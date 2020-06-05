@@ -18,6 +18,10 @@ void OpenMoveInventory(Game &game){
 		toggle->toggle.bounds =
 			(Rectangle){PORTRAIT_PADDING, (float)(i * PORTRAIT_SEPARATION + PORTRAIT_PADDING), PORTRAIT_WIDTH, PORTRAIT_WIDTH};
 	}
+	minvData->moveInfo.bgColor = (Color){28, 33,  35, 200};
+	minvData->moveInfo.textColor = (Color){219, 219, 235, 200};
+
+	//FIXME: magic numbers!
 	minvData->movesCurrList.bounds = (Rectangle){256, 64, 192, 192};
 	minvData->movesAvailList.bounds = (Rectangle){256 + 192 + 128, 64, 192, 192};
 
@@ -166,5 +170,49 @@ void RemoveFromCurrentMoves(Player &player, int &prevActive){
 		SetupListView(player.minvData->movesCurrList);
 		SetupListView(player.minvData->movesAvailList);
 	}
+}
+
+
+void SetupMoveInfo(MoveInventoryData &minvD){
+	struct Move *move = nullptr;
+	if(minvD.info == 0){
+		if(minvD.movesCurrList.active > -1){
+			move = minvD.movesCurr[minvD.movesCurrList.active];
+			std::string *text = &minvD.moveInfo.text;
+			*text = "";
+			*text += "Element: " + to_string(move->elem) + "\t\t";
+			*text += "Damage: " + std::to_string(move->damage) + "\t\t";
+			*text += "Healing: " + std::to_string(move->healing) + "\t\t";
+			*text += "Cost: " + std::to_string(move->cost) + "\n";
+			if(move->isPhysical)
+				*text += "Physical\t\t\t";
+			else
+				*text += "Meta\t\t\t";
+			
+			*text += "Obtained at level " + std::to_string(move->levelObtained);
+			//TODO: Description
+		}
+	}
+	else{
+		if(minvD.movesAvailList.active > -1){
+			move = minvD.movesAvail[minvD.movesAvailList.active];
+			std::string *text = &minvD.moveInfo.text;
+			*text = "";
+			*text += "Element: " + to_string(move->elem) + "\t\t";
+			*text += "Damage: " + std::to_string(move->damage) + "\t\t";
+			*text += "Healing: " + std::to_string(move->healing) + "\t\t";
+			*text += "Cost: " + std::to_string(move->cost) + "\n";
+			if(move->isPhysical)
+				*text += "Physical\t\t\t";
+			else
+				*text += "Meta\t\t\t";
+			
+			*text += "Obtained at level " + std::to_string(move->levelObtained);
+			//TODO: Description
+		}
+	}
+	Vector2 textSize = MeasureTextEx(GuiGetFont(), minvD.moveInfo.text.c_str(), GuiGetStyle(DEFAULT, TEXT_SIZE), GuiGetStyle(DEFAULT, TEXT_SPACING));
+	minvD.moveInfo.bounds = (Rectangle){256, 288 - textSize.y / 2, textSize.x, textSize.y};
+	minvD.moveInfo.bgBounds = (Rectangle){minvD.moveInfo.bounds.x - 8, minvD.moveInfo.bounds.y - 16 + textSize.y/2, textSize.x + 16, textSize.y + 16};
 }
 

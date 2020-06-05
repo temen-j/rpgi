@@ -548,5 +548,6 @@ void DrawMoveInventory(const Player &player){
 
 	DrawGuiListView(player.minvData->movesCurrList);
 	DrawGuiListView(player.minvData->movesAvailList);
+	DrawGuiBoxLabel(player.minvData->moveInfo);
 }
 

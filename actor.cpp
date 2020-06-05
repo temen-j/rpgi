@@ -196,21 +196,6 @@ void AssignType(Actor &a){
 		}
 	}
 	
-	/* int max = -1; */
-	/* Element found = Element::none; */ 
-	/* Element foundNext = Element::none; */
-	/* bool getSecondary = true; //Should it find the secondary type? */
-	/* for(int i = 0; i < NUMELEMENTS; ++i){ */
-	/* 	if(counts[i] > max){ */
-	/* 		max = counts[i]; */
-	/* 		found = (Element)(i + 1); */
-	/* 		getSecondary = true; */
-	/* 	} */
-	/* 	if(counts[i] == max && found != (Element)(i + 1) && getSecondary){ */
-	/* 		foundNext = (Element)(i + 1); */
-	/* 		getSecondary = false; */
-	/* 	} */
-	/* } */
 	int max = 0;
 	int maxIndex = -1;
 	for(int i = 0; i < NUMELEMENTS; ++i){
@@ -241,6 +226,19 @@ void AssignType(Actor &a){
 
 	a.type[0] = found;
 	a.type[1] = foundNext;
+
+	struct Move *moves[NUM_ACTOR_MOVES] = {nullptr};
+	int fill = 0;
+	for(int i = 0; i < NUM_ACTOR_MOVES; ++i){
+		if(a.moves[i]){
+			if(a.moves[i]->elem == a.type[0] || a.moves[i]->elem == a.type[1]){
+				moves[fill] = a.moves[i];
+				fill++;
+			}
+		}
+	}
+	for(int i = 0; i < NUM_ACTOR_MOVES; ++i)
+		a.moves[i] = moves[i];
 }
 
 

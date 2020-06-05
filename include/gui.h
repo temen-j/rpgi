@@ -161,6 +161,7 @@ void SetupScrollBar(ScrollBar &);
 void SetupListView(ListView &);
 void DrawGuiButton(Button &);
 void DrawGuiLabel(Label &);
+void DrawGuiBoxLabel(BoxLabel &);
 void DrawGuiImageButton(ImageButton &);
 void DrawGuiImageToggle(ImageToggle &);
 void DrawGuiScrollBar(ScrollBar &);

@@ -80,10 +80,25 @@ int MoveInventoryState(Game &game){
 	int prevActiveCurr = game.player.minvData->movesCurrList.active;
 	Update(game.player.minvData->movesCurrList);
 	Update(game.player.minvData->movesAvailList);
-	if(game.player.minvData->movesAvailList.active == -1 && game.player.minvData->movesAvailList.active != prevActiveAvail)
+
+	if(game.player.minvData->movesAvailList.active == -1 && game.player.minvData->movesAvailList.active != prevActiveAvail){
 		AddToCurrentMoves(game.player, prevActiveAvail);
-	if(game.player.minvData->movesCurrList.active == -1 && game.player.minvData->movesCurrList.active != prevActiveCurr)
+		game.player.minvData->info = 0;
+		SetupMoveInfo(*game.player.minvData);
+	}
+	else if(game.player.minvData->movesAvailList.active != prevActiveAvail){
+		game.player.minvData->info = 1;
+		SetupMoveInfo(*game.player.minvData);
+	}
+	if(game.player.minvData->movesCurrList.active == -1 && game.player.minvData->movesCurrList.active != prevActiveCurr){
 		RemoveFromCurrentMoves(game.player, prevActiveCurr);
+		game.player.minvData->info = 1;
+		SetupMoveInfo(*game.player.minvData);
+	}
+	else if(game.player.minvData->movesCurrList.active != prevActiveCurr){
+		game.player.minvData->info = 0;
+		SetupMoveInfo(*game.player.minvData);
+	}
 
 	return 0;
 }

@@ -7,6 +7,7 @@
 
 #include "element.h"
 #include "move.h"
+#include "moveinventory.h"
 
 //TODO re-enable move and effects once working/complete
 
