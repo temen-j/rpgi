@@ -1,0 +1,4 @@
+So the problem is the vec ownedEleminoes, when it grows, the pointer in the inventory
+is no longer valid as the vector copies the memory to a new place with new allocation.
+Thus the inventory only "has" 3 eleminoes it can draw because they were added under
+capacity.

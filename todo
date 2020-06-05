@@ -1,0 +1,43 @@
+TODO
+	Make Actor
+		Test
+		Do Fixes (In file)
+		Create Enemy and Character derivations (Rudimentary)
+	Finish Actor
+		Re-enable moves and effects to work with actors
+	Make Team/Player
+		Give the player combined control over characters
+	Call npcs "Living Entities" of some sort
+	Make Inventory stats hoverable/clickable
+		Keep hp and mp on screen at all times
+	Make Characters
+		Make stats
+	Make Moves
+		Read in move data
+		Finish move functions
+	Make Effects
+		Read in effect data
+		Finish effect tick functions
+	Make Combat
+		Display Character Portrait Active for move selection
+		Display moves (buttons)
+		Display stats (stat bars?)
+		Perform Combat
+			Display animations?
+	Make AI
+		Write Minimax with Alpha-Beta Recursion
+			Use Monte-Carlo tree search for speedup
+				use random table init at start to keep "derterminism"
+		Have agent select moves
+	Make Overworld
+		Tiles?
+		Cities/Towns?
+		Currency?
+	
+Is working
+	Text
+	Elements
+	Eleminoes
+	Console
+	Inventory
+	
