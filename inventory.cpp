@@ -1,6 +1,7 @@
 #include "include\inventory.h"
 #include "include\game.h"
 #include "include\player.h"
+#include "include\stattext.h"
 
 Elemino TotalEleminoes::storage[512];
 unsigned int TotalEleminoes::size = 0;
@@ -12,15 +13,16 @@ void OpenInventory(Game &game){
 	invData->focus = 0;
 	invData->grids = game.gridMat[invData->focus];
 
-	invData->portraits.toggles[0].toggle.active = true;
+	invData->portraits.toggles[0].active = true;
 	invData->portraits.toggles[0].texture = LoadTexture("../img/cassandra_dev.png");
 	invData->portraits.toggles[1].texture = LoadTexture("../img/gordon_dev.png");
 	invData->portraits.toggles[2].texture = LoadTexture("../img/lou_dev.png");
 	invData->portraits.toggles[3].texture = LoadTexture("../img/persy_dev.png");
+	invData->halo = LoadTexture("../img/portrait_halo.png");
 
 	for(size_t i = 0; i < 4; ++i){
 		ImageToggle *toggle = &invData->portraits.toggles[i];
-		toggle->toggle.bounds =
+		toggle->bounds =
 			(Rectangle){PORTRAIT_PADDING, (float)(i * PORTRAIT_SEPARATION + PORTRAIT_PADDING), PORTRAIT_WIDTH, PORTRAIT_WIDTH};
 	}
 
@@ -37,6 +39,7 @@ void UnloadTexturesFrom(InventoryData &invData){
 		if(invData.portraits.toggles[i].texture.id > 0)
 			UnloadTexture(invData.portraits.toggles[i].texture);
 	}
+	UnloadTexture(invData.halo);
 }
 
 
@@ -45,17 +48,17 @@ void HandleInventoryPortraits(InventoryData &invD){
 	//TODO: Make me work with int instead storing a bunch of bools
 	bool isToggled[4]; //Keep track of previous activation
 	for(size_t i = 0; i < 4; ++i)
-		isToggled[i] = invP->toggles[i].toggle.active;
+		isToggled[i] = invP->toggles[i].active;
 
 	for(size_t i = 0; i < 4; ++i){
 		bool update = Update(invP->toggles[i]);
 		if(update != isToggled[i] && !update && isToggled[i])
-			invP->toggles[i].toggle.active = true;
+			invP->toggles[i].active = true;
 		if(update != isToggled[i] && update){
 			invD.focus = i;
 			for(size_t j = 0; j < 4; ++j){
 				if(j != i) //Turn the others in the toggle group off
-					invP->toggles[j].toggle.active = false;
+					invP->toggles[j].active = false;
 			}
 			break;
 		}

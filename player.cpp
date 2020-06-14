@@ -26,6 +26,11 @@ Player::~Player(){
 void AddCharacters(Player &player){
 	for(unsigned int i = 0; i < NUM_PLAYER_CHARACTERS; ++i)
 		player.team.members.push_back(&Character::actors[i]);
+
+	Character::actors[0].name = "Cassandra";
+	Character::actors[1].name = "Gordon";
+	Character::actors[2].name = "Lou";
+	Character::actors[3].name = "Persy";
 }
 
 

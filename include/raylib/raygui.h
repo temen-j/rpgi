@@ -639,7 +639,7 @@ static const char *GetTextIcon(const char *text, int *iconId);  // Get text icon
 
 static void GuiDrawText(const char *text, Rectangle bounds, int alignment, Color tint);         // Gui draw text using default font
 static void GuiDrawRectangle(Rectangle rec, int borderWidth, Color borderColor, Color color);   // Gui draw rectangle using default raygui style
-static void GuiDrawTooltip(Rectangle bounds);                   // Draw tooltip relatively to bounds
+extern void GuiDrawTooltip(Rectangle bounds);                   // Draw tooltip relatively to bounds NOTE:changed from 'static' to extern
 
 static const char **GuiTextSplit(const char *text, int *count, int *textRow);   // Split controls text into multiple strings
 static Vector3 ConvertHSVtoRGB(Vector3 hsv);                    // Convert color data from HSV to RGB
@@ -746,7 +746,7 @@ bool GuiWindowBox(Rectangle bounds, const char *title)
     int statusBarHeight = WINDOW_STATUSBAR_HEIGHT + 2*GuiGetStyle(STATUSBAR, BORDER_WIDTH);
     statusBarHeight += (statusBarHeight%2);
 
-    Rectangle statusBar = { bounds.x, bounds.y, bounds.width, statusBarHeight };
+    Rectangle statusBar = { bounds.x, bounds.y, bounds.width, (float)statusBarHeight };
     if (bounds.height < statusBarHeight*2) bounds.height = statusBarHeight*2;
     
     Rectangle windowPanel = { bounds.x, bounds.y + statusBarHeight - 1, bounds.width, bounds.height - statusBarHeight };
@@ -790,9 +790,9 @@ void GuiGroupBox(Rectangle bounds, const char *text)
 
     // Draw control
     //--------------------------------------------------------------------
-    GuiDrawRectangle(RAYGUI_CLITERAL(Rectangle){ bounds.x, bounds.y, GROUPBOX_LINE_THICK, bounds.height }, 0, BLANK, Fade(GetColor(GuiGetStyle(DEFAULT, (state == GUI_STATE_DISABLED)? BORDER_COLOR_DISABLED : LINE_COLOR)), guiAlpha));
-    GuiDrawRectangle(RAYGUI_CLITERAL(Rectangle){ bounds.x, bounds.y + bounds.height - 1, bounds.width, GROUPBOX_LINE_THICK }, 0, BLANK, Fade(GetColor(GuiGetStyle(DEFAULT, (state == GUI_STATE_DISABLED)? BORDER_COLOR_DISABLED : LINE_COLOR)), guiAlpha));
-    GuiDrawRectangle(RAYGUI_CLITERAL(Rectangle){ bounds.x + bounds.width - 1, bounds.y, GROUPBOX_LINE_THICK, bounds.height }, 0, BLANK, Fade(GetColor(GuiGetStyle(DEFAULT, (state == GUI_STATE_DISABLED)? BORDER_COLOR_DISABLED : LINE_COLOR)), guiAlpha));
+    GuiDrawRectangle(RAYGUI_CLITERAL(Rectangle){ bounds.x, bounds.y, GROUPBOX_LINE_THICK, bounds.height }, 0, BLANK, Fade(GetColor(GuiGetStyle(DEFAULT, (state == GUI_STATE_DISABLED)? BORDER_COLOR_DISABLED : static_cast<int>(LINE_COLOR))), guiAlpha));
+    GuiDrawRectangle(RAYGUI_CLITERAL(Rectangle){ bounds.x, bounds.y + bounds.height - 1, bounds.width, GROUPBOX_LINE_THICK }, 0, BLANK, Fade(GetColor(GuiGetStyle(DEFAULT, (state == GUI_STATE_DISABLED)? BORDER_COLOR_DISABLED : static_cast<int>(LINE_COLOR))), guiAlpha));
+    GuiDrawRectangle(RAYGUI_CLITERAL(Rectangle){ bounds.x + bounds.width - 1, bounds.y, GROUPBOX_LINE_THICK, bounds.height }, 0, BLANK, Fade(GetColor(GuiGetStyle(DEFAULT, (state == GUI_STATE_DISABLED)? BORDER_COLOR_DISABLED : static_cast<int>(LINE_COLOR))), guiAlpha));
 
     GuiLine(RAYGUI_CLITERAL(Rectangle){ bounds.x, bounds.y, bounds.width, 1 }, text);
     //--------------------------------------------------------------------
@@ -805,7 +805,7 @@ void GuiLine(Rectangle bounds, const char *text)
 
     GuiControlState state = guiState;
 
-    Color color = Fade(GetColor(GuiGetStyle(DEFAULT, (state == GUI_STATE_DISABLED)? BORDER_COLOR_DISABLED : LINE_COLOR)), guiAlpha);
+    Color color = Fade(GetColor(GuiGetStyle(DEFAULT, (state == GUI_STATE_DISABLED)? BORDER_COLOR_DISABLED : static_cast<int>(LINE_COLOR))), guiAlpha);
 
     // Draw control
     //--------------------------------------------------------------------
@@ -835,8 +835,8 @@ void GuiPanel(Rectangle bounds)
 
     // Draw control
     //--------------------------------------------------------------------
-    GuiDrawRectangle(bounds, PANEL_BORDER_WIDTH, Fade(GetColor(GuiGetStyle(DEFAULT, (state == GUI_STATE_DISABLED)? BORDER_COLOR_DISABLED: LINE_COLOR)), guiAlpha),
-                     Fade(GetColor(GuiGetStyle(DEFAULT, (state == GUI_STATE_DISABLED)? BASE_COLOR_DISABLED : BACKGROUND_COLOR)), guiAlpha));
+    GuiDrawRectangle(bounds, PANEL_BORDER_WIDTH, Fade(GetColor(GuiGetStyle(DEFAULT, (state == GUI_STATE_DISABLED)? BORDER_COLOR_DISABLED: static_cast<int>(LINE_COLOR))), guiAlpha),
+                     Fade(GetColor(GuiGetStyle(DEFAULT, (state == GUI_STATE_DISABLED)? BASE_COLOR_DISABLED : static_cast<int>(BACKGROUND_COLOR))), guiAlpha));
     //--------------------------------------------------------------------
 }
 
@@ -937,7 +937,7 @@ Rectangle GuiScrollPanel(Rectangle bounds, Rectangle content, Vector2 *scroll)
     if (hasHorizontalScrollBar && hasVerticalScrollBar)
     {
         // TODO: Consider scroll bars side
-        Rectangle corner = { horizontalScrollBar.x + horizontalScrollBar.width + 2, verticalScrollBar.y + verticalScrollBar.height + 2, horizontalScrollBarWidth - 4, verticalScrollBarWidth - 4 };
+        Rectangle corner = { horizontalScrollBar.x + horizontalScrollBar.width + 2, verticalScrollBar.y + verticalScrollBar.height + 2, (float)(horizontalScrollBarWidth - 4), (float)(verticalScrollBarWidth - 4) };
         GuiDrawRectangle(corner, 0, BLANK, Fade(GetColor(GuiGetStyle(LISTVIEW, TEXT + (state*3))), guiAlpha));
     }
 
@@ -1400,7 +1400,7 @@ bool GuiTextBox(Rectangle bounds, char *text, int textSize, bool editMode)
         bounds.x + GuiGetStyle(TEXTBOX, TEXT_PADDING) + GetTextWidth(text) + 2,
         bounds.y + bounds.height/2 - GuiGetStyle(DEFAULT, TEXT_SIZE),
         1,
-        GuiGetStyle(DEFAULT, TEXT_SIZE)*2
+        (float)(GuiGetStyle(DEFAULT, TEXT_SIZE)*2)
     };
 
     // Update control
@@ -1707,7 +1707,7 @@ bool GuiTextBoxMulti(Rectangle bounds, char *text, int textSize, bool editMode)
     };
 
     // Cursor position, [x, y] values should be updated
-    Rectangle cursor = { 0, 0, 1, GuiGetStyle(DEFAULT, TEXT_SIZE) + 2 };
+    Rectangle cursor = { 0, 0, 1, (float)(GuiGetStyle(DEFAULT, TEXT_SIZE) + 2) };
 
     int textWidth = 0;
     int currentLine = 0;
@@ -2380,7 +2380,7 @@ Color GuiColorPanelEx(Rectangle bounds, Color color, float hue)
         DrawRectangleGradientEx(bounds, Fade(colBlack, 0), Fade(colBlack, guiAlpha), Fade(colBlack, guiAlpha), Fade(colBlack, 0));
 
         // Draw color picker: selector
-        Rectangle selector = { pickerSelector.x - GuiGetStyle(COLORPICKER, COLOR_SELECTOR_SIZE)/2, pickerSelector.y - GuiGetStyle(COLORPICKER, COLOR_SELECTOR_SIZE)/2, GuiGetStyle(COLORPICKER, COLOR_SELECTOR_SIZE), GuiGetStyle(COLORPICKER, COLOR_SELECTOR_SIZE) };
+        Rectangle selector = { pickerSelector.x - GuiGetStyle(COLORPICKER, COLOR_SELECTOR_SIZE)/2, pickerSelector.y - GuiGetStyle(COLORPICKER, COLOR_SELECTOR_SIZE)/2, (float)GuiGetStyle(COLORPICKER, COLOR_SELECTOR_SIZE), (float)GuiGetStyle(COLORPICKER, COLOR_SELECTOR_SIZE) };
         GuiDrawRectangle(selector, 0, BLANK, Fade(colWhite, guiAlpha));
     }
     else
@@ -3346,7 +3346,7 @@ static void GuiDrawRectangle(Rectangle rec, int borderWidth, Color borderColor, 
 }
 
 // Draw tooltip relatively to bounds
-static void GuiDrawTooltip(Rectangle bounds)
+extern void GuiDrawTooltip(Rectangle bounds) //NOTE: changed from 'static' to 'extern'
 {
     //static int tooltipFramesCounter = 0;  // Not possible gets reseted at second function call!
 

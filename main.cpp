@@ -39,7 +39,8 @@ int main(int argc, char **argv){
 	gs->old = gs->prev;
 
 	GlobalTextData gtd;
-	gtd.defaultFont = LoadFont("../fonts/Inconsolata-SemiBold.ttf");
+	gtd.defaultFont = LoadFontEx("../fonts/Inconsolata-SemiBold.ttf", 64, 0, 0);
+	SetTextureFilter(gtd.defaultFont.texture, FILTER_BILINEAR);
 	gtd.imageText = GenImageColor(GetScreenWidth(), GetScreenHeight(), CLEAR);
 	GuiSetFont(gtd.defaultFont);
 
@@ -57,34 +58,40 @@ int main(int argc, char **argv){
 		}
 
 		//State Transistion (Toggle): to inventory, from inventory
-		if(!console->toggled){
+		if(!console->toggled && gs->curr != State::combat_act && gs->curr != State::combat_watch){
+			if(IsKeyPressed(KEY_C)){
+				game.gs.prev = game.gs.curr;
+				game.gs.curr = State::combat_act;
+			}
 			//Open/Close inventory?
-			if(IsKeyPressed(KEY_I)){
-				if(!game.inventoryOpen){
-					game.inventoryOpen = true;
-					game.minventoryOpen = false;
-					game.justEnteredState = true;
+			else if(gs->curr != State::combat_act && gs->curr != State::combat_watch){
+				if(IsKeyPressed(KEY_I)){
+					if(!game.inventoryOpen){
+						game.inventoryOpen = true;
+						game.minventoryOpen = false;
+						game.justEnteredState = true;
+					}
+					else
+						game.inventoryOpen = false;
 				}
-				else
-					game.inventoryOpen = false;
-			}
-			else if(IsKeyReleased(KEY_I)){
-				if(game.inventoryOpen)
-					game.justEnteredState = false;
-			}
+				else if(IsKeyReleased(KEY_I)){
+					if(game.inventoryOpen)
+						game.justEnteredState = false;
+				}
 
-			if(IsKeyPressed(KEY_O)){
-				if(!game.minventoryOpen){
-					game.minventoryOpen = true;
-					game.inventoryOpen = false;
-					game.justEnteredState = true;
+				if(IsKeyPressed(KEY_O)){
+					if(!game.minventoryOpen){
+						game.minventoryOpen = true;
+						game.inventoryOpen = false;
+						game.justEnteredState = true;
+					}
+					else
+						game.minventoryOpen = false;
 				}
-				else
-					game.minventoryOpen = false;
-			}
-			else if(IsKeyReleased(KEY_O)){
-				if(game.minventoryOpen)
-					game.justEnteredState = false;
+				else if(IsKeyReleased(KEY_O)){
+					if(game.minventoryOpen)
+						game.justEnteredState = false;
+				}
 			}
 		}
 
@@ -99,8 +106,6 @@ int main(int argc, char **argv){
 			delete player->minvData;
 			player->minvData = nullptr;
 		}
-		/* if(gs->curr != State::console_dialog){ */
-		/* } */
 		//TODO: Turn me into a switch?
 		if(console->toggled){
 			InputConsole(*console, *gs);
@@ -111,6 +116,9 @@ int main(int argc, char **argv){
 			int ret;
 			if(gs->curr == State::limbo){
 				game.justEnteredState = false;
+			}
+			else if(gs->curr == State::combat_act || gs->curr == State::combat_watch){
+				ret = CombatState(game);
 			}
 			if(game.inventoryOpen){
 				ret = InventoryState(game);
@@ -127,12 +135,18 @@ int main(int argc, char **argv){
 
 		ClearBackground(RAYWHITE);
 
-		if(game.inventoryOpen){
-			DrawInventory(game.player);
-			DrawMouse(game.mouse);
+		if(game.gs.curr == State::combat_act || game.gs.curr == State::combat_watch){
+			/* std::cout << "reached" << std::endl; */
+			DrawCombat(game);
 		}
-		if(game.minventoryOpen){
-			DrawMoveInventory(game.player);
+		else{
+			if(game.inventoryOpen){
+				DrawInventory(game.player);
+				DrawMouse(game.mouse);
+			}
+			else if(game.minventoryOpen){
+				DrawMoveInventory(game.player);
+			}
 		}
 		if(console->toggled){ //Draw console last
 			DrawConsole(*console, gtd);

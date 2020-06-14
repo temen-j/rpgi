@@ -16,6 +16,7 @@ using Vec = std::vector<T>;
 
 struct MoveInventoryData{
 	InventoryPortraits portraits;
+	Texture halo;
 
 	ListView movesAvailList; //ListView of the move that are available to the character
 	Vec<struct Move *> movesAvail; //Internal list rep. the moves the focused character can have

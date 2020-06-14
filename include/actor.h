@@ -56,7 +56,6 @@ struct Actor{
 	bool immune[NUMELEMENTS], pIncap, mIncap, isDisabled;
 	struct Move *moves[NUM_ACTOR_MOVES];
 	Element type[2];
-	//move  *chosen;
 
 	//Vec<effect *> currEffects;
 
@@ -96,16 +95,18 @@ struct Actor{
 /* 	Actor_serialized(Actor *); */
 /* }; */
 
+//Assigns the stats of an actor based off its grids, will also call AssignType()
 void AssignStats(Actor *);
+
+//Assigns the type based of the number of elements in the grids, also clears moves
+//that do not match the type
 void AssignType(Actor &);
 
-//Saves relevant Actor data to file in format:  *.Actor where  * = name
-/* void saveActor(const Actor *); */
-/* void loadActor(Actor *&, const Actor_serialized &); */
-/* void fullRestore(Actor &); //Max health and mp */
-/* void fullRestore(Vec<Actor *> &); //Max health and mp */
-/* bool isDead(const Actor &); */
-/* bool isDead(const Actor *); */
+bool IsDead(const Actor &);
+
+void HealActor(Actor &, const unsigned int);
+
+void FullHealActor(Actor &);
 
 std::ostream& operator<<(std::ostream &, const Actor &);
 

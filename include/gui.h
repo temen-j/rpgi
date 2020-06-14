@@ -34,6 +34,10 @@ struct MoveInventoryData;
 #define METALCOLOR (Color){ 152, 168, 192, 255 }
 #define ROCKCOLOR (Color){ 128, 96, 32, 255 }
 #define SPECTRECOLOR (Color){ 128, 0, 196, 255 }
+#define HPGOODCOLOR (Color){224, 48, 80, 255}
+#define MPGOODCOLOR (Color){80, 48, 224, 255}
+#define HPBADCOLOR (Color){112, 68, 75, 255}
+#define MPBADCOLOR (Color){75, 68, 112, 255}
 #endif
 
 template<typename T>
@@ -86,8 +90,8 @@ struct Button{
 	std::string text;
 };
 
-struct ImageButton{
-	Button button;
+struct ImageButton : Button{
+	/* Button button; */
 	Texture texture;
 };
 
@@ -98,8 +102,7 @@ struct Toggle{
 	std::string text;
 };
 
-struct ImageToggle{
-	Toggle toggle;
+struct ImageToggle : Toggle{
 	Texture texture;
 };
 
@@ -149,8 +152,16 @@ struct InventoryPortraits{
 	ImageToggle toggles[4];
 };
 
+struct StatBar{
+	float k; //Coeff of proportionality of HP/MP
+	float thickness, length;
+	Vector2 pos; //Origin is top left
+	bool showNum;
+	Color colorGood, colorBad;
+};
 
-//Button functions ------------------------------------------------------------
+
+//raygui functions ------------------------------------------------------------
 void Update(Button &);
 void Update(ImageButton &);
 bool Update(Toggle &);
@@ -168,7 +179,7 @@ void DrawGuiScrollBar(ScrollBar &);
 void DrawGuiListView(ListView &);
 //-----------------------------------------------------------------------------
 
-//Label functions ------------------------------------------------------------
+//Custom gui functions ------------------------------------------------------------
 
 Color ElementToColor(const Element &);
 
@@ -178,5 +189,9 @@ void DrawGrid(const Grid &);
 void DrawConsole(const Console &, GlobalTextData &);
 void DrawInventory(const Player &);
 void DrawMoveInventory(const Player &);
+void DrawStatBar(const StatBar &);
+
+//------------------------------------------------------------------------------------
+
 
 #endif

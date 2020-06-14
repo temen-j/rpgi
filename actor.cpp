@@ -102,8 +102,7 @@ void AssignStats(Actor *a){
 			if(i == 1){
 				if(a->grids[i][j] > Element::none && a->grids[i][j] <= Element::spectre){
 					a->pDef[a->grids[i][j] - 1]++;
-					/* a->hpBonus += (a->grids[i][j]); //FIXME!!!, add HPBONUS_***! */
-					switch(a->grids[i][j]){ //TODO: check if this works
+					switch(a->grids[i][j]){
 					case Element::fire:
 						a->hpBonus += HPBONUS_FIRE;
 						break;
@@ -133,8 +132,7 @@ void AssignStats(Actor *a){
 			if(i == 2){
 				if(a->grids[i][j] > Element::none && a->grids[i][j] <= Element::spectre){
 					a->pAtk[a->grids[i][j] - 1]++;
-					/* a->mpBonus += (a->grids[i][j]); //FIXME!!!, add MPBONUS_***! */
-					switch(a->grids[i][j]){ //TODO: check if this works
+					switch(a->grids[i][j]){
 					case Element::fire:
 						a->mpBonus += MPBONUS_FIRE;
 						break;
@@ -162,8 +160,13 @@ void AssignStats(Actor *a){
 				}
 			}
 			
+			int prevMaxHP = a->maxHP;
+			int prevMaxMP = a->maxMP;
 			a->maxHP = (int)ceil(INITHP * (1.0f + HPMPBONUS_MULT * a->hpBonus));
 			a->maxMP = (int)ceil(INITMP * (1.0f + HPMPBONUS_MULT * a->mpBonus));
+
+			a->remHP = (int) ceil(((float) a->remHP / prevMaxHP) * a->maxHP);
+			a->remMP = (int) ceil(((float) a->remMP / prevMaxMP) * a->maxMP);
 		}
 	}
 
@@ -171,20 +174,6 @@ void AssignStats(Actor *a){
 }
 
 
-/*void fullRestore(Actor &a){*/
-/*	a.remHP = a.maxHP;*/
-/*	a.remMP = a.maxMP;*/
-/*}*/
-
-
-/*void fullRestore(Vec<Actor*> &v){*/
-/*	for(Actor *&a : v){*/
-/*		a->remHP = a->maxHP;*/
-/*		a->remMP = a->maxMP;*/
-/*	}*/
-/*}*/
-
-//TODO Check if this actually works...
 void AssignType(Actor &a){
 	int counts[NUMELEMENTS] = { 0,0,0,0,0,0,0 };
 	
@@ -242,11 +231,11 @@ void AssignType(Actor &a){
 }
 
 
-/*bool isDead(const Actor &a){*/
-/*	if(a.remHP <= 0)*/
-/*		return true;*/
-/*	return false;*/
-/*}*/
+bool IsDead(const Actor &a){
+	if(a.remHP <= 0)
+		return true;
+	return false;
+}
 
 
 /*bool isDead(const Actor *a){*/
@@ -254,6 +243,24 @@ void AssignType(Actor &a){
 /*		return true;*/
 /*	return false;*/
 /*}*/
+
+
+void HealActor(Actor &a, const unsigned int amount){
+	unsigned int diff = (unsigned int)(a.maxHP - a.remHP);
+	if(diff < amount){
+		a.remHP += amount;
+	}
+	else{
+		a.remHP = a.maxHP;
+	}
+	//TODO: do something about proportions
+}
+
+
+void FullHealActor(Actor &a){
+	a.remHP = a.maxHP;
+	//TODO: do something about proportions
+}
 
 
 /*std::ostream& operator<<(std::ostream &out, const Actor &a){*/

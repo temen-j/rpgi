@@ -1,5 +1,6 @@
 #include "raylib\raymath.h"
 
+typedef Quaternion Vector4;
 
 Vector2 operator+(const Vector2 &a, const Vector2 &b);
 Vector2 operator-(const Vector2 &a, const Vector2 &b);

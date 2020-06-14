@@ -53,3 +53,6 @@ void operator/=(Vector2 &a, const Vector2 &b){
 float dot(const Vector2 &a, const Vector2 &b){
 	return Vector2DotProduct(a, b);
 }
+
+
+

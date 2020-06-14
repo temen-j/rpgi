@@ -3,7 +3,7 @@
 #define PLAYER_H
 #include <vector>
 
-#include "team.h"
+/* #include "team.h" */
 #include "elemino.h"
 #include "inventory.h"
 #include "actor.h"
@@ -24,6 +24,16 @@ const unsigned int NUM_PLAYER_CHARACTERS = 4;
 
 struct Character{
 	static Actor actors[NUM_PLAYER_CHARACTERS];
+};
+
+struct Team{
+	Vec<Actor*> members;
+
+	Team(){
+		members.resize(0);
+	}
+	~Team(){
+	}
 };
 
 struct Player{

@@ -1,5 +1,6 @@
 #include "include\game.h"
 #include "include\moveinventory.h"
+/* #include "include\combat.h" */
 
 Game::Game(){
 	justEnteredState = false;
@@ -102,3 +103,45 @@ int MoveInventoryState(Game &game){
 
 	return 0;
 }
+
+
+int CombatState(Game &game){
+	if(!game.cbtData){
+		game.cbtData = new CombatData();
+		StartCombat(game);
+	}
+	if(game.gs.curr == State::combat_act){
+		if(game.cbtData->aiMakePairs)
+			AIMakeCTPs(*game.cbtData);
+		
+		unsigned char prevFocus = game.cbtData->focus;
+		HandleInventoryPortraits(*game.cbtData);
+
+		if(prevFocus != game.cbtData->focus){
+			GetAffordableMoves(*game.cbtData->playerTeam->members[game.cbtData->focus], game.cbtData->affordable);
+			MoveButtonsTextSetup(*game.cbtData);
+		}
+
+		SelectMoves(*game.cbtData);
+
+		if(game.cbtData->canAssign){
+			game.cbtData->dispTargetLists = true;
+			AssignTargets(*game.cbtData);
+		}
+		if(game.cbtData->canMakePair){ //TODO: turn into a function (MakeCTP())?
+			MakeCTP(*game.cbtData);
+		}
+		if(CanExecMoves(*game.cbtData)){
+			ResetSelectAvailList(*game.cbtData);
+			game.gs.prev = game.gs.curr;
+			game.gs.curr = State::combat_watch;
+			ExecMoves(*game.cbtData); //TODO: make this work with animations
+		}
+	}
+	//else watch battle anims
+	//if(battle is over)
+	//delete goons
+	return 0;
+}
+
+

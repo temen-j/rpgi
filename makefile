@@ -1,11 +1,20 @@
 CXX = g++
-CXXFLAGS = -Wall -pg -g -Iinclude
+CXXFLAGS = -Wall -Iinclude
 LIB = -lraylib -lopengl32 -lgdi32 -lwinmm -static -lpthread
 
 DEV_OBJ = console.o
-GUI_OBJ = gui.o
+GUI_OBJ = gui.o #raygui_impl.o
 MATH_OBJ = tmath.o interp.o
-GAME_OBJ = game.o element.o elemino.o inventory.o actor.o player.o move.o allmoves.o moveinventory.o
+GAME_OBJ = game.o element.o elemino.o inventory.o actor.o player.o move.o allmoves.o moveinventory.o combat.o
+
+BUILD ?= DEBUG
+
+ifeq ($(BUILD),DEBUG)
+	CXXFLAGS += -pg -g
+endif
+ifeq ($(BUILD),RELEASE)
+	CXXFLAGS += -s -O3 -Os
+endif
 
 
 game:
@@ -17,6 +26,9 @@ game.exe: main.cpp $(GUI_OBJ) $(MATH_OBJ) $(GAME_OBJ) $(DEV_OBJ)
 
 gui.o: gui.cpp include\gui.h include\player.h include\inventory.h include\console.h include\elemino.h include\gamestate.h
 	$(CXX) $(CXXFLAGS) -c gui.cpp -L. $(LIB)
+
+raygui_impl.o: raygui_impl.cpp
+	$(CXX) $(CXXFLAGS) -c raygui_impl.cpp -L. $(LIB)
 
 tmath.o: tmath.cpp include\tmath.h
 	$(CXX) $(CXXFLAGS) -c tmath.cpp -L. $(LIB)
@@ -54,11 +66,17 @@ allmoves.o: allmoves.cpp include\allmoves.h include\move.h
 moveinventory.o: moveinventory.cpp include\moveinventory.h include\move.h
 	$(CXX) $(CXXFLAGS) -c moveinventory.cpp -L. $(LIB)
 
-run: game.exe
-	make bin run
+combat.o: combat.cpp include\combat.h include\gui.h include\team.h include\move.h
+	$(CXX) $(CXXFLAGS) -c combat.cpp -L. $(LIB)
+
+run:
+	$(MAKE) -C bin run
 
 debug:
 	$(MAKE) -C bin debug
+
+prof:
+	$(MAKE) -C bin prof
 
 clean:
 	del *.o

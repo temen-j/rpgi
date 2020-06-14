@@ -14,13 +14,6 @@ const int PORTRAIT_SEPARATION = 80;
 const int PORTRAIT_WIDTH = 64;
 const int NUM_STATS = 6;
 
-static const char *TEXT_MATK = "MATK: ";
-static const char *TEXT_MDEF = "MDEF: ";
-static const char *TEXT_HP = "HP: ";
-static const char *TEXT_PDEF = "PDEF: ";
-static const char *TEXT_PATK = "PATK: ";
-static const char *TEXT_MP = "MP: ";
-
 const Vector2 INV_POS = (Vector2){360, 64};
 const int INV_GRID_WIDTH = 400;
 const int INV_ELMN_OFFSET = 80;
@@ -38,6 +31,7 @@ struct InventoryData{
 	Elemino *inFlight = nullptr; //The elemino not being dragged in open space
 
 	InventoryPortraits portraits;
+	Texture halo;
 	Label statText[6];
 	BoxLabel tooltip;
 

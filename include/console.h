@@ -26,7 +26,8 @@ namespace Dev{
 		none,
 		clear,
 		give,
-		exec
+		exec,
+		heal
 	};
 
 }
@@ -78,5 +79,6 @@ void ConsoleCommand(Console &, Game &);
 void GiveCommand(Console &, Game &);
 void ClearCommand(Console &);
 void ExecCommand(Console &, Game &);
+void HealCommand(Console &, Game &);
 
 #endif

@@ -5,11 +5,6 @@
 
 void HandleClose(Console &console, GameState &gs){
 	if(IsKeyPressed(KEY_GRAVE) && !console.justToggled){
-		/*
-		State temp = gs.prev;
-		gs.prev = gs.curr;
-		gs.curr = temp;
-		*/
 		console.toggled = false;
 		return;
 	}
@@ -166,6 +161,9 @@ Dev::Command ParseConsole(Console &c){
 			else
 				AddNumArgMessage(c, 3);
 		}
+		else if (c.tokens[0] == "heal"){
+			return Dev::Command::heal;
+		}
 		else{
 			c.msg = ERR + INVA_CMD;
 			c.history.insert(c.history.begin(), c.msg);
@@ -210,6 +208,9 @@ void ConsoleCommand(Console &c, Game &game){
 		break;
 	case Dev::Command::exec:
 		ExecCommand(c, game);
+		break;
+	case Dev::Command::heal:
+		HealCommand(c, game);
 		break;
 	default:
 		break;
@@ -276,7 +277,9 @@ void GiveCommand(Console &c, Game &game){
 
 		game.player.inventory.push_back(&storage[TotalEleminoes::size]); //Save the elemino index to refer to later
 		TotalEleminoes::size++;
-		PositionEleminoes(game.player);
+
+		if(game.player.invData)
+			PositionEleminoes(game.player);
 	}
 	else if(!Valid(param1)){
 		c.msg = ERR + INVA_ARG + c.tokens[1] + " is an invalid element.";
@@ -336,4 +339,64 @@ void ExecCommand(Console &c, Game &game){
 		keepExec = commands.size() > 0;
 	}
 }
+
+
+void HealCommand(Console &c, Game &game){
+	bool fullHeal = false;
+	bool specificHeal = false;
+	bool allCharacters = false;
+	bool specificCharacter = false;
+	bool badInput = false;
+	int healAmt = -1;
+	int character = -1;
+	if((c.tokens[1] == "f" && c.tokens[2] != "f") || (c.tokens[2] == "f" && c.tokens[1] != "f"))
+		fullHeal = true;
+	else{
+		healAmt = std::stoi(c.tokens[2]);
+		if(healAmt > -1)
+			specificHeal = true;
+	}
+
+	if((c.tokens[1] == "a" && c.tokens[2] != "a") || (c.tokens[2] == "a" && c.tokens[1] != "a"))
+		allCharacters = true;
+	else{
+		character = std::stoi(c.tokens[1]);
+		if(character > -1 && character < 4){
+			specificCharacter = true;
+		}
+	}
+
+
+	if(allCharacters){
+		if(fullHeal){
+			for(unsigned int i = 0; i < game.player.team.members.size(); ++i)
+				FullHealActor(*game.player.team.members[i]);
+		}
+		else if(specificHeal){
+			for(unsigned int i = 0; i < game.player.team.members.size(); ++i)
+				HealActor(*game.player.team.members[i], healAmt);
+		}
+		else
+			badInput = true;
+	}
+	else if(specificCharacter){
+		if(fullHeal){
+			FullHealActor(*game.player.team.members[character]);
+		}
+		else if(specificHeal){
+			HealActor(*game.player.team.members[character], healAmt);
+		}
+		else{
+			badInput = true;
+		}
+	}
+	else
+		badInput = true;
+	if(badInput){
+		//TODO: print invalid message in the console
+	}
+}
+
+
+
 

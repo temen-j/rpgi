@@ -1,19 +1,11 @@
 TODO
 	Make Actor
-		Test
-		Do Fixes (In file)
 		Create Enemy and Character derivations (Rudimentary)
 	Finish Actor
-		Re-enable moves and effects to work with actors
+		Re-enable effects to work with actors
 	Make Team/Player
-		Give the player combined control over characters
 	Call npcs "Living Entities" of some sort
-	Make Inventory stats hoverable/clickable
-		Keep hp and mp on screen at all times
-	Make Characters
-		Make stats
 	Make Moves
-		Read in move data
 		Finish move functions
 	Make Effects
 		Read in effect data
@@ -40,4 +32,6 @@ Is working
 	Eleminoes
 	Console
 	Inventory
+	Move
+	Actor
 	

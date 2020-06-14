@@ -2,22 +2,25 @@
 #ifndef GAME_H
 #define GAME_H
 
-/* #include "move.h" */
 #include "elemino.h"
 #include "console.h"
 #include "player.h"
 #include "gamestate.h"
 #include "moveinventory.h"
+#include "combat.h"
 
 #include "raylib\raylib.h"
 
 const int GRID_PADDING = 96;
 
 struct Game{
+	unsigned int frameCounter = 0;
+
 	Console console;
 	Player player;
 	GameState gs;
 	Mouse mouse;
+	CombatData *cbtData = nullptr;
 
 	bool justEnteredState;
 	bool consoleOpen;
@@ -32,5 +35,8 @@ struct Game{
 
 int InventoryState(Game &);
 int MoveInventoryState(Game &);
+void InventoryStatesToggle(Game &);
+int CombatState(Game &);
+void DrawCombat(const Game &);
 
 #endif

@@ -1,4 +1,6 @@
 #pragma once
+#ifndef TEAM_H
+#define TEAM_H
 #include <vector>
 #include "actor.h"
 #include "raylib\raylib.h"
@@ -17,13 +19,9 @@ struct Team{
 		members.resize(0);
 	}
 	~Team(){
-		/* for(Actor *a : members){ */
-		/* 	if(a) */
-		/* 		delete a; */
-		/* 	a = nullptr; */
-		/* } */
 	}
 };
 
 void CalcLevelCap(const int&);
 
+#endif

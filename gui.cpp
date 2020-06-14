@@ -1,6 +1,6 @@
 #include "include\gui.h"
-/* #include "include\move.h" */
 #include "include\player.h"
+#include "include\game.h"
 
 #ifndef RAYGUI_IMPLEMENTATION
 #define RAYGUI_IMPLEMENTATION
@@ -10,66 +10,53 @@
 
 //Lifted from raygui to work with button object
 void Update(Button &button){
-	auto state = button.state;
-	auto pressed = button.pressed;
-	auto bounds = button.bounds;
-
-    if ((state != GUI_STATE_DISABLED) && !guiLocked)
+    if ((button.state != GUI_STATE_DISABLED) && !guiLocked)
     {
         Vector2 mousePoint = GetMousePosition();
 
         // Check button state
-        if (CheckCollisionPointRec(mousePoint, bounds))
+        if (CheckCollisionPointRec(mousePoint, button.bounds))
         {
-            if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) state = GUI_STATE_PRESSED;
-            else state = GUI_STATE_FOCUSED;
+            if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) button.state = GUI_STATE_PRESSED;
+            else button.state = GUI_STATE_FOCUSED;
 
-            if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) pressed = true;
+            if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) button.pressed = true;
         }
+		else
+			button.state = GUI_STATE_NORMAL;
     }
-
-	button.state = state;
-	button.pressed = pressed;
-	button.bounds = bounds;
 }
 
 
 void Update(ImageButton &button){
-	Update(button.button);
+	Update(*static_cast<Button *>(&button));
 }
 
 
 bool Update(Toggle &toggle){
-	auto state = toggle.state;
-	auto active = toggle.active;
-	auto bounds = toggle.bounds;
-
-    if ((state != GUI_STATE_DISABLED) && !guiLocked)
+    if ((toggle.state != GUI_STATE_DISABLED) && !guiLocked)
     {
         Vector2 mousePoint = GetMousePosition();
 
         // Check toggle button state
-        if (CheckCollisionPointRec(mousePoint, bounds))
+        if (CheckCollisionPointRec(mousePoint, toggle.bounds))
         {
-            if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) state = GUI_STATE_PRESSED;
+            if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) toggle.state = GUI_STATE_PRESSED;
             else if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
             {
-                state = GUI_STATE_NORMAL;
-                active = !active;
+                toggle.state = GUI_STATE_NORMAL;
+                toggle.active = !toggle.active;
             }
-            else state = GUI_STATE_FOCUSED;
+            else toggle.state = GUI_STATE_FOCUSED;
         }
     }
 
-	toggle.state = state;
-	toggle.active = active;
-	toggle.bounds = bounds;
-	return active;
+	return toggle.active;
 }
 
 
 bool Update(ImageToggle &toggle){
-	return Update(toggle.toggle);
+	return Update(*static_cast<Toggle *>(&toggle));
 }
 
 
@@ -105,7 +92,7 @@ void SetupScrollBar(ScrollBar &sb){
 void SetupListView(ListView &lw){
 	lw.state = GuiControlState::GUI_STATE_NORMAL;
     lw.itemFocused = (&lw.focus == nullptr)? -1 : lw.focus;
-    int itemSelected = lw.active;
+    /* int itemSelected = lw.active; */
     lw.useScrollBar = false;
     if ((GuiGetStyle(LISTVIEW, LIST_ITEMS_HEIGHT) + GuiGetStyle(LISTVIEW, LIST_ITEMS_PADDING))*lw.text.size() > lw.bounds.height) lw.useScrollBar = true;
 	
@@ -116,10 +103,10 @@ void SetupListView(ListView &lw){
     if (lw.useScrollBar) lw.itemBounds.width -= GuiGetStyle(LISTVIEW, SCROLLBAR_WIDTH);
 
     lw.visibleItems = lw.bounds.height/(GuiGetStyle(LISTVIEW, LIST_ITEMS_HEIGHT) + GuiGetStyle(LISTVIEW, LIST_ITEMS_PADDING));
-    if (lw.visibleItems > lw.text.size()) lw.visibleItems = lw.text.size();
+    if (lw.visibleItems > (int)lw.text.size()) lw.visibleItems = lw.text.size();
 
     lw.startIndex = (&lw.scrollIndex == nullptr)? 0 : lw.scrollIndex;
-    if ((lw.startIndex < 0) || (lw.startIndex > (lw.text.size() - lw.visibleItems))) lw.startIndex = 0;
+    if ((lw.startIndex < 0) || (lw.startIndex > ((int)lw.text.size() - lw.visibleItems))) lw.startIndex = 0;
     lw.endIndex = lw.startIndex + lw.visibleItems;
 
 	
@@ -135,8 +122,8 @@ void SetupListView(ListView &lw){
         float percentVisible = (float)(lw.endIndex - lw.startIndex)/lw.text.size();
         float sliderSize = lw.bounds.height*percentVisible;
 
-        int prevSliderSize = GuiGetStyle(SCROLLBAR, SCROLL_SLIDER_SIZE);   // Save default slider size
-        int prevScrollSpeed = GuiGetStyle(SCROLLBAR, SCROLL_SPEED); // Save default scroll speed
+        /* int prevSliderSize = GuiGetStyle(SCROLLBAR, SCROLL_SLIDER_SIZE);   // Save default slider size */
+        /* int prevScrollSpeed = GuiGetStyle(SCROLLBAR, SCROLL_SPEED); // Save default scroll speed */
         GuiSetStyle(SCROLLBAR, SCROLL_SLIDER_SIZE, sliderSize);            // Change slider size
         GuiSetStyle(SCROLLBAR, SCROLL_SPEED, lw.text.size() - lw.visibleItems); // Change scroll speed
 
@@ -235,10 +222,10 @@ void Update(ListView &lw){
                 lw.startIndex -= wheelMove;
 
                 if (lw.startIndex < 0) lw.startIndex = 0;
-                else if (lw.startIndex > (lw.text.size() - lw.visibleItems)) lw.startIndex = lw.text.size() - lw.visibleItems;
+                else if (lw.startIndex > ((int)lw.text.size() - lw.visibleItems)) lw.startIndex = lw.text.size() - lw.visibleItems;
 
                 lw.endIndex = lw.startIndex + lw.visibleItems;
-                if (lw.endIndex > lw.text.size()) lw.endIndex = lw.text.size();
+                if (lw.endIndex > (int)lw.text.size()) lw.endIndex = lw.text.size();
 
 				lw.scrollbar.value = lw.startIndex;
 				lw.scrollbar.minValue = 0;
@@ -261,35 +248,29 @@ void Update(ListView &lw){
 
 
 void DrawGuiButton(Button &button){
-	Rectangle bounds = button.bounds;
-	const char *text = button.text.c_str();
-    GuiControlState state = button.state;
 
-    GuiDrawRectangle(bounds, GuiGetStyle(BUTTON, BORDER_WIDTH), Fade(GetColor(GuiGetStyle(BUTTON, BORDER + (state*3))), guiAlpha), Fade(GetColor(GuiGetStyle(BUTTON, BASE + (state*3))), guiAlpha));
-    GuiDrawText(text, GetTextBounds(BUTTON, bounds), GuiGetStyle(BUTTON, TEXT_ALIGNMENT), Fade(GetColor(GuiGetStyle(BUTTON, TEXT + (state*3))), guiAlpha));
+    GuiDrawRectangle(button.bounds, GuiGetStyle(BUTTON, BORDER_WIDTH), Fade(GetColor(GuiGetStyle(BUTTON, BORDER + (button.state*3))), guiAlpha), Fade(GetColor(GuiGetStyle(BUTTON, BASE + (button.state*3))), guiAlpha));
+    GuiDrawText(button.text.c_str(), GetTextBounds(BUTTON, button.bounds), GuiGetStyle(BUTTON, TEXT_ALIGNMENT), Fade(GetColor(GuiGetStyle(BUTTON, TEXT + (button.state*3))), guiAlpha));
 }
 
 
 void DrawGuiImageButton(ImageButton &ib){
-	Rectangle bounds = ib.button.bounds;
-	const char *text = ib.button.text.c_str();
-    GuiControlState state = ib.button.state;
 	Rectangle texSource = (Rectangle){ 0, 0, (float)ib.texture.width, (float)ib.texture.height };
 
-    if (text != nullptr) GuiDrawText(text, GetTextBounds(BUTTON, bounds), GuiGetStyle(BUTTON, TEXT_ALIGNMENT), Fade(GetColor(GuiGetStyle(BUTTON, TEXT + (state*3))), guiAlpha));
-    if (ib.texture.id > 0) DrawTextureRec(ib.texture, texSource, RAYGUI_CLITERAL(Vector2){ bounds.x, bounds.y}, Fade(GetColor(GuiGetStyle(BUTTON, TEXT + (state*3))), guiAlpha));
+    if (ib.text.c_str() != nullptr) GuiDrawText(ib.text.c_str(), GetTextBounds(BUTTON, ib.bounds), GuiGetStyle(BUTTON, TEXT_ALIGNMENT), Fade(GetColor(GuiGetStyle(BUTTON, TEXT + (ib.state*3))), guiAlpha));
+    if (ib.texture.id > 0) DrawTextureRec(ib.texture, texSource, RAYGUI_CLITERAL(Vector2){ ib.bounds.x, ib.bounds.y}, Fade(GetColor(GuiGetStyle(BUTTON, TEXT + (ib.state*3))), guiAlpha));
 }
 
 
 void DrawGuiImageToggle(ImageToggle &ito){
-	Rectangle bounds = ito.toggle.bounds;
-	const char *text = ito.toggle.text.c_str();
-    GuiControlState state = ito.toggle.state;
+	Rectangle bounds = ito.bounds;
+	const char *text = ito.text.c_str();
+    GuiControlState state = ito.state;
 	Rectangle texSource = (Rectangle){ 0, 0, (float)ito.texture.width, (float)ito.texture.height };
 
     if (text != nullptr) GuiDrawText(text, GetTextBounds(TOGGLE, bounds), GuiGetStyle(TOGGLE, TEXT_ALIGNMENT), Fade(GetColor(GuiGetStyle(TOGGLE, TEXT + (state*3))), guiAlpha));
     if (ito.texture.id > 0){
-		if(ito.toggle.active)
+		if(ito.active)
 			DrawTextureRec(ito.texture, texSource, RAYGUI_CLITERAL(Vector2){ bounds.x, bounds.y}, WHITE);
 		else
 			DrawTextureRec(ito.texture, texSource, RAYGUI_CLITERAL(Vector2){ bounds.x, bounds.y}, GRAY);
@@ -359,8 +340,6 @@ void DrawGuiListView(ListView &lw){
     }
     //--------------------------------------------------------------------
 
-    /* if (&lw.focus != NULL) lw.focus = lw.itemFocused; */
-    /* if (&lw.scrollIndex != NULL) lw.scrollIndex = lw.startIndex; */
 }
 
 
@@ -466,7 +445,6 @@ void DrawElemino(const Elemino &e){
 	for(size_t i = 0; i < 16; ++i){
 		if(e.useRect[i]){
 			DrawTextureEx(Elemino::eleminoTile, (Vector2){e.rect[i].x, e.rect[i].y}, 0.f, (2 - e.inInventory) * .5f, e.color);
-			//DrawRectangleRec(e.rect[i], e.color);	
 		}
 	}
 }
@@ -522,6 +500,14 @@ void DrawInventory(const Player &player){
 	for(size_t i = 0; i < 4; ++i)
 		DrawGuiImageToggle(player.invData->portraits.toggles[i]);
 
+	for(size_t i = 0; i < 4; ++i){
+		auto &toggle = player.invData->portraits.toggles[i];
+		if(toggle.active){
+			DrawTextureV(player.invData->halo, (Vector2){toggle.bounds.x - 8, toggle.bounds.y - 8}, WHITE);
+			break;
+		}
+	}
+
 	for(size_t i = 0; i < 3; ++i)
 		DrawGrid(player.invData->grids[i]);
 
@@ -546,8 +532,38 @@ void DrawMoveInventory(const Player &player){
 	for(size_t i = 0; i < 4; ++i)
 		DrawGuiImageToggle(player.minvData->portraits.toggles[i]);
 
+	for(size_t i = 0; i < 4; ++i){
+		auto &toggle = player.minvData->portraits.toggles[i];
+		if(toggle.active){
+			DrawTextureV(player.minvData->halo, (Vector2){toggle.bounds.x - 8, toggle.bounds.y - 8}, WHITE);
+			break;
+		}
+	}
+
 	DrawGuiListView(player.minvData->movesCurrList);
 	DrawGuiListView(player.minvData->movesAvailList);
 	DrawGuiBoxLabel(player.minvData->moveInfo);
+}
+
+
+void DrawCombat(const Game &game){
+	for(size_t i = 0; i < 4; ++i)
+		DrawGuiImageToggle(game.cbtData->portraits.toggles[i]);
+
+	for(size_t i = 0; i < 4; ++i){
+		auto &toggle = game.cbtData->portraits.toggles[i];
+		if(toggle.active){
+			DrawTextureV(game.cbtData->halo, (Vector2){toggle.bounds.x - 8, toggle.bounds.y - 8}, WHITE);
+			break;
+		}
+	}
+	
+	for(size_t i = 0; i < NUM_ACTOR_MOVES; ++i)
+		DrawGuiButton(game.cbtData->moveButtons[i]);
+
+	if(game.cbtData->canAssign){
+		DrawGuiListView(game.cbtData->targetAliveList);
+		DrawGuiListView(game.cbtData->targetSelectedList);
+	}
 }
 
