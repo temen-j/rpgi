@@ -32,9 +32,14 @@ struct InventoryData{
 
 	InventoryPortraits portraits;
 	Texture halo;
+	Texture rArrow;
+	Texture lArrow;
+
 	Label statText[6];
 	BoxLabel tooltip;
 	DropDown elemdd;
+	Button plusPage;
+	Button minusPage;
 
 	Vec<Elemino *> eleminoesAvail; //The eleminoes available to the pages
 	Vec<Elemino *> interactable; //The eleminoes on the page

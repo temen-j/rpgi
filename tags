@@ -58,6 +58,7 @@ ADDRESS_NONE	.\include\raylib\rnet.h	199;"	d
 ADDRESS_TYPE_ANY	.\include\raylib\rnet.h	189;"	d
 ADDRESS_TYPE_IPV4	.\include\raylib\rnet.h	190;"	d
 ADDRESS_TYPE_IPV6	.\include\raylib\rnet.h	191;"	d
+AIMakeCTPs	.\combat.cpp	/^void AIMakeCTPs(CombatData &cbtD){$/;"	f
 ALIGN	.\include\raylib\external\jar_xm.h	620;"	d
 ALIGN_PTR	.\include\raylib\external\jar_xm.h	621;"	d
 ALLMOVES_H	.\include\allmoves.h	3;"	d
@@ -1628,10 +1629,12 @@ DrawGrid	.\gui.cpp	/^void DrawGrid(const Grid &g){$/;"	f
 DrawGrid	.\include\raylib\models.c	/^void DrawGrid(int slices, float spacing)$/;"	f
 DrawGuiBoxLabel	.\gui.cpp	/^void DrawGuiBoxLabel(BoxLabel &label){$/;"	f
 DrawGuiButton	.\gui.cpp	/^void DrawGuiButton(Button &button){$/;"	f
+DrawGuiDropDown	.\gui.cpp	/^void DrawGuiDropDown(DropDown &dd){$/;"	f
 DrawGuiImageButton	.\gui.cpp	/^void DrawGuiImageButton(ImageButton &ib){$/;"	f
 DrawGuiImageToggle	.\gui.cpp	/^void DrawGuiImageToggle(ImageToggle &ito){$/;"	f
 DrawGuiLabel	.\gui.cpp	/^void DrawGuiLabel(Label &label){$/;"	f
 DrawGuiListView	.\gui.cpp	/^void DrawGuiListView(ListView &lw){$/;"	f
+DrawGuiPanel	.\gui.cpp	/^void DrawGuiPanel(Panel &p){$/;"	f
 DrawGuiScrollBar	.\gui.cpp	/^void DrawGuiScrollBar(ScrollBar &sb){$/;"	f
 DrawInventory	.\gui.cpp	/^void DrawInventory(const Player &player){$/;"	f
 DrawLine	.\include\raylib\shapes.c	/^void DrawLine(int startPosX, int startPosY, int endPosX, int endPosY, Color color)$/;"	f
@@ -1686,6 +1689,8 @@ DrawTriangle	.\include\raylib\shapes.c	/^void DrawTriangle(Vector2 v1, Vector2 v
 DrawTriangleFan	.\include\raylib\shapes.c	/^void DrawTriangleFan(Vector2 *points, int pointsCount, Color color)$/;"	f
 DrawTriangleLines	.\include\raylib\shapes.c	/^void DrawTriangleLines(Vector2 v1, Vector2 v2, Vector2 v3, Color color)$/;"	f
 DrawTriangleStrip	.\include\raylib\shapes.c	/^void DrawTriangleStrip(Vector2 *points, int pointsCount, Color color)$/;"	f
+DropDown	.\include\gui.h	/^	DropDown(){$/;"	f	struct:DropDown
+DropDown	.\include\gui.h	/^struct DropDown{$/;"	s
 DuplicateSoundBuffer	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * DuplicateSoundBuffer)(ma_IDirectSound* pThis, ma_IDirectSoundBuffer* pDSBufferOriginal, ma_IDirectSoundBuffer** ppDSBufferDuplicate);$/;"	m	struct:__anon284
 DwmEnableBlurBehindWindow	.\include\raylib\external\glfw\src\win32_platform.h	252;"	d
 DwmFlush	.\include\raylib\external\glfw\src\win32_platform.h	251;"	d
@@ -2429,7 +2434,6 @@ FLAG_WINDOW_UNDECORATED	.\include\raylib\raylib.h	/^    FLAG_WINDOW_UNDECORATED 
 FONT_BITMAP	.\include\raylib\raylib.h	/^    FONT_BITMAP,            \/\/ Bitmap font generation, no anti-aliasing$/;"	e	enum:__anon440
 FONT_DEFAULT	.\include\raylib\raylib.h	/^    FONT_DEFAULT = 0,       \/\/ Default font generation, anti-aliased$/;"	e	enum:__anon440
 FONT_SDF	.\include\raylib\raylib.h	/^    FONT_SDF                \/\/ SDF font generation, requires external shader$/;"	e	enum:__anon440
-FOO_H	.\include\foo.h	3;"	d
 FORCE_TO_SWIPE	.\include\raylib\gestures.h	166;"	d
 FOURCC_DXT1	.\include\raylib\textures.c	3093;"	d	file:
 FOURCC_DXT3	.\include\raylib\textures.c	3094;"	d	file:
@@ -8097,7 +8101,7 @@ GuiDisableTooltip	.\include\raylib\raygui.h	/^void GuiDisableTooltip(void) { gui
 GuiDrawIcon	.\include\raylib\raygui.h	/^void GuiDrawIcon(int iconId, Vector2 position, int pixelSize, Color color)$/;"	f
 GuiDrawRectangle	.\include\raylib\raygui.h	/^static void GuiDrawRectangle(Rectangle rec, int borderWidth, Color borderColor, Color color)$/;"	f
 GuiDrawText	.\include\raylib\raygui.h	/^static void GuiDrawText(const char *text, Rectangle bounds, int alignment, Color tint)$/;"	f
-GuiDrawTooltip	.\include\raylib\raygui.h	/^static void GuiDrawTooltip(Rectangle bounds)$/;"	f
+GuiDrawTooltip	.\include\raylib\raygui.h	/^extern void GuiDrawTooltip(Rectangle bounds) \/\/NOTE: changed from 'static' to 'extern'$/;"	f
 GuiDropdownBox	.\include\raylib\raygui.h	/^bool GuiDropdownBox(Rectangle bounds, const char *text, int *active, bool editMode)$/;"	f
 GuiDropdownBoxProperty	.\include\raylib\raygui.h	/^} GuiDropdownBoxProperty;$/;"	t	typeref:enum:__anon416
 GuiDummyRec	.\include\raylib\raygui.h	/^void GuiDummyRec(Rectangle bounds, const char *text)$/;"	f
@@ -8566,7 +8570,6 @@ INCLUDED_GETOPT_PORT_H	.\include\raylib\external\glfw\deps\getopt.h	28;"	d
 INCLUDE_JAR_MOD_H	.\include\raylib\external\jar_mod.h	82;"	d
 INCLUDE_JAR_XM_H	.\include\raylib\external\jar_xm.h	52;"	d
 INCLUDE_STB_IMAGE_WRITE_H	.\include\raylib\external\stb_image_write.h	151;"	d
-INCONS_H	.\include\inconsolata.h	2;"	d
 INCR	.\include\raylib\external\glfw\src\x11_platform.h	/^    Atom            INCR;$/;"	m	struct:_GLFWlibraryX11
 INITHP	.\include\actor.h	/^static const int INITHP = 200;$/;"	v
 INITMP	.\include\actor.h	/^static const int INITMP = 200;$/;"	v
@@ -8648,7 +8651,7 @@ INVA_CMD	.\include\console.h	/^const std::string INVA_CMD = "Invalid command! ";
 INVENTORY_H	.\include\inventory.h	3;"	d
 INV_ELMN_OFFSET	.\include\inventory.h	/^const int INV_ELMN_OFFSET = 80;$/;"	v
 INV_GRID_WIDTH	.\include\inventory.h	/^const int INV_GRID_WIDTH = 400;$/;"	v
-INV_POS	.\include\inventory.h	/^const Vector2 INV_POS = (Vector2){360, 64};$/;"	v
+INV_POS	.\include\inventory.h	/^const Vector2 INV_POS = (Vector2){320, 64};$/;"	v
 IPAddress	.\include\raylib\rnet.h	/^typedef struct IPAddress {$/;"	s
 IPAddress	.\include\raylib\rnet.h	/^} IPAddress;$/;"	t	typeref:struct:IPAddress
 IPTOS_LOWDELAY	.\include\raylib\rnet.h	143;"	d
@@ -9349,7 +9352,7 @@ MAX_GAMEPADS	.\include\raylib\core.c	294;"	d	file:
 MAX_GAMEPAD_AXIS	.\include\raylib\core.c	295;"	d	file:
 MAX_GAMEPAD_BUTTONS	.\include\raylib\core.c	296;"	d	file:
 MAX_HIST	.\include\console.h	/^const unsigned int MAX_HIST = 16;$/;"	v
-MAX_INV_DISP	.\include\inventory.h	/^	const unsigned int MAX_INV_DISP = 20;$/;"	m	struct:InventoryData
+MAX_INV_DISP	.\include\inventory.h	/^	const unsigned int MAX_INV_DISP = 25;$/;"	m	struct:InventoryData
 MAX_KEYBUFFER_SIZE	.\include\raylib\core.c	4572;"	d	file:
 MAX_MATERIAL_MAPS	.\include\raylib\rlgl.h	156;"	d
 MAX_MATERIAL_MAPS	.\include\raylib\rlgl.h	268;"	d
@@ -10347,6 +10350,7 @@ MVK_macos_surface	.\include\raylib\external\glfw\src\internal.h	/^        GLFWbo
 MWM_DECOR_ALL	.\include\raylib\external\glfw\src\x11_window.c	55;"	d	file:
 MWM_HINTS_DECORATIONS	.\include\raylib\external\glfw\src\x11_window.c	54;"	d	file:
 M_PI	.\include\raylib\external\stb_vorbis.h	1015;"	d
+MakeCTP	.\combat.cpp	/^void MakeCTP(CombatData &cbtD){$/;"	f
 MakeCurrent	.\include\raylib\external\glfw\src\egl_context.h	/^    PFN_eglMakeCurrent          MakeCurrent;$/;"	m	struct:_GLFWlibraryEGL
 MakeCurrent	.\include\raylib\external\glfw\src\glx_context.h	/^    PFNGLXMAKECURRENTPROC               MakeCurrent;$/;"	m	struct:_GLFWlibraryGLX
 MakeCurrent	.\include\raylib\external\glfw\src\osmesa_context.h	/^    PFN_OSMesaMakeCurrent           MakeCurrent;$/;"	m	struct:_GLFWlibraryOSMesa
@@ -10440,7 +10444,6 @@ MouseButtonCallback	.\include\raylib\core.c	/^static void MouseButtonCallback(GL
 MouseCursorPosCallback	.\include\raylib\core.c	/^static void MouseCursorPosCallback(GLFWwindow *window, double x, double y)$/;"	f	file:
 MouseTouchElemino	.\inventory.cpp	/^void MouseTouchElemino(Game &game){$/;"	f
 Move	.\elemino.cpp	/^void Move(Elemino &e, const Vector2 &offset){$/;"	f
-Move	.\include\foo.h	/^struct Move{$/;"	s
 Move	.\include\move.h	/^struct Move{$/;"	s
 Move	.\move.cpp	/^Move::Move(){$/;"	f	class:Move
 Move	.\move.cpp	/^Move::Move(int id, const char *name, Element elem, int levelObtained, int priority, int maxTargets, int damage, int healing, int cost,$/;"	f	class:Move
@@ -10674,6 +10677,7 @@ OpenMoveInventory	.\moveinventory.cpp	/^void OpenMoveInventory(Game &game){$/;"	
 OpenPropertyStore	.\include\raylib\external\miniaudio.h	/^        HRESULT (STDMETHODCALLTYPE * OpenPropertyStore)(ma_IMMDevice* pThis, DWORD stgmAccess, ma_IPropertyStore** ppProperties);$/;"	m	struct:__anon267
 OpenURL	.\include\raylib\core.c	/^void OpenURL(const char *url)$/;"	f
 Overlap	.\elemino.cpp	/^unsigned int Overlap(const Elemino &e, const Grid &g){$/;"	f
+PANEL_BORDER_WIDTH	.\gui.cpp	460;"	d	file:
 PANEL_BORDER_WIDTH	.\include\raylib\raygui.h	832;"	d
 PAR_CALLOC	.\include\raylib\external\par_shapes.h	186;"	d
 PAR_CALLOC	.\include\raylib\models.c	84;"	d	file:
@@ -12655,6 +12659,7 @@ PacketSend	.\include\raylib\rnet.h	/^void PacketSend(Packet *packet)$/;"	f
 PacketWrite16	.\include\raylib\rnet.h	/^void PacketWrite16(Packet *packet, uint16_t value)$/;"	f
 PacketWrite32	.\include\raylib\rnet.h	/^void PacketWrite32(Packet *packet, uint32_t value)$/;"	f
 PacketWrite64	.\include\raylib\rnet.h	/^void PacketWrite64(Packet *packet, uint64_t value)$/;"	f
+Panel	.\include\gui.h	/^struct Panel{$/;"	s
 ParseConsole	.\console.cpp	/^Dev::Command ParseConsole(Console &c){$/;"	f
 PauseAudioBuffer	.\include\raylib\raudio.c	/^void PauseAudioBuffer(AudioBuffer *buffer)$/;"	f
 PauseAudioStream	.\include\raylib\raudio.c	/^void PauseAudioStream(AudioStream stream)$/;"	f
@@ -12691,6 +12696,7 @@ Point	.\include\raylib\core.c	/^typedef struct { int x; int y; } Point;$/;"	t	ty
 PollInputEvents	.\include\raylib\core.c	/^static void PollInputEvents(void)$/;"	f	file:
 PolygonData	.\include\raylib\physac.h	/^typedef struct PolygonData {$/;"	s
 PolygonData	.\include\raylib\physac.h	/^} PolygonData;$/;"	t	typeref:struct:PolygonData
+PositionEleminoes	.\inventory.cpp	/^void PositionEleminoes(InventoryData &invD){$/;"	f
 PositionEleminoes	.\inventory.cpp	/^void PositionEleminoes(Player &player){$/;"	f
 PrintSocket	.\include\raylib\rnet.h	/^static void PrintSocket(struct sockaddr_storage *addr, const int family, const int socktype, const int protocol)$/;"	f
 ProcessGestureEvent	.\include\raylib\gestures.h	/^void ProcessGestureEvent(GestureEvent event)$/;"	f
@@ -12698,7 +12704,6 @@ ProcessKeyboard	.\include\raylib\core.c	/^static void ProcessKeyboard(void)$/;"	
 ProductGuid	.\include\raylib\external\miniaudio.h	/^    GUID ProductGuid;$/;"	m	struct:__anon291
 ProductGuid	.\include\raylib\external\miniaudio.h	/^    GUID ProductGuid;$/;"	m	struct:__anon292
 PropVariantClear	.\include\raylib\external\miniaudio.h	/^            ma_proc PropVariantClear;$/;"	m	struct:ma_context::__anon222::__anon223
-QWER_H	.\include\qwer.h	3;"	d
 Quaternion	.\include\raylib\raylib.h	/^typedef Vector4 Quaternion;$/;"	t
 Quaternion	.\include\raylib\raymath.h	/^    typedef struct Quaternion {$/;"	s
 Quaternion	.\include\raylib\raymath.h	/^    } Quaternion;$/;"	t	typeref:struct:Quaternion
@@ -12762,7 +12767,7 @@ RAYGUI_CLITERAL	.\include\raylib\raygui.h	530;"	d
 RAYGUI_CLITERAL	.\include\raylib\raygui.h	532;"	d
 RAYGUI_FREE	.\include\raylib\raygui.h	172;"	d
 RAYGUI_H	.\include\raylib\raygui.h	131;"	d
-RAYGUI_IMPLEMENTATION	.\gui.cpp	7;"	d	file:
+RAYGUI_IMPLEMENTATION	.\gui.cpp	6;"	d	file:
 RAYGUI_MALLOC	.\include\raylib\raygui.h	166;"	d
 RAYGUI_VERSION	.\include\raylib\raygui.h	133;"	d
 RAYLIB_H	.\include\raylib\raylib.h	75;"	d
@@ -13159,6 +13164,7 @@ Reset	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * R
 Reset	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * Reset)            (ma_IAudioClient2* pThis);$/;"	m	struct:__anon271
 Reset	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * Reset)            (ma_IAudioClient3* pThis);$/;"	m	struct:__anon272
 ResetPhysics	.\include\raylib\physac.h	/^PHYSACDEF void ResetPhysics(void)$/;"	f
+ResetSelectAvailList	.\combat.cpp	/^void ResetSelectAvailList(CombatData &cbtD){$/;"	f
 ResizePacket	.\include\raylib\rnet.h	/^int ResizePacket(SocketDataPacket *packet, int newsize)$/;"	f
 ResolveHost	.\include\raylib\rnet.h	/^int ResolveHost(const char *address, const char *service, int addressType, int flags, AddressInformation *outAddr)$/;"	f
 ResolveIP	.\include\raylib\rnet.h	/^void ResolveIP(const char *ip, const char *port, int flags, char *host, char *serv)$/;"	f
@@ -13233,6 +13239,7 @@ SPIN_BUTTON_WIDTH	.\include\raylib\raygui.h	/^    SPIN_BUTTON_WIDTH = 16,$/;"	e	
 SQUISH_CONSTANT_2D	.\include\raylib\external\par_shapes.h	1758;"	d
 SQUISH_CONSTANT_3D	.\include\raylib\external\par_shapes.h	1760;"	d
 SQUISH_CONSTANT_4D	.\include\raylib\external\par_shapes.h	1762;"	d
+STATTEXT_H	.\include\stattext.h	2;"	d
 STATUSBAR	.\include\raylib\raygui.h	/^    STATUSBAR$/;"	e	enum:__anon408
 STBIDEF	.\include\raylib\external\stb_image.h	349;"	d
 STBIDEF	.\include\raylib\external\stb_image.h	351;"	d
@@ -13686,6 +13693,7 @@ SetWindowMonitor	.\include\raylib\core.c	/^void SetWindowMonitor(int monitor)$/;
 SetWindowPosition	.\include\raylib\core.c	/^void SetWindowPosition(int x, int y)$/;"	f
 SetWindowSize	.\include\raylib\core.c	/^void SetWindowSize(int width, int height)$/;"	f
 SetWindowTitle	.\include\raylib\core.c	/^void SetWindowTitle(const char *title)$/;"	f
+SetupDropDown	.\gui.cpp	/^void SetupDropDown(DropDown &dd){$/;"	f
 SetupFramebuffer	.\include\raylib\core.c	/^static void SetupFramebuffer(int width, int height)$/;"	f	file:
 SetupListView	.\gui.cpp	/^void SetupListView(ListView &lw){$/;"	f
 SetupMoveInfo	.\moveinventory.cpp	/^void SetupMoveInfo(MoveInventoryData &minvD){$/;"	f
@@ -13826,15 +13834,15 @@ TEXT_COLOR_DISABLED	.\include\raylib\raygui.h	/^    TEXT_COLOR_DISABLED,$/;"	e	e
 TEXT_COLOR_FOCUSED	.\include\raylib\raygui.h	/^    TEXT_COLOR_FOCUSED,$/;"	e	enum:__anon409
 TEXT_COLOR_NORMAL	.\include\raylib\raygui.h	/^    TEXT_COLOR_NORMAL,$/;"	e	enum:__anon409
 TEXT_COLOR_PRESSED	.\include\raylib\raygui.h	/^    TEXT_COLOR_PRESSED,$/;"	e	enum:__anon409
-TEXT_HP	.\include\inventory.h	/^static const char *TEXT_HP = "HP: ";$/;"	v
+TEXT_HP	.\include\stattext.h	/^const char *TEXT_HP = "HP: ";$/;"	v
 TEXT_INNER_PADDING	.\include\raylib\raygui.h	/^    TEXT_INNER_PADDING = 16,$/;"	e	enum:__anon417
 TEXT_LINES_PADDING	.\include\raylib\raygui.h	/^    TEXT_LINES_PADDING,$/;"	e	enum:__anon417
-TEXT_MATK	.\include\inventory.h	/^static const char *TEXT_MATK = "MATK: ";$/;"	v
-TEXT_MDEF	.\include\inventory.h	/^static const char *TEXT_MDEF = "MDEF: ";$/;"	v
-TEXT_MP	.\include\inventory.h	/^static const char *TEXT_MP = "MP: ";$/;"	v
+TEXT_MATK	.\include\stattext.h	/^const char *TEXT_MATK = "MATK: ";$/;"	v
+TEXT_MDEF	.\include\stattext.h	/^const char *TEXT_MDEF = "MDEF: ";$/;"	v
+TEXT_MP	.\include\stattext.h	/^const char *TEXT_MP = "MP: ";$/;"	v
 TEXT_PADDING	.\include\raylib\raygui.h	/^    TEXT_PADDING,$/;"	e	enum:__anon409
-TEXT_PATK	.\include\inventory.h	/^static const char *TEXT_PATK = "PATK: ";$/;"	v
-TEXT_PDEF	.\include\inventory.h	/^static const char *TEXT_PDEF = "PDEF: ";$/;"	v
+TEXT_PATK	.\include\stattext.h	/^const char *TEXT_PATK = "PATK: ";$/;"	v
+TEXT_PDEF	.\include\stattext.h	/^const char *TEXT_PDEF = "PDEF: ";$/;"	v
 TEXT_SIZE	.\include\raylib\raygui.h	/^    TEXT_SIZE = 16,$/;"	e	enum:__anon410
 TEXT_SPACING	.\include\raylib\raygui.h	/^    TEXT_SPACING,$/;"	e	enum:__anon410
 TEXT_VALIGN_PIXEL_OFFSET	.\include\raylib\raygui.h	3258;"	d
@@ -14067,6 +14075,7 @@ Unlock	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * 
 Unoccupy	.\elemino.cpp	/^void Unoccupy(Grid &g){$/;"	f
 UnregisterEndpointNotificationCallback	.\include\raylib\external\miniaudio.h	/^        HRESULT (STDMETHODCALLTYPE * UnregisterEndpointNotificationCallback)(ma_IMMDeviceEnumerator* pThis, ma_IMMNotificationClient* pClient);$/;"	m	struct:__anon265
 UntrackAudioBuffer	.\include\raylib\raudio.c	/^void UntrackAudioBuffer(AudioBuffer *buffer)$/;"	f
+Update	.\gui.cpp	/^bool Update(DropDown &dd){$/;"	f
 Update	.\gui.cpp	/^bool Update(ImageToggle &toggle){$/;"	f
 Update	.\gui.cpp	/^bool Update(Toggle &toggle){$/;"	f
 Update	.\gui.cpp	/^void Update(Button &button){$/;"	f
@@ -14078,6 +14087,7 @@ UpdateBuffersDefault	.\include\raylib\rlgl.h	/^static void UpdateBuffersDefault(
 UpdateCamera	.\include\raylib\camera.h	/^void UpdateCamera(Camera *camera)$/;"	f
 UpdateConfiguration	.\include\raylib\external\glfw\src\x11_platform.h	/^        PFN_XRRUpdateConfiguration UpdateConfiguration;$/;"	m	struct:_GLFWlibraryX11::__anon113
 UpdateGestures	.\include\raylib\gestures.h	/^void UpdateGestures(void)$/;"	f
+UpdateInteractable	.\inventory.cpp	/^void UpdateInteractable(Player &player){$/;"	f
 UpdateModelAnimation	.\include\raylib\models.c	/^void UpdateModelAnimation(Model model, ModelAnimation anim, int frame)$/;"	f
 UpdateMusicStream	.\include\raylib\raudio.c	/^void UpdateMusicStream(Music music)$/;"	f
 UpdatePos	.\elemino.cpp	/^void Grid::UpdatePos(){$/;"	f	class:Grid
@@ -16367,7 +16377,7 @@ __STB_INCLUDE_STB_TRUETYPE_H__	.\include\raylib\external\stb_truetype.h	496;"	d
 __USE_BSD	.\include\raylib\external\dr_flac.h	871;"	d
 __USE_W32_SOCKETS	.\include\raylib\rnet.h	138;"	d
 __WINE_XINPUT_H	.\include\raylib\external\glfw\deps\mingw\xinput.h	21;"	d
-__cpluplus	.\gui.cpp	8;"	d	file:
+__cpluplus	.\gui.cpp	7;"	d	file:
 __eglMustCastToProperFunctionPointerType	.\include\raylib\external\ANGLE\EGL\egl.h	/^typedef void (*__eglMustCastToProperFunctionPointerType)(void);$/;"	t
 __egl_h_	.\include\raylib\external\ANGLE\EGL\egl.h	2;"	d
 __eglext_h_	.\include\raylib\external\ANGLE\EGL\eglext.h	2;"	d
@@ -16841,6 +16851,7 @@ accumulator	.\include\raylib\physac.h	/^static double accumulator = 0.0;        
 acquireMonitor	.\include\raylib\external\glfw\src\win32_window.c	/^static void acquireMonitor(_GLFWwindow* window)$/;"	f	file:
 acquireMonitor	.\include\raylib\external\glfw\src\x11_window.c	/^static void acquireMonitor(_GLFWwindow* window)$/;"	f	file:
 acquiredMonitorCount	.\include\raylib\external\glfw\src\win32_platform.h	/^    int                 acquiredMonitorCount;$/;"	m	struct:_GLFWlibraryWin32
+active	.\include\gui.h	/^	int active;$/;"	m	struct:DropDown
 active	.\include\gui.h	/^	int active;$/;"	m	struct:ListView
 active	.\include\gui.h	/^    bool active = false;$/;"	m	struct:Toggle
 active	.\include\raylib\external\jar_mod.h	/^    int  active;$/;"	m	struct:tracker_state_instrument_
@@ -16876,6 +16887,7 @@ advanceX	.\include\raylib\raylib.h	/^    int advanceX;           \/\/ Character 
 affected	.\include\moveeffect.h	/^	Actor *affector, *affected;$/;"	m	struct:MoveEffect
 affector	.\include\moveeffect.h	/^	Actor *affector, *affected;$/;"	m	struct:MoveEffect
 affordable	.\include\combat.h	/^	struct Move *affordable[NUM_ACTOR_MOVES] = {nullptr};$/;"	m	struct:CombatData	typeref:struct:CombatData::Move
+aiMakePairs	.\include\combat.h	/^	bool aiMakePairs = false;$/;"	m	struct:CombatData
 algo	.\include\raylib\external\dr_mp3.h	/^    } algo;$/;"	m	struct:drmp3_src	typeref:union:drmp3_src::__anon55
 algorithm	.\include\raylib\external\dr_mp3.h	/^    drmp3_src_algorithm algorithm;$/;"	m	struct:__anon54
 algorithm	.\include\raylib\external\miniaudio.h	/^        ma_resample_algorithm algorithm;$/;"	m	struct:__anon159::__anon160
@@ -16983,6 +16995,7 @@ arrayLayer	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t     
 arrayLayers	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t                 arrayLayers;$/;"	m	struct:VkImageCreateInfo
 arrayPitch	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkDeviceSize             arrayPitch;$/;"	m	struct:VkSubresourceLayout
 array_of_unicode_codepoints	.\include\raylib\external\stb_truetype.h	/^   int *array_of_unicode_codepoints;       \/\/ if non-zero, then this is an array of unicode codepoints$/;"	m	struct:__anon348
+arrow	.\include\inventory.h	/^	Texture arrow;$/;"	m	struct:InventoryData
 arrowDownRight	.\include\gui.h	/^    Rectangle arrowDownRight = { 0 };$/;"	m	struct:ScrollBar
 arrowUpLeft	.\include\gui.h	/^    Rectangle arrowUpLeft = { 0 };$/;"	m	struct:ScrollBar
 asoundSO	.\include\raylib\external\miniaudio.h	/^            ma_handle asoundSO;$/;"	m	struct:ma_context::__anon207::__anon211
@@ -17056,7 +17069,6 @@ backend	.\include\raylib\external\miniaudio.h	/^    ma_backend backend;         
 background	.\include\raylib\external\stb_image.h	/^   stbi_uc *background;          \/\/ The current "background" as far as a gif is concerned$/;"	m	struct:__anon331
 backlog_size	.\include\raylib\rnet.h	/^    int backlog_size;           \/\/ set a custom backlog size$/;"	m	struct:SocketConfig
 band_count	.\include\raylib\external\dr_mp3.h	/^    drmp3_uint8 tab_offset, code_tab_width, band_count;$/;"	m	struct:__anon64
-bar	.\include\foo.h	/^	int bar;$/;"	m	struct:foo
 bark_map_size	.\include\raylib\external\stb_vorbis.h	/^   stbv_uint16 bark_map_size;$/;"	m	struct:__anon365
 base	.\include\raylib\core.c	/^        unsigned long long base;            \/\/ Base time measure for hi-res timer$/;"	m	struct:CoreData::__anon16	file:
 base	.\include\raylib\rmem.h	/^    uint8_t *mem, *base;$/;"	m	struct:Stack
@@ -17167,8 +17179,10 @@ bottom	.\include\raylib\raylib.h	/^    int bottom;            \/\/ bottom border
 bottomDecoration	.\include\raylib\external\glfw\src\wl_platform.h	/^    bottomDecoration,$/;"	e	enum:_GLFWdecorationSideWayland
 bottom_y	.\include\raylib\external\stb_truetype.h	/^   int x,y,bottom_y;$/;"	m	struct:__anon360
 bounds	.\include\gui.h	/^	Rectangle bounds;$/;"	m	struct:Button
+bounds	.\include\gui.h	/^	Rectangle bounds;$/;"	m	struct:DropDown
 bounds	.\include\gui.h	/^	Rectangle bounds;$/;"	m	struct:Label
 bounds	.\include\gui.h	/^	Rectangle bounds;$/;"	m	struct:ListView
+bounds	.\include\gui.h	/^	Rectangle bounds;$/;"	m	struct:Panel
 bounds	.\include\gui.h	/^	Rectangle bounds;$/;"	m	struct:ScrollBar
 bounds	.\include\gui.h	/^	Rectangle bounds;$/;"	m	struct:Toggle
 bounds	.\include\raylib\external\stb_truetype.h	/^   int bounds;$/;"	m	struct:__anon358
@@ -17288,7 +17302,7 @@ cbSize	.\include\raylib\external\glfw\src\win32_platform.h	/^    DWORD cbSize;$/
 cbSize	.\include\raylib\external\miniaudio.h	/^    UINT32 cbSize;$/;"	m	struct:__anon262
 cbTypeSpecificParams	.\include\raylib\external\glfw\deps\mingw\dinput.h	/^	DWORD			cbTypeSpecificParams;$/;"	m	struct:DIEFFECT
 cbTypeSpecificParams	.\include\raylib\external\glfw\deps\mingw\dinput.h	/^	DWORD			cbTypeSpecificParams;$/;"	m	struct:DIEFFECT_DX5
-cbtData	.\include\game.h	/^	CombatData *cbtData;$/;"	m	struct:Game
+cbtData	.\include\game.h	/^	CombatData *cbtData = nullptr;$/;"	m	struct:Game
 cdata	.\include\raylib\external\stb_truetype.h	/^stbtt_bakedchar cdata[96]; \/\/ ASCII 32..126 is 95 glyphs$/;"	v
 centerCursor	.\include\raylib\external\glfw\src\internal.h	/^    GLFWbool      centerCursor;$/;"	m	struct:_GLFWwndconfig
 cff	.\include\raylib\external\stb_truetype.h	/^   stbtt__buf cff;                    \/\/ cff font data$/;"	m	struct:stbtt_fontinfo
@@ -17799,7 +17813,6 @@ coreaudio	.\include\raylib\external\miniaudio.h	/^    char coreaudio[256];      
 coreaudio	.\include\raylib\external\miniaudio.h	/^    } coreaudio;$/;"	m	struct:__anon202	typeref:struct:__anon202::__anon205
 corner	.\include\elemino.h	/^	corner$/;"	e	enum:MinoShape
 correlationMaskCount	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t                 correlationMaskCount;$/;"	m	struct:VkRenderPassMultiviewCreateInfo
-cost	.\include\foo.h	/^	int id, levelObtained, priority, maxTargets, damage, healing, cost;$/;"	m	struct:Move
 cost	.\include\move.h	/^	char id, priority, maxTargets, damage, healing, cost;$/;"	m	struct:Move_serialized
 cost	.\include\move.h	/^	int id, levelObtained, priority, maxTargets, damage, healing, cost;$/;"	m	struct:Move
 count	.\include\elemino.h	/^	unsigned int count;$/;"	m	struct:Elemino
@@ -17843,6 +17856,7 @@ createXdgSurface	.\include\raylib\external\glfw\src\wl_window.c	/^static GLFWboo
 create_hash_table	.\include\raylib\external\tinyobj_loader_c.h	/^static void create_hash_table(unsigned int start_capacity, hash_table_t* hash_table)$/;"	f
 crtc	.\include\raylib\external\glfw\src\x11_platform.h	/^    RRCrtc          crtc;$/;"	m	struct:_GLFWmonitorX11
 ctps	.\include\combat.h	/^	Vec<CasterTargetsPair> ctps; \/\/When exectuting moves, create an array of pointer and heapify that$/;"	m	struct:CombatData
+ctpsPtrs	.\include\combat.h	/^	Vec<CasterTargetsPair *> ctpsPtrs;$/;"	m	struct:CombatData
 ctxData	.\include\raylib\raudio.h	/^    void *ctxData;                  \/\/ Audio context data, depends on type$/;"	m	struct:Music
 ctxData	.\include\raylib\raylib.h	/^    void *ctxData;                  \/\/ Audio context data, depends on type$/;"	m	struct:Music
 ctxType	.\include\raylib\raudio.h	/^    int ctxType;                    \/\/ Type of music context (audio filetype)$/;"	m	struct:Music
@@ -17938,7 +17952,6 @@ cx1	.\include\raylib\external\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy
 cy	.\include\raylib\external\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon350
 cy1	.\include\raylib\external\stb_truetype.h	/^      stbtt_vertex_type x,y,cx,cy,cx1,cy1;$/;"	m	struct:__anon350
 d_name	.\include\raylib\external\dirent.h	/^    char *d_name;$/;"	m	struct:dirent
-damage	.\include\foo.h	/^	int id, levelObtained, priority, maxTargets, damage, healing, cost;$/;"	m	struct:Move
 damage	.\include\move.h	/^	char id, priority, maxTargets, damage, healing, cost;$/;"	m	struct:Move_serialized
 damage	.\include\move.h	/^	int id, levelObtained, priority, maxTargets, damage, healing, cost;$/;"	m	struct:Move
 data	.\include\raylib\external\cgltf.h	/^	cgltf_accessor* data;$/;"	m	struct:cgltf_attribute
@@ -18197,7 +18210,7 @@ disabledCursorWindow	.\include\raylib\external\glfw\src\win32_platform.h	/^    _
 disabledCursorWindow	.\include\raylib\external\glfw\src\x11_platform.h	/^    _GLFWwindow*    disabledCursorWindow;$/;"	m	struct:_GLFWlibraryX11
 discard_samples_deferred	.\include\raylib\external\stb_vorbis.h	/^   int discard_samples_deferred;$/;"	m	struct:stb_vorbis
 discreteQueuePriorities	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t                 discreteQueuePriorities;$/;"	m	struct:VkPhysicalDeviceLimits
-dispTargetLists	.\include\combat.h	/^	bool dispTargetLists;$/;"	m	struct:CombatData
+dispTargetLists	.\include\combat.h	/^	bool dispTargetLists = false;$/;"	m	struct:CombatData
 displacement_texname	.\include\raylib\external\tinyobj_loader_c.h	/^  char *displacement_texname;       \/* disp *\/$/;"	m	struct:__anon378
 display	.\include\raylib\core.c	/^        Size display;                       \/\/ Display width and height (monitor, device-screen, LCD, ...)$/;"	m	struct:CoreData::__anon9	file:
 display	.\include\raylib\external\glfw\src\egl_context.h	/^    EGLDisplay      display;$/;"	m	struct:_GLFWlibraryEGL
@@ -19084,6 +19097,7 @@ dynamic_fgets	.\include\raylib\external\tinyobj_loader_c.h	/^char *dynamic_fgets
 eCategory	.\include\raylib\external\miniaudio.h	/^    MA_AUDIO_STREAM_CATEGORY eCategory;$/;"	m	struct:__anon262
 edge_horizontal	.\include\raylib\external\stb_image_resize.h	/^    stbir_edge edge_horizontal;$/;"	m	struct:__anon338
 edge_vertical	.\include\raylib\external\stb_image_resize.h	/^    stbir_edge edge_vertical;$/;"	m	struct:__anon338
+editMode	.\include\gui.h	/^	bool editMode;$/;"	m	struct:DropDown
 effect	.\include\raylib\external\jar_mod.h	/^    muchar  effect;$/;"	m	struct:__anon124
 effect	.\include\raylib\external\jar_mod.h	/^    muchar  effect;$/;"	m	struct:__anon126
 effect_code	.\include\raylib\external\jar_mod.h	/^    muint   effect_code;$/;"	m	struct:__anon126
@@ -19109,11 +19123,12 @@ eglSwapInterval	.\include\raylib\external\glfw\src\egl_context.h	148;"	d
 eglTerminate	.\include\raylib\external\glfw\src\egl_context.h	140;"	d
 elem	.\include\elemino.h	/^	Element elem;$/;"	m	struct:Elemino
 elem	.\include\elemino.h	/^	Element elem[NUM_RECT];$/;"	m	struct:Grid
-elem	.\include\foo.h	/^	Element elem;$/;"	m	struct:Move
 elem	.\include\move.h	/^	Element elem;$/;"	m	struct:Move
 elem	.\include\move.h	/^	char elem;$/;"	m	struct:Move_serialized
+elemdd	.\include\inventory.h	/^	DropDown elemdd;$/;"	m	struct:InventoryData
 eleminoTile	.\elemino.cpp	/^Texture Elemino::eleminoTile;$/;"	m	class:Elemino	file:
 eleminoTile	.\include\elemino.h	/^	static Texture eleminoTile;$/;"	m	struct:Elemino
+eleminoesAvail	.\include\inventory.h	/^	Vec<Elemino *> eleminoesAvail; \/\/The eleminoes available to the pages$/;"	m	struct:InventoryData
 emission	.\include\raylib\external\tinyobj_loader_c.h	/^  float emission[3];$/;"	m	struct:__anon378
 emissive_factor	.\include\raylib\external\cgltf.h	/^	cgltf_float emissive_factor[3];$/;"	m	struct:cgltf_material
 emissive_texture	.\include\raylib\external\cgltf.h	/^	cgltf_texture_view emissive_texture;$/;"	m	struct:cgltf_material
@@ -19173,6 +19188,9 @@ eventSource	.\include\raylib\external\glfw\src\cocoa_platform.h	/^    CGEventSou
 eventTime	.\include\raylib\gestures.h	/^        double eventTime;               \/\/ Time stamp when an event happened$/;"	m	struct:__anon390::__anon391
 eventWorker	.\include\raylib\core.c	/^        InputEventWorker eventWorker[10];   \/\/ List of worker threads for every monitored "\/dev\/input\/event<N>"$/;"	m	struct:CoreData::__anon11	file:
 exec	.\include\console.h	/^		exec,$/;"	e	enum:Dev::Command
+execCTP	.\include\combat.h	/^	CasterTargetsPair *execCTP; \/\/the iterator$/;"	m	struct:CombatData
+execIndex	.\include\combat.h	/^	unsigned int execIndex = 0;$/;"	m	struct:CombatData
+executingMove	.\include\combat.h	/^	bool executingMove = false;$/;"	m	struct:CombatData
 executingMoves	.\include\combat.h	/^	bool executingMoves = false;$/;"	m	struct:CombatData
 exitKey	.\include\raylib\core.c	/^            int exitKey;                    \/\/ Default exit key$/;"	m	struct:CoreData::__anon11::__anon12	file:
 exp	.\include\player.h	/^	int exp;$/;"	m	struct:Player
@@ -19414,6 +19432,7 @@ floor_types	.\include\raylib\external\stb_vorbis.h	/^   stbv_uint16 floor_types[
 fmt	.\include\raylib\external\dr_wav.h	/^    drwav_fmt fmt;$/;"	m	struct:__anon78
 fmtid	.\include\raylib\external\miniaudio.h	/^    GUID fmtid;$/;"	m	struct:__anon257
 focus	.\include\combat.h	/^	unsigned char focus = 0;$/;"	m	struct:CombatData
+focus	.\include\gui.h	/^	int focus;$/;"	m	struct:DropDown
 focus	.\include\gui.h	/^	int focus;$/;"	m	struct:ListView
 focus	.\include\inventory.h	/^	unsigned char focus;$/;"	m	struct:InventoryData
 focus	.\include\moveinventory.h	/^	unsigned char focus = 0;$/;"	m	struct:MoveInventoryData
@@ -19426,7 +19445,6 @@ fontSize	.\include\gui.h	/^	int fontSize;$/;"	m	struct:GlobalTextData
 font_size	.\include\raylib\external\stb_truetype.h	/^   float font_size;$/;"	m	struct:__anon348
 fontdicts	.\include\raylib\external\stb_truetype.h	/^   stbtt__buf fontdicts;              \/\/ array of font dicts$/;"	m	struct:stbtt_fontinfo
 fontstart	.\include\raylib\external\stb_truetype.h	/^   int              fontstart;         \/\/ offset of start of font$/;"	m	struct:stbtt_fontinfo
-foo	.\include\foo.h	/^struct foo{$/;"	s
 fopen	.\include\raylib\utils.c	312;"	d	file:
 fopen	.\include\raylib\utils.c	314;"	d	file:
 fopen	.\include\raylib\utils.h	52;"	d
@@ -24312,6 +24330,9 @@ hWinMM	.\include\raylib\external\miniaudio.h	/^            ma_handle hWinMM;$/;"
 h_oversample	.\include\raylib\external\stb_truetype.h	/^   unsigned char h_oversample, v_oversample; \/\/ don't set these, they're used internally$/;"	m	struct:__anon348
 h_oversample	.\include\raylib\external\stb_truetype.h	/^   unsigned int   h_oversample, v_oversample;$/;"	m	struct:stbtt_pack_context
 ha	.\include\raylib\external\stb_image.h	/^      int hd,ha;$/;"	m	struct:__anon320::__anon321
+halo	.\include\combat.h	/^	Texture halo;$/;"	m	struct:CombatData
+halo	.\include\inventory.h	/^	Texture halo;$/;"	m	struct:InventoryData
+halo	.\include\moveinventory.h	/^	Texture halo;$/;"	m	struct:MoveInventoryData
 handle	.\include\raylib\core.c	/^        EGL_DISPMANX_WINDOW_T handle;       \/\/ Native window handle (graphic device)$/;"	m	struct:CoreData::__anon9	file:
 handle	.\include\raylib\core.c	/^        GLFWwindow *handle;                 \/\/ Native window handle (graphic device)$/;"	m	struct:CoreData::__anon9	file:
 handle	.\include\raylib\external\dirent.h	/^    handle_type handle;         \/\/ -1 for failed rewind$/;"	m	struct:DIR
@@ -24408,7 +24429,6 @@ headerFramesConsumedCapture	.\include\raylib\external\miniaudio.h	/^            
 headerFramesConsumedPlayback	.\include\raylib\external\miniaudio.h	/^            ma_uint32 headerFramesConsumedPlayback;    \/* The number of PCM frames consumed in the buffer in pWAVEHEADER[iNextHeader]. *\/$/;"	m	struct:ma_device::__anon230::__anon233
 headerType	.\include\raylib\external\dr_flac.h	/^    drflac_uint8 headerType;$/;"	m	struct:__anon46
 heal	.\include\console.h	/^		heal$/;"	e	enum:Dev::Command
-healing	.\include\foo.h	/^	int id, levelObtained, priority, maxTargets, damage, healing, cost;$/;"	m	struct:Move
 healing	.\include\move.h	/^	char id, priority, maxTargets, damage, healing, cost;$/;"	m	struct:Move_serialized
 healing	.\include\move.h	/^	int id, levelObtained, priority, maxTargets, damage, healing, cost;$/;"	m	struct:Move
 heapIndex	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t                 heapIndex;$/;"	m	struct:VkMemoryType
@@ -24495,7 +24515,6 @@ ic	.\include\raylib\external\glfw\src\x11_platform.h	/^    XIC             ic;$/
 iconified	.\include\raylib\external\glfw\src\win32_platform.h	/^    GLFWbool            iconified;$/;"	m	struct:_GLFWwindowWin32
 iconified	.\include\raylib\external\glfw\src\x11_platform.h	/^    GLFWbool        iconified;$/;"	m	struct:_GLFWwindowX11
 iconify	.\include\raylib\external\glfw\src\internal.h	/^        GLFWwindowiconifyfun    iconify;$/;"	m	struct:_GLFWwindow::__anon91
-id	.\include\foo.h	/^	int id, levelObtained, priority, maxTargets, damage, healing, cost;$/;"	m	struct:Move
 id	.\include\move.h	/^	char id, priority, maxTargets, damage, healing, cost;$/;"	m	struct:Move_serialized
 id	.\include\move.h	/^	int id, levelObtained, priority, maxTargets, damage, healing, cost;$/;"	m	struct:Move
 id	.\include\moveeffect.h	/^	int id; \/\/Id of the move that was used to produce this effect$/;"	m	struct:MoveEffect
@@ -24588,8 +24607,6 @@ inFlight	.\include\inventory.h	/^	Elemino *inFlight = nullptr; \/\/The elemino n
 inInventory	.\include\elemino.h	/^	bool inInventory = true;$/;"	m	struct:Elemino
 inTimeFrac	.\include\raylib\external\miniaudio.h	/^    ma_uint32 inTimeFrac;$/;"	m	struct:__anon146
 inTimeInt	.\include\raylib\external\miniaudio.h	/^    ma_uint32 inTimeInt;$/;"	m	struct:__anon146
-inconsFontChars	.\include\inconsolata.h	/^struct inconsFontChars{$/;"	s
-inconsFontRect	.\include\inconsolata.h	/^struct inconsFontRect{$/;"	s
 incrementCursorImage	.\include\raylib\external\glfw\src\wl_window.c	/^static void incrementCursorImage(_GLFWwindow* window)$/;"	f	file:
 independentBlend	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkBool32                 independentBlend;$/;"	m	struct:VkPhysicalDeviceFeatures
 index	.\include\raylib\external\cgltf.h	/^	cgltf_int index;$/;"	m	struct:cgltf_attribute
@@ -24686,6 +24703,7 @@ int_least64_t	.\include\raylib\external\glfw\deps\vs2008\stdint.h	/^typedef int6
 int_least8_t	.\include\raylib\external\glfw\deps\vs2008\stdint.h	/^typedef int8_t    int_least8_t;$/;"	t
 intensity	.\include\raylib\external\cgltf.h	/^	cgltf_float intensity;$/;"	m	struct:cgltf_light
 intensity	.\include\raylib\gestures.h	/^        float intensity;                \/\/ DRAG intensity, how far why did the DRAG (pixels per frame)$/;"	m	struct:__anon390::__anon393
+interactable	.\include\inventory.h	/^	Vec<Elemino *> interactable; \/\/The eleminoes on the page$/;"	m	struct:InventoryData
 interface	.\include\gui.h	/^	InterfaceID interface = InterfaceID::INTERFACE_NONE;$/;"	m	struct:Mouse
 internalChannelMap	.\include\raylib\external\miniaudio.h	/^        ma_channel internalChannelMap[MA_MAX_CHANNELS];$/;"	m	struct:ma_device::__anon228
 internalChannelMap	.\include\raylib\external\miniaudio.h	/^        ma_channel internalChannelMap[MA_MAX_CHANNELS];$/;"	m	struct:ma_device::__anon229
@@ -24738,11 +24756,9 @@ isDisabled	.\include\actor.h	/^	bool immune[NUMELEMENTS], pIncap, mIncap, isDisa
 isDrainingCapture	.\include\raylib\external\miniaudio.h	/^            ma_bool32 isDrainingCapture;$/;"	m	struct:ma_device::__anon230::__anon242
 isDrainingPlayback	.\include\raylib\external\miniaudio.h	/^            ma_bool32 isDrainingPlayback;$/;"	m	struct:ma_device::__anon230::__anon242
 isFrameExtentsEvent	.\include\raylib\external\glfw\src\x11_window.c	/^static Bool isFrameExtentsEvent(Display* display, XEvent* event, XPointer pointer)$/;"	f	file:
-isFriendly	.\include\foo.h	/^	bool isPhysical, isFriendly, isHostile;$/;"	m	struct:Move
 isFriendly	.\include\move.h	/^	bool isPhysical, isFriendly, isHostile;$/;"	m	struct:Move
 isGamepad	.\include\raylib\core.c	/^    bool isGamepad;                 \/\/ True if device has gamepad buttons$/;"	m	struct:__anon5	file:
 isGrounded	.\include\raylib\physac.h	/^    bool isGrounded;                            \/\/ Physics grounded on other body state$/;"	m	struct:PhysicsBodyData
-isHostile	.\include\foo.h	/^	bool isPhysical, isFriendly, isHostile;$/;"	m	struct:Move
 isHostile	.\include\move.h	/^	bool isPhysical, isFriendly, isHostile;$/;"	m	struct:Move
 isIPv6	.\include\raylib\rnet.h	/^    bool isIPv6;                \/\/ Is this socket address an ipv6 address?$/;"	m	struct:Socket
 isKeyboard	.\include\raylib\core.c	/^    bool isKeyboard;                \/\/ True if device has letter keycodes$/;"	m	struct:__anon5	file:
@@ -24753,7 +24769,6 @@ isOccupied	.\include\elemino.h	/^	bool isOccupied = false;$/;"	m	struct:Anchor
 isOwnerOfContext	.\include\raylib\external\miniaudio.h	/^    ma_bool32 isOwnerOfContext        : 1;  \/* When set to true, uninitializing the device will also uninitialize the context. Set to true when NULL is passed into ma_device_init(). *\/$/;"	m	struct:ma_device
 isPassthrough	.\include\raylib\external\miniaudio.h	/^    ma_bool32 isPassthrough           : 1;$/;"	m	struct:__anon163
 isPassthrough	.\include\raylib\external\miniaudio.h	/^    ma_bool32 isPassthrough         : 1;$/;"	m	struct:__anon157
-isPhysical	.\include\foo.h	/^	bool isPhysical, isFriendly, isHostile;$/;"	m	struct:Move
 isPhysical	.\include\move.h	/^	bool isPhysical, isFriendly, isHostile;$/;"	m	struct:Move
 isPointerLocked	.\include\raylib\external\glfw\src\wl_window.c	/^static GLFWbool isPointerLocked(_GLFWwindow* window)$/;"	f	file:
 isPrevFramesLoaded	.\include\raylib\external\dr_mp3.h	/^            drmp3_bool32 isPrevFramesLoaded : 1;$/;"	m	struct:drmp3_src::__anon55::__anon56
@@ -24782,6 +24797,7 @@ isVertical	.\include\gui.h	/^	bool isVertical;$/;"	m	struct:ScrollBar
 is_line_ending	.\include\raylib\external\tinyobj_loader_c.h	/^static int is_line_ending(const char *p, unsigned int i, unsigned int end_i) {$/;"	f
 is_sparse	.\include\raylib\external\cgltf.h	/^	cgltf_bool is_sparse;$/;"	m	struct:cgltf_accessor
 ist_pos	.\include\raylib\external\dr_mp3.h	/^    drmp3_uint8 ist_pos[2][39];$/;"	m	struct:__anon66
+itemBounds	.\include\gui.h	/^	Rectangle itemBounds;$/;"	m	struct:DropDown
 itemBounds	.\include\gui.h	/^	Rectangle itemBounds;$/;"	m	struct:ListView
 itemFocused	.\include\gui.h	/^	int itemFocused;$/;"	m	struct:ListView
 jack	.\include\raylib\external\miniaudio.h	/^        } jack;$/;"	m	union:ma_context::__anon207	typeref:struct:ma_context::__anon207::__anon213
@@ -25164,7 +25180,6 @@ lensSeparationDistance	.\include\raylib\rlgl.h	/^        float lensSeparationDis
 level	.\include\player.h	/^	int level;$/;"	m	struct:Player
 level	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkCommandBufferLevel     level;$/;"	m	struct:VkCommandBufferAllocateInfo
 levelCount	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t                 levelCount;$/;"	m	struct:VkImageSubresourceRange
-levelObtained	.\include\foo.h	/^	int id, levelObtained, priority, maxTargets, damage, healing, cost;$/;"	m	struct:Move
 levelObtained	.\include\move.h	/^	int id, levelObtained, priority, maxTargets, damage, healing, cost;$/;"	m	struct:Move
 lflags	.\include\raylib\external\stb_image.h	/^   int lflags;$/;"	m	struct:__anon331
 light	.\include\raylib\external\cgltf.h	/^	cgltf_light* light;$/;"	m	struct:cgltf_node
@@ -27145,7 +27160,6 @@ maxSamplerAnisotropy	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    flo
 maxSamplerLodBias	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    float                    maxSamplerLodBias;$/;"	m	struct:VkPhysicalDeviceLimits
 maxSets	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t                 maxSets;$/;"	m	struct:VkDescriptorPoolCreateInfo
 maxStorageBufferRange	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t                 maxStorageBufferRange;$/;"	m	struct:VkPhysicalDeviceLimits
-maxTargets	.\include\foo.h	/^	int id, levelObtained, priority, maxTargets, damage, healing, cost;$/;"	m	struct:Move
 maxTargets	.\include\move.h	/^	char id, priority, maxTargets, damage, healing, cost;$/;"	m	struct:Move_serialized
 maxTargets	.\include\move.h	/^	int id, levelObtained, priority, maxTargets, damage, healing, cost;$/;"	m	struct:Move
 maxTessellationControlPerPatchOutputComponents	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t                 maxTessellationControlPerPatchOutputComponents;$/;"	m	struct:VkPhysicalDeviceLimits
@@ -27412,7 +27426,6 @@ n_short_sfb	.\include\raylib\external\dr_mp3.h	/^    drmp3_uint8 global_gain, bl
 n_volume_steps	.\include\raylib\external\miniaudio.h	/^    ma_uint32 n_volume_steps;$/;"	m	struct:__anon302
 n_volume_steps	.\include\raylib\external\miniaudio.h	/^    ma_uint32 n_volume_steps;$/;"	m	struct:__anon303
 name	.\include\actor.h	/^	std::string name;$/;"	m	struct:Actor
-name	.\include\foo.h	/^	std::string name;$/;"	m	struct:Move
 name	.\include\move.h	/^	char name[24];$/;"	m	struct:Move_serialized
 name	.\include\move.h	/^	std::string name;$/;"	m	struct:Move
 name	.\include\raylib\core.c	/^            char name[64];                  \/\/ Gamepad name holder$/;"	m	struct:CoreData::__anon11::__anon15	file:
@@ -27726,7 +27739,6 @@ outputs	.\include\raylib\external\stb_vorbis.h	/^   float *outputs        [STB_V
 overrideRedirect	.\include\raylib\external\glfw\src\x11_platform.h	/^    GLFWbool        overrideRedirect;$/;"	m	struct:_GLFWwindowX11
 overworld_idle	.\include\gamestate.h	/^	overworld_idle,$/;"	e	enum:State
 overworld_move	.\include\gamestate.h	/^	overworld_move,$/;"	e	enum:State
-owner	.\include\foo.h	/^	Ownership owner;$/;"	m	struct:Move
 owner	.\include\move.h	/^	Ownership owner;$/;"	m	struct:Move
 owner_module	.\include\raylib\external\miniaudio.h	/^    ma_uint32 owner_module;$/;"	m	struct:__anon302
 owner_module	.\include\raylib\external\miniaudio.h	/^    ma_uint32 owner_module;$/;"	m	struct:__anon303
@@ -28124,7 +28136,7 @@ padding	.\include\raylib\external\dr_flac.h	/^        } padding;$/;"	m	union:__a
 padding	.\include\raylib\external\stb_truetype.h	/^      unsigned char type,padding;$/;"	m	struct:__anon350
 padding	.\include\raylib\external\stb_truetype.h	/^   int   padding;$/;"	m	struct:stbtt_pack_context
 paddingSize	.\include\raylib\external\dr_wav.h	/^    unsigned int paddingSize;$/;"	m	struct:__anon70
-page	.\include\inventory.h	/^	unsigned char page;$/;"	m	struct:InventoryData
+page	.\include\inventory.h	/^	unsigned char page = 0;$/;"	m	struct:InventoryData
 pageData	.\include\raylib\external\dr_flac.h	/^    drflac_uint8 pageData[DRFLAC_OGG_MAX_PAGE_SIZE];$/;"	m	struct:__anon49
 pageDataSize	.\include\raylib\external\dr_flac.h	/^    drflac_uint32 pageDataSize;$/;"	m	struct:__anon49
 page_crc_tests	.\include\raylib\external\stb_vorbis.h	/^   int page_crc_tests; \/\/ only in push_mode: number of tests active; -1 if not searching$/;"	m	struct:stb_vorbis
@@ -28133,6 +28145,7 @@ page_flag	.\include\raylib\external\stb_vorbis.h	/^   stbv_uint8 page_flag;$/;"	
 page_start	.\include\raylib\external\stb_vorbis.h	/^   stbv_uint32 page_start, page_end;$/;"	m	struct:__anon373
 pal	.\include\raylib\external\stb_image.h	/^   stbi_uc  pal[256][4];$/;"	m	struct:__anon331
 panControl	.\include\raylib\camera.h	/^    int panControl;                 \/\/ raylib: MOUSE_MIDDLE_BUTTON$/;"	m	struct:__anon4
+panel	.\include\gui.h	/^	Panel panel;$/;"	m	struct:DropDown
 panning	.\include\raylib\external\jar_xm.h	/^     float panning; \/* Between 0 (left) and 1 (right); 0.5 is centered *\/$/;"	m	struct:jar_xm_channel_context_s
 panning	.\include\raylib\external\jar_xm.h	/^    float panning;$/;"	m	struct:jar_xm_sample_s
 panning_envelope	.\include\raylib\external\jar_xm.h	/^     jar_xm_envelope_t panning_envelope;$/;"	m	struct:jar_xm_instrument_s
@@ -28440,7 +28453,6 @@ primitives	.\include\raylib\external\cgltf.h	/^	cgltf_primitive* primitives;$/;"
 primitives_count	.\include\raylib\external\cgltf.h	/^	cgltf_size primitives_count;$/;"	m	struct:cgltf_mesh
 print_cur_config	.\include\raylib\external\android\native_app_glue\android_native_app_glue.c	/^static void print_cur_config(struct android_app* android_app) {$/;"	f	file:
 priorRunTime	.\include\raylib\external\miniaudio.h	/^            double priorRunTime;$/;"	m	struct:ma_device::__anon230::__anon244
-priority	.\include\foo.h	/^	int id, levelObtained, priority, maxTargets, damage, healing, cost;$/;"	m	struct:Move
 priority	.\include\move.h	/^	char id, priority, maxTargets, damage, healing, cost;$/;"	m	struct:Move_serialized
 priority	.\include\move.h	/^	int id, levelObtained, priority, maxTargets, damage, healing, cost;$/;"	m	struct:Move
 process	.\include\raylib\external\android\native_app_glue\android_native_app_glue.h	/^    void (*process)(struct android_app* app, struct android_poll_source* source);$/;"	m	struct:android_poll_source
@@ -29379,6 +29391,8 @@ start_x	.\include\raylib\external\stb_image.h	/^   int start_x, start_y;$/;"	m	s
 start_y	.\include\raylib\external\stb_image.h	/^   int start_x, start_y;$/;"	m	struct:__anon331
 started	.\include\raylib\external\stb_truetype.h	/^   int started;$/;"	m	struct:__anon358
 statText	.\include\inventory.h	/^	Label statText[6];$/;"	m	struct:InventoryData
+state	.\include\gui.h	/^	GuiControlState state = GuiControlState::GUI_STATE_NORMAL;$/;"	m	struct:Panel
+state	.\include\gui.h	/^	GuiControlState state;$/;"	m	struct:DropDown
 state	.\include\gui.h	/^	GuiControlState state;$/;"	m	struct:ListView
 state	.\include\gui.h	/^	GuiControlState state;$/;"	m	struct:ScrollBar
 state	.\include\gui.h	/^    GuiControlState state = GuiControlState::GUI_STATE_NORMAL;$/;"	m	struct:Label
@@ -30379,6 +30393,7 @@ texcoords	.\include\raylib\rlgl.h	/^        float *texcoords;       \/\/ vertex 
 texcoords	.\include\raylib\rlgl.h	/^    float *texcoords;           \/\/ vertex texture coordinates (UV - 2 components per vertex) (shader-location = 1)$/;"	m	struct:DynamicBuffer
 texcoords2	.\include\raylib\raylib.h	/^    float *texcoords2;      \/\/ Vertex second texture coordinates (useful for lightmaps) (shader-location = 5)$/;"	m	struct:Mesh
 texcoords2	.\include\raylib\rlgl.h	/^        float *texcoords2;      \/\/ vertex second texture coordinates (useful for lightmaps) (shader-location = 5)$/;"	m	struct:Mesh
+text	.\include\gui.h	/^	Vec<std::string> text;$/;"	m	struct:DropDown
 text	.\include\gui.h	/^	Vec<std::string> text;$/;"	m	struct:ListView
 text	.\include\gui.h	/^	std::string text;$/;"	m	struct:Button
 text	.\include\gui.h	/^	std::string text;$/;"	m	struct:Label
@@ -31180,8 +31195,6 @@ writeMask	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t      
 writeTargetToProperty	.\include\raylib\external\glfw\src\x11_window.c	/^static Atom writeTargetToProperty(const XSelectionRequestEvent* request)$/;"	f	file:
 wsz	.\include\raylib\external\glfw\deps\mingw\dinput.h	/^        WCHAR        wsz[MAX_PATH];$/;"	m	struct:DIPROPSTRING
 wszPath	.\include\raylib\external\glfw\deps\mingw\dinput.h	/^	WCHAR   wszPath[MAX_PATH];$/;"	m	struct:DIPROPGUIDANDPATH
-wtf	.\include\inconsolata.h	/^ char *wtf = " \\nnn/;"	m	struct:inconsFontChars
-wtf	.\include\inconsolata.h	/^char *wtf = "\\nnn/;"	m	struct:inconsFontRect
 x	.\include\raylib\camera.h	/^        float x;$/;"	m	struct:Vector2
 x	.\include\raylib\camera.h	/^        float x;$/;"	m	struct:Vector3
 x	.\include\raylib\core.c	/^typedef struct { int x; int y; } Point;$/;"	m	struct:__anon7	file:
@@ -31350,7 +31363,6 @@ zout_start	.\include\raylib\external\stb_image.h	/^   char *zout_start;$/;"	m	st
 ~Game	.\game.cpp	/^Game::~Game(){$/;"	f	class:Game
 ~Grid	.\include\elemino.h	/^	~Grid(){$/;"	f	struct:Grid
 ~Menu	.\menu.cpp	/^Menu::~Menu(){$/;"	f	class:Menu
-~Move	.\include\foo.h	/^	~Move(){$/;"	f	struct:Move
 ~Move	.\include\move.h	/^	~Move(){$/;"	f	struct:Move
 ~Player	.\player.cpp	/^Player::~Player(){$/;"	f	class:Player
 ~Team	.\include\player.h	/^	~Team(){$/;"	f	struct:Team

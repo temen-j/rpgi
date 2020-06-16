@@ -89,7 +89,7 @@ struct BoxLabel : Label{
 };
 
 struct Button{
-    GuiControlState state;
+    GuiControlState state = GUI_STATE_NORMAL;
     bool pressed = false;
 	Rectangle bounds;
 	std::string text;

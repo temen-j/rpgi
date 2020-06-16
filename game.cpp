@@ -44,6 +44,28 @@ int InventoryState(Game &game){
 		UpdateStatText(*player.invData, *player.team.members[player.invData->focus]);
 	}
 
+	bool prevPlusPage = player.invData->plusPage.pressed;
+	Update(player.invData->plusPage);
+	if(!prevPlusPage && player.invData->plusPage.pressed){
+		int max = player.invData->eleminoesAvail.size() / player.invData->MAX_INV_DISP;
+		max = player.invData->eleminoesAvail.size() % player.invData->MAX_INV_DISP > 0 ? max : max - 1;
+		if(player.invData->page < max){
+			player.invData->page++;
+			UpdateInteractable(player);
+			PositionEleminoes(*player.invData);
+		}
+	}
+
+	bool prevMinusPage = player.invData->minusPage.pressed;
+	Update(player.invData->minusPage);
+	if(!prevMinusPage && player.invData->minusPage.pressed){
+		if(player.invData->page > 0){
+			player.invData->page--;
+			UpdateInteractable(player);
+			PositionEleminoes(*player.invData);
+		}
+	}
+
 	int prevActive = player.invData->elemdd.active;
 	Update(player.invData->elemdd);
 	if(prevActive != player.invData->elemdd.active){

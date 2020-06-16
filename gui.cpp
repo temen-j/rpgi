@@ -18,12 +18,17 @@ void Update(Button &button){
         if (CheckCollisionPointRec(mousePoint, button.bounds))
         {
             if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) button.state = GUI_STATE_PRESSED;
-            else button.state = GUI_STATE_FOCUSED;
+            else{
+				button.state = GUI_STATE_FOCUSED;
+				button.pressed = false;
+			}
 
             if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) button.pressed = true;
         }
-		else
+		else{
 			button.state = GUI_STATE_NORMAL;
+			button.pressed = false;
+		}
     }
 }
 
@@ -472,7 +477,6 @@ void DrawGuiDropDown(DropDown &dd){
 
     if (dd.editMode)
     {
-		/* Rectangle itemBounds = dd.bounds; */
         // Draw visible items
         for (int i = 0; i < (int)dd.text.size(); i++)
         {
@@ -616,6 +620,11 @@ void DrawInventory(const Player &player){
 
 	Rectangle rect = {INV_POS.x, INV_POS.y, INV_GRID_WIDTH, INV_GRID_WIDTH};
 	DrawRectangleRec(rect, GRAY);
+
+	Vector2 rarrowPos = (Vector2){rect.x + INV_GRID_WIDTH + 8, rect.y + INV_GRID_WIDTH / 2 - 32};
+	Vector2 larrowPos = (Vector2){rect.x - 40, rect.y + INV_GRID_WIDTH / 2 - 32};
+	DrawTextureV(player.invData->rArrow, rarrowPos, GRIDON); 
+	DrawTextureV(player.invData->lArrow, larrowPos, GRIDON); 
 	
 	DrawGuiDropDown(player.invData->elemdd);
 

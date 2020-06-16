@@ -276,11 +276,12 @@ void GiveCommand(Console &c, Game &game){
 		storage[TotalEleminoes::size] = elemino; //Add elemino to the reserves
 
 		game.player.inventory.push_back(&storage[TotalEleminoes::size]); //Save the elemino index to refer to later
-		UpdateInteractable(game.player);
 		TotalEleminoes::size++;
 
-		if(game.player.invData)
+		if(game.player.invData){
+			UpdateInteractable(game.player);
 			PositionEleminoes(*game.player.invData);
+		}
 	}
 	else if(!Valid(param1)){
 		c.msg = ERR + INVA_ARG + c.tokens[1] + " is an invalid element.";

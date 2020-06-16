@@ -19,6 +19,8 @@ void OpenInventory(Game &game){
 	invData->portraits.toggles[2].texture = LoadTexture("../img/lou_dev.png");
 	invData->portraits.toggles[3].texture = LoadTexture("../img/persy_dev.png");
 	invData->halo = LoadTexture("../img/portrait_halo.png");
+	invData->rArrow = LoadTexture("../img/inv_arrow.png");
+	invData->lArrow = LoadTexture("../img/inv_arrow1.png");
 
 	for(size_t i = 0; i < 4; ++i){
 		ImageToggle *toggle = &invData->portraits.toggles[i];
@@ -33,7 +35,12 @@ void OpenInventory(Game &game){
 		SetupDropDown(invData->elemdd);
 
 		StatTextSetup(*invData, *game.player.team.members[invData->focus]);
+
+		UpdateInteractable(game.player);
 		PositionEleminoes(*invData);
+
+		invData->plusPage.bounds = (Rectangle){INV_POS.x + INV_GRID_WIDTH + 8, INV_POS.y, 32, INV_GRID_WIDTH};
+		invData->minusPage.bounds = (Rectangle){INV_POS.x + - 40, INV_POS.y, 32, INV_GRID_WIDTH};
 	}
 	game.justEnteredState = true;
 }
@@ -44,7 +51,12 @@ void UnloadTexturesFrom(InventoryData &invData){
 		if(invData.portraits.toggles[i].texture.id > 0)
 			UnloadTexture(invData.portraits.toggles[i].texture);
 	}
-	UnloadTexture(invData.halo);
+	if(invData.halo.id > 0)
+		UnloadTexture(invData.halo);
+	if(invData.rArrow.id > 0)
+		UnloadTexture(invData.rArrow);
+	if(invData.lArrow.id > 0)
+		UnloadTexture(invData.lArrow);
 }
 
 
