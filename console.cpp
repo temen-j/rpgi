@@ -276,6 +276,7 @@ void GiveCommand(Console &c, Game &game){
 		storage[TotalEleminoes::size] = elemino; //Add elemino to the reserves
 
 		game.player.inventory.push_back(&storage[TotalEleminoes::size]); //Save the elemino index to refer to later
+		UpdateInteractable(game.player);
 		TotalEleminoes::size++;
 
 		if(game.player.invData)

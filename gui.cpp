@@ -60,82 +60,6 @@ bool Update(ImageToggle &toggle){
 }
 
 
-void SetupScrollBar(ScrollBar &sb){
-	sb.state = GuiControlState::GUI_STATE_NORMAL;
-    sb.isVertical = (sb.bounds.width > sb.bounds.height)? false : true;
-    sb.spinnerSize = GuiGetStyle(SCROLLBAR, ARROWS_VISIBLE)? (sb.isVertical? sb.bounds.width - 2*GuiGetStyle(SCROLLBAR, BORDER_WIDTH) : sb.bounds.height - 2*GuiGetStyle(SCROLLBAR, BORDER_WIDTH)) : 0;
-	
-    // Normalize value
-    if (sb.value > sb.maxValue) sb.value = sb.maxValue;
-    if (sb.value < sb.minValue) sb.value = sb.minValue;
-	sb.range = sb.maxValue - sb.minValue;
-    sb.sliderSize = GuiGetStyle(SCROLLBAR, SCROLL_SLIDER_SIZE);
-    sb.arrowUpLeft = RAYGUI_CLITERAL(Rectangle){ (float)sb.bounds.x + GuiGetStyle(SCROLLBAR, BORDER_WIDTH), (float)sb.bounds.y + GuiGetStyle(SCROLLBAR, BORDER_WIDTH), (float)sb.spinnerSize, (float)sb.spinnerSize };
-
-    if (sb.isVertical)
-    {
-        sb.arrowDownRight = RAYGUI_CLITERAL(Rectangle){ (float)sb.bounds.x + GuiGetStyle(SCROLLBAR, BORDER_WIDTH), (float)sb.bounds.y + sb.bounds.height - sb.spinnerSize - GuiGetStyle(SCROLLBAR, BORDER_WIDTH), (float)sb.spinnerSize, (float)sb.spinnerSize};
-        sb.scrollbar = RAYGUI_CLITERAL(Rectangle){ sb.bounds.x + GuiGetStyle(SCROLLBAR, BORDER_WIDTH) + GuiGetStyle(SCROLLBAR, SCROLL_PADDING), sb.arrowUpLeft.y + sb.arrowUpLeft.height, sb.bounds.width - 2*(GuiGetStyle(SCROLLBAR, BORDER_WIDTH) + GuiGetStyle(SCROLLBAR, SCROLL_PADDING)), sb.bounds.height - sb.arrowUpLeft.height - sb.arrowDownRight.height - 2*GuiGetStyle(SCROLLBAR, BORDER_WIDTH) };
-        sb.sliderSize = (sb.sliderSize >= sb.scrollbar.height)? (sb.scrollbar.height - 2) : sb.sliderSize;     // Make sure the slider won't get outside of the scrollbar
-        sb.slider = RAYGUI_CLITERAL(Rectangle){ (float)sb.bounds.x + GuiGetStyle(SCROLLBAR, BORDER_WIDTH) + GuiGetStyle(SCROLLBAR, SCROLL_SLIDER_PADDING), (float)sb.scrollbar.y + (int)(((float)(sb.value - sb.minValue)/sb.range)*(sb.scrollbar.height - sb.sliderSize)), (float)sb.bounds.width - 2*(GuiGetStyle(SCROLLBAR, BORDER_WIDTH) + GuiGetStyle(SCROLLBAR, SCROLL_SLIDER_PADDING)), (float)sb.sliderSize };
-    }
-    else
-    {
-        sb.arrowDownRight = RAYGUI_CLITERAL(Rectangle){ (float)sb.bounds.x + sb.bounds.width - sb.spinnerSize - GuiGetStyle(SCROLLBAR, BORDER_WIDTH), (float)sb.bounds.y + GuiGetStyle(SCROLLBAR, BORDER_WIDTH), (float)sb.spinnerSize, (float)sb.spinnerSize};
-        sb.scrollbar = RAYGUI_CLITERAL(Rectangle){ sb.arrowUpLeft.x + sb.arrowUpLeft.width, sb.bounds.y + GuiGetStyle(SCROLLBAR, BORDER_WIDTH) + GuiGetStyle(SCROLLBAR, SCROLL_PADDING), sb.bounds.width - sb.arrowUpLeft.width - sb.arrowDownRight.width - 2*GuiGetStyle(SCROLLBAR, BORDER_WIDTH), sb.bounds.height - 2*(GuiGetStyle(SCROLLBAR, BORDER_WIDTH) + GuiGetStyle(SCROLLBAR, SCROLL_PADDING))};
-        sb.sliderSize = (sb.sliderSize >= sb.scrollbar.width)? (sb.scrollbar.width - 2) : sb.sliderSize;       // Make sure the slider won't get outside of the scrollbar
-        sb.slider = RAYGUI_CLITERAL(Rectangle){ (float)sb.scrollbar.x + (int)(((float)(sb.value - sb.minValue)/sb.range)*(sb.scrollbar.width - sb.sliderSize)), (float)sb.bounds.y + GuiGetStyle(SCROLLBAR, BORDER_WIDTH) + GuiGetStyle(SCROLLBAR, SCROLL_SLIDER_PADDING), (float)sb.sliderSize, (float)sb.bounds.height - 2*(GuiGetStyle(SCROLLBAR, BORDER_WIDTH) + GuiGetStyle(SCROLLBAR, SCROLL_SLIDER_PADDING)) };
-    }
-}
-
-
-void SetupListView(ListView &lw){
-	lw.state = GuiControlState::GUI_STATE_NORMAL;
-    lw.itemFocused = (&lw.focus == nullptr)? -1 : lw.focus;
-    /* int itemSelected = lw.active; */
-    lw.useScrollBar = false;
-    if ((GuiGetStyle(LISTVIEW, LIST_ITEMS_HEIGHT) + GuiGetStyle(LISTVIEW, LIST_ITEMS_PADDING))*lw.text.size() > lw.bounds.height) lw.useScrollBar = true;
-	
-    lw.itemBounds.x = lw.bounds.x + GuiGetStyle(LISTVIEW, LIST_ITEMS_PADDING);
-    lw.itemBounds.y = lw.bounds.y + GuiGetStyle(LISTVIEW, LIST_ITEMS_PADDING) + GuiGetStyle(DEFAULT, BORDER_WIDTH);
-    lw.itemBounds.width = lw.bounds.width - 2*GuiGetStyle(LISTVIEW, LIST_ITEMS_PADDING) - GuiGetStyle(DEFAULT, BORDER_WIDTH);
-    lw.itemBounds.height = GuiGetStyle(LISTVIEW, LIST_ITEMS_HEIGHT);
-    if (lw.useScrollBar) lw.itemBounds.width -= GuiGetStyle(LISTVIEW, SCROLLBAR_WIDTH);
-
-    lw.visibleItems = lw.bounds.height/(GuiGetStyle(LISTVIEW, LIST_ITEMS_HEIGHT) + GuiGetStyle(LISTVIEW, LIST_ITEMS_PADDING));
-    if (lw.visibleItems > (int)lw.text.size()) lw.visibleItems = lw.text.size();
-
-    lw.startIndex = (&lw.scrollIndex == nullptr)? 0 : lw.scrollIndex;
-    if ((lw.startIndex < 0) || (lw.startIndex > ((int)lw.text.size() - lw.visibleItems))) lw.startIndex = 0;
-    lw.endIndex = lw.startIndex + lw.visibleItems;
-
-	
-    if (lw.useScrollBar)
-    {
-        Rectangle scrollBarBounds = {
-            lw.bounds.x + lw.bounds.width - GuiGetStyle(LISTVIEW, BORDER_WIDTH) - GuiGetStyle(LISTVIEW, SCROLLBAR_WIDTH),
-            lw.bounds.y + GuiGetStyle(LISTVIEW, BORDER_WIDTH), (float)GuiGetStyle(LISTVIEW, SCROLLBAR_WIDTH),
-            lw.bounds.height - 2*GuiGetStyle(DEFAULT, BORDER_WIDTH)
-        };
-
-        // Calculate percentage of visible items and apply same percentage to scrollbar
-        float percentVisible = (float)(lw.endIndex - lw.startIndex)/lw.text.size();
-        float sliderSize = lw.bounds.height*percentVisible;
-
-        /* int prevSliderSize = GuiGetStyle(SCROLLBAR, SCROLL_SLIDER_SIZE);   // Save default slider size */
-        /* int prevScrollSpeed = GuiGetStyle(SCROLLBAR, SCROLL_SPEED); // Save default scroll speed */
-        GuiSetStyle(SCROLLBAR, SCROLL_SLIDER_SIZE, sliderSize);            // Change slider size
-        GuiSetStyle(SCROLLBAR, SCROLL_SPEED, lw.text.size() - lw.visibleItems); // Change scroll speed
-
-		lw.scrollbar.bounds = scrollBarBounds;
-		lw.scrollbar.value = lw.startIndex;
-		lw.scrollbar.minValue = 0;
-		lw.scrollbar.maxValue = lw.text.size() - lw.visibleItems;
-		SetupScrollBar(lw.scrollbar);
-    }
-}
-
-
 void Update(ScrollBar &sb){
     if ((sb.state != GUI_STATE_DISABLED) && !guiLocked)
     {
@@ -244,6 +168,146 @@ void Update(ListView &lw){
     }
     if (&lw.focus != nullptr) lw.focus = lw.itemFocused;
     if (&lw.scrollIndex != nullptr) lw.scrollIndex = lw.startIndex;
+}
+
+
+void SetupScrollBar(ScrollBar &sb){
+	sb.state = GuiControlState::GUI_STATE_NORMAL;
+    sb.isVertical = (sb.bounds.width > sb.bounds.height)? false : true;
+    sb.spinnerSize = GuiGetStyle(SCROLLBAR, ARROWS_VISIBLE)? (sb.isVertical? sb.bounds.width - 2*GuiGetStyle(SCROLLBAR, BORDER_WIDTH) : sb.bounds.height - 2*GuiGetStyle(SCROLLBAR, BORDER_WIDTH)) : 0;
+	
+    // Normalize value
+    if (sb.value > sb.maxValue) sb.value = sb.maxValue;
+    if (sb.value < sb.minValue) sb.value = sb.minValue;
+	sb.range = sb.maxValue - sb.minValue;
+    sb.sliderSize = GuiGetStyle(SCROLLBAR, SCROLL_SLIDER_SIZE);
+    sb.arrowUpLeft = RAYGUI_CLITERAL(Rectangle){ (float)sb.bounds.x + GuiGetStyle(SCROLLBAR, BORDER_WIDTH), (float)sb.bounds.y + GuiGetStyle(SCROLLBAR, BORDER_WIDTH), (float)sb.spinnerSize, (float)sb.spinnerSize };
+
+    if (sb.isVertical)
+    {
+        sb.arrowDownRight = RAYGUI_CLITERAL(Rectangle){ (float)sb.bounds.x + GuiGetStyle(SCROLLBAR, BORDER_WIDTH), (float)sb.bounds.y + sb.bounds.height - sb.spinnerSize - GuiGetStyle(SCROLLBAR, BORDER_WIDTH), (float)sb.spinnerSize, (float)sb.spinnerSize};
+        sb.scrollbar = RAYGUI_CLITERAL(Rectangle){ sb.bounds.x + GuiGetStyle(SCROLLBAR, BORDER_WIDTH) + GuiGetStyle(SCROLLBAR, SCROLL_PADDING), sb.arrowUpLeft.y + sb.arrowUpLeft.height, sb.bounds.width - 2*(GuiGetStyle(SCROLLBAR, BORDER_WIDTH) + GuiGetStyle(SCROLLBAR, SCROLL_PADDING)), sb.bounds.height - sb.arrowUpLeft.height - sb.arrowDownRight.height - 2*GuiGetStyle(SCROLLBAR, BORDER_WIDTH) };
+        sb.sliderSize = (sb.sliderSize >= sb.scrollbar.height)? (sb.scrollbar.height - 2) : sb.sliderSize;     // Make sure the slider won't get outside of the scrollbar
+        sb.slider = RAYGUI_CLITERAL(Rectangle){ (float)sb.bounds.x + GuiGetStyle(SCROLLBAR, BORDER_WIDTH) + GuiGetStyle(SCROLLBAR, SCROLL_SLIDER_PADDING), (float)sb.scrollbar.y + (int)(((float)(sb.value - sb.minValue)/sb.range)*(sb.scrollbar.height - sb.sliderSize)), (float)sb.bounds.width - 2*(GuiGetStyle(SCROLLBAR, BORDER_WIDTH) + GuiGetStyle(SCROLLBAR, SCROLL_SLIDER_PADDING)), (float)sb.sliderSize };
+    }
+    else
+    {
+        sb.arrowDownRight = RAYGUI_CLITERAL(Rectangle){ (float)sb.bounds.x + sb.bounds.width - sb.spinnerSize - GuiGetStyle(SCROLLBAR, BORDER_WIDTH), (float)sb.bounds.y + GuiGetStyle(SCROLLBAR, BORDER_WIDTH), (float)sb.spinnerSize, (float)sb.spinnerSize};
+        sb.scrollbar = RAYGUI_CLITERAL(Rectangle){ sb.arrowUpLeft.x + sb.arrowUpLeft.width, sb.bounds.y + GuiGetStyle(SCROLLBAR, BORDER_WIDTH) + GuiGetStyle(SCROLLBAR, SCROLL_PADDING), sb.bounds.width - sb.arrowUpLeft.width - sb.arrowDownRight.width - 2*GuiGetStyle(SCROLLBAR, BORDER_WIDTH), sb.bounds.height - 2*(GuiGetStyle(SCROLLBAR, BORDER_WIDTH) + GuiGetStyle(SCROLLBAR, SCROLL_PADDING))};
+        sb.sliderSize = (sb.sliderSize >= sb.scrollbar.width)? (sb.scrollbar.width - 2) : sb.sliderSize;       // Make sure the slider won't get outside of the scrollbar
+        sb.slider = RAYGUI_CLITERAL(Rectangle){ (float)sb.scrollbar.x + (int)(((float)(sb.value - sb.minValue)/sb.range)*(sb.scrollbar.width - sb.sliderSize)), (float)sb.bounds.y + GuiGetStyle(SCROLLBAR, BORDER_WIDTH) + GuiGetStyle(SCROLLBAR, SCROLL_SLIDER_PADDING), (float)sb.sliderSize, (float)sb.bounds.height - 2*(GuiGetStyle(SCROLLBAR, BORDER_WIDTH) + GuiGetStyle(SCROLLBAR, SCROLL_SLIDER_PADDING)) };
+    }
+}
+
+
+void SetupListView(ListView &lw){
+	lw.state = GuiControlState::GUI_STATE_NORMAL;
+    lw.itemFocused = (&lw.focus == nullptr)? -1 : lw.focus;
+    /* int itemSelected = lw.active; */
+    lw.useScrollBar = false;
+    if ((GuiGetStyle(LISTVIEW, LIST_ITEMS_HEIGHT) + GuiGetStyle(LISTVIEW, LIST_ITEMS_PADDING))*lw.text.size() > lw.bounds.height) lw.useScrollBar = true;
+	
+    lw.itemBounds.x = lw.bounds.x + GuiGetStyle(LISTVIEW, LIST_ITEMS_PADDING);
+    lw.itemBounds.y = lw.bounds.y + GuiGetStyle(LISTVIEW, LIST_ITEMS_PADDING) + GuiGetStyle(DEFAULT, BORDER_WIDTH);
+    lw.itemBounds.width = lw.bounds.width - 2*GuiGetStyle(LISTVIEW, LIST_ITEMS_PADDING) - GuiGetStyle(DEFAULT, BORDER_WIDTH);
+    lw.itemBounds.height = GuiGetStyle(LISTVIEW, LIST_ITEMS_HEIGHT);
+    if (lw.useScrollBar) lw.itemBounds.width -= GuiGetStyle(LISTVIEW, SCROLLBAR_WIDTH);
+
+    lw.visibleItems = lw.bounds.height/(GuiGetStyle(LISTVIEW, LIST_ITEMS_HEIGHT) + GuiGetStyle(LISTVIEW, LIST_ITEMS_PADDING));
+    if (lw.visibleItems > (int)lw.text.size()) lw.visibleItems = lw.text.size();
+
+    lw.startIndex = (&lw.scrollIndex == nullptr)? 0 : lw.scrollIndex;
+    if ((lw.startIndex < 0) || (lw.startIndex > ((int)lw.text.size() - lw.visibleItems))) lw.startIndex = 0;
+    lw.endIndex = lw.startIndex + lw.visibleItems;
+
+	
+    if (lw.useScrollBar)
+    {
+        Rectangle scrollBarBounds = {
+            lw.bounds.x + lw.bounds.width - GuiGetStyle(LISTVIEW, BORDER_WIDTH) - GuiGetStyle(LISTVIEW, SCROLLBAR_WIDTH),
+            lw.bounds.y + GuiGetStyle(LISTVIEW, BORDER_WIDTH), (float)GuiGetStyle(LISTVIEW, SCROLLBAR_WIDTH),
+            lw.bounds.height - 2*GuiGetStyle(DEFAULT, BORDER_WIDTH)
+        };
+
+        // Calculate percentage of visible items and apply same percentage to scrollbar
+        float percentVisible = (float)(lw.endIndex - lw.startIndex)/lw.text.size();
+        float sliderSize = lw.bounds.height*percentVisible;
+
+        /* int prevSliderSize = GuiGetStyle(SCROLLBAR, SCROLL_SLIDER_SIZE);   // Save default slider size */
+        /* int prevScrollSpeed = GuiGetStyle(SCROLLBAR, SCROLL_SPEED); // Save default scroll speed */
+        GuiSetStyle(SCROLLBAR, SCROLL_SLIDER_SIZE, sliderSize);            // Change slider size
+        GuiSetStyle(SCROLLBAR, SCROLL_SPEED, lw.text.size() - lw.visibleItems); // Change scroll speed
+
+		lw.scrollbar.bounds = scrollBarBounds;
+		lw.scrollbar.value = lw.startIndex;
+		lw.scrollbar.minValue = 0;
+		lw.scrollbar.maxValue = lw.text.size() - lw.visibleItems;
+		SetupScrollBar(lw.scrollbar);
+    }
+}
+
+
+void SetupDropDown(DropDown &dd){
+	dd.panel.bounds = (Rectangle){
+		dd.bounds.x,
+		dd.bounds.y,
+		dd.bounds.width,
+		(dd.text.size() + 1) * (dd.bounds.height + GuiGetStyle(DROPDOWNBOX, DROPDOWN_ITEMS_PADDING))
+	};
+}
+
+
+bool Update(DropDown &dd){
+	bool pressed = false;
+    if ((dd.state != GUI_STATE_DISABLED) && !guiLocked && (dd.text.size() > 1)){
+        Vector2 mousePoint = GetMousePosition();
+
+        if (dd.editMode){
+            dd.state = GUI_STATE_PRESSED;
+			dd.itemBounds = dd.bounds;
+
+            // Check if mouse has been pressed or released outside limits
+            if (!CheckCollisionPointRec(mousePoint, dd.panel.bounds)){
+                if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON) || IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) pressed = true;
+            }
+
+            // Check if already selected item has been pressed again
+            if (CheckCollisionPointRec(mousePoint, dd.bounds) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) pressed = true;
+
+            // Check focused and selected item
+            for (int i = 0; i < (int)dd.text.size(); i++){
+                // Update item rectangle y position for next item
+                dd.itemBounds.y += (dd.bounds.height + GuiGetStyle(DROPDOWNBOX, DROPDOWN_ITEMS_PADDING));
+
+                if (CheckCollisionPointRec(mousePoint, dd.itemBounds)){
+                    dd.focus = i;
+                    if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)){
+                        dd.active = i;
+                        pressed = true;     // Item selected, change to editMode = false
+						dd.editMode = false;
+                    }
+                    break;
+                }
+            }
+			dd.itemBounds = dd.bounds;
+        }
+        else{
+            if (CheckCollisionPointRec(mousePoint, dd.bounds)){
+                if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)){
+                    pressed = true;
+                    dd.state = GUI_STATE_PRESSED;
+					dd.editMode = true;
+                }
+                else dd.state = GUI_STATE_FOCUSED;
+            }
+			else{
+				dd.state = GUI_STATE_NORMAL;
+				dd.editMode = false;
+			}
+        }
+    }
+
+	return pressed;
 }
 
 
@@ -392,6 +456,45 @@ void DrawGuiScrollBar(ScrollBar &sb){
 }
 
 
+void DrawGuiPanel(Panel &p){
+    #define PANEL_BORDER_WIDTH   1 //TODO: put this in the raygui header?
+    GuiDrawRectangle(p.bounds, PANEL_BORDER_WIDTH, Fade(GetColor(GuiGetStyle(DEFAULT, (p.state == GUI_STATE_DISABLED)? BORDER_COLOR_DISABLED: static_cast<int>(LINE_COLOR))), guiAlpha),
+                     Fade(GetColor(GuiGetStyle(DEFAULT, (p.state == GUI_STATE_DISABLED)? BASE_COLOR_DISABLED : static_cast<int>(BACKGROUND_COLOR))), guiAlpha));
+}
+
+
+void DrawGuiDropDown(DropDown &dd){
+	if(dd.editMode)
+		DrawGuiPanel(dd.panel);
+
+    GuiDrawRectangle(dd.bounds, GuiGetStyle(DROPDOWNBOX, BORDER_WIDTH), Fade(GetColor(GuiGetStyle(DROPDOWNBOX, BORDER + dd.state*3)), guiAlpha), Fade(GetColor(GuiGetStyle(DROPDOWNBOX, BASE + dd.state*3)), guiAlpha));
+    GuiDrawText(dd.text[dd.active].c_str(), GetTextBounds(DEFAULT, dd.bounds), GuiGetStyle(DROPDOWNBOX, TEXT_ALIGNMENT), Fade(GetColor(GuiGetStyle(DROPDOWNBOX, TEXT + dd.state*3)), guiAlpha));
+
+    if (dd.editMode)
+    {
+		/* Rectangle itemBounds = dd.bounds; */
+        // Draw visible items
+        for (int i = 0; i < (int)dd.text.size(); i++)
+        {
+            // Update item rectangle y position for next item
+            dd.itemBounds.y += (dd.bounds.height + GuiGetStyle(DROPDOWNBOX, DROPDOWN_ITEMS_PADDING));
+
+            if (i == dd.active)
+            {
+                GuiDrawRectangle(dd.itemBounds, GuiGetStyle(DROPDOWNBOX, BORDER_WIDTH), Fade(GetColor(GuiGetStyle(DROPDOWNBOX, BORDER_COLOR_PRESSED)), guiAlpha), Fade(GetColor(GuiGetStyle(DROPDOWNBOX, BASE_COLOR_PRESSED)), guiAlpha));
+                GuiDrawText(dd.text[i].c_str(), GetTextBounds(DEFAULT, dd.itemBounds), GuiGetStyle(DROPDOWNBOX, TEXT_ALIGNMENT), Fade(GetColor(GuiGetStyle(DROPDOWNBOX, TEXT_COLOR_PRESSED)), guiAlpha));
+            }
+            else if (i == dd.focus)
+            {
+                GuiDrawRectangle(dd.itemBounds, GuiGetStyle(DROPDOWNBOX, BORDER_WIDTH), Fade(GetColor(GuiGetStyle(DROPDOWNBOX, BORDER_COLOR_FOCUSED)), guiAlpha), Fade(GetColor(GuiGetStyle(DROPDOWNBOX, BASE_COLOR_FOCUSED)), guiAlpha));
+                GuiDrawText(dd.text[i].c_str(), GetTextBounds(DEFAULT, dd.itemBounds), GuiGetStyle(DROPDOWNBOX, TEXT_ALIGNMENT), Fade(GetColor(GuiGetStyle(DROPDOWNBOX, TEXT_COLOR_FOCUSED)), guiAlpha));
+            }
+            else GuiDrawText(dd.text[i].c_str(), GetTextBounds(DEFAULT, dd.itemBounds), GuiGetStyle(DROPDOWNBOX, TEXT_ALIGNMENT), Fade(GetColor(GuiGetStyle(DROPDOWNBOX, TEXT_COLOR_NORMAL)), guiAlpha));
+        }
+    }
+}
+
+
 Color ElementToColor(const Element &e){
 	switch(e){
 		case Element::fire:
@@ -513,15 +616,20 @@ void DrawInventory(const Player &player){
 
 	Rectangle rect = {INV_POS.x, INV_POS.y, INV_GRID_WIDTH, INV_GRID_WIDTH};
 	DrawRectangleRec(rect, GRAY);
+	
+	DrawGuiDropDown(player.invData->elemdd);
 
 	for(size_t i = 0; i < NUM_STATS; ++i)
 		DrawGuiLabel(player.invData->statText[i]);
 
-	unsigned int max = player.invData->MAX_INV_DISP;
-	unsigned int size = player.inventory.size();
+	/* auto &max = player.invData->MAX_INV_DISP; */
+	/* unsigned int size = player.inventory.size(); */
 
-	for(unsigned int i = 0; i < size && i < max; ++i)
-		DrawElemino(*(player.inventory[i]));
+	/* for(unsigned int i = 0; i < size && i < max; ++i) */
+	/* 	DrawElemino(*(player.inventory[i])); */
+
+	for(unsigned int i = 0; i < player.invData->interactable.size(); ++i)
+		DrawElemino(*(player.invData->interactable[i]));
 
 	if(!player.invData->tooltip.disabled)
 		DrawGuiBoxLabel(player.invData->tooltip);

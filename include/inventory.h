@@ -14,7 +14,7 @@ const int PORTRAIT_SEPARATION = 80;
 const int PORTRAIT_WIDTH = 64;
 const int NUM_STATS = 6;
 
-const Vector2 INV_POS = (Vector2){360, 64};
+const Vector2 INV_POS = (Vector2){320, 64};
 const int INV_GRID_WIDTH = 400;
 const int INV_ELMN_OFFSET = 80;
 
@@ -34,9 +34,13 @@ struct InventoryData{
 	Texture halo;
 	Label statText[6];
 	BoxLabel tooltip;
+	DropDown elemdd;
 
-	const unsigned int MAX_INV_DISP = 20;
-	unsigned char page;
+	Vec<Elemino *> eleminoesAvail; //The eleminoes available to the pages
+	Vec<Elemino *> interactable; //The eleminoes on the page
+
+	const unsigned int MAX_INV_DISP = 25;
+	unsigned char page = 0;
 	unsigned char focus;
 	unsigned char lastFocus;
 };
@@ -49,6 +53,7 @@ struct TotalEleminoes{
 void OpenInventory(Game &);
 void HandleInventoryPortraits(InventoryData &);
 void PositionEleminoes(Player &); //For the inventory
+void PositionEleminoes(InventoryData &);
 void StatTextSetup(InventoryData &, Actor &);
 void UpdateStatText(InventoryData &, Actor &);
 void StatToolTip(InventoryData &, Actor &);
@@ -56,6 +61,7 @@ void StatToolTip(InventoryData &, Actor &);
 void CheckForEleminoClicked(Game &); //Check if an elemino has been clicked on to start dragging
 void MouseTouchElemino(Game &); //Drag, Rotate, and Check for release while mouse if touching elemino
 void HandleFlyingElemino(Game &); //Either snap it to a grid or back into the inventory
+void UpdateInteractable(Player &); //Remake the interactable vector
 
 void UnloadTexturesFrom(InventoryData &);
 

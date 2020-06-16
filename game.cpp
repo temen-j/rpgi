@@ -30,18 +30,25 @@ Game::~Game(){
 
 
 int InventoryState(Game &game){
-	Player *player = &game.player;
+	Player &player = game.player;
 
-	if(!player->invData){
-		player->invData = new InventoryData(); //ewww heap alloc
+	if(!player.invData){
+		player.invData = new InventoryData(); //ewww heap alloc
 		OpenInventory(game);
 	}
 
-	unsigned char prevFocus = player->invData->focus;
-	HandleInventoryPortraits(*(player->invData));
-	if(prevFocus != player->invData->focus){
-		player->invData->grids = game.gridMat[player->invData->focus];
-		UpdateStatText(*player->invData, *player->team.members[player->invData->focus]);
+	unsigned char prevFocus = player.invData->focus;
+	HandleInventoryPortraits(*player.invData);
+	if(prevFocus != player.invData->focus){
+		player.invData->grids = game.gridMat[player.invData->focus];
+		UpdateStatText(*player.invData, *player.team.members[player.invData->focus]);
+	}
+
+	int prevActive = player.invData->elemdd.active;
+	Update(player.invData->elemdd);
+	if(prevActive != player.invData->elemdd.active){
+		UpdateInteractable(player);
+		PositionEleminoes(*player.invData);
 	}
 
 	CheckForEleminoClicked(game);
@@ -49,11 +56,11 @@ int InventoryState(Game &game){
 	HandleFlyingElemino(game);
 
 
-	Unoccupy(player->invData->grids[0]);
-	Unoccupy(player->invData->grids[1]);
-	Unoccupy(player->invData->grids[2]);
+	Unoccupy(player.invData->grids[0]);
+	Unoccupy(player.invData->grids[1]);
+	Unoccupy(player.invData->grids[2]);
 
-	StatToolTip(*player->invData, Character::actors[player->invData->focus]);
+	StatToolTip(*player.invData, Character::actors[player.invData->focus]);
 
 	return 0;
 }

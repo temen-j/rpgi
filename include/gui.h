@@ -65,6 +65,11 @@ struct Mouse{
 	void *touch = nullptr;
 };
 
+struct Panel{
+	GuiControlState state = GuiControlState::GUI_STATE_NORMAL;
+	Rectangle bounds;
+};
+
 struct Label{
     GuiControlState state = GuiControlState::GUI_STATE_NORMAL;
 	Rectangle bounds;
@@ -91,7 +96,6 @@ struct Button{
 };
 
 struct ImageButton : Button{
-	/* Button button; */
 	Texture texture;
 };
 
@@ -134,8 +138,6 @@ struct ListView{
 	Rectangle bounds;
 	Rectangle itemBounds;
 	Vec<std::string> text;
-	/* int *focus; */
-	/* int *scrollIndex; */
 	int focus;
 	int scrollIndex;
 	int active;
@@ -145,6 +147,24 @@ struct ListView{
 	int startIndex, endIndex;
 	ListView(){
 		state = GuiControlState::GUI_STATE_NORMAL;
+	}
+};
+
+struct DropDown{
+	GuiControlState state;
+	Panel panel;
+	Rectangle bounds;
+	Rectangle itemBounds;
+	Vec<std::string> text;
+	int active;
+	int focus;
+	bool editMode;
+
+	DropDown(){
+		state = GuiControlState::GUI_STATE_NORMAL;
+		editMode = false;
+		active = 0;
+		focus = 0;
 	}
 };
 
@@ -168,8 +188,10 @@ bool Update(Toggle &);
 bool Update(ImageToggle &);
 void Update(ScrollBar &);
 void Update(ListView &);
+bool Update(DropDown &);
 void SetupScrollBar(ScrollBar &);
 void SetupListView(ListView &);
+void SetupDropDown(DropDown &);
 void DrawGuiButton(Button &);
 void DrawGuiLabel(Label &);
 void DrawGuiBoxLabel(BoxLabel &);
@@ -177,6 +199,8 @@ void DrawGuiImageButton(ImageButton &);
 void DrawGuiImageToggle(ImageToggle &);
 void DrawGuiScrollBar(ScrollBar &);
 void DrawGuiListView(ListView &);
+void DrawGuiPanel(Panel &);
+void DrawGuiDropDown(DropDown &);
 //-----------------------------------------------------------------------------
 
 //Custom gui functions ------------------------------------------------------------
