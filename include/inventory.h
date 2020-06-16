@@ -52,7 +52,6 @@ struct TotalEleminoes{
 
 void OpenInventory(Game &);
 void HandleInventoryPortraits(InventoryData &);
-void PositionEleminoes(Player &); //For the inventory
 void PositionEleminoes(InventoryData &);
 void StatTextSetup(InventoryData &, Actor &);
 void UpdateStatText(InventoryData &, Actor &);

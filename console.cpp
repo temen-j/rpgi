@@ -280,7 +280,7 @@ void GiveCommand(Console &c, Game &game){
 		TotalEleminoes::size++;
 
 		if(game.player.invData)
-			PositionEleminoes(game.player.invData);
+			PositionEleminoes(*game.player.invData);
 	}
 	else if(!Valid(param1)){
 		c.msg = ERR + INVA_ARG + c.tokens[1] + " is an invalid element.";

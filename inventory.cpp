@@ -33,7 +33,6 @@ void OpenInventory(Game &game){
 		SetupDropDown(invData->elemdd);
 
 		StatTextSetup(*invData, *game.player.team.members[invData->focus]);
-		/* PositionEleminoes(game.player); */
 		PositionEleminoes(*invData);
 	}
 	game.justEnteredState = true;
@@ -211,27 +210,6 @@ void StatToolTip(InventoryData &invD, Actor &actor){
 
 
 void CheckForEleminoClicked(Game &game){
-	/* Player *player = &game.player; */
-	/* for(unsigned int i = 0; i < player->inventory.size(); ++i){ */
-	/* 	bool clicked = CheckLPressed(*player->inventory[i], game.mouse); */
-	/* 	if(clicked){ */
-	/* 		player->invData->inFlight = nullptr; */
-	/* 		player->inventory.erase(player->inventory.begin() + i); */
-	/* 		PositionEleminoes(*player); */
-	/* 		break; */
-	/* 	} */
-	/* } */
-	/* for(size_t i = 0; i < 3; ++i){ */
-	/* 	for(unsigned int j = 0; j < player->invData->grids[i].attached.size(); ++j){ */
-	/* 		bool clicked = CheckLPressed(*player->invData->grids[i].attached[j], game.mouse); */
-	/* 		if(clicked){ */
-	/* 			player->invData->inFlight = nullptr; */
-	/* 			player->invData->grids[i].attached.erase(player->invData->grids[i].attached.begin() + j); //FIXME: Verbose */
-	/* 			break; */
-	/* 		} */
-	/* 	} */
-	/* } */
-
 	auto &player = game.player;
 	for(unsigned int i = 0; i < player.invData->interactable.size(); ++i){
 		bool clicked = CheckLPressed(*player.invData->interactable[i], game.mouse);
@@ -266,21 +244,6 @@ void CheckForEleminoClicked(Game &game){
 
 
 void MouseTouchElemino(Game &game){
-	/* Player *player = &game.player; */
-
-	/* if(game.mouse.touch && game.mouse.interface == InterfaceID::ELEMINO){ */
-	/* 	Elemino *elemino = static_cast<Elemino *>(game.mouse.touch); */
-	/* 	Drag(*elemino); */
-
-	/* 	if(IsKeyPressed(KEY_R)) */
-	/* 		Rotate(*elemino); */
-
-	/* 	CheckLReleased(*elemino, game.mouse); */
-
-	/* 	if(!game.mouse.touch) */
-	/* 		player->invData->inFlight = elemino; //Set the elemino to be in open space */
-
-/* } */
 	Player &player = game.player;
 
 	if(game.mouse.touch && game.mouse.interface == InterfaceID::ELEMINO){
@@ -299,42 +262,6 @@ void MouseTouchElemino(Game &game){
 
 
 void HandleFlyingElemino(Game &game){
-	/* Player *player = &game.player; */
-
-	/* if(player->invData->inFlight){ */
-	/* 	Elemino *elemino = player->invData->inFlight; */
-	/* 	for(size_t i = 0; i < 3; ++i){ */
-	/* 		Grid *grid = &player->invData->grids[i]; */
-	/* 		bool prevAlignment = elemino->aligned; */
-	/* 		Snap(*elemino, *grid); //Snap this floating elemino */
-			
-	/* 		bool addEleminoToGrid = true; */
-	/* 		//Lin. search for this pointer to see if it is alread attached to the grid */
-	/* 		for(unsigned int j = 0; j < player->invData->grids[i].attached.size(); ++j){ //FIXME: Verbose! */
-	/* 			if(elemino == player->invData->grids[i].attached[j]) */
-	/* 				addEleminoToGrid = false; */
-	/* 		} */
-
-	/* 		if(elemino->aligned && !prevAlignment){ */
-	/* 			if(addEleminoToGrid){ */
-	/* 				player->invData->grids[i].attached.push_back(elemino); */
-	/* 				AssignElementGrid(player->invData->grids, *player->team.members[player->invData->focus]); //FIXME: Verbose! */
-	/* 				UpdateStatText(*player->invData, *player->team.members[player->invData->focus]); */
-	/* 			} */
-	/* 			break; */
-	/* 		} */
-	/* 	} */
-	/* 	if(!elemino->aligned && !elemino->dragging){ //TODO: turn this into a function? */
-	/* 			elemino->inInventory = true; */
-	/* 			player->inventory.push_back(elemino); */
-	/* 			PositionEleminoes(*player); */
-	/* 			MakeRectanglesSmall(*elemino); */
-	/* 			player->invData->inFlight = nullptr; */
-	/* 			AssignElementGrid(player->invData->grids, *player->team.members[player->invData->focus]); //FIXME: Verbose! */
-	/* 			UpdateStatText(*player->invData, *player->team.members[player->invData->focus]); */
-	/* 	} */
-	/* } */
-
 	Player &player = game.player;
 
 	if(player.invData->inFlight){
@@ -378,6 +305,7 @@ void UpdateInteractable(Player &player){
 	Element curr = static_cast<Element>(player.invData->elemdd.active);
 	player.invData->eleminoesAvail.resize(0);
 	player.invData->interactable.resize(0);
+
 	if(curr == Element::none){
 		for(auto &it : player.inventory)
 			player.invData->eleminoesAvail.push_back(it);
@@ -389,7 +317,6 @@ void UpdateInteractable(Player &player){
 		}
 	}
 	
-
 	unsigned int beginIndex = player.invData->page * player.invData->MAX_INV_DISP;
 	unsigned int maxIndex = beginIndex + player.invData->MAX_INV_DISP;
 
