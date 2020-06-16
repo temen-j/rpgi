@@ -622,12 +622,6 @@ void DrawInventory(const Player &player){
 	for(size_t i = 0; i < NUM_STATS; ++i)
 		DrawGuiLabel(player.invData->statText[i]);
 
-	/* auto &max = player.invData->MAX_INV_DISP; */
-	/* unsigned int size = player.inventory.size(); */
-
-	/* for(unsigned int i = 0; i < size && i < max; ++i) */
-	/* 	DrawElemino(*(player.inventory[i])); */
-
 	for(unsigned int i = 0; i < player.invData->interactable.size(); ++i)
 		DrawElemino(*(player.invData->interactable[i]));
 
