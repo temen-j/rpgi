@@ -1,4 +1,5 @@
-#include "move.h"
+#include "include\move.h"
+#include "include\actor.h"
 
 
 Move::Move(){
@@ -34,9 +35,9 @@ Move::Move(int id, const char *name, Element elem, int levelObtained, int priori
 		this->owner = owner;
 }
 
-/* move::~move(){ */
-/* 	std::cout << "Deleted " << id << std::endl; */
-/* } */
+
+
+
 
 
 /* move::move(const move_serialized &ms){ */

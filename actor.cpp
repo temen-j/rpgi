@@ -238,13 +238,6 @@ bool IsDead(const Actor &a){
 }
 
 
-/*bool isDead(const Actor *a){*/
-/*	if(a->remHP <= 0)*/
-/*		return true;*/
-/*	return false;*/
-/*}*/
-
-
 void HealActor(Actor &a, const unsigned int amount){
 	unsigned int diff = (unsigned int)(a.maxHP - a.remHP);
 	if(diff < amount){
@@ -262,41 +255,4 @@ void FullHealActor(Actor &a){
 	//TODO: do something about proportions
 }
 
-
-/*std::ostream& operator<<(std::ostream &out, const Actor &a){*/
-/*	out << a.name << "'s Stats: " << std::endl;*/
-/*	out << "HP: " << a.remHP << "/" << a.maxHP << std::endl;*/
-/*	out << "MP: " << a.remMP << "/" << a.maxMP << std::endl;*/
-/*	//out << "HPBS: " << a.hpBonus << std::endl;*/
-/*	//out << "MPBS: " << a.mpBonus << std::endl;*/
-/*	out << "PATK: \n    ";*/
-/*	for(int i = 0; i < NUMELEMENTS; ++i){*/
-/*		if(i != NUMELEMENTS - 1)*/
-/*			out << (Element)(i + 1) << ": " << a.pAtk[i] << " ";*/
-/*		else*/
-/*			out << (Element)(i + 1) << ": " << a.pAtk[i] << std::endl;*/
-/*	}*/
-/*	out << "PDEF: \n    ";*/
-/*	for(int i = 0; i < NUMELEMENTS; ++i){*/
-/*		if(i != NUMELEMENTS - 1)*/
-/*			out << (Element)(i + 1) << ": " << a.pDef[i] << " ";*/
-/*		else*/
-/*			out << (Element)(i + 1) << ": " << a.pDef[i] << std::endl;*/
-/*	}*/
-/*	out << "MATK: \n    ";*/
-/*	for(int i = 0; i < NUMELEMENTS; ++i){*/
-/*		if(i != NUMELEMENTS - 1)*/
-/*			out << (Element)(i + 1) << ": " << a.mAtk[i] << " ";*/
-/*		else*/
-/*			out << (Element)(i + 1) << ": " << a.mAtk[i] << std::endl;*/
-/*	}*/
-/*	out << "MDEF: \n    ";*/
-/*	for(int i = 0; i < NUMELEMENTS; ++i){*/
-/*		if(i != NUMELEMENTS - 1)*/
-/*			out << (Element)(i + 1) << ": " << a.mDef[i] << " ";*/
-/*		else*/
-/*			out << (Element)(i + 1) << ": " << a.mDef[i] << std::endl;*/
-/*	}*/
-/*	return out;*/
-/*}*/
 

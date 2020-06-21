@@ -1,11 +1,11 @@
 CXX = g++
-CXXFLAGS = -Wall -Iinclude
+CXXFLAGS = -Wall -Iinclude -m64
 LIB = -lraylib -lopengl32 -lgdi32 -lwinmm -static -lpthread
 
 DEV_OBJ = console.o
 GUI_OBJ = gui.o #raygui_impl.o
 MATH_OBJ = tmath.o interp.o
-GAME_OBJ = game.o element.o elemino.o inventory.o actor.o player.o move.o allmoves.o moveinventory.o combat.o
+GAME_OBJ = game.o element.o elemino.o inventory.o actor.o player.o move.o allmoves.o moveinventory.o combat.o moveeffect.o
 
 BUILD ?= DEBUG
 
@@ -68,6 +68,9 @@ moveinventory.o: moveinventory.cpp include\moveinventory.h include\move.h
 
 combat.o: combat.cpp include\combat.h include\gui.h include\team.h include\move.h
 	$(CXX) $(CXXFLAGS) -c combat.cpp -L. $(LIB)
+
+moveeffect.o: moveeffect.cpp include\moveeffect.h include\moveconst.h include\actor.h
+	$(CXX) $(CXXFLAGS) -c moveeffect.cpp -L. $(LIB)
 
 run:
 	$(MAKE) -C bin run

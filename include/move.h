@@ -3,8 +3,6 @@
 #define MOVE_H
 
 #include "element.h"
-/* #include "effect.h" */
-/* #include "MoveConstants.h" */
 
 struct Actor;
 struct Team;
@@ -20,136 +18,6 @@ enum Ownership : int {
 	boss
 };
 
-enum mv : int{
-	NONE,
-	IGNITE,
-	BLAZE,
-	FIREBALL,
-	EXPLOSION,
-	FIREBEAM,
-	FLAMESWORD,
-	FLAREKICK,
-	FIREWALL,
-	SEARINGFLESH,
-	MOLTENMETEOR,
-	WILDFIRE,
-	RAZEEARTH,
-	FROMTHEASHES,
-	SUPERNOVA,
-	WATERWHIP,
-	TORRENT,
-	TIDALWAVE,
-	COALESCE,
-	WHIRLPOOL,
-	HAILSTORM,
-	AQUAPRISON,
-	RAINSTORM,
-	DEWPOINT,
-	FLASHFREEZE,
-	RIPTIDE,
-	VAPORVORTEX,
-	HELLBROTH,
-	TSUNAMI,
-	SEEDSHOT,
-	ACORNASSAULT,
-	SAPPINGSTEMS,
-	NOURISH,
-	LEAFLANCE,
-	FUNGALSPORES,
-	BARBEDHUSK,
-	GRASSBLADES,
-	PETALPIKE,
-	UNDERGROWTH,
-	SYMBIOSIS,
-	ENSNARINGVINE,
-	RANCIDROSES,
-	DRYADSCURSE,
-	ZAP,
-	CHARGE,
-	DISCHARGE,
-	LIGHTNINGBOLT,
-	DAZZLINGLIGHTS,
-	ELECTROSTORM,
-	LIGHTNINGKICK,
-	SPARKINGSKIN,
-	SUPERCONDUCT,
-	STATICSHOCK,
-	EVANESCENTFIELD,
-	HIGHVOLTAGE,
-	MJOLNIR,
-	CLOSEDCIRUIT,
-	IRONSPIKES,
-	CANNONBALL,
-	SHARPEN,
-	SHATTERSHRAPNEL,
-	BALLANDCHAIN,
-	QUICKSILVER,
-	COPPERCUTLASS,
-	BRASSKNUCKLES,
-	MIDASTOUCH,
-	CHROMEPLATED,
-	MAGNETIZE,
-	STEELFIST,
-	ALLOYASSAULT,
-	PIERCINGPLATINUM,
-	HURLROCK,
-	STONESPEAR,
-	FORTIFY,
-	QUICKSAND,
-	ENTOMB,
-	CRUSH,
-	TREMOR,
-	ROCKSLIDE,
-	ROLLINGBOULDER,
-	SAPPHIRESTRIKE,
-	RUBYRUSH,
-	GARNETGAZE,
-	EMERALDEDGE,
-	OBSIDIANONSLAUGHT,
-	ECTORAY,
-	TORMENT,
-	CHAOSCLAW,
-	PHANTOMWALTS,
-	GRAVETENDER,
-	MINDINVASION,
-	BINDINGPAIN,
-	PLAGUE,
-	WICKEDHEX,
-	PETRIFYINGPALM,
-	DECAY,
-	VIVIDNIGHTMARE,
-	ETHEREALFOG,
-	NOXIOUSVOID,
-	FLASHFRICTION,
-	SCORCHINGHEAT,
-	DRAGONBREATH,
-	ICARUSINFERNO,
-	REND,
-	SIRENSTEAR,
-	CHILLINGBLAST,
-	DELUGE,
-	NEEDLE,
-	BLOOM,
-	TREECLEAVER,
-	VENOMCOATING, 
-	SURGE,
-	OVERLOAD,
-	IONSTRIKE,
-	PLASMAPULSE,
-	SCRAPSLUG,
-	ANNEAL,
-	ANODIZE,
-	GALVANIZEDGLAIVE,
-	GRAVELSPIN,
-	SANDBOMB,
-	CRYSTALCAGE,
-	FISSURE,
-	SHADOWSLASH,
-	PILFER,
-	BLOODCURDLE,
-	BLACKHOLE
-};
-
 struct Move_serialized;
 
 struct Move{
@@ -163,12 +31,6 @@ struct Move{
 	Move(int id, const char *name, Element elem, int levelObtained, int priority, int maxTargets, int damage, int healing, int cost,
 		bool isPhysical, bool isFriendly, bool isHostile, Ownership owner);
 	Move(const Move_serialized&);
-	~Move(){
-	};
-
-	//Returns a dyn. array of damage/heal values for each actor effected
-	//"Uses" the Move
-	/* void (*use)(Move *, actor*, std::vector<actor*>&); */
 
 };
 
@@ -177,16 +39,16 @@ struct AllMoves{
 };
 
 
-struct Move_serialized{
-	char name[24];
-	char id, priority, maxTargets, damage, healing, cost;
-	//3 bits levelObtained, 3 bits for the isPhysical, IsFriendly, isHostile
-	//2 bits owner
-	char packed0; 
-	//2 bits for damage, healing, and cost extras
-	char packed1;
-	char elem;
-};
+/* struct Move_serialized{ */
+/* 	char name[24]; */
+/* 	char id, priority, maxTargets, damage, healing, cost; */
+/* 	//3 bits levelObtained, 3 bits for the isPhysical, IsFriendly, isHostile */
+/* 	//2 bits owner */
+/* 	char packed0; */ 
+/* 	//2 bits for damage, healing, and cost extras */
+/* 	char packed1; */
+/* 	char elem; */
+/* }; */
 
 
 /* void loadAllMoves(std::vector<Move *>&); */

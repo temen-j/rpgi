@@ -5,7 +5,7 @@
 
 static const int NUMELEMENTS = 7;
 
-enum Element{
+enum Element : int{
 	error = -1,
 	none = 0,
 	fire = 1,
