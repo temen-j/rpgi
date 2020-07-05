@@ -8,8 +8,8 @@
 #include "element.h"
 #include "move.h"
 #include "moveinventory.h"
+#include "moveeffect.h"
 
-//TODO re-enable move and effects once working/complete
 
 template<typename T>
 using Vec = std::vector<T>;
@@ -53,11 +53,8 @@ struct Actor{
 	Element grids[NUMGRIDS][NUMCELLS];
 	int remHP, remMP, maxHP, maxMP, speed;
 	int mAtk[NUMELEMENTS], mDef[NUMELEMENTS], pAtk[NUMELEMENTS], pDef[NUMELEMENTS], hpBonus, mpBonus;
-	bool immune[NUMELEMENTS], pIncap, mIncap, isDisabled;
 	struct Move *moves[NUM_ACTOR_MOVES];
 	Element type[2];
-
-	//Vec<effect *> currEffects;
 
 
 	Actor(){
@@ -72,7 +69,7 @@ struct Actor{
 		for(int i = 0; i < NUMELEMENTS; ++i)
 			mAtk[i] = mDef[i] = pAtk[i] = pDef[i] = 0;
 
-		pIncap = mIncap = isDisabled = false;
+		/* pIncap = mIncap = isDisabled = false; */
 
 		hpBonus = mpBonus = 0;
 		type[0] = type[1] = Element::none;
@@ -102,11 +99,15 @@ void AssignStats(Actor *);
 //that do not match the type
 void AssignType(Actor &);
 
+
 bool IsDead(const Actor &);
+
 
 void HealActor(Actor &, const unsigned int);
 
+
 void FullHealActor(Actor &);
+
 
 std::ostream& operator<<(std::ostream &, const Actor &);
 

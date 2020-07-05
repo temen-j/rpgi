@@ -2,18 +2,22 @@ CXX = g++
 CXXFLAGS = -Wall -Iinclude -m64
 LIB = -lraylib -lopengl32 -lgdi32 -lwinmm -static -lpthread
 
-DEV_OBJ = console.o
-GUI_OBJ = gui.o #raygui_impl.o
+DEV_OBJ = console.o tmem.o
+GUI_OBJ = gui.o
 MATH_OBJ = tmath.o interp.o
-GAME_OBJ = game.o element.o elemino.o inventory.o actor.o player.o move.o allmoves.o moveinventory.o combat.o moveeffect.o
+INVENTORY_OBJ = elemino.o inventory.o moveinventory.o
+MOVE_OBJ = move.o allmoves.o moveeffect.o move_impl.o
+COMBAT_OBJ = actor.o combat.o
+GAME_OBJ = game.o element.o player.o
 
 BUILD ?= DEBUG
+EMPTY = 
 
 ifeq ($(BUILD),DEBUG)
 	CXXFLAGS += -pg -g
 endif
 ifeq ($(BUILD),RELEASE)
-	CXXFLAGS += -s -O3 -Os
+	CXXFLAGS += -s -O3
 endif
 
 
@@ -21,8 +25,11 @@ game:
 	make game.exe
 	move game.exe bin
 
-game.exe: main.cpp $(GUI_OBJ) $(MATH_OBJ) $(GAME_OBJ) $(DEV_OBJ)
-	$(CXX) $(CXXFLAGS) main.cpp $(GUI_OBJ) $(MATH_OBJ) $(GAME_OBJ) $(DEV_OBJ) -L. $(LIB) -o $@
+game.exe: main.cpp $(GUI_OBJ) $(MATH_OBJ) $(GAME_OBJ) $(DEV_OBJ) $(INVENTORY_OBJ) $(MOVE_OBJ) $(COMBAT_OBJ)
+	$(CXX) $(CXXFLAGS) main.cpp $(EMPTY) \
+		$(GUI_OBJ) $(MATH_OBJ) $(GAME_OBJ) $(INVENTORY_OBJ) $(MOVE_OBJ) $(COMBAT_OBJ) $(DEV_OBJ) \
+		-L. $(LIB) -o $@
+
 
 gui.o: gui.cpp include\gui.h include\player.h include\inventory.h include\console.h include\elemino.h include\gamestate.h
 	$(CXX) $(CXXFLAGS) -c gui.cpp -L. $(LIB)
@@ -70,7 +77,13 @@ combat.o: combat.cpp include\combat.h include\gui.h include\team.h include\move.
 	$(CXX) $(CXXFLAGS) -c combat.cpp -L. $(LIB)
 
 moveeffect.o: moveeffect.cpp include\moveeffect.h include\moveconst.h include\actor.h
-	$(CXX) $(CXXFLAGS) -c moveeffect.cpp -L. $(LIB)
+	$(CXX) $(CXXFLAGS) -c moveeffect.cpp -l. $(LIB)
+
+move_impl.o: move_impl.cpp include\move_impl.h include\actor.h include\combat.h include\move.h
+	$(CXX) $(CXXFLAGS) -c move_impl.cpp -l. $(LIB)
+
+tmem.o: tmem.c
+	gcc -O3 -c tmem.c
 
 run:
 	$(MAKE) -C bin run

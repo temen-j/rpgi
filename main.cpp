@@ -136,7 +136,6 @@ int main(int argc, char **argv){
 		ClearBackground(RAYWHITE);
 
 		if(game.gs.curr == State::combat_act || game.gs.curr == State::combat_watch){
-			/* std::cout << "reached" << std::endl; */
 			DrawCombat(game);
 		}
 		else{
@@ -159,6 +158,8 @@ int main(int argc, char **argv){
 	UnloadTexture(Elemino::eleminoTile);
 	UnloadTexture(Grid::gridTile);
 	UnloadFont(gtd.defaultFont);
+
+	DestroyMemPool(&CombatData::diffMemPool);
 
 	CloseWindow();
 

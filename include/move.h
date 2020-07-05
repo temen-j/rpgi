@@ -8,6 +8,8 @@ struct Actor;
 struct Team;
 
 const int NUM_MOVES = 126;
+const int TARGET_ALL = 127;
+const int TARGET_SELF = -1;
 
 enum Ownership : int {
 	general = 0,
