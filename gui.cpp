@@ -12,7 +12,7 @@
 void Update(Button &button){
     if ((button.state != GUI_STATE_DISABLED) && !guiLocked)
     {
-        Vector2 mousePoint = GetMousePosition();
+        Vector2 mousePoint = Game::mouse.pos;
 
         // Check button state
         if (CheckCollisionPointRec(mousePoint, button.bounds))
@@ -41,7 +41,7 @@ void Update(ImageButton &button){
 bool Update(Toggle &toggle){
     if ((toggle.state != GUI_STATE_DISABLED) && !guiLocked)
     {
-        Vector2 mousePoint = GetMousePosition();
+        Vector2 mousePoint = Game::mouse.pos;
 
         // Check toggle button state
         if (CheckCollisionPointRec(mousePoint, toggle.bounds))
@@ -68,7 +68,7 @@ bool Update(ImageToggle &toggle){
 void Update(ScrollBar &sb){
     if ((sb.state != GUI_STATE_DISABLED) && !guiLocked)
     {
-        Vector2 mousePoint = GetMousePosition();
+        Vector2 mousePoint = Game::mouse.pos;
 
         if (CheckCollisionPointRec(mousePoint, sb.bounds))
         {
@@ -120,7 +120,7 @@ void Update(ScrollBar &sb){
 void Update(ListView &lw){
     if ((lw.state != GUI_STATE_DISABLED) && !guiLocked)
     {
-        Vector2 mousePoint = GetMousePosition();
+        Vector2 mousePoint = Game::mouse.pos;
 
         // Check mouse inside list view
         if (CheckCollisionPointRec(mousePoint, lw.bounds))
@@ -265,7 +265,7 @@ void SetupDropDown(DropDown &dd){
 bool Update(DropDown &dd){
 	bool pressed = false;
     if ((dd.state != GUI_STATE_DISABLED) && !guiLocked && (dd.text.size() > 1)){
-        Vector2 mousePoint = GetMousePosition();
+        Vector2 mousePoint = Game::mouse.pos;
 
         if (dd.editMode){
             dd.state = GUI_STATE_PRESSED;

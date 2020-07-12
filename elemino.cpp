@@ -1,4 +1,5 @@
 #include "include\elemino.h"
+#include "include\game.h"
 
 Texture Elemino::eleminoTile;
 Texture Grid::gridTile;
@@ -138,7 +139,7 @@ void MakeRectanglesSmall(Elemino &e){
 
 
 void Enlarge(Elemino &e){
-	e.mOffset = GetMousePosition() - e.pos;
+	e.mOffset = Game::mouse.pos - e.pos;
 	e.mOffset *= -1.f;
 	Move(e, e.mOffset); //Position elemino relative to where it was clicked
 	MakeRectangles(e);
@@ -158,7 +159,7 @@ bool CheckLPressed(Elemino &e, Mouse &mouse){
 	if(e.disabled)
 		return wasClicked;
 	if(IsMouseButtonPressed(MouseButton::MOUSE_LEFT_BUTTON)){
-		Vector2 mPos = GetMousePosition();
+		Vector2 mPos = Game::mouse.pos;
 
 		for(size_t i = 0; i < NUM_RECT; ++i){
 			if(e.useRect[i] && CheckCollisionPointRec(mPos, e.rect[i])){
@@ -176,7 +177,7 @@ void CheckLDown(Elemino &e){
 	if(e.disabled)
 		return;
 	if(IsMouseButtonDown(MouseButton::MOUSE_LEFT_BUTTON)){
-		Vector2 mousePos = GetMousePosition();
+		Vector2 mousePos = Game::mouse.pos;
 		for(size_t i = 0; i < NUM_RECT; ++i){
 			if(CheckCollisionPointRec(mousePos, e.rect[i])){
 				e.dragging = true;
@@ -217,14 +218,14 @@ void SetClicked(Elemino &e, Mouse &mouse){
 
 	e.inInventory = false;
 	e.aligned = false;
-	ComputeOffsets(e, GetMousePosition());
-	e.mOffset = GetMousePosition() - e.pos; 
+	ComputeOffsets(e, Game::mouse.pos);
+	e.mOffset = Game::mouse.pos - e.pos; 
 	e.step = 0.0f;
 }
 
 
 void Drag(Elemino &e){
-	Vector2 mouse = GetMousePosition();
+	Vector2 mouse = Game::mouse.pos;
 	e.pos = mouse - e.mOffset;
 	//std::cout << e.pos.x << " " << e.pos.y << std::endl;
 	for(size_t i = 0; i < NUM_RECT; ++i){
@@ -246,7 +247,7 @@ void Rotate(Elemino &e){
 		e.rect[i] = (Rectangle){-1, -1, 0, 0};
 
 	MakeRectangles(e);
-	ComputeOffsets(e, GetMousePosition());
+	ComputeOffsets(e, Game::mouse.pos);
 }
 
 
@@ -275,7 +276,7 @@ void OffsetRotAxis(Elemino &e){
 	temp.y = e.mOffset.x;
 
 	e.mOffset = temp;
-	e.pos = GetMousePosition() - e.mOffset;
+	e.pos = Game::mouse.pos - e.mOffset;
 }
 
 

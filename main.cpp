@@ -50,7 +50,8 @@ int main(int argc, char **argv){
 
 	SetTargetFPS(60);
 	while(!WindowShouldClose()){
-		game.mouse.pos = GetMousePosition();
+		/* game.mouse.pos = GetMousePosition(); */
+		Update(Game::mouse);
 		ImageClearBackground(&(gtd.imageText), CLEAR); //Clear batched text
 
 
