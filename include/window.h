@@ -33,4 +33,6 @@ void Update(Mouse &);
 
 void UpdateWindow();
 
+void WindowSetup();
+
 #endif

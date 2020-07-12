@@ -18,18 +18,15 @@ using Vec = std::vector<T>;
 
 
 int main(int argc, char **argv){
-	/* const int screenWidth = 960; */
-	/* const int screenHeight = 640; */
 	std::string empty = "";
 
-	InitWindow(SCREENWIDTH, SCREENHEIGHT, "RPG Window");
-
+	WindowSetup();
 	Window::rescaleTarget = LoadRenderTexture(SCREENWIDTH, SCREENHEIGHT);
 	SetTextureFilter(Window::rescaleTarget.texture, FILTER_TRILINEAR);
 
 	Game game; //Lots of stuff loads here!!!!!!!!1
-	Game::mouse.pos = GetMousePosition();
 
+	//TODO: Make these references, not pointers
 	Player *player = &game.player;
 	AddCharacters(*player);
 	SetMaxLevel(*player);
@@ -50,7 +47,6 @@ int main(int argc, char **argv){
 
 	SetTargetFPS(60);
 	while(!WindowShouldClose()){
-		/* game.mouse.pos = GetMousePosition(); */
 		Update(Game::mouse);
 		ImageClearBackground(&(gtd.imageText), CLEAR); //Clear batched text
 

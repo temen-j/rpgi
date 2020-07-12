@@ -27,3 +27,15 @@ void Update(Mouse &mouse){
 void UpdateWindow(){
 	Window::scale = std::min((float)GetScreenWidth()/SCREENWIDTH, (float)GetScreenHeight()/SCREENHEIGHT);
 }
+
+void WindowSetup(){
+    /* SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_WINDOW_UNDECORATED); */
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
+	InitWindow(SCREENWIDTH, SCREENHEIGHT, "RPG Window");
+	SetWindowMinSize(SCREENWIDTH, SCREENHEIGHT);
+
+	Window::rescaleTarget = LoadRenderTexture(SCREENWIDTH, SCREENHEIGHT);
+	SetTextureFilter(Window::rescaleTarget.texture, FILTER_TRILINEAR);
+}
+
+
