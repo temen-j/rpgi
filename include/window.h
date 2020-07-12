@@ -1,5 +1,6 @@
 #ifndef WINDOW_H
 #define WINDOW_H
+
 #include <algorithm>
 
 #include "raylib\raylib.h"
@@ -8,7 +9,8 @@ const int SCREENWIDTH = 960;
 const int SCREENHEIGHT = 640;
 
 struct Window{
-	static 
+	static RenderTexture rescaleTarget;
+	static float scale;
 };
 
 enum InterfaceID: unsigned char{

@@ -24,8 +24,11 @@ int main(int argc, char **argv){
 
 	InitWindow(SCREENWIDTH, SCREENHEIGHT, "RPG Window");
 
+	Window::rescaleTarget = LoadRenderTexture(SCREENWIDTH, SCREENHEIGHT);
+	SetTextureFilter(Window::rescaleTarget.texture, FILTER_TRILINEAR);
+
 	Game game; //Lots of stuff loads here!!!!!!!!1
-	game.mouse.pos = GetMousePosition();
+	Game::mouse.pos = GetMousePosition();
 
 	Player *player = &game.player;
 	AddCharacters(*player);
@@ -132,6 +135,9 @@ int main(int argc, char **argv){
 //-----------------------------------------------------------------------------
 		BeginDrawing();
 
+		ClearBackground(BLACK);
+
+		BeginTextureMode(Window::rescaleTarget);
 		ClearBackground(RAYWHITE);
 
 		if(game.gs.curr == State::combat_act || game.gs.curr == State::combat_watch){
@@ -150,10 +156,21 @@ int main(int argc, char **argv){
 			DrawConsole(*console, gtd);
 		}
 
+		EndTextureMode();
+
+		float wScaled = SCREENWIDTH * Window::scale;
+		float hScaled = SCREENHEIGHT * Window::scale;
+		DrawTexturePro(Window::rescaleTarget.texture, (Rectangle){ 0.0f, 0.0f, (float) Window::rescaleTarget.texture.width, (float) -Window::rescaleTarget.texture.height },
+				(Rectangle) {(GetScreenWidth() - wScaled) * 0.5f, (GetScreenHeight() - hScaled) * 0.5f, wScaled, hScaled},
+				(Vector2) {0, 0},
+				0.0f,
+				WHITE);
+
 		EndDrawing();
 //-----------------------------------------------------------------------------
 	}
 	
+	UnloadRenderTexture(Window::rescaleTarget);
 	UnloadTexture(Elemino::eleminoTile);
 	UnloadTexture(Grid::gridTile);
 	UnloadFont(gtd.defaultFont);

@@ -2,6 +2,7 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "window.h"
 #include "elemino.h"
 #include "console.h"
 #include "player.h"
@@ -20,7 +21,7 @@ struct Game{
 	Console console;
 	Player player;
 	GameState gs;
-	Mouse mouse;
+	static Mouse mouse;
 	CombatData *cbtData = nullptr;
 	static TextureManager textures;
 

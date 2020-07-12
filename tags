@@ -168,6 +168,7 @@ Android	.\include\raylib\core.c	/^    } Android;$/;"	m	struct:CoreData	typeref:s
 AndroidButton	.\include\raylib\raylib.h	/^} AndroidButton;$/;"	t	typeref:enum:__anon428
 AndroidCommandCallback	.\include\raylib\core.c	/^static void AndroidCommandCallback(struct android_app *app, int32_t cmd)$/;"	f	file:
 AndroidInputCallback	.\include\raylib\core.c	/^static int32_t AndroidInputCallback(struct android_app *app, AInputEvent *event)$/;"	f	file:
+Animation	.\include\sprite.h	/^struct Animation{$/;"	s
 ApplyCost	.\move_impl.cpp	/^void ApplyCost(CasterMove &cm){$/;"	f
 ApplyDamage	.\move_impl.cpp	/^void ApplyDamage(Actor &target, CasterMove &cm){$/;"	f
 ApplyDisableDiff	.\moveeffect.cpp	/^void ApplyDisableDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
@@ -270,6 +271,7 @@ BORDER_COLOR_NORMAL	.\include\raylib\raygui.h	/^    BORDER_COLOR_NORMAL = 0,$/;"
 BORDER_COLOR_PRESSED	.\include\raylib\raygui.h	/^    BORDER_COLOR_PRESSED,$/;"	e	enum:__anon409
 BORDER_WIDTH	.\include\raylib\raygui.h	/^    BORDER_WIDTH,$/;"	e	enum:__anon409
 BRASSKNUCKLES	.\move_impl.cpp	/^void MoveImplementation::BRASSKNUCKLES(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+BRITTLE_DEBUFF_BONUS	.\include\moveeffect.h	/^const float BRITTLE_DEBUFF_BONUS = .15f;$/;"	v
 BROWN	.\include\raylib\raylib.h	147;"	d
 BUFFER_SIZE	.\include\raylib\external\stb_vorbis.h	5075;"	d
 BUFFER_SIZE	.\include\raylib\external\stb_vorbis.h	5100;"	d
@@ -370,7 +372,7 @@ CGLTF_PTRINDEX	.\include\raylib\external\cgltf.h	1932;"	d
 CHANGEFILTERSTRUCT	.\include\raylib\external\glfw\src\win32_platform.h	/^} CHANGEFILTERSTRUCT;$/;"	t	typeref:struct:__anon96
 CHAOSCLAW	.\move_impl.cpp	/^void MoveImplementation::CHAOSCLAW(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 CHARGE	.\move_impl.cpp	/^void MoveImplementation::CHARGE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-CHARGE_BUFF_BONUS	.\include\moveeffect.h	/^const float CHARGE_BUFF_BONUS = .15f;$/;"	v
+CHARGED_BUFF_BONUS	.\include\moveeffect.h	/^const float CHARGED_BUFF_BONUS = .15f;$/;"	v
 CHDIR	.\include\raylib\core.c	180;"	d	file:
 CHDIR	.\include\raylib\core.c	185;"	d	file:
 CHDIR	.\include\raylib\models.c	55;"	d	file:
@@ -385,7 +387,7 @@ CIRCLE_ERROR_RATE	.\include\raylib\shapes.c	459;"	d	file:
 CIRCLE_ERROR_RATE	.\include\raylib\shapes.c	555;"	d	file:
 CIRCLE_ERROR_RATE	.\include\raylib\shapes.c	769;"	d	file:
 CIRCLE_ERROR_RATE	.\include\raylib\shapes.c	993;"	d	file:
-CLEAR	.\include\gui.h	27;"	d
+CLEAR	.\include\gui.h	28;"	d
 CLIPBOARD	.\include\raylib\external\glfw\src\x11_platform.h	/^    Atom            CLIPBOARD;$/;"	m	struct:_GLFWlibraryX11
 CLIPBOARD_MANAGER	.\include\raylib\external\glfw\src\x11_platform.h	/^    Atom            CLIPBOARD_MANAGER;$/;"	m	struct:_GLFWlibraryX11
 CLITERAL	.\include\raylib\raylib.h	121;"	d
@@ -450,6 +452,7 @@ CUBEMAP_CROSS_THREE_BY_FOUR	.\include\raylib\raylib.h	/^    CUBEMAP_CROSS_THREE_
 CUBEMAP_LINE_HORIZONTAL	.\include\raylib\raylib.h	/^    CUBEMAP_LINE_HORIZONTAL,        \/\/ Layout is defined by an horizontal line with faces$/;"	e	enum:__anon438
 CUBEMAP_LINE_VERTICAL	.\include\raylib\raylib.h	/^    CUBEMAP_LINE_VERTICAL,          \/\/ Layout is defined by a vertical line with faces$/;"	e	enum:__anon438
 CUBEMAP_PANORAMA	.\include\raylib\raylib.h	/^    CUBEMAP_PANORAMA                \/\/ Layout is defined by a panorama image (equirectangular map)$/;"	e	enum:__anon438
+CURSED_DEBUFF_BONUS	.\include\moveeffect.h	/^const float CURSED_DEBUFF_BONUS = .15f;$/;"	v
 CUSTOM_MESH_GEN_CUBE	.\include\raylib\models.c	1427;"	d	file:
 CUSTOM_MESH_GEN_PLANE	.\include\raylib\models.c	1292;"	d	file:
 CalcLevelCap	.\team.cpp	/^void CalcLevelCap(const int &level){$/;"	f
@@ -516,6 +519,8 @@ CheckRReleased	.\draggable.cpp	/^void CheckRReleased(Draggable &d){$/;"	f
 CheckRUp	.\draggable.cpp	/^void CheckRUp(Draggable &d){$/;"	f
 CheckSockets	.\include\raylib\rnet.h	/^int CheckSockets(SocketSet *set, unsigned int timeout)$/;"	f
 Clamp	.\include\raylib\raymath.h	/^RMDEF float Clamp(float value, float min, float max)$/;"	f
+Clamp	.\window.cpp	/^Vector2 Clamp(Vector2 &v, Vector2 min, Vector2 max){$/;"	f
+ClampValue	.\core_window_letterbox.c	/^Vector2 ClampValue(Vector2 value, Vector2 min, Vector2 max)$/;"	f
 ClearBackground	.\include\raylib\core.c	/^void ClearBackground(Color color)$/;"	f
 ClearCommand	.\console.cpp	/^void ClearCommand(Console &c){$/;"	f
 ClearDirectoryFiles	.\include\raylib\core.c	/^void ClearDirectoryFiles(void)$/;"	f
@@ -2482,7 +2487,7 @@ FILTER_TRILINEAR	.\include\raylib\raylib.h	/^    FILTER_TRILINEAR,              
 FILTER_TRILINEAR	.\include\raylib\rlgl.h	/^        FILTER_TRILINEAR,               \/\/ Trilinear filtering (linear with mipmaps)$/;"	e	enum:__anon451
 FIREBALL	.\move_impl.cpp	/^void MoveImplementation::FIREBALL(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 FIREBEAM	.\move_impl.cpp	/^void MoveImplementation::FIREBEAM(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-FIRECOLOR	.\include\gui.h	30;"	d
+FIRECOLOR	.\include\gui.h	31;"	d
 FIREWALL	.\move_impl.cpp	/^void MoveImplementation::FIREWALL(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 FISSURE	.\move_impl.cpp	/^void MoveImplementation::FISSURE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 FLAG_FULLSCREEN_MODE	.\include\raylib\raylib.h	/^    FLAG_FULLSCREEN_MODE    = 2,    \/\/ Set to run program in fullscreen$/;"	e	enum:__anon425
@@ -7836,9 +7841,9 @@ GRAY	.\include\raylib\raylib.h	129;"	d
 GRAY_VALUE	.\include\raylib\models.c	1813;"	d	file:
 GREEN	.\include\raylib\raylib.h	137;"	d
 GRIDOFF	.\include\elemino.h	6;"	d
-GRIDOFF	.\include\gui.h	29;"	d
+GRIDOFF	.\include\gui.h	30;"	d
 GRIDON	.\include\elemino.h	5;"	d
-GRIDON	.\include\gui.h	28;"	d
+GRIDON	.\include\gui.h	29;"	d
 GRID_COLOR_ALPHA	.\include\raylib\raygui.h	2686;"	d
 GRID_PADDING	.\include\game.h	/^const int GRID_PADDING = 96;$/;"	v
 GROUPBOX_LINE_THICK	.\include\raylib\raygui.h	786;"	d
@@ -8286,7 +8291,7 @@ HBITMAP	.\include\raylib\external\ANGLE\EGL\eglplatform.h	/^typedef HANDLE HBITM
 HDC	.\include\raylib\external\ANGLE\EGL\eglplatform.h	/^typedef HANDLE HDC;     \/\/ HDC is a handle to a device context (DC). This type is declared in WinDef.h$/;"	t
 HELLBROTH	.\move_impl.cpp	/^void MoveImplementation::HELLBROTH(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 HIGHVOLTAGE	.\move_impl.cpp	/^void MoveImplementation::HIGHVOLTAGE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-HPBADCOLOR	.\include\gui.h	39;"	d
+HPBADCOLOR	.\include\gui.h	40;"	d
 HPBONUS_FIRE	.\include\actor.h	/^static const int HPBONUS_FIRE = 2;$/;"	v
 HPBONUS_LIGHTNING	.\include\actor.h	/^static const int HPBONUS_LIGHTNING = 3;$/;"	v
 HPBONUS_METAL	.\include\actor.h	/^static const int HPBONUS_METAL = 7;$/;"	v
@@ -8294,7 +8299,7 @@ HPBONUS_NATURE	.\include\actor.h	/^static const int HPBONUS_NATURE = 5;$/;"	v
 HPBONUS_ROCK	.\include\actor.h	/^static const int HPBONUS_ROCK = 6;$/;"	v
 HPBONUS_SPECTRE	.\include\actor.h	/^static const int HPBONUS_SPECTRE = 1;$/;"	v
 HPBONUS_WATER	.\include\actor.h	/^static const int HPBONUS_WATER = 4;$/;"	v
-HPGOODCOLOR	.\include\gui.h	37;"	d
+HPGOODCOLOR	.\include\gui.h	38;"	d
 HPMPBONUS_MULT	.\include\actor.h	/^static const float HPMPBONUS_MULT = 0.015625f; \/\/2^-6$/;"	v
 HUEBAR_PADDING	.\include\raylib\raygui.h	/^    HUEBAR_PADDING,                \/\/ Right hue bar separation from panel$/;"	e	enum:__anon422
 HUEBAR_SELECTOR_HEIGHT	.\include\raylib\raygui.h	/^    HUEBAR_SELECTOR_HEIGHT,        \/\/ Right hue bar selector height$/;"	e	enum:__anon422
@@ -8316,6 +8321,7 @@ HandleMoveRight	.\console.cpp	/^void HandleMoveRight(Console &console){$/;"	f
 HandleRetrieveCommand	.\console.cpp	/^void HandleRetrieveCommand(Console &console){$/;"	f
 HasEffect	.\moveeffect.cpp	/^bool HasEffect(Actor &target, MoveEffect &meff, MoveEffect *match){$/;"	f
 HasMessageFromUWP	.\include\raylib\utils.c	/^bool HasMessageFromUWP(void)$/;"	f
+Hash_sbdm	.\include\sprite.h	/^struct Hash_sbdm{$/;"	s
 HealActor	.\actor.cpp	/^void HealActor(Actor &a, const unsigned int amount){$/;"	f
 HealCommand	.\console.cpp	/^void HealCommand(Console &c, Game &game){$/;"	f
 HidCode	.\include\raylib\external\glfw\deps\mingw\xinput.h	/^    BYTE HidCode;$/;"	m	struct:_XINPUT_KEYSTROKE
@@ -9107,7 +9113,7 @@ LEAFLANCE	.\move_impl.cpp	/^void MoveImplementation::LEAFLANCE(Actor &target, Ca
 LIBVORBIS_MDCT	.\include\raylib\external\stb_vorbis.h	2361;"	d
 LIGHTGRAY	.\include\raylib\raylib.h	128;"	d
 LIGHTNINGBOLT	.\move_impl.cpp	/^void MoveImplementation::LIGHTNINGBOLT(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-LIGHTNINGCOLOR	.\include\gui.h	33;"	d
+LIGHTNINGCOLOR	.\include\gui.h	34;"	d
 LIGHTNINGKICK	.\move_impl.cpp	/^void MoveImplementation::LIGHTNINGKICK(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 LIME	.\include\raylib\raylib.h	138;"	d
 LINE_COLOR	.\include\raylib\raygui.h	/^    LINE_COLOR,$/;"	e	enum:__anon410
@@ -9404,6 +9410,7 @@ MAGENTA	.\include\raylib\raylib.h	153;"	d
 MAGNETIZE	.\move_impl.cpp	/^void MoveImplementation::MAGNETIZE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 MAKEDIPROP	.\include\raylib\external\glfw\deps\mingw\dinput.h	829;"	d
 MAKEDIPROP	.\include\raylib\external\glfw\deps\mingw\dinput.h	831;"	d
+MANABURN_DEBUFF_BONUS	.\include\moveeffect.h	/^const float MANABURN_DEBUFF_BONUS = .125f;$/;"	v
 MAP_ALBEDO	.\include\raylib\raylib.h	/^    MAP_ALBEDO    = 0,       \/\/ MAP_DIFFUSE$/;"	e	enum:__anon435
 MAP_ALBEDO	.\include\raylib\rlgl.h	/^        MAP_ALBEDO    = 0,       \/\/ MAP_DIFFUSE$/;"	e	enum:__anon455
 MAP_BRDF	.\include\raylib\raylib.h	/^    MAP_BRDF$/;"	e	enum:__anon435
@@ -10407,7 +10414,7 @@ MESA_swap_control	.\include\raylib\external\glfw\src\glx_context.h	/^    GLFWboo
 MESH_NAME_LENGTH	.\include\raylib\models.c	3008;"	d	file:
 MESSAGEBOX_BUTTON_HEIGHT	.\include\raylib\raygui.h	2560;"	d
 MESSAGEBOX_BUTTON_PADDING	.\include\raylib\raygui.h	2561;"	d
-METALCOLOR	.\include\gui.h	34;"	d
+METALCOLOR	.\include\gui.h	35;"	d
 MIDASTOUCH	.\move_impl.cpp	/^void MoveImplementation::MIDASTOUCH(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 MIN	.\include\raylib\textures.c	1681;"	d	file:
 MINDINVASION	.\move_impl.cpp	/^void MoveImplementation::MINDINVASION(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
@@ -10435,7 +10442,7 @@ MOVE_IMPL_H	.\include\move_impl.h	3;"	d
 MOVE_LEFT	.\include\raylib\camera.h	/^    MOVE_LEFT,$/;"	e	enum:__anon3
 MOVE_RIGHT	.\include\raylib\camera.h	/^    MOVE_RIGHT,$/;"	e	enum:__anon3
 MOVE_UP	.\include\raylib\camera.h	/^    MOVE_UP,$/;"	e	enum:__anon3
-MPBADCOLOR	.\include\gui.h	40;"	d
+MPBADCOLOR	.\include\gui.h	41;"	d
 MPBONUS_FIRE	.\include\actor.h	/^static const int MPBONUS_FIRE = 6;$/;"	v
 MPBONUS_LIGHTNING	.\include\actor.h	/^static const int MPBONUS_LIGHTNING = 5;$/;"	v
 MPBONUS_METAL	.\include\actor.h	/^static const int MPBONUS_METAL = 1;$/;"	v
@@ -10443,7 +10450,7 @@ MPBONUS_NATURE	.\include\actor.h	/^static const int MPBONUS_NATURE = 3;$/;"	v
 MPBONUS_ROCK	.\include\actor.h	/^static const int MPBONUS_ROCK = 2;$/;"	v
 MPBONUS_SPECTRE	.\include\actor.h	/^static const int MPBONUS_SPECTRE = 7;$/;"	v
 MPBONUS_WATER	.\include\actor.h	/^static const int MPBONUS_WATER = 4;$/;"	v
-MPGOODCOLOR	.\include\gui.h	38;"	d
+MPGOODCOLOR	.\include\gui.h	39;"	d
 MSGFLT_ALLOW	.\include\raylib\external\glfw\src\win32_platform.h	124;"	d
 MULTIPLE	.\include\raylib\external\glfw\src\x11_platform.h	/^    Atom            MULTIPLE;$/;"	m	struct:_GLFWlibraryX11
 MUSIC_AUDIO_FLAC	.\include\raylib\raudio.c	/^    MUSIC_AUDIO_FLAC,$/;"	e	enum:__anon398	file:
@@ -10544,8 +10551,8 @@ Model	.\include\raylib\raylib.h	/^typedef struct Model {$/;"	s
 Model	.\include\raylib\raylib.h	/^} Model;$/;"	t	typeref:struct:Model
 ModelAnimation	.\include\raylib\raylib.h	/^typedef struct ModelAnimation {$/;"	s
 ModelAnimation	.\include\raylib\raylib.h	/^} ModelAnimation;$/;"	t	typeref:struct:ModelAnimation
-Mouse	.\include\gui.h	/^struct Mouse{$/;"	s
 Mouse	.\include\raylib\core.c	/^        } Mouse;$/;"	m	struct:CoreData::__anon11	typeref:struct:CoreData::__anon11::__anon13	file:
+Mouse	.\include\window.h	/^struct Mouse{$/;"	s
 MouseButton	.\include\raylib\raylib.h	/^} MouseButton;$/;"	t	typeref:enum:__anon429
 MouseButtonCallback	.\include\raylib\core.c	/^static void MouseButtonCallback(GLFWwindow *window, int button, int action, int mods)$/;"	f	file:
 MouseCursorPosCallback	.\include\raylib\core.c	/^static void MouseCursorPosCallback(GLFWwindow *window, double x, double y)$/;"	f	file:
@@ -10578,7 +10585,7 @@ NAME_INFO_NAMEREQD	.\include\raylib\rnet.h	205;"	d
 NAME_INFO_NOFQDN	.\include\raylib\rnet.h	203;"	d
 NAME_INFO_NUMERICHOST	.\include\raylib\rnet.h	204;"	d
 NAME_INFO_NUMERICSERV	.\include\raylib\rnet.h	206;"	d
-NATURECOLOR	.\include\gui.h	32;"	d
+NATURECOLOR	.\include\gui.h	33;"	d
 NBITS	.\include\raylib\core.c	4737;"	d	file:
 NEEDLE	.\move_impl.cpp	/^void MoveImplementation::NEEDLE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 NET_ACTIVE_WINDOW	.\include\raylib\external\glfw\src\x11_platform.h	/^    Atom            NET_ACTIVE_WINDOW;$/;"	m	struct:_GLFWlibraryX11
@@ -12806,6 +12813,7 @@ Pinch	.\include\raylib\gestures.h	/^    } Pinch;$/;"	m	struct:__anon390	typeref:
 PixelFormat	.\include\raylib\raylib.h	/^} PixelFormat;$/;"	t	typeref:enum:__anon436
 PixelFormat	.\include\raylib\rlgl.h	/^    } PixelFormat;$/;"	t	typeref:enum:__anon450
 Play	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * Play)              (ma_IDirectSoundBuffer* pThis, DWORD dwReserved1, DWORD dwPriority, DWORD dwFlags);$/;"	m	struct:__anon285
+PlayAnimation	.\sprite.cpp	/^void PlayAnimation(Sprite &spr, const char *str){$/;"	f
 PlayAudioBuffer	.\include\raylib\raudio.c	/^void PlayAudioBuffer(AudioBuffer *buffer)$/;"	f
 PlayAudioStream	.\include\raylib\raudio.c	/^void PlayAudioStream(AudioStream stream)$/;"	f
 PlayMusicStream	.\include\raylib\raudio.c	/^void PlayMusicStream(Music music)$/;"	f
@@ -13245,7 +13253,7 @@ RNET_CALLOC	.\include\raylib\rnet.h	98;"	d
 RNET_FREE	.\include\raylib\rnet.h	101;"	d
 RNET_H	.\include\raylib\rnet.h	41;"	d
 RNET_MALLOC	.\include\raylib\rnet.h	95;"	d
-ROCKCOLOR	.\include\gui.h	35;"	d
+ROCKCOLOR	.\include\gui.h	36;"	d
 ROCKSLIDE	.\move_impl.cpp	/^void MoveImplementation::ROCKSLIDE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 ROLLINGBOULDER	.\move_impl.cpp	/^void MoveImplementation::ROLLINGBOULDER(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 RUBYRUSH	.\move_impl.cpp	/^void MoveImplementation::RUBYRUSH(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
@@ -13324,6 +13332,8 @@ SAPPINGSTEMS	.\move_impl.cpp	/^void MoveImplementation::SAPPINGSTEMS(Actor &targ
 SAVE_TARGETS	.\include\raylib\external\glfw\src\x11_platform.h	/^    Atom            SAVE_TARGETS;$/;"	m	struct:_GLFWlibraryX11
 SCORCHINGHEAT	.\move_impl.cpp	/^void MoveImplementation::SCORCHINGHEAT(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 SCRAPSLUG	.\move_impl.cpp	/^void MoveImplementation::SCRAPSLUG(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+SCREENHEIGHT	.\include\window.h	/^const int SCREENHEIGHT = 640;$/;"	v
+SCREENWIDTH	.\include\window.h	/^const int SCREENWIDTH = 960;$/;"	v
 SCROLLBAR	.\include\raylib\raygui.h	/^    SCROLLBAR,$/;"	e	enum:__anon408
 SCROLLBAR_LEFT_SIDE	.\include\raylib\raygui.h	/^    SCROLLBAR_LEFT_SIDE = 0,$/;"	e	enum:__anon420
 SCROLLBAR_RIGHT_SIDE	.\include\raylib\raygui.h	/^    SCROLLBAR_RIGHT_SIDE$/;"	e	enum:__anon420
@@ -13341,6 +13351,7 @@ SEEDSHOT	.\move_impl.cpp	/^void MoveImplementation::SEEDSHOT(Actor &target, Cast
 SGI_swap_control	.\include\raylib\external\glfw\src\glx_context.h	/^    GLFWbool        SGI_swap_control;$/;"	m	struct:_GLFWlibraryGLX
 SHADOWSLASH	.\move_impl.cpp	/^void MoveImplementation::SHADOWSLASH(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 SHARPEN	.\move_impl.cpp	/^void MoveImplementation::SHARPEN(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+SHARPENED_BUFF_BONUS	.\include\moveeffect.h	/^const float SHARPENED_BUFF_BONUS = .15f;$/;"	v
 SHATTERSHRAPNEL	.\move_impl.cpp	/^void MoveImplementation::SHATTERSHRAPNEL(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 SIG_ATOMIC_MAX	.\include\raylib\external\glfw\deps\vs2008\stdint.h	200;"	d
 SIG_ATOMIC_MIN	.\include\raylib\external\glfw\deps\vs2008\stdint.h	199;"	d
@@ -13380,10 +13391,11 @@ SPEAKER_TOP_CENTER	.\include\raylib\external\miniaudio.h	8502;"	d
 SPEAKER_TOP_FRONT_CENTER	.\include\raylib\external\miniaudio.h	8504;"	d
 SPEAKER_TOP_FRONT_LEFT	.\include\raylib\external\miniaudio.h	8503;"	d
 SPEAKER_TOP_FRONT_RIGHT	.\include\raylib\external\miniaudio.h	8505;"	d
-SPECTRECOLOR	.\include\gui.h	36;"	d
+SPECTRECOLOR	.\include\gui.h	37;"	d
 SPINNER	.\include\raylib\raygui.h	/^    SPINNER,$/;"	e	enum:__anon408
 SPIN_BUTTON_PADDING	.\include\raylib\raygui.h	/^    SPIN_BUTTON_PADDING,$/;"	e	enum:__anon418
 SPIN_BUTTON_WIDTH	.\include\raylib\raygui.h	/^    SPIN_BUTTON_WIDTH = 16,$/;"	e	enum:__anon418
+SPRITE_H	.\include\sprite.h	2;"	d
 SQUISH_CONSTANT_2D	.\include\raylib\external\par_shapes.h	1758;"	d
 SQUISH_CONSTANT_3D	.\include\raylib\external\par_shapes.h	1760;"	d
 SQUISH_CONSTANT_4D	.\include\raylib\external\par_shapes.h	1762;"	d
@@ -13763,7 +13775,7 @@ SaveFileText	.\include\raylib\utils.c	/^void SaveFileText(const char *fileName, 
 SaveKTX	.\include\raylib\textures.c	/^static int SaveKTX(Image image, const char *fileName)$/;"	f	file:
 SaveStorageValue	.\include\raylib\core.c	/^void SaveStorageValue(unsigned int position, int value)$/;"	f
 SaveWAV	.\include\raylib\raudio.c	/^static int SaveWAV(Wave wave, const char *fileName)$/;"	f	file:
-ScreenCenter	.\main.cpp	/^Vector2 ScreenCenter(){$/;"	f
+ScreenCenter	.\window.cpp	/^Vector2 ScreenCenter(){$/;"	f
 ScrollBar	.\include\gui.h	/^	ScrollBar(){$/;"	f	struct:ScrollBar
 ScrollBar	.\include\gui.h	/^struct ScrollBar{$/;"	s
 ScrollCallback	.\include\raylib\core.c	/^static void ScrollCallback(GLFWwindow *window, double xoffset, double yoffset)$/;"	f	file:
@@ -13916,6 +13928,7 @@ Sound	.\include\raylib\raudio.h	/^typedef struct Sound {$/;"	s
 Sound	.\include\raylib\raudio.h	/^} Sound;$/;"	t	typeref:struct:Sound
 Sound	.\include\raylib\raylib.h	/^typedef struct Sound {$/;"	s
 Sound	.\include\raylib\raylib.h	/^} Sound;$/;"	t	typeref:struct:Sound
+Sprite	.\include\sprite.h	/^struct Sprite{$/;"	s
 SpriteFont	.\include\raylib\raylib.h	286;"	d
 Stack	.\include\raylib\rmem.h	/^typedef struct Stack {$/;"	s
 Stack	.\include\raylib\rmem.h	/^} Stack;$/;"	t	typeref:struct:Stack
@@ -14091,6 +14104,7 @@ TextureCubemap	.\include\raylib\raylib.h	/^typedef Texture2D TextureCubemap;$/;"
 TextureCubemap	.\include\raylib\rlgl.h	/^    typedef Texture2D TextureCubemap;$/;"	t
 TextureFilterMode	.\include\raylib\raylib.h	/^} TextureFilterMode;$/;"	t	typeref:enum:__anon437
 TextureFilterMode	.\include\raylib\rlgl.h	/^    } TextureFilterMode;$/;"	t	typeref:enum:__anon451
+TextureManager	.\include\sprite.h	/^struct TextureManager{$/;"	s
 TextureWrapMode	.\include\raylib\raylib.h	/^} TextureWrapMode;$/;"	t	typeref:enum:__anon439
 Tick	.\moveeffect.cpp	/^void MoveEffect::Tick(Actor *actor){$/;"	f	class:MoveEffect
 TickDamage	.\moveeffect.cpp	/^void MoveEffect::TickDamage(int healing){$/;"	f	class:MoveEffect
@@ -14257,6 +14271,9 @@ Update	.\gui.cpp	/^void Update(Button &button){$/;"	f
 Update	.\gui.cpp	/^void Update(ImageButton &button){$/;"	f
 Update	.\gui.cpp	/^void Update(ListView &lw){$/;"	f
 Update	.\gui.cpp	/^void Update(ScrollBar &sb){$/;"	f
+Update	.\sprite.cpp	/^void Update(Animation &anim){$/;"	f
+Update	.\sprite.cpp	/^void Update(Sprite &spr){$/;"	f
+Update	.\window.cpp	/^void Update(Mouse &mouse){$/;"	f
 UpdateAudioStream	.\include\raylib\raudio.c	/^void UpdateAudioStream(AudioStream stream, const void *data, int samplesCount)$/;"	f
 UpdateBuffersDefault	.\include\raylib\rlgl.h	/^static void UpdateBuffersDefault(void)$/;"	f
 UpdateCamera	.\include\raylib\camera.h	/^void UpdateCamera(Camera *camera)$/;"	f
@@ -16041,7 +16058,7 @@ VrStereoConfig	.\include\raylib\rlgl.h	/^    typedef struct VrStereoConfig {$/;"
 VrStereoConfig	.\include\raylib\rlgl.h	/^    } VrStereoConfig;$/;"	t	typeref:struct:VrStereoConfig
 VrStereoConfig	.\include\raylib\rlgl.h	/^typedef struct VrStereoConfig {$/;"	s
 VrStereoConfig	.\include\raylib\rlgl.h	/^} VrStereoConfig;$/;"	t	typeref:struct:VrStereoConfig
-WATERCOLOR	.\include\gui.h	31;"	d
+WATERCOLOR	.\include\gui.h	32;"	d
 WATERWHIP	.\move_impl.cpp	/^void MoveImplementation::WATERWHIP(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 WAVEFORMATEXTENSIBLE	.\include\raylib\external\miniaudio.h	/^} WAVEFORMATEXTENSIBLE;$/;"	t	typeref:struct:__anon254
 WAVE_FORMAT_44M08	.\include\raylib\external\miniaudio.h	8476;"	d
@@ -16114,6 +16131,7 @@ WIN32_LEAN_AND_MEAN	.\include\raylib\external\ANGLE\EGL\eglplatform.h	72;"	d
 WIN32_LEAN_AND_MEAN	.\include\raylib\external\glad.h	30;"	d
 WIN32_LEAN_AND_MEAN	.\include\raylib\external\glfw\src\win32_platform.h	38;"	d
 WIN32_LEAN_AND_MEAN	.\include\raylib\rnet.h	139;"	d
+WINDOW_H	.\include\window.h	2;"	d
 WINDOW_STATUSBAR_HEIGHT	.\include\raylib\raygui.h	741;"	d
 WINELIB_NAME_AW	.\include\raylib\external\glfw\deps\mingw\_mingw_dxhelper.h	100;"	d
 WINELIB_NAME_AW	.\include\raylib\external\glfw\deps\mingw\_mingw_dxhelper.h	103;"	d
@@ -16147,6 +16165,7 @@ WaveCopy	.\include\raylib\raudio.c	/^Wave WaveCopy(Wave wave)$/;"	f
 WaveCrop	.\include\raylib\raudio.c	/^void WaveCrop(Wave *wave, int initSample, int finalSample)$/;"	f
 WaveFormat	.\include\raylib\raudio.c	/^void WaveFormat(Wave *wave, int sampleRate, int sampleSize, int channels)$/;"	f
 Window	.\include\raylib\core.c	/^    } Window;$/;"	m	struct:CoreData	typeref:struct:CoreData::__anon9	file:
+Window	.\include\window.h	/^struct Window{$/;"	s
 WindowDropCallback	.\include\raylib\core.c	/^static void WindowDropCallback(GLFWwindow *window, int count, const char **paths)$/;"	f	file:
 WindowIconifyCallback	.\include\raylib\core.c	/^static void WindowIconifyCallback(GLFWwindow *window, int iconified)$/;"	f	file:
 WindowShouldClose	.\include\raylib\core.c	/^bool WindowShouldClose(void)$/;"	f
@@ -17068,8 +17087,8 @@ addripv4	.\include\raylib\rnet.h	/^    SocketAddressIPv4 addripv4; \/\/ The host
 addripv6	.\include\raylib\rnet.h	/^    SocketAddressIPv6 addripv6; \/\/ The host\/target IPv6 for this socket (in network byte order)$/;"	m	struct:Socket
 advance	.\include\raylib\external\stb_truetype.h	/^   int advance;$/;"	m	struct:stbtt_kerningentry
 advanceX	.\include\raylib\raylib.h	/^    int advanceX;           \/\/ Character advance position X$/;"	m	struct:CharInfo
-affected	.\include\moveeffect.h	/^	Actor *affector, *affected;$/;"	v
-affector	.\include\moveeffect.h	/^	Actor *affector, *affected;$/;"	v
+affected	.\include\moveeffect.h	/^	Actor *affected = nullptr;$/;"	v
+affector	.\include\moveeffect.h	/^	Actor *affector = nullptr;$/;"	v
 affordable	.\include\combat.h	/^	struct Move *affordable[NUM_ACTOR_MOVES] = {nullptr};$/;"	m	struct:CombatData	typeref:struct:CombatData::Move
 aiMakePairs	.\include\combat.h	/^	bool aiMakePairs = false;$/;"	m	struct:CombatData
 algo	.\include\raylib\external\dr_mp3.h	/^    } algo;$/;"	m	struct:drmp3_src	typeref:union:drmp3_src::__anon55
@@ -17159,6 +17178,7 @@ animVertices	.\include\raylib\raylib.h	/^    float *animVertices;    \/\/ Animat
 animVertices	.\include\raylib\rlgl.h	/^        float *animVertices;    \/\/ Animated vertex positions (after bones transformations)$/;"	m	struct:Mesh
 animations	.\include\raylib\external\cgltf.h	/^	cgltf_animation* animations;$/;"	m	struct:cgltf_data
 animations_count	.\include\raylib\external\cgltf.h	/^	cgltf_size animations_count;$/;"	m	struct:cgltf_data
+anims	.\include\sprite.h	/^	UMapHash<const char *, Animation, Hash_sbdm> anims;$/;"	m	struct:Sprite
 anisotropyEnable	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkBool32                 anisotropyEnable;$/;"	m	struct:VkSamplerCreateInfo
 api	.\include\raylib\external\glfw\src\win32_platform.h	/^        IDirectInput8W*                 api;$/;"	m	struct:_GLFWlibraryWin32::__anon101
 apiVersion	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t          apiVersion;$/;"	m	struct:VkApplicationInfo
@@ -17369,6 +17389,7 @@ bounds	.\include\gui.h	/^	Rectangle bounds;$/;"	m	struct:Panel
 bounds	.\include\gui.h	/^	Rectangle bounds;$/;"	m	struct:ScrollBar
 bounds	.\include\gui.h	/^	Rectangle bounds;$/;"	m	struct:Toggle
 bounds	.\include\raylib\external\stb_truetype.h	/^   int bounds;$/;"	m	struct:__anon358
+bounds	.\include\sprite.h	/^	Rectangle *bounds = nullptr;$/;"	m	struct:Sprite
 bpm	.\include\raylib\external\jar_mod.h	/^    int bpm;$/;"	m	struct:tracker_state_
 bpm	.\include\raylib\external\jar_mod.h	/^    muchar  bpm;$/;"	m	struct:__anon127
 bpm	.\include\raylib\external\jar_xm.h	/^     uint16_t bpm;$/;"	m	struct:jar_xm_context_s
@@ -17379,6 +17400,7 @@ bq	.\include\raylib\external\miniaudio.h	/^    ma_biquad bq;   \/* The band-pass
 bq	.\include\raylib\external\miniaudio.h	/^    ma_biquad bq;   \/* The high-pass filter is implemented as a biquad filter. *\/$/;"	m	struct:__anon142
 bq	.\include\raylib\external\miniaudio.h	/^    ma_biquad bq;   \/* The low-pass filter is implemented as a biquad filter. *\/$/;"	m	struct:__anon140
 breakFromMainLoop	.\include\raylib\external\miniaudio.h	/^            ma_bool32 breakFromMainLoop : 1;$/;"	m	struct:ma_device::__anon230::__anon235
+brittle	.\include\moveeffect.h	/^		brittle,$/;"	m	struct:MoveEffect	typeref:enum:MoveEffect::
 bs	.\include\raylib\external\dr_flac.h	/^    drflac_bs bs;                           \/* <-- A bit streamer is required for loading data during initialization. *\/$/;"	m	struct:__anon47
 bs	.\include\raylib\external\dr_flac.h	/^    drflac_bs bs;$/;"	m	struct:__anon41
 bs	.\include\raylib\external\dr_mp3.h	/^    drmp3_bs bs;$/;"	m	struct:__anon66
@@ -17998,6 +18020,7 @@ coreaudio	.\include\raylib\external\miniaudio.h	/^    char coreaudio[256];      
 coreaudio	.\include\raylib\external\miniaudio.h	/^    } coreaudio;$/;"	m	struct:__anon202	typeref:struct:__anon202::__anon205
 corner	.\include\elemino.h	/^	corner$/;"	e	enum:MinoShape
 correlationMaskCount	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t                 correlationMaskCount;$/;"	m	struct:VkRenderPassMultiviewCreateInfo
+corroding	.\include\moveeffect.h	/^		corroding,$/;"	m	struct:MoveEffect	typeref:enum:MoveEffect::
 cost	.\include\move.h	/^	int id, levelObtained, priority, maxTargets, damage, healing, cost;$/;"	m	struct:Move
 count	.\include\elemino.h	/^	unsigned int count;$/;"	m	struct:Elemino
 count	.\include\raylib\external\cgltf.h	/^	cgltf_size count;$/;"	m	struct:cgltf_accessor
@@ -18059,6 +18082,8 @@ cur_volume	.\include\raylib\external\jar_mod.h	/^    unsigned char  cur_volume;$
 cur_x	.\include\raylib\external\stb_image.h	/^   int cur_x, cur_y;$/;"	m	struct:__anon331
 cur_y	.\include\raylib\external\stb_image.h	/^   int cur_x, cur_y;$/;"	m	struct:__anon331
 curr	.\include\gamestate.h	/^	State curr;$/;"	m	struct:GameState
+currAnim	.\include\sprite.h	/^	Animation *currAnim = nullptr;$/;"	m	struct:Sprite
+currTime	.\include\sprite.h	/^	float currTime = 0.0f;$/;"	m	struct:Animation
 current	.\include\raylib\core.c	/^        double current;                     \/\/ Current time measure$/;"	m	struct:CoreData::__anon16	file:
 current	.\include\raylib\external\jar_xm.h	/^     jar_xm_pattern_slot_t* current;$/;"	m	struct:jar_xm_channel_context_s
 current	.\include\raylib\gestures.h	/^    int current;                        \/\/ Current detected gesture$/;"	m	struct:__anon390
@@ -18101,6 +18126,7 @@ current_loc_valid	.\include\raylib\external\stb_vorbis.h	/^   int    current_loc
 current_row	.\include\raylib\external\jar_xm.h	/^     uint8_t current_row;$/;"	m	struct:jar_xm_context_s
 current_table_index	.\include\raylib\external\jar_xm.h	/^     uint8_t current_table_index;$/;"	m	struct:jar_xm_context_s
 current_tick	.\include\raylib\external\jar_xm.h	/^     uint16_t current_tick; \/* Can go below 255, with high tempo and a pattern delay *\/$/;"	m	struct:jar_xm_context_s
+cursed	.\include\moveeffect.h	/^		cursed,$/;"	m	struct:MoveEffect	typeref:enum:MoveEffect::
 cursor	.\include\console.h	/^	unsigned int cursor;$/;"	m	struct:Console
 cursor	.\include\raylib\external\glfw\src\internal.h	/^    _GLFWcursor*        cursor;$/;"	m	struct:_GLFWwindow
 cursor	.\include\raylib\external\glfw\src\wl_platform.h	/^    struct wl_cursor*           cursor;$/;"	m	struct:_GLFWcursorWayland	typeref:struct:_GLFWcursorWayland::wl_cursor
@@ -18237,6 +18263,7 @@ debug	.\include\raylib\external\glfw\src\internal.h	/^    GLFWbool            fo
 debug	.\include\raylib\external\glfw\src\internal.h	/^    GLFWbool      debug;$/;"	m	struct:_GLFWctxconfig
 debugMarker	.\include\raylib\rlgl.h	/^        bool debugMarker;                   \/\/ Debug marker support$/;"	m	struct:rlglData::__anon457
 decalperiod	.\include\raylib\external\jar_mod.h	/^    mint    decalperiod;$/;"	m	struct:__anon126
+decaying	.\include\moveeffect.h	/^		decaying,$/;"	m	struct:MoveEffect	typeref:enum:MoveEffect::
 decodeUTF8	.\include\raylib\external\glfw\src\x11_window.c	/^static unsigned int decodeUTF8(const char** s)$/;"	f	file:
 decode_buffer	.\include\raylib\external\stb_image_resize.h	/^    float* decode_buffer;$/;"	m	struct:__anon338
 decode_buffer_pixels	.\include\raylib\external\stb_image_resize.h	/^    int decode_buffer_pixels;$/;"	m	struct:__anon338
@@ -19705,6 +19732,7 @@ frame	.\include\raylib\core.c	/^        double frame;                       \/\/
 frame	.\include\raylib\external\jar_xm.h	/^    uint16_t frame;$/;"	m	struct:jar_xm_envelope_point_s
 frameAction	.\include\raylib\external\glfw\src\win32_platform.h	/^    GLFWbool            frameAction;$/;"	m	struct:_GLFWwindowWin32
 frameCount	.\include\raylib\raylib.h	/^    int frameCount;         \/\/ Number of animation frames$/;"	m	struct:ModelAnimation
+frameCount	.\include\sprite.h	/^	unsigned int frameCount = 0;$/;"	m	struct:Animation
 frameCounter	.\include\game.h	/^	unsigned int frameCounter = 0;$/;"	m	struct:Game
 frameCursorPos	.\include\raylib\raudio.c	/^    unsigned int frameCursorPos;    \/\/ Frame cursor position$/;"	m	struct:rAudioBuffer	file:
 frameInfo	.\include\raylib\external\dr_mp3.h	/^    drmp3dec_frame_info frameInfo;$/;"	m	struct:__anon60
@@ -19725,6 +19753,7 @@ framebufferStencilSampleCounts	.\include\raylib\external\glfw\deps\glad\vulkan.h
 framebufferWidth	.\include\raylib\rlgl.h	/^        int framebufferWidth;               \/\/ Default framebuffer width$/;"	m	struct:rlglData::__anon456
 framesConsumed	.\include\raylib\external\miniaudio.h	/^    ma_uint32 framesConsumed;  \/* The number of frames consumed in ppPacketData. *\/$/;"	m	struct:__anon308
 framesRemaining	.\include\raylib\external\miniaudio.h	/^    ma_uint32 framesRemaining; \/* The number of frames remaining in ppPacketData. *\/$/;"	m	struct:__anon308
+frametime	.\include\sprite.h	/^	static constexpr float frametime = 1.f \/ 24.f; \/\/NOTE: to be used with GetFrameTime() from raylib$/;"	m	struct:Sprite
 framework	.\include\raylib\external\glfw\src\nsgl_context.h	/^    CFBundleRef     framework;$/;"	m	struct:_GLFWlibraryNSGL
 free	.\include\raylib\external\cgltf.h	/^	void (*free) (void* user, void* ptr);$/;"	m	struct:cgltf_memory_options
 free	.\include\raylib\external\stb_vorbis.h	579;"	d
@@ -24749,12 +24778,14 @@ imageArrayLayers	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_
 imageBindCount	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t                 imageBindCount;$/;"	m	struct:VkBindSparseInfo
 imageColorSpace	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkColorSpaceKHR                    imageColorSpace;$/;"	m	struct:VkSwapchainCreateInfoKHR
 imageCubeArray	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkBool32                 imageCubeArray;$/;"	m	struct:VkPhysicalDeviceFeatures
+imageDuration	.\include\sprite.h	/^	Vec<Pair<unsigned int, bool> > imageDuration; \/\/ 0 - infinite, 1,2,3,... - regular duration$/;"	m	struct:Animation
 imageExtent	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkExtent2D                         imageExtent;$/;"	m	struct:VkSwapchainCreateInfoKHR
 imageExtent	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkExtent3D               imageExtent;$/;"	m	struct:VkBufferImageCopy
 imageFormat	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkFormat                           imageFormat;$/;"	m	struct:VkSwapchainCreateInfoKHR
 imageFormatProperties	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkImageFormatProperties            imageFormatProperties;$/;"	m	struct:VkImageFormatProperties2
 imageGranularity	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkExtent3D               imageGranularity;$/;"	m	struct:VkSparseImageFormatProperties
 imageIndex	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t                           imageIndex;$/;"	m	struct:VkBindImageMemorySwapchainInfoKHR
+imageIndex	.\include\sprite.h	/^	unsigned int imageIndex = 0; \/\/For indexing into imageDuration$/;"	m	struct:Animation
 imageLayout	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkImageLayout     imageLayout;$/;"	m	struct:VkDescriptorImageInfo
 imageMipTailFirstLod	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t                 imageMipTailFirstLod;$/;"	m	struct:VkSparseImageMemoryRequirements
 imageMipTailOffset	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkDeviceSize             imageMipTailOffset;$/;"	m	struct:VkSparseImageMemoryRequirements
@@ -24762,6 +24793,7 @@ imageMipTailSize	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkDevic
 imageMipTailStride	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkDeviceSize             imageMipTailStride;$/;"	m	struct:VkSparseImageMemoryRequirements
 imageOffset	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkOffset3D               imageOffset;$/;"	m	struct:VkBufferImageCopy
 imageOpaqueBindCount	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t                 imageOpaqueBindCount;$/;"	m	struct:VkBindSparseInfo
+imageRects	.\include\sprite.h	/^	Vec<Rectangle> imageRects;$/;"	m	struct:Animation
 imageSharingMode	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkSharingMode                      imageSharingMode;$/;"	m	struct:VkSwapchainCreateInfoKHR
 imageSubresource	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkImageSubresourceLayers   imageSubresource;$/;"	m	struct:VkBufferImageCopy
 imageText	.\include\gui.h	/^	Image imageText;$/;"	m	struct:GlobalTextData
@@ -24788,7 +24820,7 @@ img_out_n	.\include\raylib\external\stb_image.h	/^   int img_n, img_out_n;$/;"	m
 img_v_max	.\include\raylib\external\stb_image.h	/^   int img_h_max, img_v_max;$/;"	m	struct:__anon320
 img_x	.\include\raylib\external\stb_image.h	/^   stbi__uint32 img_x, img_y;$/;"	m	struct:__anon315
 img_y	.\include\raylib\external\stb_image.h	/^   stbi__uint32 img_x, img_y;$/;"	m	struct:__anon315
-immune	.\include\combat.h	/^	bool immune[NUMELEMENTS] = {false};$/;"	m	struct:StatusEffects
+immune	.\include\combat.h	/^	bool immune[NUMELEMENTS + 2] = {false}; \/\/the +2 is for physical\/meta immunity$/;"	m	struct:StatusEffects
 implementationVersion	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t          implementationVersion;$/;"	m	struct:VkLayerProperties
 inAdvanceFrac	.\include\raylib\external\miniaudio.h	/^    ma_uint32 inAdvanceFrac;$/;"	m	struct:__anon146
 inAdvanceInt	.\include\raylib\external\miniaudio.h	/^    ma_uint32 inAdvanceInt;$/;"	m	struct:__anon146
@@ -24894,7 +24926,7 @@ int_least8_t	.\include\raylib\external\glfw\deps\vs2008\stdint.h	/^typedef int8_
 intensity	.\include\raylib\external\cgltf.h	/^	cgltf_float intensity;$/;"	m	struct:cgltf_light
 intensity	.\include\raylib\gestures.h	/^        float intensity;                \/\/ DRAG intensity, how far why did the DRAG (pixels per frame)$/;"	m	struct:__anon390::__anon393
 interactable	.\include\inventory.h	/^	Vec<Elemino *> interactable; \/\/The eleminoes on the page$/;"	m	struct:InventoryData
-interface	.\include\gui.h	/^	InterfaceID interface = InterfaceID::INTERFACE_NONE;$/;"	m	struct:Mouse
+interface	.\include\window.h	/^	InterfaceID interface = InterfaceID::INTERFACE_NONE;$/;"	m	struct:Mouse
 internalChannelMap	.\include\raylib\external\miniaudio.h	/^        ma_channel internalChannelMap[MA_MAX_CHANNELS];$/;"	m	struct:ma_device::__anon228
 internalChannelMap	.\include\raylib\external\miniaudio.h	/^        ma_channel internalChannelMap[MA_MAX_CHANNELS];$/;"	m	struct:ma_device::__anon229
 internalChannelMap	.\include\raylib\external\miniaudio.h	/^    ma_channel internalChannelMap[MA_MAX_CHANNELS];$/;"	m	struct:ma_decoder
@@ -25475,6 +25507,7 @@ loop_type	.\include\raylib\external\jar_xm.h	/^    jar_xm_loop_type_t loop_type;
 loopcount	.\include\raylib\external\jar_mod.h	/^    muint   loopcount;$/;"	m	struct:__anon127
 looper	.\include\raylib\external\android\native_app_glue\android_native_app_glue.h	/^    ALooper* looper;$/;"	m	struct:android_app
 looping	.\include\raylib\raudio.c	/^    bool looping;                   \/\/ Audio buffer looping, always true for AudioStreams$/;"	m	struct:rAudioBuffer	file:
+looping	.\include\sprite.h	/^	bool looping = false;$/;"	m	struct:Animation
 loops	.\include\raylib\external\dr_wav.h	/^    drwav_smpl_loop loops[DRWAV_MAX_SMPL_LOOPS];$/;"	m	struct:__anon77
 lpDSCFXDesc	.\include\raylib\external\miniaudio.h	/^    void* lpDSCFXDesc;  \/* <-- miniaudio doesn't use this, so set to void*. *\/$/;"	m	struct:__anon278
 lpDiEffect	.\include\raylib\external\glfw\deps\mingw\dinput.h	/^  LPCDIEFFECT lpDiEffect;$/;"	m	struct:DIFILEEFFECT
@@ -27218,6 +27251,7 @@ ma_zero_pcm_frames	.\include\raylib\external\miniaudio.h	/^void ma_zero_pcm_fram
 magFilter	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkFilter                 magFilter;$/;"	m	struct:VkSamplerCreateInfo
 mag_filter	.\include\raylib\external\cgltf.h	/^	cgltf_int mag_filter;$/;"	m	struct:cgltf_sampler
 magnitude	.\include\raylib\external\stb_vorbis.h	/^   stbv_uint8 magnitude;$/;"	m	struct:__anon369
+main	.\core_window_letterbox.c	/^int main(void)$/;"	f
 main	.\include\raylib\external\stb_truetype.h	/^int main(int argc, char **argv)$/;"	f
 main	.\main.cpp	/^int main(int argc, char **argv){$/;"	f
 mainWindow	.\include\raylib\external\glfw\src\wl_platform.h	/^    mainWindow,$/;"	e	enum:_GLFWdecorationSideWayland
@@ -27267,6 +27301,7 @@ materials	.\include\raylib\external\cgltf.h	/^	cgltf_material* materials;$/;"	m	
 materials	.\include\raylib\raylib.h	/^    Material *materials;    \/\/ Materials array$/;"	m	struct:Model
 materials_count	.\include\raylib\external\cgltf.h	/^	cgltf_size materials_count;$/;"	m	struct:cgltf_data
 matrix	.\include\raylib\external\cgltf.h	/^	cgltf_float matrix[16];$/;"	m	struct:cgltf_node
+max	.\core_window_letterbox.c	16;"	d	file:
 max	.\include\raylib\external\cgltf.h	/^	cgltf_float max[16];$/;"	m	struct:cgltf_accessor
 max	.\include\raylib\physac.h	218;"	d
 max	.\include\raylib\raylib.h	/^    Vector3 max;            \/\/ Maximum vertex box-corner$/;"	m	struct:BoundingBox
@@ -27444,6 +27479,7 @@ midiUnityNotes	.\include\raylib\external\dr_wav.h	/^    drwav_uint32 midiUnityNo
 mime	.\include\raylib\external\dr_flac.h	/^            const char* mime;$/;"	m	struct:__anon28::__anon29::__anon35
 mimeLength	.\include\raylib\external\dr_flac.h	/^            drflac_uint32 mimeLength;$/;"	m	struct:__anon28::__anon29::__anon35
 mime_type	.\include\raylib\external\cgltf.h	/^	char* mime_type;$/;"	m	struct:cgltf_image
+min	.\core_window_letterbox.c	17;"	d	file:
 min	.\include\raylib\external\cgltf.h	/^	cgltf_float min[16];$/;"	m	struct:cgltf_accessor
 min	.\include\raylib\external\glfw\src\wl_init.c	/^static inline int min(int n1, int n2)$/;"	f	file:
 min	.\include\raylib\physac.h	217;"	d
@@ -27861,6 +27897,7 @@ operation	.\include\raylib\external\miniaudio.h	/^            ma_uint32 operatio
 operationCompletionEvent	.\include\raylib\external\miniaudio.h	/^            ma_event operationCompletionEvent;$/;"	m	struct:ma_device::__anon230::__anon244
 operationEvent	.\include\raylib\external\miniaudio.h	/^            ma_event operationEvent;$/;"	m	struct:ma_device::__anon230::__anon244
 operationResult	.\include\raylib\external\miniaudio.h	/^            ma_result operationResult;$/;"	m	struct:ma_device::__anon230::__anon244
+operator ()	.\include\sprite.h	/^	size_t operator()(const char *str) const {$/;"	f	struct:Hash_sbdm
 operator *	.\tmath.cpp	/^Vector2 operator*(const Vector2 &a, const float &f){$/;"	f
 operator *=	.\tmath.cpp	/^void operator*=(Vector2 &a, const float &f){$/;"	f
 operator +	.\tmath.cpp	/^Vector2 operator+(const Vector2 &a, const Vector2 &b){$/;"	f
@@ -27872,6 +27909,7 @@ operator /	.\tmath.cpp	/^Vector2 operator\/(const Vector2 &a, const float &f){$/
 operator /=	.\tmath.cpp	/^void operator\/=(Vector2 &a, const Vector2 &b){$/;"	f
 operator /=	.\tmath.cpp	/^void operator\/=(Vector2 &a, const float &f){$/;"	f
 operator =	.\gui.cpp	/^void Anchor::operator=(const Vector2 &v){$/;"	f	class:Anchor
+operator []	.\include\sprite.h	/^	Texture & operator[](const char *path){$/;"	f	struct:TextureManager
 optarg	.\include\raylib\external\glfw\deps\getopt.c	/^char* optarg;$/;"	v
 optcursor	.\include\raylib\external\glfw\deps\getopt.c	/^static char* optcursor = NULL;$/;"	v	file:
 opterr	.\include\raylib\external\glfw\deps\getopt.c	/^int opterr;$/;"	v
@@ -28528,6 +28566,7 @@ playerAlive	.\include\combat.h	/^	Vec<Actor *> playerAlive;$/;"	m	struct:CombatD
 playerEyesPosition	.\include\raylib\camera.h	/^    float playerEyesPosition;       \/\/ Default player eyes position from ground (in meters)$/;"	m	struct:__anon4
 playerTeam	.\include\combat.h	/^	Team *playerTeam = nullptr;$/;"	m	struct:CombatData
 playing	.\include\raylib\raudio.c	/^    bool playing;                   \/\/ Audio buffer state: AUDIO_PLAYING$/;"	m	struct:rAudioBuffer	file:
+playing	.\include\sprite.h	/^	bool playing = false;$/;"	m	struct:Animation
 playrate	.\include\raylib\external\jar_mod.h	/^    mulong  playrate;$/;"	m	struct:__anon127
 plusPage	.\include\inventory.h	/^	Button plusPage;$/;"	m	struct:InventoryData
 pointClippingBehavior	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkPointClippingBehavior        pointClippingBehavior;$/;"	m	struct:VkPhysicalDevicePointClippingProperties
@@ -28549,7 +28588,7 @@ pointerLock	.\include\raylib\external\glfw\src\wl_platform.h	/^    } pointerLock
 points	.\include\raylib\external\jar_xm.h	/^    jar_xm_envelope_point_t points[NUM_ENVELOPE_POINTS];$/;"	m	struct:jar_xm_envelope_s
 points	.\include\raylib\external\par_shapes.h	/^    float const* points;$/;"	m	struct:__anon312
 points	.\include\raylib\external\par_shapes.h	/^    float* points;           \/\/ Flat list of 3-tuples (X Y Z X Y Z...)$/;"	m	struct:par_shapes_mesh_s
-poison	.\include\moveeffect.h	/^		poison,$/;"	m	struct:MoveEffect	typeref:enum:MoveEffect::
+poisoned	.\include\moveeffect.h	/^		poisoned,$/;"	m	struct:MoveEffect	typeref:enum:MoveEffect::
 pollAbsState	.\include\raylib\external\glfw\src\linux_joystick.c	/^static void pollAbsState(_GLFWjoystick* js)$/;"	f	file:
 polygonMode	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkPolygonMode            polygonMode;$/;"	m	struct:VkPipelineRasterizationStateCreateInfo
 pool	.\include\raylib\raudio.c	/^        AudioBuffer *pool[MAX_AUDIO_BUFFER_POOL_CHANNELS];      \/\/ Multichannel AudioBuffer pointers pool$/;"	m	struct:AudioData::__anon403	file:
@@ -28570,12 +28609,12 @@ pos	.\include\elemino.h	/^	Vector2 pos; \/\/Pos of the whole elemino, NOT just t
 pos	.\include\elemino.h	/^	Vector2 pos;$/;"	m	struct:Anchor
 pos	.\include\elemino.h	/^	Vector2 pos;$/;"	m	struct:Grid
 pos	.\include\gui.h	/^	Vector2 pos; \/\/Origin is top left$/;"	m	struct:StatBar
-pos	.\include\gui.h	/^	Vector2 pos;$/;"	m	struct:Mouse
 pos	.\include\raylib\external\cgltf.h	/^	unsigned int pos; \/* offset in the JSON string *\/$/;"	m	struct:__anon23
 pos	.\include\raylib\external\dr_mp3.h	/^    int pos, limit;$/;"	m	struct:__anon62
 pos	.\include\raylib\external\glfw\src\internal.h	/^        GLFWwindowposfun        pos;$/;"	m	struct:_GLFWwindow::__anon91
 pos	.\include\raylib\external\miniaudio.h	/^    unsigned int pos[1];$/;"	m	struct:__anon295
 pos	.\include\raylib\external\tinyobj_loader_c.h	/^  unsigned int pos;$/;"	m	struct:__anon385
+pos	.\include\window.h	/^	Vector2 pos;$/;"	m	struct:Mouse
 position	.\include\raylib\camera.h	/^        Vector3 position;       \/\/ Camera position$/;"	m	struct:Camera3D
 position	.\include\raylib\core.c	/^            Vector2 position;               \/\/ Mouse position on screen$/;"	m	struct:CoreData::__anon11::__anon13	file:
 position	.\include\raylib\core.c	/^            Vector2 position[MAX_TOUCH_POINTS];         \/\/ Touch position on screen$/;"	m	struct:CoreData::__anon11::__anon14	file:
@@ -28762,6 +28801,7 @@ recs	.\include\raylib\raygui.h	/^        Rectangle *recs;        \/\/ Characters
 recs	.\include\raylib\raylib.h	/^    Rectangle *recs;        \/\/ Characters rectangles in texture$/;"	m	struct:Font
 rect	.\include\elemino.h	/^	Rectangle rect[NUM_RECT];$/;"	m	struct:Elemino
 rect	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkRect2D         rect;$/;"	m	struct:VkClearRect
+rectIndex	.\include\sprite.h	/^	unsigned int rectIndex = 0;$/;"	m	struct:Animation
 rect_height_compare	.\include\raylib\external\stb_rect_pack.h	/^static int rect_height_compare(const void *a, const void *b)$/;"	f
 rect_original_order	.\include\raylib\external\stb_rect_pack.h	/^static int rect_original_order(const void *a, const void *b)$/;"	f
 red	.\include\raylib\external\glfw\include\GLFW\glfw3.h	/^    unsigned short* red;$/;"	m	struct:GLFWgammaramp
@@ -29340,6 +29380,7 @@ shareMode	.\include\raylib\external\miniaudio.h	/^    ma_share_mode shareMode;$/
 shareMode	.\include\raylib\external\miniaudio.h	/^    ma_share_mode shareMode;$/;"	m	struct:__anon307
 sharingMode	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkSharingMode            sharingMode;$/;"	m	struct:VkBufferCreateInfo
 sharingMode	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkSharingMode            sharingMode;$/;"	m	struct:VkImageCreateInfo
+sharpened	.\include\moveeffect.h	/^		sharpened,$/;"	m	struct:MoveEffect	typeref:enum:MoveEffect::
 shcore	.\include\raylib\external\glfw\src\win32_platform.h	/^    } shcore;$/;"	m	struct:_GLFWlibraryWin32	typeref:struct:_GLFWlibraryWin32::__anon105
 shiftMask	.\include\raylib\external\glfw\src\wl_platform.h	/^        xkb_mod_mask_t          shiftMask;$/;"	m	struct:_GLFWlibraryWayland::__anon110
 shininess	.\include\raylib\external\tinyobj_loader_c.h	/^  float shininess;$/;"	m	struct:__anon378
@@ -30594,11 +30635,16 @@ texture	.\include\raylib\raylib.h	/^    Texture2D texture;      \/\/ Color buffe
 texture	.\include\raylib\raylib.h	/^    Texture2D texture;      \/\/ Material map texture$/;"	m	struct:MaterialMap
 texture	.\include\raylib\rlgl.h	/^        Texture2D texture;      \/\/ Color buffer attachment texture$/;"	m	struct:RenderTexture2D
 texture	.\include\raylib\rlgl.h	/^        Texture2D texture;      \/\/ Material map texture$/;"	m	struct:MaterialMap
+texture	.\include\sprite.h	/^	Texture *texture = nullptr;$/;"	m	struct:Sprite
 textureCompressionASTC_LDR	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkBool32                 textureCompressionASTC_LDR;$/;"	m	struct:VkPhysicalDeviceFeatures
 textureCompressionBC	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkBool32                 textureCompressionBC;$/;"	m	struct:VkPhysicalDeviceFeatures
 textureCompressionETC2	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkBool32                 textureCompressionETC2;$/;"	m	struct:VkPhysicalDeviceFeatures
 textureId	.\include\raylib\rlgl.h	/^    unsigned int textureId;     \/\/ Texture id to be used on the draw$/;"	m	struct:DrawCall
+textures	.\game.cpp	/^TextureManager Game::textures;$/;"	m	class:Game	file:
+textures	.\include\game.h	/^	static TextureManager textures;$/;"	m	struct:Game
 textures	.\include\raylib\external\cgltf.h	/^	cgltf_texture* textures;$/;"	m	struct:cgltf_data
+textures	.\include\sprite.h	/^	static UMapHash<const char *, Texture, Hash_sbdm> textures;$/;"	m	struct:TextureManager
+textures	.\sprite.cpp	/^UMapHash<const char *, Texture, Hash_sbdm> TextureManager::textures;$/;"	m	class:TextureManager	file:
 textures_count	.\include\raylib\external\cgltf.h	/^	cgltf_size textures_count;$/;"	m	struct:cgltf_data
 theme_destroy	.\include\raylib\external\glfw\src\wl_platform.h	/^        PFN_wl_cursor_theme_destroy theme_destroy;$/;"	m	struct:_GLFWlibraryWayland::__anon111
 theme_get_cursor	.\include\raylib\external\glfw\src\wl_platform.h	/^        PFN_wl_cursor_theme_get_cursor theme_get_cursor;$/;"	m	struct:_GLFWlibraryWayland::__anon111
@@ -30672,7 +30718,7 @@ totalSampleCount	.\include\raylib\external\dr_flac.h	/^    drflac_uint64 totalSa
 totalSampleCount	.\include\raylib\external\dr_wav.h	/^    drwav_uint64 totalSampleCount;  \/* <-- DEPRECATED. Will be removed in a future version. *\/$/;"	m	struct:__anon78
 total_bands	.\include\raylib\external\dr_mp3.h	/^    drmp3_uint8 total_bands, stereo_bands, bitalloc[64], scfcod[64];$/;"	m	struct:__anon63
 total_samples	.\include\raylib\external\stb_vorbis.h	/^   stbv_uint32 total_samples;$/;"	m	struct:stb_vorbis
-touch	.\include\gui.h	/^	void *touch = nullptr;$/;"	m	struct:Mouse
+touch	.\include\window.h	/^	void *touch = nullptr;$/;"	m	struct:Mouse
 touchAction	.\include\raylib\gestures.h	/^    int touchAction;$/;"	m	struct:__anon389
 touchSlot	.\include\raylib\core.c	/^    int touchSlot;                  \/\/ Hold the touch slot number of the currently being sent multitouch block$/;"	m	struct:__anon5	file:
 tq	.\include\raylib\external\stb_image.h	/^      int tq;$/;"	m	struct:__anon320::__anon321

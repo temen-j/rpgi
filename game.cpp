@@ -1,6 +1,7 @@
 #include "include\game.h"
 #include "include\moveinventory.h"
 
+Mouse Game::mouse;
 TextureManager Game::textures;
 
 Game::Game(){

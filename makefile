@@ -3,7 +3,7 @@ CXXFLAGS = -Wall -Iinclude -m64
 LIB = -lraylib -lopengl32 -lgdi32 -lwinmm -static -lpthread
 
 DEV_OBJ = console.o tmem.o
-GUI_OBJ = gui.o
+GUI_OBJ = gui.o window.o
 MATH_OBJ = tmath.o interp.o
 GRAPHICS_OBJ = sprite.o
 INVENTORY_OBJ = elemino.o inventory.o moveinventory.o
@@ -91,6 +91,9 @@ cwl.exe: core_window_letterbox.c
 
 sprite.o: sprite.cpp include\sprite.h
 	$(CXX) $(CXXFLAGS) -c sprite.cpp -L. $(LIB)
+
+window.o: window.cpp include\window.h
+	$(CXX) $(CXXFLAGS) -c window.cpp -L. $(LIB)
 
 run:
 	$(MAKE) -C bin run
