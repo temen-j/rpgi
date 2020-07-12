@@ -156,6 +156,8 @@ AddressInformation	.\include\raylib\rnet.h	/^typedef struct _AddressInformation 
 AdjustWindowRectExForDpi	.\include\raylib\external\glfw\src\win32_platform.h	244;"	d
 AdjustWindowRectExForDpi_	.\include\raylib\external\glfw\src\win32_platform.h	/^        PFN_AdjustWindowRectExForDpi    AdjustWindowRectExForDpi_;$/;"	m	struct:_GLFWlibraryWin32::__anon103
 AllMoves	.\include\move.h	/^struct AllMoves{$/;"	s
+AllocEDiff	.\move_impl.cpp	/^inline EffectDiff *AllocEDiff(){$/;"	f
+AllocEDiff	.\move_impl.cpp	/^inline EffectDiff *AllocEDiff(size_t size){ \/\/WARNING: Make the assumption that size > 0$/;"	f
 AllocGamma	.\include\raylib\external\glfw\src\x11_platform.h	/^        PFN_XRRAllocGamma AllocGamma;$/;"	m	struct:_GLFWlibraryX11::__anon113
 AllocList	.\include\raylib\rmem.h	/^typedef struct AllocList {$/;"	s
 AllocList	.\include\raylib\rmem.h	/^} AllocList;$/;"	t	typeref:struct:AllocList
@@ -166,15 +168,18 @@ Android	.\include\raylib\core.c	/^    } Android;$/;"	m	struct:CoreData	typeref:s
 AndroidButton	.\include\raylib\raylib.h	/^} AndroidButton;$/;"	t	typeref:enum:__anon428
 AndroidCommandCallback	.\include\raylib\core.c	/^static void AndroidCommandCallback(struct android_app *app, int32_t cmd)$/;"	f	file:
 AndroidInputCallback	.\include\raylib\core.c	/^static int32_t AndroidInputCallback(struct android_app *app, AInputEvent *event)$/;"	f	file:
+ApplyCost	.\move_impl.cpp	/^void ApplyCost(CasterMove &cm){$/;"	f
 ApplyDamage	.\move_impl.cpp	/^void ApplyDamage(Actor &target, CasterMove &cm){$/;"	f
 ApplyDisableDiff	.\moveeffect.cpp	/^void ApplyDisableDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
 ApplyEffect	.\combat.cpp	/^void ApplyEffect(Actor &target, int id){$/;"	f
 ApplyEffectDiff	.\moveeffect.cpp	/^void ApplyEffectDiff(Actor &actor, MoveEffect &meff){$/;"	f
+ApplyHPBonusDiff	.\moveeffect.cpp	/^void ApplyHPBonusDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
 ApplyHeal	.\move_impl.cpp	/^void ApplyHeal(Actor &target, CasterMove &cm){$/;"	f
 ApplyImmunityDiff	.\moveeffect.cpp	/^void ApplyImmunityDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
 ApplyIncapicateDiff	.\moveeffect.cpp	/^void ApplyIncapicateDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
 ApplyMATKDiff	.\moveeffect.cpp	/^void ApplyMATKDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
 ApplyMDEFDiff	.\moveeffect.cpp	/^void ApplyMDEFDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
+ApplyMPBonusDiff	.\moveeffect.cpp	/^void ApplyMPBonusDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
 ApplyMaxHPDiff	.\moveeffect.cpp	/^void ApplyMaxHPDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
 ApplyMaxMPDiff	.\moveeffect.cpp	/^void ApplyMaxMPDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
 ApplyPATKDiff	.\moveeffect.cpp	/^void ApplyPATKDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
@@ -365,6 +370,7 @@ CGLTF_PTRINDEX	.\include\raylib\external\cgltf.h	1932;"	d
 CHANGEFILTERSTRUCT	.\include\raylib\external\glfw\src\win32_platform.h	/^} CHANGEFILTERSTRUCT;$/;"	t	typeref:struct:__anon96
 CHAOSCLAW	.\move_impl.cpp	/^void MoveImplementation::CHAOSCLAW(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 CHARGE	.\move_impl.cpp	/^void MoveImplementation::CHARGE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+CHARGE_BUFF_BONUS	.\include\moveeffect.h	/^const float CHARGE_BUFF_BONUS = .15f;$/;"	v
 CHDIR	.\include\raylib\core.c	180;"	d	file:
 CHDIR	.\include\raylib\core.c	185;"	d	file:
 CHDIR	.\include\raylib\models.c	55;"	d	file:
@@ -981,6 +987,7 @@ DIERR_UNPLUGGED	.\include\raylib\external\glfw\deps\mingw\dinput.h	210;"	d
 DIERR_UNSUPPORTED	.\include\raylib\external\glfw\deps\mingw\dinput.h	183;"	d
 DIES_NODOWNLOAD	.\include\raylib\external\glfw\deps\mingw\dinput.h	1014;"	d
 DIES_SOLO	.\include\raylib\external\glfw\deps\mingw\dinput.h	1013;"	d
+DIFF_MEM_SIZE	.\include\combat.h	/^constexpr size_t DIFF_MEM_SIZE = 1024 * sizeof(EffectDiff);$/;"	v
 DIFILEEFFECT	.\include\raylib\external\glfw\deps\mingw\dinput.h	/^typedef struct DIFILEEFFECT {$/;"	s
 DIFILEEFFECT	.\include\raylib\external\glfw\deps\mingw\dinput.h	/^} DIFILEEFFECT, *LPDIFILEEFFECT;$/;"	t	typeref:struct:DIFILEEFFECT
 DIGDD_PEEK	.\include\raylib\external\glfw\deps\mingw\dinput.h	701;"	d
@@ -1777,6 +1784,7 @@ EFFECT_VOLSLIDE_TONEPORTA	.\include\raylib\external\jar_mod.h	274;"	d
 EFFECT_VOLSLIDE_TREMOLO	.\include\raylib\external\jar_mod.h	276;"	d
 EFFECT_VOLSLIDE_VIBRATO	.\include\raylib\external\jar_mod.h	275;"	d
 EFFECT_VOLUME_SLIDE	.\include\raylib\external\jar_mod.h	279;"	d
+EFFICIENT_BUFF_BONUS	.\include\moveeffect.h	/^const float EFFICIENT_BUFF_BONUS = .2f;$/;"	v
 EGLAPI	.\include\raylib\external\ANGLE\EGL\eglplatform.h	50;"	d
 EGLAPIENTRY	.\include\raylib\external\ANGLE\EGL\eglplatform.h	54;"	d
 EGLAPIENTRY	.\include\raylib\external\glfw\src\egl_context.h	31;"	d
@@ -13232,6 +13240,7 @@ RMEMAPI	.\include\raylib\rmem.h	51;"	d
 RMEMAPI	.\include\raylib\rmem.h	53;"	d
 RMEMAPI	.\include\raylib\rmem.h	55;"	d
 RMEM_H	.\include\raylib\rmem.h	42;"	d
+RMEM_IMPLEMENTATION	.\tmem.c	6;"	d	file:
 RNET_CALLOC	.\include\raylib\rnet.h	98;"	d
 RNET_FREE	.\include\raylib\rnet.h	101;"	d
 RNET_H	.\include\raylib\rnet.h	41;"	d
@@ -13921,6 +13930,7 @@ StatTextSetup	.\inventory.cpp	/^void StatTextSetup(InventoryData &invD, Actor &a
 StatToolTip	.\inventory.cpp	/^void StatToolTip(InventoryData &invD, Actor &actor){$/;"	f
 State	.\include\gamestate.h	/^enum State{$/;"	g
 State	.\include\raylib\rlgl.h	/^    } State;$/;"	m	struct:rlglData	typeref:struct:rlglData::__anon456
+StatusEffects	.\include\combat.h	/^struct StatusEffects{$/;"	s
 StbvCRCscan	.\include\raylib\external\stb_vorbis.h	/^} StbvCRCscan;$/;"	t	typeref:struct:__anon372
 StbvCodebook	.\include\raylib\external\stb_vorbis.h	/^} StbvCodebook;$/;"	t	typeref:struct:__anon364
 StbvFloor	.\include\raylib\external\stb_vorbis.h	/^} StbvFloor;$/;"	t	typeref:union:__anon367
@@ -14014,6 +14024,7 @@ TINYOBJ_REALLOC	.\include\raylib\models.c	66;"	d	file:
 TINYOBJ_SUCCESS	.\include\raylib\external\tinyobj_loader_c.h	85;"	d
 TISCopyCurrentKeyboardLayoutInputSource	.\include\raylib\external\glfw\src\cocoa_platform.h	107;"	d
 TISGetInputSourceProperty	.\include\raylib\external\glfw\src\cocoa_platform.h	109;"	d
+TMEM_H	.\tmem.c	3;"	d	file:
 TOGGLE	.\include\raylib\raygui.h	/^    TOGGLE,         \/\/ TOGGLEGROUP$/;"	e	enum:__anon408
 TOGGLEGROUP_MAX_ELEMENTS	.\include\raylib\raygui.h	1124;"	d
 TORMENT	.\move_impl.cpp	/^void MoveImplementation::TORMENT(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
@@ -14198,16 +14209,18 @@ UWP_MSG_SET_MOUSE_LOCATION	.\include\raylib\utils.h	/^    UWP_MSG_SET_MOUSE_LOCA
 UWP_MSG_SHOW_MOUSE	.\include\raylib\utils.h	/^    UWP_MSG_SHOW_MOUSE,$/;"	e	enum:__anon461
 UWP_MSG_UNLOCK_MOUSE	.\include\raylib\utils.h	/^    UWP_MSG_UNLOCK_MOUSE,$/;"	e	enum:__anon461
 UWP_MSG_UPDATE_MOUSE_LOCATION	.\include\raylib\utils.h	/^    UWP_MSG_UPDATE_MOUSE_LOCATION,  \/\/ paramVector0 (pos)$/;"	e	enum:__anon461
-UndoDisableDiff	.\moveeffect.cpp	/^void UndoDisableDiff(Actor &actor, EffectDiff &ediff){$/;"	f
-UndoImmunityDiff	.\moveeffect.cpp	/^void UndoImmunityDiff(Actor &actor, EffectDiff &ediff){$/;"	f
-UndoIncapicateDiff	.\moveeffect.cpp	/^void UndoIncapicateDiff(Actor &actor, EffectDiff &ediff){$/;"	f
-UndoMATKDiff	.\moveeffect.cpp	/^void UndoMATKDiff(Actor &actor, EffectDiff &ediff){$/;"	f
-UndoMDEFDiff	.\moveeffect.cpp	/^void UndoMDEFDiff(Actor &actor, EffectDiff &ediff){$/;"	f
-UndoMaxHPDiff	.\moveeffect.cpp	/^void UndoMaxHPDiff(Actor &actor, EffectDiff &ediff){$/;"	f
-UndoMaxMPDiff	.\moveeffect.cpp	/^void UndoMaxMPDiff(Actor &actor, EffectDiff &ediff){$/;"	f
-UndoPATKDiff	.\moveeffect.cpp	/^void UndoPATKDiff(Actor &actor, EffectDiff &ediff){$/;"	f
-UndoPDEFDiff	.\moveeffect.cpp	/^void UndoPDEFDiff(Actor &actor, EffectDiff &ediff){$/;"	f
-UndoTypeDiff	.\moveeffect.cpp	/^void UndoTypeDiff(Actor &actor, EffectDiff &ediff){$/;"	f
+UndoDisableDiff	.\moveeffect.cpp	/^void UndoDisableDiff(EffectDiff &ediff){$/;"	f
+UndoHPBonusDiff	.\moveeffect.cpp	/^void UndoHPBonusDiff(EffectDiff &ediff){$/;"	f
+UndoImmunityDiff	.\moveeffect.cpp	/^void UndoImmunityDiff(EffectDiff &ediff){$/;"	f
+UndoIncapicateDiff	.\moveeffect.cpp	/^void UndoIncapicateDiff(EffectDiff &ediff){$/;"	f
+UndoMATKDiff	.\moveeffect.cpp	/^void UndoMATKDiff(EffectDiff &ediff){$/;"	f
+UndoMDEFDiff	.\moveeffect.cpp	/^void UndoMDEFDiff(EffectDiff &ediff){$/;"	f
+UndoMPBonusDiff	.\moveeffect.cpp	/^void UndoMPBonusDiff(EffectDiff &ediff){$/;"	f
+UndoMaxHPDiff	.\moveeffect.cpp	/^void UndoMaxHPDiff(EffectDiff &ediff){$/;"	f
+UndoMaxMPDiff	.\moveeffect.cpp	/^void UndoMaxMPDiff(EffectDiff &ediff){$/;"	f
+UndoPATKDiff	.\moveeffect.cpp	/^void UndoPATKDiff(EffectDiff &ediff){$/;"	f
+UndoPDEFDiff	.\moveeffect.cpp	/^void UndoPDEFDiff(EffectDiff &ediff){$/;"	f
+UndoTypeDiff	.\moveeffect.cpp	/^void UndoTypeDiff(EffectDiff &ediff){$/;"	f
 UnhideWindow	.\include\raylib\core.c	/^void UnhideWindow(void)$/;"	f
 Unicode	.\include\raylib\external\glfw\deps\mingw\xinput.h	/^    WCHAR Unicode;$/;"	m	struct:_XINPUT_KEYSTROKE
 UnloadAddress	.\include\raylib\rnet.h	/^void UnloadAddress(AddressInformation *addressInfo)$/;"	f
@@ -17799,6 +17812,7 @@ channelsOut	.\include\raylib\external\miniaudio.h	/^    ma_uint32 channelsOut;$/
 channels_count	.\include\raylib\external\cgltf.h	/^	cgltf_size channels_count;$/;"	m	struct:cgltf_animation
 character	.\include\raylib\external\glfw\src\internal.h	/^        GLFWcharfun             character;$/;"	m	struct:_GLFWwindow::__anon91
 chardata_for_range	.\include\raylib\external\stb_truetype.h	/^   stbtt_packedchar *chardata_for_range; \/\/ output$/;"	m	struct:__anon348
+charged	.\include\moveeffect.h	/^		charged,$/;"	m	struct:MoveEffect	typeref:enum:MoveEffect::
 charmods	.\include\raylib\external\glfw\src\internal.h	/^        GLFWcharmodsfun         charmods;$/;"	m	struct:_GLFWwindow::__anon91
 chars	.\include\raylib\raygui.h	/^        CharInfo *chars;        \/\/ Characters info data$/;"	m	struct:Font
 chars	.\include\raylib\raylib.h	/^    CharInfo *chars;        \/\/ Characters info data$/;"	m	struct:Font
@@ -18346,8 +18360,9 @@ deviceType	.\include\raylib\external\miniaudio.h	/^    ma_device_type deviceType
 deviceUUID	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint8_t                            deviceUUID [ VK_UUID_SIZE ];$/;"	m	struct:VkPhysicalDeviceIDProperties
 dics	.\include\raylib\external\glfw\deps\mingw\dinput.h	/^	DICOLORSET		dics;$/;"	m	struct:_DICONFIGUREDEVICESPARAMSA
 dics	.\include\raylib\external\glfw\deps\mingw\dinput.h	/^	DICOLORSET		dics;$/;"	m	struct:_DICONFIGUREDEVICESPARAMSW
-diffs	.\combat.cpp	/^UMap<Actor *, Vec<EffectDiff> > CombatData::diffs;$/;"	m	class:CombatData	file:
-diffs	.\include\combat.h	/^	static UMap<Actor *, Vec<EffectDiff> > diffs;$/;"	m	struct:CombatData
+diffMemPool	.\combat.cpp	/^MemPool CombatData::diffMemPool = CreateMemPool(DIFF_MEM_SIZE);$/;"	m	class:CombatData	file:
+diffMemPool	.\include\combat.h	/^	static MemPool diffMemPool;$/;"	m	struct:CombatData
+diffs	.\include\moveeffect.h	/^	struct EffectDiff *diffs = nullptr;$/;"	v	typeref:struct:EffectDiff
 diffuse	.\include\raylib\external\tinyobj_loader_c.h	/^  float diffuse[3];$/;"	m	struct:__anon378
 diffuse_factor	.\include\raylib\external\cgltf.h	/^	cgltf_float diffuse_factor[4];$/;"	m	struct:cgltf_pbr_specular_glossiness
 diffuse_texname	.\include\raylib\external\tinyobj_loader_c.h	/^  char *diffuse_texname;            \/* map_Kd *\/$/;"	m	struct:__anon378
@@ -18368,6 +18383,7 @@ direction	.\include\raylib\external\stb_truetype.h	/^   float direction;$/;"	m	s
 direction	.\include\raylib\external\stb_truetype.h	/^   int direction;$/;"	m	struct:stbtt__active_edge
 direction	.\include\raylib\raylib.h	/^    Vector3 direction;      \/\/ Ray direction$/;"	m	struct:Ray
 dirent	.\include\raylib\external\dirent.h	/^struct dirent {$/;"	s
+disable	.\include\combat.h	/^	bool disable = false;$/;"	m	struct:StatusEffects
 disableCursor	.\include\raylib\external\glfw\src\win32_window.c	/^static void disableCursor(_GLFWwindow* window)$/;"	f	file:
 disableCursor	.\include\raylib\external\glfw\src\x11_window.c	/^static void disableCursor(_GLFWwindow* window)$/;"	f	file:
 disableRawMouseMotion	.\include\raylib\external\glfw\src\win32_window.c	/^static void disableRawMouseMotion(_GLFWwindow* window)$/;"	f	file:
@@ -19274,7 +19290,9 @@ effect	.\include\raylib\external\jar_mod.h	/^    muchar  effect;$/;"	m	struct:__
 effect_code	.\include\raylib\external\jar_mod.h	/^    muint   effect_code;$/;"	m	struct:__anon126
 effect_param	.\include\raylib\external\jar_xm.h	/^     uint8_t effect_param;$/;"	m	struct:jar_xm_pattern_slot_s
 effect_type	.\include\raylib\external\jar_xm.h	/^     uint8_t effect_type;$/;"	m	struct:jar_xm_pattern_slot_s
-effects	.\include\actor.h	/^	Vec<MoveEffect> effects;$/;"	m	struct:Actor
+effects	.\combat.cpp	/^UMap<Actor *, Vec<MoveEffect> > CombatData::effects;$/;"	m	class:CombatData	file:
+effects	.\include\combat.h	/^	static UMap<Actor *, Vec<MoveEffect> > effects;$/;"	m	struct:CombatData
+efficient	.\include\moveeffect.h	/^		efficient,$/;"	m	struct:MoveEffect	typeref:enum:MoveEffect::
 eflags	.\include\raylib\external\stb_image.h	/^   int flags, bgindex, ratio, transparent, eflags;$/;"	m	struct:__anon331
 egl	.\include\raylib\external\glfw\src\wl_platform.h	/^    } egl;$/;"	m	struct:_GLFWlibraryWayland	typeref:struct:_GLFWlibraryWayland::__anon112
 eglBindAPI	.\include\raylib\external\glfw\src\egl_context.h	141;"	d
@@ -24770,7 +24788,7 @@ img_out_n	.\include\raylib\external\stb_image.h	/^   int img_n, img_out_n;$/;"	m
 img_v_max	.\include\raylib\external\stb_image.h	/^   int img_h_max, img_v_max;$/;"	m	struct:__anon320
 img_x	.\include\raylib\external\stb_image.h	/^   stbi__uint32 img_x, img_y;$/;"	m	struct:__anon315
 img_y	.\include\raylib\external\stb_image.h	/^   stbi__uint32 img_x, img_y;$/;"	m	struct:__anon315
-immune	.\include\actor.h	/^	bool immune[NUMELEMENTS], pIncap, mIncap, isDisabled;$/;"	m	struct:Actor
+immune	.\include\combat.h	/^	bool immune[NUMELEMENTS] = {false};$/;"	m	struct:StatusEffects
 implementationVersion	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t          implementationVersion;$/;"	m	struct:VkLayerProperties
 inAdvanceFrac	.\include\raylib\external\miniaudio.h	/^    ma_uint32 inAdvanceFrac;$/;"	m	struct:__anon146
 inAdvanceInt	.\include\raylib\external\miniaudio.h	/^    ma_uint32 inAdvanceInt;$/;"	m	struct:__anon146
@@ -24778,6 +24796,7 @@ inFlight	.\include\inventory.h	/^	Elemino *inFlight = nullptr; \/\/The elemino n
 inInventory	.\include\elemino.h	/^	bool inInventory = true;$/;"	m	struct:Elemino
 inTimeFrac	.\include\raylib\external\miniaudio.h	/^    ma_uint32 inTimeFrac;$/;"	m	struct:__anon146
 inTimeInt	.\include\raylib\external\miniaudio.h	/^    ma_uint32 inTimeInt;$/;"	m	struct:__anon146
+incaps	.\include\combat.h	/^	bool incaps[2] = {false};$/;"	m	struct:StatusEffects
 incrementCursorImage	.\include\raylib\external\glfw\src\wl_window.c	/^static void incrementCursorImage(_GLFWwindow* window)$/;"	f	file:
 independentBlend	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkBool32                 independentBlend;$/;"	m	struct:VkPhysicalDeviceFeatures
 index	.\include\raylib\external\cgltf.h	/^	cgltf_int index;$/;"	m	struct:cgltf_attribute
@@ -24923,7 +24942,6 @@ isCD	.\include\raylib\external\dr_flac.h	/^            drflac_bool32 isCD;$/;"	m
 isDefault	.\include\raylib\external\miniaudio.h	/^        ma_bool32 isDefault;$/;"	m	struct:__anon191::__anon192
 isDefaultCaptureDevice	.\include\raylib\external\miniaudio.h	/^            ma_bool32 isDefaultCaptureDevice;$/;"	m	struct:ma_device::__anon230::__anon237
 isDefaultPlaybackDevice	.\include\raylib\external\miniaudio.h	/^            ma_bool32 isDefaultPlaybackDevice;$/;"	m	struct:ma_device::__anon230::__anon237
-isDisabled	.\include\actor.h	/^	bool immune[NUMELEMENTS], pIncap, mIncap, isDisabled;$/;"	m	struct:Actor
 isDrainingCapture	.\include\raylib\external\miniaudio.h	/^            ma_bool32 isDrainingCapture;$/;"	m	struct:ma_device::__anon230::__anon242
 isDrainingPlayback	.\include\raylib\external\miniaudio.h	/^            ma_bool32 isDrainingPlayback;$/;"	m	struct:ma_device::__anon230::__anon242
 isFrameExtentsEvent	.\include\raylib\external\glfw\src\x11_window.c	/^static Bool isFrameExtentsEvent(Display* display, XEvent* event, XPointer pointer)$/;"	f	file:
@@ -25546,7 +25564,6 @@ m9	.\include\raylib\raylib.h	/^    float m1, m5, m9, m13;$/;"	m	struct:Matrix
 m9	.\include\raylib\raymath.h	/^        float m1, m5, m9, m13;$/;"	m	struct:Matrix
 mAtk	.\include\actor.h	/^	int mAtk[NUMELEMENTS], mDef[NUMELEMENTS], pAtk[NUMELEMENTS], pDef[NUMELEMENTS], hpBonus, mpBonus;$/;"	m	struct:Actor
 mDef	.\include\actor.h	/^	int mAtk[NUMELEMENTS], mDef[NUMELEMENTS], pAtk[NUMELEMENTS], pDef[NUMELEMENTS], hpBonus, mpBonus;$/;"	m	struct:Actor
-mIncap	.\include\actor.h	/^	bool immune[NUMELEMENTS], pIncap, mIncap, isDisabled;$/;"	m	struct:Actor
 mOffset	.\include\elemino.h	/^	Vector2 mOffset; \/\/Offset from mouse to position$/;"	m	struct:Elemino
 m_next	.\include\raylib\external\rgif.h	/^    unsigned short m_next[256];$/;"	m	struct:GifLzwNode
 ma	.\include\raylib\external\stb_image.h	/^   unsigned int mr,mg,mb,ma, all_a;$/;"	m	struct:__anon328
@@ -27703,6 +27720,7 @@ ntriangles	.\include\raylib\external\par_shapes.h	/^    int ntriangles;         
 null_backend	.\include\raylib\external\miniaudio.h	/^        } null_backend;$/;"	m	union:ma_context::__anon207	typeref:struct:ma_context::__anon207::__anon221
 null_device	.\include\raylib\external\miniaudio.h	/^        } null_device;$/;"	m	union:ma_device::__anon230	typeref:struct:ma_device::__anon230::__anon244
 nullbackend	.\include\raylib\external\miniaudio.h	/^    int nullbackend;                \/* The null backend uses an integer for device IDs. *\/$/;"	m	union:__anon190
+numDiffs	.\include\moveeffect.h	/^	int numDiffs = 0;$/;"	v
 numGlyphs	.\include\raylib\external\stb_truetype.h	/^   int numGlyphs;                     \/\/ number of glyphs, needed for range checking$/;"	m	struct:stbtt_fontinfo
 numLockMask	.\include\raylib\external\glfw\src\wl_platform.h	/^        xkb_mod_mask_t          numLockMask;$/;"	m	struct:_GLFWlibraryWayland::__anon110
 numSampleLoops	.\include\raylib\external\dr_wav.h	/^    drwav_uint32 numSampleLoops;$/;"	m	struct:__anon77
@@ -28002,7 +28020,6 @@ pImageIndices	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    const  uin
 pImageInfo	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    const  VkDescriptorImageInfo *  pImageInfo;$/;"	m	struct:VkWriteDescriptorSet
 pImageOpaqueBinds	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    const  VkSparseImageOpaqueMemoryBindInfo *  pImageOpaqueBinds;$/;"	m	struct:VkBindSparseInfo
 pImmutableSamplers	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    const  VkSampler *        pImmutableSamplers;$/;"	m	struct:VkDescriptorSetLayoutBinding
-pIncap	.\include\actor.h	/^	bool immune[NUMELEMENTS], pIncap, mIncap, isDisabled;$/;"	m	struct:Actor
 pIndexPoints	.\include\raylib\external\dr_flac.h	/^    const drflac_cuesheet_track_index* pIndexPoints;$/;"	m	struct:__anon45
 pInfo	.\include\raylib\external\miniaudio.h	/^    ma_device_info* pInfo;$/;"	m	struct:__anon304
 pInheritanceInfo	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    const  VkCommandBufferInheritanceInfo *        pInheritanceInfo;$/;"	m	struct:VkCommandBufferBeginInfo
@@ -28532,6 +28549,7 @@ pointerLock	.\include\raylib\external\glfw\src\wl_platform.h	/^    } pointerLock
 points	.\include\raylib\external\jar_xm.h	/^    jar_xm_envelope_point_t points[NUM_ENVELOPE_POINTS];$/;"	m	struct:jar_xm_envelope_s
 points	.\include\raylib\external\par_shapes.h	/^    float const* points;$/;"	m	struct:__anon312
 points	.\include\raylib\external\par_shapes.h	/^    float* points;           \/\/ Flat list of 3-tuples (X Y Z X Y Z...)$/;"	m	struct:par_shapes_mesh_s
+poison	.\include\moveeffect.h	/^		poison,$/;"	m	struct:MoveEffect	typeref:enum:MoveEffect::
 pollAbsState	.\include\raylib\external\glfw\src\linux_joystick.c	/^static void pollAbsState(_GLFWjoystick* js)$/;"	f	file:
 polygonMode	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkPolygonMode            polygonMode;$/;"	m	struct:VkPipelineRasterizationStateCreateInfo
 pool	.\include\raylib\raudio.c	/^        AudioBuffer *pool[MAX_AUDIO_BUFFER_POOL_CHANNELS];      \/\/ Multichannel AudioBuffer pointers pool$/;"	m	struct:AudioData::__anon403	file:
@@ -29577,6 +29595,8 @@ staticFriction	.\include\raylib\physac.h	/^    float staticFriction;            
 status	.\include\raylib\rnet.h	/^    int status;                 \/\/ Packet status after sending$/;"	m	struct:SocketDataPacket
 status	.\include\raylib\rnet.h	/^    int status;                 \/\/ Socket result state$/;"	m	struct:SocketResult
 status	.\include\raylib\rnet.h	/^    int status;                 \/\/ The last status code to have occured using this socket$/;"	m	struct:Socket
+statusEffects	.\combat.cpp	/^UMap<Actor *, StatusEffects> CombatData::statusEffects;$/;"	m	class:CombatData	file:
+statusEffects	.\include\combat.h	/^	static UMap<Actor *, StatusEffects> statusEffects;$/;"	m	struct:CombatData
 stb__perlin_ease	.\include\raylib\external\stb_perlin.h	231;"	d
 stb__perlin_ease	.\include\raylib\external\stb_perlin.h	351;"	d
 stb__perlin_fastfloor	.\include\raylib\external\stb_perlin.h	/^static int stb__perlin_fastfloor(float a)$/;"	f
@@ -31525,9 +31545,11 @@ zoom	.\include\raylib\raylib.h	/^    float zoom;             \/\/ Camera zoom (s
 zout	.\include\raylib\external\stb_image.h	/^   char *zout;$/;"	m	struct:__anon324
 zout_end	.\include\raylib\external\stb_image.h	/^   char *zout_end;$/;"	m	struct:__anon324
 zout_start	.\include\raylib\external\stb_image.h	/^   char *zout_start;$/;"	m	struct:__anon324
+~EffectDiff	.\moveeffect.cpp	/^EffectDiff::~EffectDiff(){$/;"	f	class:EffectDiff
 ~Game	.\game.cpp	/^Game::~Game(){$/;"	f	class:Game
 ~Grid	.\include\elemino.h	/^	~Grid(){$/;"	f	struct:Grid
 ~Menu	.\menu.cpp	/^Menu::~Menu(){$/;"	f	class:Menu
+~MoveEffect	.\moveeffect.cpp	/^MoveEffect::~MoveEffect(){$/;"	f	class:MoveEffect
 ~Player	.\player.cpp	/^Player::~Player(){$/;"	f	class:Player
 ~Team	.\include\player.h	/^	~Team(){$/;"	f	struct:Team
 ~Team	.\include\team.h	/^	~Team(){$/;"	f	struct:Team

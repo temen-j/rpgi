@@ -154,6 +154,7 @@ void ApplyDamage(Actor &, CasterMove &);
 
 void ApplyHeal(Actor &, CasterMove &);
 
+void ApplyCost(CasterMove &);
 
 #endif
 

@@ -8,6 +8,13 @@
 
 struct Actor;
 
+const float CHARGED_BUFF_BONUS = .15f;
+const float EFFICIENT_BUFF_BONUS = .2f;
+const float SHARPENED_BUFF_BONUS = .15f;
+const float BRITTLE_DEBUFF_BONUS = .15f;
+const float CURSED_DEBUFF_BONUS = .15f;
+const float MANABURN_DEBUFF_BONUS = .125f;
+
 struct MoveEffect{
 	enum Family : int{
 		noFam,
@@ -15,11 +22,19 @@ struct MoveEffect{
 		wet,
 		florid,
 		lifeDrain,
+		poisoned,
+		charged,
+		efficient,
 		feared,
 		taunted,
 		frozen,
+		sharpened,
+		corroding,
+		brittle,
 		supernatural,
-		cursed
+		cursed,
+		decaying,
+		manaburn
 	};
 
 	int id; //Id of the move that was used to produce this effect
@@ -28,7 +43,8 @@ struct MoveEffect{
 	struct EffectDiff *diffs = nullptr;
 
 	Family family = noFam;
-	Actor *affector, *affected;
+	Actor *affector = nullptr;
+	Actor *affected = nullptr;
 
 	void TickDamage(int damage);
 	void TickHealCaster(int damage);
@@ -91,6 +107,8 @@ struct EffectDiff{
 		disabled,
 		type0,
 		type1,
+		immunityP,
+		immunityM,
 		noStat
 	};
 

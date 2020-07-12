@@ -316,8 +316,19 @@ bool CanExecMoves(CombatData &cbtD){
 
 
 bool LessThanCTP(CasterTargetsPair *first, CasterTargetsPair *second){
-	//TODO: Add priority effect 'slow' in here
-	return first->move->priority < second->move->priority;
+	//TODO: DONT FORGET SLOWING
+	int priorities[2] = {first->move->priority, second->move->priority};
+
+	for(auto &it : CombatData::effects[first->caster]){
+		if(it.id == QUICKSILVER)
+			priorities[0] -= (int)GetEffectPrimaryBuff(it.id);
+	}
+	for(auto &it : CombatData::effects[second->caster]){
+		if(it.id == QUICKSILVER)
+			priorities[1] -= (int)GetEffectPrimaryBuff(it.id);
+	}
+
+	return priorities[0] < priorities[1];
 }
 
 

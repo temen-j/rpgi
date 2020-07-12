@@ -1,6 +1,7 @@
 #include "include\game.h"
 #include "include\moveinventory.h"
-/* #include "include\combat.h" */
+
+TextureManager Game::textures;
 
 Game::Game(){
 	justEnteredState = false;

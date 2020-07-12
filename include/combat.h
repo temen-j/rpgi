@@ -39,7 +39,7 @@ struct CasterTargetsPair : CasterMove{
 
 struct StatusEffects{
 	bool incaps[2] = {false};
-	bool immune[NUMELEMENTS] = {false};
+	bool immune[NUMELEMENTS + 2] = {false}; //the +2 is for physical/meta immunity
 	bool disable = false;
 };
 

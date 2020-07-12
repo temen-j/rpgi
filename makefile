@@ -5,6 +5,7 @@ LIB = -lraylib -lopengl32 -lgdi32 -lwinmm -static -lpthread
 DEV_OBJ = console.o tmem.o
 GUI_OBJ = gui.o
 MATH_OBJ = tmath.o interp.o
+GRAPHICS_OBJ = sprite.o
 INVENTORY_OBJ = elemino.o inventory.o moveinventory.o
 MOVE_OBJ = move.o allmoves.o moveeffect.o move_impl.o
 COMBAT_OBJ = actor.o combat.o
@@ -84,6 +85,9 @@ move_impl.o: move_impl.cpp include\move_impl.h include\actor.h include\combat.h 
 
 tmem.o: tmem.c
 	gcc -O3 -c tmem.c
+
+sprite.o: sprite.cpp include\sprite.h
+	$(CXX) $(CXXFLAGS) -c sprite.cpp -l. $(LIB)
 
 run:
 	$(MAKE) -C bin run

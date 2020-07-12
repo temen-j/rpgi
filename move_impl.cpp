@@ -15,7 +15,7 @@ inline EffectDiff *AllocEDiff(size_t size){ //WARNING: Make the assumption that 
 void MoveImplementation::IGNITE(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 //NOTE: July 5, 2020. This code uses vector<>::emplace_back() b/c when temp goes out of scope
@@ -28,15 +28,15 @@ void MoveImplementation::BLAZE(Actor &target, CasterMove &cm){
 	temp.duration = GetEffectPrimaryDuration(temp.id);
 	temp.family = MoveEffect::Family::burning;
 
-
 	if(!UpdateEffectDuration(target, temp)){
 		CombatData::effects[&target].emplace_back(cm.move->id);
 		auto &meff = CombatData::effects[&target].back();
 		meff.duration = GetEffectPrimaryDuration(meff.id);
 		meff.family = MoveEffect::Family::burning;
+		meff.affected = &target;
 	}
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
@@ -52,9 +52,10 @@ void MoveImplementation::FIREBALL(Actor &target, CasterMove &cm){
 		auto &meff = CombatData::effects[&target].back();
 		meff.duration = GetEffectPrimaryDuration(meff.id);
 		meff.family = MoveEffect::Family::burning;
+		meff.affected = &target;
 	}
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
@@ -70,9 +71,10 @@ void MoveImplementation::EXPLOSION(Actor &target, CasterMove &cm){
 		auto &meff = CombatData::effects[&target].back();
 		meff.duration = GetEffectPrimaryDuration(meff.id);
 		meff.family = MoveEffect::Family::burning;
+		meff.affected = &target;
 	}
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
@@ -88,9 +90,10 @@ void MoveImplementation::FIREBEAM(Actor &target, CasterMove &cm){
 		auto &meff = CombatData::effects[&target].back();
 		meff.duration = GetEffectPrimaryDuration(meff.id);
 		meff.family = MoveEffect::Family::burning;
+		meff.affected = &target;
 	}
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
@@ -106,8 +109,9 @@ void MoveImplementation::FLAMESWORD(Actor &target, CasterMove &cm){
 		auto &meff = CombatData::effects[&target].back();
 		meff.duration = GetEffectPrimaryDuration(meff.id);
 		meff.family = MoveEffect::Family::burning;
+		meff.affected = &target;
 	}
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
@@ -123,6 +127,7 @@ void MoveImplementation::FLAREKICK(Actor &target, CasterMove &cm){
 		auto &meff = CombatData::effects[&target].back();
 		meff.duration = GetEffectPrimaryDuration(meff.id);
 		meff.family = MoveEffect::Family::burning;
+		meff.affected = &target;
 	}
 
 	MoveEffect temp2(cm.move->id);
@@ -136,7 +141,7 @@ void MoveImplementation::FLAREKICK(Actor &target, CasterMove &cm){
 		meff.family = MoveEffect::Family::taunted;
 	}
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
@@ -150,7 +155,7 @@ void MoveImplementation::FIREWALL(Actor &target, CasterMove &cm){
 		meff.duration = GetEffectPrimaryDuration(meff.id);
 	}
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
@@ -169,7 +174,7 @@ void MoveImplementation::SEARINGFLESH(Actor &target, CasterMove &cm){
 		ApplyImmunityDiff(target, *meff.diffs, temp);
 	}
 	
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
@@ -185,9 +190,10 @@ void MoveImplementation::MOLTENMETEOR(Actor &target, CasterMove &cm){
 		auto &meff = CombatData::effects[&target].back();
 		meff.duration = GetEffectPrimaryDuration(meff.id);
 		meff.family = MoveEffect::Family::burning;
+		meff.affected = &target;
 	}
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
@@ -203,9 +209,10 @@ void MoveImplementation::WILDFIRE(Actor &target, CasterMove &cm){
 		auto &meff = CombatData::effects[&target].back();
 		meff.duration = GetEffectPrimaryDuration(meff.id);
 		meff.family = MoveEffect::Family::burning;
+		meff.affected = &target;
 	}
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
@@ -222,6 +229,7 @@ void MoveImplementation::RAZEEARTH(Actor &target, CasterMove &cm){
 		auto &meff = CombatData::effects[&target].back();
 		meff.duration = GetEffectPrimaryDuration(meff.id);
 		meff.family = MoveEffect::Family::burning;
+		meff.affected = &target;
 	}
 
 	MoveEffect temp2(cm.move->id);
@@ -233,7 +241,7 @@ void MoveImplementation::RAZEEARTH(Actor &target, CasterMove &cm){
 		meff.duration = GetEffectPrimaryDuration(meff.id);
 	}
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
@@ -243,7 +251,7 @@ void MoveImplementation::FROMTHEASHES(Actor &target, CasterMove &cm){
 	bool consumed = false;
 
 	for(int i = 0; i < (int)CombatData::effects[&target].size(); ++i){
-		if(CombatData::effects[&target][i].id == MoveEffect::Family::burning){
+		if(CombatData::effects[&target][i].family == MoveEffect::Family::burning){
 			consumed = true;
 			CombatData::effects[&target].erase(CombatData::effects[&target].begin() + i);
 			break;
@@ -270,7 +278,7 @@ void MoveImplementation::FROMTHEASHES(Actor &target, CasterMove &cm){
 			target.remHP = target.maxHP;
 	}
 	
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
@@ -286,16 +294,17 @@ void MoveImplementation::SUPERNOVA(Actor &target, CasterMove &cm){
 		auto &meff = CombatData::effects[&target].back();
 		meff.duration = GetEffectPrimaryDuration(meff.id);
 		meff.family = MoveEffect::Family::burning;
+		meff.affected = &target;
 	}
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::WATERWHIP(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
@@ -313,7 +322,7 @@ void MoveImplementation::TORRENT(Actor &target, CasterMove &cm){
 		meff.family = MoveEffect::Family::wet;
 	}
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
@@ -331,7 +340,7 @@ void MoveImplementation::TIDALWAVE(Actor &target, CasterMove &cm){
 		meff.family = MoveEffect::Family::wet;
 	}
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
@@ -339,7 +348,7 @@ void MoveImplementation::COALESCE(Actor &target, CasterMove &cm){
 	bool consumed = false;
 
 	for(int i = 0; i < (int)CombatData::effects[&target].size(); ++i){
-		if(CombatData::effects[&target][i].id == MoveEffect::Family::wet){
+		if(CombatData::effects[&target][i].family == MoveEffect::Family::wet){
 			consumed = true;
 			CombatData::effects[&target].erase(CombatData::effects[&target].begin() + i);
 			break;
@@ -368,7 +377,7 @@ void MoveImplementation::COALESCE(Actor &target, CasterMove &cm){
 			target.remHP = target.maxHP;
 	}
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
@@ -386,7 +395,7 @@ void MoveImplementation::WHIRLPOOL(Actor &target, CasterMove &cm){
 		meff.family = MoveEffect::Family::wet;
 	}
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
@@ -395,7 +404,7 @@ void MoveImplementation::HAILSTORM(Actor &target, CasterMove &cm){
 
 	bool consumed = false;
 	for(int i = 0; i < (int)CombatData::effects[&target].size(); ++i){
-		if(CombatData::effects[&target][i].id == MoveEffect::Family::wet){
+		if(CombatData::effects[&target][i].family == MoveEffect::Family::wet){
 			consumed = true;
 			CombatData::effects[&target].erase(CombatData::effects[&target].begin() + i);
 			break;
@@ -404,7 +413,7 @@ void MoveImplementation::HAILSTORM(Actor &target, CasterMove &cm){
 	
 	if(consumed){
 		MoveEffect temp(cm.move->id);
-		temp.duration = GetEffectPrimaryDuration(meff.id);
+		temp.duration = GetEffectPrimaryDuration(temp.id);
 		temp.family = MoveEffect::Family::frozen;
 
 		if(!UpdateEffectDuration(target, temp)){
@@ -420,7 +429,7 @@ void MoveImplementation::HAILSTORM(Actor &target, CasterMove &cm){
 		}
 	}
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
@@ -452,7 +461,7 @@ void MoveImplementation::AQUAPRISON(Actor &target, CasterMove &cm){
 		ApplyIncapicateDiff(target, *meff.diffs, temp);
 	}
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
@@ -477,7 +486,7 @@ void MoveImplementation::RAINSTORM(Actor &target, CasterMove &cm){
 		meff.duration = GetEffectPrimaryDuration(meff.id);
 	}
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
@@ -486,7 +495,7 @@ void MoveImplementation::DEWPOINT(Actor &target, CasterMove &cm){
 	
 	bool consumed = false;
 	for(int i = 0; i < (int)CombatData::effects[&target].size(); ++i){
-		if(CombatData::effects[&target][i].id == MoveEffect::Family::wet){
+		if(CombatData::effects[&target][i].family == MoveEffect::Family::wet){
 			consumed = true;
 			CombatData::effects[&target].erase(CombatData::effects[&target].begin() + i);
 			break;
@@ -505,7 +514,7 @@ void MoveImplementation::DEWPOINT(Actor &target, CasterMove &cm){
 	}
 	
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
@@ -514,7 +523,7 @@ void MoveImplementation::FLASHFREEZE(Actor &target, CasterMove &cm){
 
 	bool consumed = false;
 	for(int i = 0; i < (int)CombatData::effects[&target].size(); ++i){
-		if(CombatData::effects[&target][i].id == MoveEffect::Family::wet){
+		if(CombatData::effects[&target][i].family == MoveEffect::Family::wet){
 			consumed = true;
 			CombatData::effects[&target].erase(CombatData::effects[&target].begin() + i);
 			break;
@@ -534,7 +543,7 @@ void MoveImplementation::FLASHFREEZE(Actor &target, CasterMove &cm){
 		}
 	}
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
@@ -552,7 +561,7 @@ void MoveImplementation::RIPTIDE(Actor &target, CasterMove &cm){
 		meff.family = MoveEffect::Family::wet;
 	}
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
@@ -573,7 +582,7 @@ void MoveImplementation::VAPORVORTEX(Actor &target, CasterMove &cm){
 		ApplyIncapicateDiff(target, *meff.diffs, temp);
 	}
 	
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
@@ -582,7 +591,7 @@ void MoveImplementation::HELLBROTH(Actor &target, CasterMove &cm){
 
 	bool consumed = false;
 	for(int i = 0; i < (int)CombatData::effects[&target].size(); ++i){
-		if(CombatData::effects[&target][i].id == MoveEffect::Family::wet){
+		if(CombatData::effects[&target][i].family == MoveEffect::Family::wet){
 			consumed = true;
 			CombatData::effects[&target].erase(CombatData::effects[&target].begin() + i);
 			break;
@@ -643,7 +652,7 @@ void MoveImplementation::HELLBROTH(Actor &target, CasterMove &cm){
 		}
 	}
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
@@ -661,14 +670,14 @@ void MoveImplementation::TSUNAMI(Actor &target, CasterMove &cm){
 		meff.family = MoveEffect::Family::wet;
 	}
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::SEEDSHOT(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
@@ -686,7 +695,7 @@ void MoveImplementation::ACORNASSAULT(Actor &target, CasterMove &cm){
 		meff.family = MoveEffect::Family::florid;
 	}
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
@@ -695,684 +704,1670 @@ void MoveImplementation::SAPPINGSTEMS(Actor &target, CasterMove &cm){
 
 	MoveEffect temp(cm.move->id);
 	temp.duration = GetEffectPrimaryDuration(temp.id);
-	temp.family = MoveEffect::Family::florid;
+	temp.family = MoveEffect::Family::lifeDrain;
 
-	bool consumed = false;
 	if(!UpdateEffectDuration(target, temp)){
-		for(int i = 0; i < (int)CombatData::effects[&target].size(); ++i){
-			if(CombatData::effects[&target][i].id == MoveEffect::Family::florid && ){
+		CombatData::effects[cm.caster].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[cm.caster].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::lifeDrain;
+		meff.affector = cm.caster;
+		meff.affected = &target;
+	}
+
+	MoveEffect temp2(cm.move->id);
+	temp2.duration = GetEffectPrimaryDuration(temp2.id);
+
+	if(!UpdateEffectDuration(target, temp2)){
+		bool consumed = false;
+		for(int i = 0; i < (int)CombatData::effects[cm.caster].size(); ++i){
+			if(CombatData::effects[cm.caster][i].family == MoveEffect::Family::florid){
 				consumed = true;
-				CombatData::effects[&target].erase(CombatData::effects[&target].begin() + i);
+				CombatData::effects[cm.caster].erase(CombatData::effects[cm.caster].begin() + i);
 				break;
 			}
 		}
-	}
-
-	if(consumed){
-
-		if(!UpdateEffectDuration(target, temp)){
-			CombatData::effects[&target].emplace_back(cm.move->id);
-			auto &meff = CombatData::effects[&target].back();
+		if(consumed){
+			CombatData::effects[cm.caster].emplace_back(cm.move->id);
+			auto &meff = CombatData::effects[cm.caster].back();
 			meff.duration = GetEffectPrimaryDuration(meff.id);
-			meff.family = MoveEffect::Family::florid;
 		}
 	}
 
-
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::NOURISH(Actor &target, CasterMove &cm){
+	ApplyHeal(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::florid;
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::florid;
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::LEAFLANCE(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	bool consumed = false;
+	for(int i = 0; i < (int)CombatData::effects[cm.caster].size(); ++i){
+		if(CombatData::effects[cm.caster][i].family == MoveEffect::Family::florid){
+			consumed = true;
+			CombatData::effects[cm.caster].erase(CombatData::effects[cm.caster].begin() + i);
+			break;
+		}
+	}
+
+	if(consumed){
+		MoveEffect temp(cm.move->id);
+		temp.duration = GetEffectPrimaryDuration(temp.id);
+		temp.family = MoveEffect::Family::lifeDrain;
+
+		if(!UpdateEffectDuration(target, temp)){
+			CombatData::effects[&target].emplace_back(cm.move->id);
+			auto &meff = CombatData::effects[&target].back();
+			meff.duration = GetEffectPrimaryDuration(meff.id);
+			meff.family = MoveEffect::Family::lifeDrain;
+			meff.affector = cm.caster;
+			meff.affected = &target;
+		}
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::FUNGALSPORES(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::poisoned;
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::poisoned;
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::BARBEDHUSK(Actor &target, CasterMove &cm){
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
 
-	cm.caster->remMP -= cm.move->cost;
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::GRASSBLADES(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::PETALPIKE(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::florid;
+
+	if(!UpdateEffectDuration(*cm.caster, temp)){
+		CombatData::effects[cm.caster].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[cm.caster].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::florid;
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::UNDERGROWTH(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	bool consumed = false;
+	for(int i = 0; i < (int)CombatData::effects[cm.caster].size(); ++i){
+		if(CombatData::effects[cm.caster][i].family == MoveEffect::Family::florid){
+			consumed = true;
+			CombatData::effects[cm.caster].erase(CombatData::effects[cm.caster].begin() + i);
+			break;
+		}
+	}
+
+	if(!consumed){
+		MoveEffect temp(cm.move->id);
+		temp.duration = GetEffectPrimaryDuration(temp.id);
+		temp.family = MoveEffect::Family::lifeDrain;
+
+		if(!UpdateEffectDuration(target, temp)){
+			CombatData::effects[&target].emplace_back(cm.move->id);
+			auto &meff = CombatData::effects[&target].back();
+			meff.duration = GetEffectPrimaryDuration(meff.id);
+			meff.family = MoveEffect::Family::lifeDrain;
+			meff.affector = cm.caster;
+			meff.affected = &target;
+		}
+	}
+	else{
+		MoveEffect temp(cm.move->id);
+		temp.duration = GetEffectSecondaryDuration(temp.id);
+		temp.family = MoveEffect::Family::lifeDrain;
+
+		if(!UpdateEffectDuration(target, temp)){
+			CombatData::effects[&target].emplace_back(cm.move->id);
+			auto &meff = CombatData::effects[&target].back();
+			meff.duration = GetEffectSecondaryDuration(meff.id);
+			meff.family = MoveEffect::Family::lifeDrain;
+			meff.affector = cm.caster;
+			meff.affected = &target;
+		}
+	}
+
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::SYMBIOSIS(Actor &target, CasterMove &cm){
+	ApplyHeal(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::florid;
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::florid;
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::ENSNARINGVINE(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	//FIXME: Dont't really like taunted, maybe slow?
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::taunted;
+
+	if(!UpdateEffectDuration(*cm.caster, temp)){
+		CombatData::effects[cm.caster].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[cm.caster].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::taunted;
+	}
+	
+	bool consumed = false;
+	for(int i = 0; i < (int)CombatData::effects[cm.caster].size(); ++i){
+		if(CombatData::effects[cm.caster][i].family == MoveEffect::Family::florid){
+			consumed = true;
+			CombatData::effects[cm.caster].erase(CombatData::effects[cm.caster].begin() + i);
+			break;
+		}
+	}
+
+	if(consumed){
+		MoveEffect temp2(cm.move->id);
+		temp2.duration = GetEffectSecondaryDuration(temp2.id);
+
+		if(!UpdateEffectDuration(target, temp2)){
+			CombatData::effects[&target].emplace_back(cm.move->id);
+			auto &meff = CombatData::effects[&target].back();
+			meff.duration = GetEffectSecondaryDuration(meff.id);
+
+			meff.diffs = AllocEDiff();
+			meff.diffs->stat = EffectDiff::Stat::pIncap;
+			int temp = (int)true;
+			ApplyIncapicateDiff(target, *meff.diffs, temp);
+		}
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::RANCIDROSES(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::feared;
+
+	if(!UpdateEffectDuration(*cm.caster, temp)){
+		CombatData::effects[cm.caster].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[cm.caster].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::feared;
+	}
+	
+	bool consumed = false;
+	for(int i = 0; i < (int)CombatData::effects[cm.caster].size(); ++i){
+		if(CombatData::effects[cm.caster][i].family == MoveEffect::Family::florid){
+			consumed = true;
+			CombatData::effects[cm.caster].erase(CombatData::effects[cm.caster].begin() + i);
+			break;
+		}
+	}
+
+	if(consumed){
+		MoveEffect temp2(cm.move->id);
+		temp2.duration = GetEffectSecondaryDuration(temp2.id);
+
+		if(!UpdateEffectDuration(target, temp2)){
+			CombatData::effects[&target].emplace_back(cm.move->id);
+			auto &meff = CombatData::effects[&target].back();
+			meff.duration = GetEffectSecondaryDuration(meff.id);
+
+			meff.diffs = AllocEDiff();
+			meff.diffs->stat = EffectDiff::Stat::mIncap;
+			int temp = (int)true;
+			ApplyIncapicateDiff(target, *meff.diffs, temp);
+		}
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::DRYADSCURSE(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::lifeDrain;
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::lifeDrain;
+		meff.affector = cm.caster;
+		meff.affected = &target;
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::ZAP(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::CHARGE(Actor &target, CasterMove &cm){
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::charged;
 
-	cm.caster->remMP -= cm.move->cost;
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::charged;
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::DISCHARGE(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::LIGHTNINGBOLT(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::DAZZLINGLIGHTS(Actor &target, CasterMove &cm){
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::taunted;
 
-	cm.caster->remMP -= cm.move->cost;
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::taunted;
+	}
+
+	MoveEffect temp2(cm.move->id);
+	temp2.duration = GetEffectPrimaryDuration(temp2.id);
+
+	if(!UpdateEffectDuration(target, temp2)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+
+		meff.diffs = AllocEDiff();
+		meff.diffs->stat = EffectDiff::Stat::pIncap;
+		int temp = (int)true;
+		ApplyIncapicateDiff(target, *meff.diffs, temp);
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::ELECTROSTORM(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::LIGHTNINGKICK(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	bool consumed = false;
+	for(int i = 0; i < (int)CombatData::effects[cm.caster].size(); ++i){
+		if(CombatData::effects[cm.caster][i].family == MoveEffect::Family::charged){
+			consumed = true;
+			CombatData::effects[cm.caster].erase(CombatData::effects[cm.caster].begin() + i);
+			break;
+		}
+	}
+
+	if(consumed){
+		MoveEffect temp(cm.move->id);
+		temp.duration = GetEffectSecondaryDuration(temp.id);
+
+		if(!UpdateEffectDuration(target, temp)){
+			CombatData::effects[&target].emplace_back(cm.move->id);
+			auto &meff = CombatData::effects[&target].back();
+			meff.duration = GetEffectPrimaryDuration(meff.id);
+
+			meff.diffs = AllocEDiff();
+			meff.diffs->stat = EffectDiff::Stat::disabled;
+			int temp = (int)true;
+			ApplyDisableDiff(target, *meff.diffs, temp);
+		}
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::SPARKINGSKIN(Actor &target, CasterMove &cm){
-	ApplyDamage(target, cm);
+	//It doesn't make much sense to hurt and heal the actor in the same move
+	/* ApplyDamage(target, cm); */
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
 
-	cm.caster->remMP -= cm.move->cost;
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::SUPERCONDUCT(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	bool consumed = false;
+	for(int i = 0; i < (int)CombatData::effects[cm.caster].size(); ++i){
+		if(CombatData::effects[cm.caster][i].family == MoveEffect::Family::charged){
+			consumed = true;
+			CombatData::effects[cm.caster].erase(CombatData::effects[cm.caster].begin() + i);
+			break;
+		}
+	}
+
+	if(consumed){
+		MoveEffect temp(cm.move->id);
+		temp.duration = GetEffectPrimaryDuration(temp.id);
+
+		if(!UpdateEffectDuration(target, temp)){
+			CombatData::effects[&target].emplace_back(cm.move->id);
+			auto &meff = CombatData::effects[&target].back();
+			meff.duration = GetEffectPrimaryDuration(meff.id);
+
+			meff.diffs = AllocEDiff();
+			meff.diffs->stat = EffectDiff::Stat::disabled;
+			int temp = (int)true;
+			ApplyDisableDiff(target, *meff.diffs, temp);
+		}
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::STATICSHOCK(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+
+		meff.diffs = AllocEDiff();
+		meff.diffs->stat = EffectDiff::Stat::pIncap;
+		int temp = (int)true;
+		ApplyIncapicateDiff(target, *meff.diffs, temp);
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::EVANESCENTFIELD(Actor &target, CasterMove &cm){
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::charged;
 
-	cm.caster->remMP -= cm.move->cost;
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::charged;
+	}
+
+	MoveEffect temp2(cm.move->id);
+	temp2.duration = GetEffectSecondaryDuration(temp2.id);
+
+	if(!UpdateEffectDuration(target, temp2)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectSecondaryDuration(meff.id);
+
+		meff.diffs = AllocEDiff();
+		meff.diffs->stat = EffectDiff::Stat::immunity3;
+		int temp = (int)true;
+		ApplyIncapicateDiff(target, *meff.diffs, temp);
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::HIGHVOLTAGE(Actor &target, CasterMove &cm){
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::charged;
 
-	cm.caster->remMP -= cm.move->cost;
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::charged;
+	}
+
+	MoveEffect temp2(cm.move->id);
+	temp2.duration = GetEffectSecondaryDuration(temp2.id);
+	temp2.family = MoveEffect::Family::efficient;
+
+	if(!UpdateEffectDuration(target, temp2)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectSecondaryDuration(meff.id);
+		meff.family = MoveEffect::Family::efficient;
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::MJOLNIR(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	bool consumed = false;
+	for(int i = 0; i < (int)CombatData::effects[cm.caster].size(); ++i){
+		if(CombatData::effects[cm.caster][i].family == MoveEffect::Family::charged){
+			consumed = true;
+			CombatData::effects[cm.caster].erase(CombatData::effects[cm.caster].begin() + i);
+			break;
+		}
+	}
+
+	if(consumed){
+		MoveEffect temp(cm.move->id);
+		temp.duration = GetEffectPrimaryDuration(temp.id);
+
+		if(!UpdateEffectDuration(target, temp)){
+			CombatData::effects[&target].emplace_back(cm.move->id);
+			auto &meff = CombatData::effects[&target].back();
+			meff.duration = GetEffectPrimaryDuration(meff.id);
+
+			meff.diffs = AllocEDiff();
+			meff.diffs->stat = EffectDiff::Stat::disabled;
+			int temp = (int)true;
+			ApplyDisableDiff(target, *meff.diffs, temp);
+		}
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::CLOSEDCIRUIT(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+
+		meff.diffs = AllocEDiff();
+		meff.diffs->stat = EffectDiff::Stat::pIncap;
+		int temp = (int)true;
+		ApplyIncapicateDiff(target, *meff.diffs, temp);
+	}
+
+	bool consumed = false;
+	for(int i = 0; i < (int)CombatData::effects[cm.caster].size(); ++i){
+		if(CombatData::effects[cm.caster][i].family == MoveEffect::Family::charged){
+			consumed = true;
+			CombatData::effects[cm.caster].erase(CombatData::effects[cm.caster].begin() + i);
+			break;
+		}
+	}
+
+	if(consumed){
+		MoveEffect temp2(cm.move->id);
+		temp2.duration = GetEffectPrimaryDuration(temp2.id);
+
+		if(!UpdateEffectDuration(target, temp2)){
+			CombatData::effects[&target].emplace_back(cm.move->id);
+			auto &meff = CombatData::effects[&target].back();
+			meff.duration = GetEffectSecondaryDuration(meff.id);
+
+			meff.diffs = AllocEDiff();
+			meff.diffs->stat = EffectDiff::Stat::disabled;
+			int temp = (int)true;
+			ApplyDisableDiff(target, *meff.diffs, temp);
+		}
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::IRONSPIKES(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::CANNONBALL(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::SHARPEN(Actor &target, CasterMove &cm){
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::sharpened;
 
-	cm.caster->remMP -= cm.move->cost;
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::sharpened;
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::SHATTERSHRAPNEL(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::BALLANDCHAIN(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::sharpened;
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::sharpened;
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::QUICKSILVER(Actor &target, CasterMove &cm){
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::sharpened;
 
-	cm.caster->remMP -= cm.move->cost;
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::sharpened;
+	}
+
+	MoveEffect temp2(cm.move->id); //TODO: Implement priority decrease
+	temp2.duration = GetEffectSecondaryDuration(temp2.id);
+
+	if(!UpdateEffectDuration(target, temp2)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectSecondaryDuration(meff.id);
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::COPPERCUTLASS(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::corroding;
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::corroding;
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::RAZORWIRE(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::corroding;
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::corroding;
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::MIDASTOUCH(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+
+		meff.diffs = AllocEDiff();
+		meff.diffs->stat = EffectDiff::Stat::mIncap;
+		int temp = (int)true;
+		ApplyIncapicateDiff(target, *meff.diffs, temp);
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::CHROMEPLATED(Actor &target, CasterMove &cm){
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
 
-	cm.caster->remMP -= cm.move->cost;
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::MAGNETIZE(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
+	
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
 
-	cm.caster->remMP -= cm.move->cost;
+	if(!UpdateEffectDuration(*cm.caster, temp)){
+		CombatData::effects[cm.caster].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[cm.caster].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::BRASSKNUCKLES(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::ALLOYASSAULT(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	//Loop through and count metal minoes from 1st and 2nd grid
+	int metalCount[2] = {0, 0};
+	for(size_t j = 0; j < NUMCELLS; ++j){
+		if(target.grids[0][j] == Element::metal)
+			metalCount[0]++;
+		if(target.grids[1][j] == Element::metal)
+			metalCount[1]++;
+	}
+	
+	int metalDiff[2] = {metalCount[0] * -1, metalCount[1] * -1};
+
+	//Apply negative effect to victim
+	MoveEffect temp(cm.move->id); //victim
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+
+		meff.diffs = AllocEDiff(4);
+		meff.diffs[0].stat = EffectDiff::Stat::mAtk5;
+		meff.diffs[1].stat = EffectDiff::Stat::mDef5;
+		meff.diffs[2].stat = EffectDiff::Stat::pDef5;
+		meff.diffs[3].stat = EffectDiff::Stat::hpBonus;
+
+		ApplyMATKDiff(target, meff.diffs[0], metalDiff[0]);
+		ApplyMDEFDiff(target, meff.diffs[1], metalDiff[0]);
+		ApplyPDEFDiff(target, meff.diffs[2], metalDiff[1]);
+		ApplyHPBonusDiff(target, meff.diffs[3], metalDiff[1] *= HPBONUS_METAL);
+	}
+	
+	//Apply positive effect to thief
+	MoveEffect temp2(cm.move->id); //thief
+	temp2.duration = GetEffectPrimaryDuration(temp2.id);
+
+	if(!UpdateEffectDuration(*cm.caster, temp)){
+		CombatData::effects[cm.caster].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[cm.caster].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+
+		meff.diffs = AllocEDiff(4);
+		meff.diffs[0].stat = EffectDiff::Stat::mAtk5;
+		meff.diffs[1].stat = EffectDiff::Stat::mDef5;
+		meff.diffs[2].stat = EffectDiff::Stat::pDef5;
+		meff.diffs[3].stat = EffectDiff::Stat::hpBonus;
+
+		ApplyMATKDiff(*cm.caster, meff.diffs[0], metalCount[0]);
+		ApplyMDEFDiff(*cm.caster, meff.diffs[1], metalCount[0]);
+		ApplyPDEFDiff(*cm.caster, meff.diffs[2], metalCount[1]);
+		ApplyHPBonusDiff(*cm.caster, meff.diffs[3], metalCount[1] *= HPBONUS_METAL);
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::PIERCINGPLATINUM(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::corroding;
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::corroding;
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::HURLROCK(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::STONESPEAR(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::FORTIFY(Actor &target, CasterMove &cm){
+	int total = 0;
+	for(size_t j = 0; j < NUMCELLS; ++j){
+		if(target.grids[0][j] == Element::rock)
+			total++;
+		if(target.grids[1][j] == Element::rock)
+			total++;
+		if(target.grids[2][j] == Element::rock)
+			total++;
+	}
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+
+		meff.diffs = AllocEDiff();
+		meff.diffs->curr = 2 * total; //As defined in the design doc
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::QUICKSAND(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::ENTOMB(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+
+		meff.diffs = AllocEDiff();
+		meff.diffs->stat = EffectDiff::Stat::pIncap;
+		int temp = (int)true;
+		ApplyIncapicateDiff(target, *meff.diffs, temp);
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::CRUSH(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::TREMOR(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::ROCKSLIDE(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::ROLLINGBOULDER(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::SAPPHIRESTRIKE(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::RUBYRUSH(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::GARNETGAZE(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	int rockCount[2] = {0, 0};
+	for(size_t j = 0; j < NUMCELLS; ++j){
+		if(target.grids[0][j] == Element::rock)
+			rockCount[1]++;
+		if(target.grids[1][j] == Element::rock)
+			rockCount[2]++;
+	}
+	
+	int rockDiff[2] = {rockCount[0] * -1, rockCount[1] * -1};
+
+	//Apply negative effect to victim
+	MoveEffect temp(cm.move->id); //victim
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+
+		meff.diffs = AllocEDiff(4);
+		meff.diffs[0].stat = EffectDiff::Stat::pDef5;
+		meff.diffs[1].stat = EffectDiff::Stat::hpBonus;
+		meff.diffs[2].stat = EffectDiff::Stat::pAtk5;
+		meff.diffs[3].stat = EffectDiff::Stat::mpBonus;
+
+		ApplyPDEFDiff(target, meff.diffs[0], rockDiff[0]);
+		ApplyHPBonusDiff(target, meff.diffs[1], rockDiff[0] *= HPBONUS_METAL);
+		ApplyPATKDiff(target, meff.diffs[2], rockDiff[1]);
+		ApplyMPBonusDiff(target, meff.diffs[3], rockDiff[1] *= MPBONUS_METAL);
+	}
+	
+	//Apply positive effect to thief
+	MoveEffect temp2(cm.move->id); //thief
+	temp2.duration = GetEffectPrimaryDuration(temp2.id);
+
+	if(!UpdateEffectDuration(*cm.caster, temp)){
+		CombatData::effects[cm.caster].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[cm.caster].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+
+		meff.diffs = AllocEDiff(4);
+		meff.diffs[0].stat = EffectDiff::Stat::pDef5;
+		meff.diffs[1].stat = EffectDiff::Stat::hpBonus;
+		meff.diffs[2].stat = EffectDiff::Stat::pAtk5;
+		meff.diffs[3].stat = EffectDiff::Stat::mpBonus;
+
+		ApplyPDEFDiff(*cm.caster, meff.diffs[0], rockDiff[0]);
+		ApplyHPBonusDiff(*cm.caster, meff.diffs[1], rockDiff[0] *= HPBONUS_METAL);
+		ApplyPATKDiff(*cm.caster, meff.diffs[2], rockDiff[1]);
+		ApplyMPBonusDiff(*cm.caster, meff.diffs[3], rockDiff[1] *= MPBONUS_METAL);
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::EMERALDEDGE(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::OBSIDIANONSLAUGHT(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::brittle;
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::brittle;
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::ECTORAY(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::TORMENT(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::cursed;
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::cursed;
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::CHAOSCLAW(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::cursed;
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::cursed;
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::PHANTOMWALTS(Actor &target, CasterMove &cm){
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::supernatural;
 
-	cm.caster->remMP -= cm.move->cost;
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::supernatural;
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::GRAVETENDER(Actor &target, CasterMove &cm){
 
-	cm.caster->remMP -= cm.move->cost;
+	//TODO: implement adding characters to the team
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::MINDINVASION(Actor &target, CasterMove &cm){
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::cursed;
 
-	cm.caster->remMP -= cm.move->cost;
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::cursed;
+	}
+
+	MoveEffect temp2(cm.move->id);
+	temp2.duration = GetEffectPrimaryDuration(temp2.id);
+
+	if(!UpdateEffectDuration(target, temp2)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectSecondaryDuration(meff.id);
+
+		meff.diffs = AllocEDiff();
+		meff.diffs->stat = EffectDiff::Stat::mIncap;
+		int temp = (int)true;
+		ApplyIncapicateDiff(target, *meff.diffs, temp);
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::BINDINGPAIN(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::cursed;
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::cursed;
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::PLAGUE(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::cursed;
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::cursed;
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::WICKEDHEX(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::cursed;
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::cursed;
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::PETRIFYINGWAIL(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::cursed;
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::cursed;
+	}
+
+	bool consumed = false;
+
+	for(int i = 0; i < (int)CombatData::effects[cm.caster].size(); ++i){
+		if(CombatData::effects[cm.caster][i].family == MoveEffect::Family::supernatural){
+			consumed = true;
+			CombatData::effects[cm.caster].erase(CombatData::effects[cm.caster].begin() + i);
+			break;
+		}
+	}
+
+	if(consumed){
+		MoveEffect temp2(cm.move->id);
+		temp2.duration = GetEffectPrimaryDuration(temp2.id);
+
+		if(!UpdateEffectDuration(target, temp2)){
+			CombatData::effects[&target].emplace_back(cm.move->id);
+			auto &meff = CombatData::effects[&target].back();
+			meff.duration = GetEffectSecondaryDuration(meff.id);
+
+			meff.diffs = AllocEDiff();
+			meff.diffs->stat = EffectDiff::Stat::pIncap;
+			int temp = (int)true;
+			ApplyIncapicateDiff(target, *meff.diffs, temp);
+		}
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::DECAY(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::cursed;
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::cursed;
+	}
+
+	MoveEffect temp2(cm.move->id);
+	temp2.duration = GetEffectPrimaryDuration(temp2.id);
+
+	if(!UpdateEffectDuration(target, temp2)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::VIVIDNIGHTMARE(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::cursed;
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::cursed;
+	}
+
+	bool consumed = false;
+
+	for(int i = 0; i < (int)CombatData::effects[cm.caster].size(); ++i){
+		if(CombatData::effects[cm.caster][i].family == MoveEffect::Family::supernatural){
+			consumed = true;
+			CombatData::effects[cm.caster].erase(CombatData::effects[cm.caster].begin() + i);
+			break;
+		}
+	}
+
+	if(consumed){
+		MoveEffect temp2(cm.move->id);
+		temp2.duration = GetEffectPrimaryDuration(temp2.id);
+
+		if(!UpdateEffectDuration(target, temp2)){
+			CombatData::effects[&target].emplace_back(cm.move->id);
+			auto &meff = CombatData::effects[&target].back();
+			meff.duration = GetEffectSecondaryDuration(meff.id);
+
+			meff.diffs = AllocEDiff();
+			meff.diffs->stat = EffectDiff::Stat::mIncap;
+			int temp = (int)true;
+			ApplyIncapicateDiff(target, *meff.diffs, temp);
+		}
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::ETHEREALFOG(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::cursed;
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::cursed;
+	}
+
+	bool consumed = false;
+
+	for(int i = 0; i < (int)CombatData::effects[cm.caster].size(); ++i){
+		if(CombatData::effects[cm.caster][i].family == MoveEffect::Family::supernatural){
+			consumed = true;
+			CombatData::effects[cm.caster].erase(CombatData::effects[cm.caster].begin() + i);
+			break;
+		}
+	}
+
+	if(consumed){
+		MoveEffect temp2(cm.move->id);
+		temp2.duration = GetEffectPrimaryDuration(temp2.id);
+
+		if(!UpdateEffectDuration(*cm.caster, temp2)){
+			CombatData::effects[cm.caster].emplace_back(cm.move->id);
+			auto &meff = CombatData::effects[cm.caster].back();
+			meff.duration = GetEffectSecondaryDuration(meff.id);
+
+			meff.diffs = AllocEDiff();
+			meff.diffs->stat = EffectDiff::Stat::immunityM;
+			int temp = (int)true;
+			ApplyImmunityDiff(target, *meff.diffs, temp);
+		}
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::NOXIOUSVOID(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::cursed;
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::cursed;
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::FLASHFRICTION(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::burning;
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::burning;
+		meff.affected = &target;
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::SCORCHINGHEAT(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::burning;
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::burning;
+		meff.affected = &target;
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::DRAGONBREATH(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::manaburn;
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::manaburn;
+		meff.affected = &target;
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::ICARUSINFERNO(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	MoveEffect temp(cm.move->id);
+	temp.duration = GetEffectPrimaryDuration(temp.id);
+	temp.family = MoveEffect::Family::burning;
+
+	if(!UpdateEffectDuration(target, temp)){
+		CombatData::effects[&target].emplace_back(cm.move->id);
+		auto &meff = CombatData::effects[&target].back();
+		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.family = MoveEffect::Family::burning;
+		meff.affected = &target;
+	}
+
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::REND(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::SIRENSTEAR(Actor &target, CasterMove &cm){
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::CHILLINGBLAST(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::DELUGE(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::NEEDLE(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::BLOOM(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::TREECLEAVER(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::VENOMCOATING(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::SURGE(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::OVERLOAD(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::IONSTRIKE(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::PLASMAPULSE(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::SCRAPSLUG(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::ANNEAL(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::ANODIZE(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::GALVANIZEDGLAIVE(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::GRAVELSPIN(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::SANDBOMB(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::CRYSTALCAGE(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::FISSURE(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::SHADOWSLASH(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::PILFER(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::BLOODCURDLE(Actor &target, CasterMove &cm){
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void MoveImplementation::BLACKHOLE(Actor &target, CasterMove &cm){
 	ApplyDamage(target, cm);
 
-	cm.caster->remMP -= cm.move->cost;
+	ApplyCost(cm);
 }
 
 
 void ApplyDamage(Actor &target, CasterMove &cm){
+
+	if(CombatData::statusEffects[&target].immune[cm.move->elem-1]) //FIXME: May have to be more verbose
+		return;
+
+	if(CombatData::statusEffects[&target].immune[cm.move->isPhysical + 7]) //FIXME: May have to be more verbose
+		return;
+
 	int dmg = cm.move->damage;
 	float effectiveness = Effectiveness(cm.move->elem, target.type);
 	dmg = (int) ceil(dmg * effectiveness);
@@ -1384,12 +2379,39 @@ void ApplyDamage(Actor &target, CasterMove &cm){
 		switch(it.id){
 		case SEARINGFLESH:
 			bonus += (GetEffectPrimaryBuff(it.id) * (cm.move->elem == Element::fire)); //Hacky!!!
-			applyBonus = cm.move->elem == Element::fire;
+			applyBonus = applyBonus || cm.move->elem == Element::fire;
 			break;
 		case RAINSTORM:
 			bonus += (GetEffectPrimaryBuff(it.id) * (cm.move->elem == Element::water)); //Hacky!!!
-			applyBonus = cm.move->elem == Element::water;
+			applyBonus = applyBonus || cm.move->elem == Element::water;
 			break;
+		case SAPPINGSTEMS:
+			bonus += (GetEffectPrimaryBuff(it.id) * (cm.move->elem == Element::nature)); //Hacky!!!
+			applyBonus = applyBonus || cm.move->elem == Element::nature;
+			break;
+		case SAPPHIRESTRIKE:
+			bonus += (GetEffectPrimaryBuff(it.id) * (target.remHP > (target.maxHP / 2)));
+			applyBonus = applyBonus || (target.remHP > (target.maxHP / 2));
+			break;
+		case RUBYRUSH:
+			bonus += (GetEffectPrimaryBuff(it.id) * (target.remHP > (target.maxHP / 2)));
+			applyBonus = applyBonus || (target.remHP > (target.maxHP / 2));
+			break;
+		case EMERALDEDGE:
+			bonus += (GetEffectPrimaryBuff(it.id) * (target.remHP > (target.maxHP / 2)));
+			applyBonus = applyBonus || (target.remHP > (target.maxHP / 2));
+			break;
+		default:
+			break;
+		}
+		switch(it.family){
+		case MoveEffect::Family::charged:
+			bonus += (CHARGED_BUFF_BONUS * (cm.move->elem == Element::lightning)); //Hacky!!!
+			applyBonus = applyBonus || cm.move->elem == Element::lightning;
+			break;
+		case MoveEffect::Family::sharpened:
+			bonus += (SHARPENED_BUFF_BONUS * (cm.move->elem == Element::metal)); //Hacky!!!
+			applyBonus = applyBonus || cm.move->elem == Element::lightning;
 		default:
 			break;
 		}
@@ -1421,6 +2443,34 @@ void ApplyDamage(Actor &target, CasterMove &cm){
 			bonus -= GetEffectPrimaryDebuff(it.id);
 			applyBonus = true;
 			break;
+		case SPARKINGSKIN:
+			bonus += (GetEffectPrimaryBuff(it.id) * cm.move->isPhysical); //Hacky!!!
+			applyBonus = applyBonus || cm.move->isPhysical;
+			break;
+		case MAGNETIZE:
+			bonus += (GetEffectPrimaryBuff(it.id) * cm.move->isPhysical); //Hacky!!!
+			applyBonus = applyBonus || cm.move->isPhysical;
+			break;
+		case FORTIFY:
+			bonus += (it.diffs->curr * GetEffectPrimaryBuff(it.id) * cm.move->isPhysical); //Hacky!!!
+			applyBonus = applyBonus || cm.move->isPhysical;
+			break;
+		case BRASSKNUCKLES:
+			bonus -= GetEffectPrimaryDebuff(it.id);
+			applyBonus = true;
+			break;
+		case QUICKSAND:
+			bonus -= GetEffectPrimaryDebuff(it.id);
+			applyBonus = true;
+			break;
+		default:
+			break;
+		}
+		switch(it.family){
+		case MoveEffect::Family::brittle:
+			bonus -= BRITTLE_DEBUFF_BONUS;
+			applyBonus = true;
+			break;
 		default:
 			break;
 		}
@@ -1436,9 +2486,11 @@ void ApplyDamage(Actor &target, CasterMove &cm){
 	//Post-damage effect appliance
 	for(auto &it : CombatData::effects[&target]){
 		if(it.id == FIREWALL){
-			MoveEffect meff(1738); //FIXME: magic number! June 20, 2020: effect applied from firewall has no id...
+			CombatData::effects[&target].emplace_back(1738);//FIXME: magic number! June 20, 2020: effect applied from firewall has no id...
+			auto &meff = CombatData::effects[&target].back();
 			meff.duration = GetEffectSecondaryDuration(it.id);
 			meff.family = MoveEffect::Family::burning;
+			meff.affected = &target;
 		}
 		else if(it.id == BARBEDHUSK && cm.move->isPhysical){
 			int dmgReturned = (int) ceil(dmg * GetEffectPrimaryBuff(it.id));
@@ -1458,6 +2510,18 @@ void ApplyHeal(Actor &target, CasterMove &cm){
 
 	if(target.remHP > target.maxHP)
 		target.remHP = target.maxHP;
+}
+
+
+void ApplyCost(CasterMove &cm){
+	int cost = cm.move->cost;
+
+	for(auto &it : CombatData::effects[cm.caster]){
+		if(it.family == MoveEffect::Family::efficient)
+			cost -= (int) floor(EFFICIENT_BUFF_BONUS * cm.move->cost);
+	}
+	cost = cost * (cost > 0);
+	cm.caster->remMP -= cost;
 }
 
 

@@ -424,8 +424,11 @@ int GetEffectPrimaryDuration(int id){
 	case WICKEDHEX:
 		ret = 3;
 		break;
+	case PETRIFYINGWAIL:
+		ret = 3;
+		break;
 	case DECAY:
-		ret = 2;
+		ret = 3;
 		break;
 	case VIVIDNIGHTMARE:
 		ret = 3;
@@ -457,7 +460,7 @@ int GetEffectSecondaryDuration(int id){
 		ret = 3; //For uptime
 		break;
 	case UNDERGROWTH:
-		ret = 4; //For not on-consume
+		ret = 4; //For on-consume
 		break;
 	case ENSNARINGVINE:
 		ret = 2;
@@ -471,17 +474,26 @@ int GetEffectSecondaryDuration(int id){
 	case EVANESCENTFIELD:
 		ret = 2;
 		break;
+	case HIGHVOLTAGE:
+		ret = 3;
+		break;
 	case CLOSEDCIRUIT:
 		ret = 2;
 		break;
-	case MINDINVASION:
+	case QUICKSILVER:
 		ret = 3;
+		break;
+	case MINDINVASION:
+		ret = 2; //For incap
+		break;
+	case PETRIFYINGWAIL:
+		ret = 2; //For incap
 		break;
 	case DECAY:
-		ret = 2;
+		ret = 3; //For decay
 		break;
 	case VIVIDNIGHTMARE:
-		ret = 3;
+		ret = 2; //For incap
 		break;
 	case ETHEREALFOG:
 		ret = 4;
@@ -595,7 +607,7 @@ float GetEffectPrimaryBuff(int id){
 		ret = .5f;
 		break;
 	case SAPPINGSTEMS:
-		ret = 1.5f;
+		ret = .5f;
 		break;
 	case NOURISH:
 		ret = 1.25f;
@@ -604,7 +616,7 @@ float GetEffectPrimaryBuff(int id){
 		ret = 1.25f;
 		break;
 	case SPARKINGSKIN:
-		ret = 1.5f;
+		ret = .5f;
 		break;
 	case HIGHVOLTAGE:
 		ret = .75f;
@@ -615,17 +627,32 @@ float GetEffectPrimaryBuff(int id){
 	case CHROMEPLATED:
 		ret = 1.25f;
 		break;
+	case MAGNETIZE:
+		ret = .25f;
+		break;
+	case BRASSKNUCKLES:
+		ret = .25f;
+		break;
+	case FORTIFY:
+		ret = .01f;
+		break;
+	case SAPPHIRESTRIKE:
+		ret = .5f;
+		break;
 	case RUBYRUSH:
-		ret = 1.5f;
+		ret = .5f;
 		break;
 	case EMERALDEDGE:
-		ret = 1.5f;
+		ret = .5f;
 		break;
 	case PHANTOMWALTS:
 		ret = 1.5f;
 		break;
 	case BARBEDHUSK:
 		ret = 0.15f;
+		break;
+	case QUICKSILVER:
+		ret = 54.f;
 		break;
 	default:
 		break;
@@ -666,7 +693,7 @@ float GetEffectPrimaryDebuff(int id){
 		ret = 0.15f; //Subtract from damage out
 		break;
 	case QUICKSAND:
-		ret = 0.15f; //Subtract from damage out
+		ret = 0.15f; //Subtract from defence
 		break;
 	case OBSIDIANONSLAUGHT:
 		ret = 1.1875f;
@@ -778,13 +805,24 @@ void ApplyPDEFDiff(Actor &actor, EffectDiff &ediff, int &diff){
 
 
 void ApplyImmunityDiff(Actor &actor, EffectDiff &ediff, int &diff){
-	ediff.affected = &actor;
-	ediff.diff = diff; //diff == 0 == false, diff == 1 == true
-	int elem = ediff.stat - EffectDiff::Stat::immunity0; //Element with fire indexed at 0
+	if(ediff.stat == EffectDiff::Stat::immunityP || ediff.stat == EffectDiff::Stat::immunityM){
+		ediff.affected = &actor;
+		ediff.diff = diff; //diff == 0 == false, diff == 1 == true
+		int physOrMeta = ediff.stat - EffectDiff::Stat::immunityP + 7;
 
-	ediff.prev = (int)CombatData::statusEffects[&actor].immune[elem];
-	CombatData::statusEffects[&actor].immune[elem] = (bool)ediff.diff; //TODO: test me!
-	ediff.curr = (int)CombatData::statusEffects[&actor].immune[elem];
+		ediff.prev = (int)CombatData::statusEffects[&actor].immune[physOrMeta];
+		CombatData::statusEffects[&actor].immune[physOrMeta] = (bool)ediff.diff; //TODO: test me!
+		ediff.curr = (int)CombatData::statusEffects[&actor].immune[physOrMeta];
+	}
+	else{
+		ediff.affected = &actor;
+		ediff.diff = diff; //diff == 0 == false, diff == 1 == true
+		int elem = ediff.stat - EffectDiff::Stat::immunity0; //Element with fire indexed at 0
+
+		ediff.prev = (int)CombatData::statusEffects[&actor].immune[elem];
+		CombatData::statusEffects[&actor].immune[elem] = (bool)ediff.diff; //TODO: test me!
+		ediff.curr = (int)CombatData::statusEffects[&actor].immune[elem];
+	}
 }
 
 

@@ -8,6 +8,7 @@
 #include "gamestate.h"
 #include "moveinventory.h"
 #include "combat.h"
+#include "sprite.h"
 
 #include "raylib\raylib.h"
 
@@ -21,6 +22,7 @@ struct Game{
 	GameState gs;
 	Mouse mouse;
 	CombatData *cbtData = nullptr;
+	static TextureManager textures;
 
 	bool justEnteredState;
 	bool consoleOpen;
