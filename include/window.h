@@ -31,4 +31,6 @@ Vector2 Clamp(Vector2 &, Vector2, Vector2);
 
 void Update(Mouse &);
 
+void UpdateWindow();
+
 #endif

@@ -17,10 +17,13 @@ Vector2 Clamp(Vector2 &v, Vector2 min, Vector2 max){
 }
 
 void Update(Mouse &mouse){
-	Window::scale = std::min((float)GetScreenWidth()/SCREENWIDTH, (float)GetScreenHeight()/SCREENHEIGHT);
 	Vector2 mouseWindowPos = GetMousePosition();
 	mouse.pos = (Vector2){0, 0};
 	mouse.pos.x = (mouseWindowPos.x - (GetScreenWidth() - (SCREENWIDTH * Window::scale)) * .5f) / Window::scale;
 	mouse.pos.y = (mouseWindowPos.y - (GetScreenHeight() - (SCREENHEIGHT * Window::scale)) * .5f) / Window::scale;
 	mouse.pos = Clamp(mouse.pos, (Vector2){0, 0}, (Vector2){SCREENWIDTH, SCREENHEIGHT});
+}
+
+void UpdateWindow(){
+	Window::scale = std::min((float)GetScreenWidth()/SCREENWIDTH, (float)GetScreenHeight()/SCREENHEIGHT);
 }
