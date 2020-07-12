@@ -6,6 +6,7 @@
 #include <memory>
 #include <vector>
 
+#include "window.h"
 #include "interp.h"
 #include "elemino.h"
 #include "console.h"
@@ -49,21 +50,21 @@ struct GlobalTextData{
 	Image imageText;
 };
 
-enum InterfaceID: unsigned char{
-	INTERFACE_NONE,
-	DRAGGABLE,
-	ELEMINO
-};
+/* enum InterfaceID: unsigned char{ */
+/* 	INTERFACE_NONE, */
+/* 	DRAGGABLE, */
+/* 	ELEMINO */
+/* }; */
 
 struct Interface{
 	InterfaceID typeID;
 };
 
-struct Mouse{
-	Vector2 pos;
-	InterfaceID interface = InterfaceID::INTERFACE_NONE;
-	void *touch = nullptr;
-};
+/* struct Mouse{ */
+/* 	Vector2 pos; */
+/* 	InterfaceID interface = InterfaceID::INTERFACE_NONE; */
+/* 	void *touch = nullptr; */
+/* }; */
 
 struct Panel{
 	GuiControlState state = GuiControlState::GUI_STATE_NORMAL;

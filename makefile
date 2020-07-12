@@ -78,16 +78,19 @@ combat.o: combat.cpp include\combat.h include\gui.h include\team.h include\move.
 	$(CXX) $(CXXFLAGS) -c combat.cpp -L. $(LIB)
 
 moveeffect.o: moveeffect.cpp include\moveeffect.h include\moveconst.h include\actor.h
-	$(CXX) $(CXXFLAGS) -c moveeffect.cpp -l. $(LIB)
+	$(CXX) $(CXXFLAGS) -c moveeffect.cpp -L. $(LIB)
 
 move_impl.o: move_impl.cpp include\move_impl.h include\actor.h include\combat.h include\move.h
-	$(CXX) $(CXXFLAGS) -c move_impl.cpp -l. $(LIB)
+	$(CXX) $(CXXFLAGS) -c move_impl.cpp -L. $(LIB)
 
 tmem.o: tmem.c
 	gcc -O3 -c tmem.c
 
+cwl.exe: core_window_letterbox.c
+	$(CXX) $(CXXFLAGS) core_window_letterbox.c -L. $(LIB) -o $@
+
 sprite.o: sprite.cpp include\sprite.h
-	$(CXX) $(CXXFLAGS) -c sprite.cpp -l. $(LIB)
+	$(CXX) $(CXXFLAGS) -c sprite.cpp -L. $(LIB)
 
 run:
 	$(MAKE) -C bin run

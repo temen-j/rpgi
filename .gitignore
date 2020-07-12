@@ -6,3 +6,5 @@ bin/profile.txt
 *.out
 *.*#
 tags
+core_window_letterbox.c
+cwl.exe

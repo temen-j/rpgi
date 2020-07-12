@@ -1,5 +1,7 @@
 #include <fstream>
+#include <algorithm>
 
+#include "include\window.h"
 #include "include\move.h"
 #include "include\game.h"
 #include "include\gamestate.h"
@@ -14,16 +16,13 @@
 template<typename T>
 using Vec = std::vector<T>;
 
-Vector2 ScreenCenter(){
-	return {(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
-}
 
 int main(int argc, char **argv){
-	const int screenWidth = 960;
-	const int screenHeight = 640;
+	/* const int screenWidth = 960; */
+	/* const int screenHeight = 640; */
 	std::string empty = "";
 
-	InitWindow(screenWidth, screenHeight, "RPG Window");
+	InitWindow(SCREENWIDTH, SCREENHEIGHT, "RPG Window");
 
 	Game game; //Lots of stuff loads here!!!!!!!!1
 	game.mouse.pos = GetMousePosition();
