@@ -27,7 +27,7 @@ struct Mouse{
 
 Vector2 ScreenCenter();
 
-Vector2 Clamp(Vector2 &, Vector2, Vector2);
+Vector2 Clamp(const Vector2 &, Vector2, Vector2);
 
 void Update(Mouse &);
 

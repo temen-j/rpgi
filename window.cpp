@@ -7,7 +7,7 @@ Vector2 ScreenCenter(){
 	return {(float)GetScreenWidth() / 2, (float)GetScreenHeight() / 2};
 }
 
-Vector2 Clamp(Vector2 &v, Vector2 min, Vector2 max){
+Vector2 Clamp(const Vector2 &v, Vector2 min, Vector2 max){
     Vector2 result = v;
     result.x = (result.x > max.x)? max.x : result.x;
     result.x = (result.x < min.x)? min.x : result.x;
@@ -29,13 +29,13 @@ void UpdateWindow(){
 }
 
 void WindowSetup(){
-    /* SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_WINDOW_UNDECORATED); */
-    SetConfigFlags(FLAG_WINDOW_RESIZABLE);
+    SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_WINDOW_UNDECORATED);
+    /* SetConfigFlags(FLAG_WINDOW_RESIZABLE); */
 	InitWindow(SCREENWIDTH, SCREENHEIGHT, "RPG Window");
 	SetWindowMinSize(SCREENWIDTH, SCREENHEIGHT);
 
 	Window::rescaleTarget = LoadRenderTexture(SCREENWIDTH, SCREENHEIGHT);
-	SetTextureFilter(Window::rescaleTarget.texture, FILTER_TRILINEAR);
+	SetTextureFilter(Window::rescaleTarget.texture, FILTER_BILINEAR);
 }
 
 

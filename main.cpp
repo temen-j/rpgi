@@ -21,8 +21,6 @@ int main(int argc, char **argv){
 	std::string empty = "";
 
 	WindowSetup();
-	Window::rescaleTarget = LoadRenderTexture(SCREENWIDTH, SCREENHEIGHT);
-	SetTextureFilter(Window::rescaleTarget.texture, FILTER_TRILINEAR);
 
 	Game game; //Lots of stuff loads here!!!!!!!!1
 
@@ -47,6 +45,7 @@ int main(int argc, char **argv){
 
 	SetTargetFPS(60);
 	while(!WindowShouldClose()){
+		UpdateWindow();
 		Update(Game::mouse);
 		ImageClearBackground(&(gtd.imageText), CLEAR); //Clear batched text
 

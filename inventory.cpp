@@ -154,7 +154,7 @@ void UpdateStatText(InventoryData &invD, Actor &actor){
 
 void StatToolTip(InventoryData &invD, Actor &actor){
 	Label *lab = invD.statText;
-	Vector2 mousePos = GetMousePosition();
+	Vector2 mousePos = Game::mouse.pos;
 	for(size_t i = 0; i < 5; ++i){
 		invD.tooltip.disabled = !CheckCollisionPointRec(mousePos, lab[i].bounds);
 		if(!invD.tooltip.disabled){ //FIXME: Way too long! Find ways of reducing the size of this func

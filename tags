@@ -14289,6 +14289,7 @@ UpdateSound	.\include\raylib\raudio.c	/^void UpdateSound(Sound sound, const void
 UpdateStatText	.\inventory.cpp	/^void UpdateStatText(InventoryData &invD, Actor &actor){$/;"	f
 UpdateTexture	.\include\raylib\textures.c	/^void UpdateTexture(Texture2D texture, const void *pixels)$/;"	f
 UpdateVrTracking	.\include\raylib\rlgl.h	/^void UpdateVrTracking(Camera *camera)$/;"	f
+UpdateWindow	.\window.cpp	/^void UpdateWindow(){$/;"	f
 UserIndex	.\include\raylib\external\glfw\deps\mingw\xinput.h	/^    BYTE UserIndex;$/;"	m	struct:_XINPUT_KEYSTROKE
 VALUEBOX	.\include\raylib\raygui.h	/^    VALUEBOX,$/;"	e	enum:__anon408
 VALUEBOX_MAX_CHARS	.\include\raylib\raygui.h	1576;"	d
@@ -16168,6 +16169,7 @@ Window	.\include\raylib\core.c	/^    } Window;$/;"	m	struct:CoreData	typeref:str
 Window	.\include\window.h	/^struct Window{$/;"	s
 WindowDropCallback	.\include\raylib\core.c	/^static void WindowDropCallback(GLFWwindow *window, int count, const char **paths)$/;"	f	file:
 WindowIconifyCallback	.\include\raylib\core.c	/^static void WindowIconifyCallback(GLFWwindow *window, int iconified)$/;"	f	file:
+WindowSetup	.\window.cpp	/^void WindowSetup(){$/;"	f
 WindowShouldClose	.\include\raylib\core.c	/^bool WindowShouldClose(void)$/;"	f
 WindowSizeCallback	.\include\raylib\core.c	/^static void WindowSizeCallback(GLFWwindow *window, int width, int height)$/;"	f	file:
 XF86VidModeGetGammaRamp	.\include\raylib\external\glfw\src\x11_platform.h	116;"	d
@@ -27580,7 +27582,8 @@ monitors	.\include\raylib\external\glfw\src\wl_platform.h	/^    _GLFWmonitor**  
 monitorsCount	.\include\raylib\external\glfw\src\wl_platform.h	/^    int                         monitorsCount;$/;"	m	struct:_GLFWwindowWayland
 monitorsSize	.\include\raylib\external\glfw\src\wl_platform.h	/^    int                         monitorsSize;$/;"	m	struct:_GLFWwindowWayland
 monotonic	.\include\raylib\external\glfw\src\posix_time.h	/^    GLFWbool    monotonic;$/;"	m	struct:_GLFWtimerPOSIX
-mouse	.\include\game.h	/^	Mouse mouse;$/;"	m	struct:Game
+mouse	.\game.cpp	/^Mouse Game::mouse;$/;"	m	class:Game	file:
+mouse	.\include\game.h	/^	static Mouse mouse;$/;"	m	struct:Game
 mouseButton	.\include\raylib\external\glfw\src\internal.h	/^        GLFWmousebuttonfun      mouseButton;$/;"	m	struct:_GLFWwindow::__anon91
 mouseButtons	.\include\raylib\external\glfw\src\internal.h	/^    char                mouseButtons[GLFW_MOUSE_BUTTON_LAST + 1];$/;"	m	struct:_GLFWwindow
 mouseTrailSize	.\include\raylib\external\glfw\src\win32_platform.h	/^    UINT                mouseTrailSize;$/;"	m	struct:_GLFWlibraryWin32
@@ -28855,6 +28858,8 @@ resampling	.\include\raylib\external\miniaudio.h	/^    } resampling;$/;"	m	struc
 resampling	.\include\raylib\external\miniaudio.h	/^    } resampling;$/;"	m	struct:__anon193	typeref:struct:__anon193::__anon194
 resampling	.\include\raylib\external\miniaudio.h	/^    } resampling;$/;"	m	struct:__anon246	typeref:struct:__anon246::__anon247
 resampling	.\include\raylib\external\miniaudio.h	/^    } resampling;$/;"	m	struct:ma_device	typeref:struct:ma_device::__anon225
+rescaleTarget	.\include\window.h	/^	static RenderTexture rescaleTarget;$/;"	m	struct:Window
+rescaleTarget	.\window.cpp	/^RenderTexture2D Window::rescaleTarget;$/;"	m	class:Window	file:
 reserv	.\include\raylib\external\dr_mp3.h	/^    int reserv, free_format_bytes;$/;"	m	struct:__anon51
 reserv_buf	.\include\raylib\external\dr_mp3.h	/^    unsigned char header[4], reserv_buf[511];$/;"	m	struct:__anon51
 reserved	.\include\raylib\external\dr_flac.h	/^    drflac_uint8 reserved[3];$/;"	m	struct:__anon44
@@ -29269,6 +29274,8 @@ scale	.\include\raylib\external\miniaudio.h	/^    float scale;$/;"	m	struct:__an
 scale	.\include\raylib\external\par_shapes.h	/^    float scale[3];$/;"	m	struct:__anon311
 scale	.\include\raylib\external\stb_vorbis.h	/^  float scale;$/;"	m	struct:__anon376
 scale	.\include\raylib\raylib.h	/^    Vector3 scale;          \/\/ Scale$/;"	m	struct:Transform
+scale	.\include\window.h	/^	static float scale;$/;"	m	struct:Window
+scale	.\window.cpp	/^float Window::scale = 1.f;$/;"	m	class:Window	file:
 scaleToMonitor	.\include\raylib\external\glfw\src\internal.h	/^    GLFWbool      scaleToMonitor;$/;"	m	struct:_GLFWwndconfig
 scaleToMonitor	.\include\raylib\external\glfw\src\win32_platform.h	/^    GLFWbool            scaleToMonitor;$/;"	m	struct:_GLFWwindowWin32
 scalefac_compress	.\include\raylib\external\dr_mp3.h	/^    drmp3_uint16 part_23_length, big_values, scalefac_compress;$/;"	m	struct:__anon65
