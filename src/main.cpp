@@ -1,17 +1,17 @@
 #include <fstream>
 #include <algorithm>
 
-#include "include\window.h"
-#include "include\move.h"
-#include "include\game.h"
-#include "include\gamestate.h"
-#include "include\gui.h"
-#include "include\tmath.h"
-#include "include\elemino.h"
-#include "include\element.h"
+#include "..\include\window.h"
+#include "..\include\move.h"
+#include "..\include\game.h"
+#include "..\include\gamestate.h"
+#include "..\include\gui.h"
+#include "..\include\tmath.h"
+#include "..\include\elemino.h"
+#include "..\include\element.h"
 
-#include "include\raylib\raylib.h"
-#include "include\raylib\raygui.h"
+#include "..\include\raylib\raylib.h"
+#include "..\include\raylib\raygui.h"
 
 template<typename T>
 using Vec = std::vector<T>;
@@ -37,6 +37,7 @@ int main(int argc, char **argv){
 
 	GlobalTextData gtd;
 	gtd.defaultFont = LoadFontEx("../fonts/Inconsolata-SemiBold.ttf", 64, 0, 0);
+	GenTextureMipmaps(gtd.defaultFont.texture);
 	SetTextureFilter(gtd.defaultFont.texture, FILTER_BILINEAR);
 	gtd.imageText = GenImageColor(GetScreenWidth(), GetScreenHeight(), CLEAR);
 	GuiSetFont(gtd.defaultFont);

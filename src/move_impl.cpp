@@ -1,7 +1,7 @@
-#include "include\move_impl.h"
-#include "include\actor.h"
-#include "include\move.h"
-#include "include\combat.h"
+#include "..\include\move_impl.h"
+#include "..\include\actor.h"
+#include "..\include\move.h"
+#include "..\include\combat.h"
 
 inline EffectDiff *AllocEDiff(){
 	return static_cast<EffectDiff *>(MemPoolAlloc(&CombatData::diffMemPool, sizeof(EffectDiff)));

@@ -1,5 +1,5 @@
-#include "include\move.h"
-#include "include\actor.h"
+#include "..\include\move.h"
+#include "..\include\actor.h"
 
 
 Move::Move(){

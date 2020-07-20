@@ -1,6 +1,6 @@
-#include "include\moveeffect.h"
-#include "include\actor.h"
-#include "include\combat.h"
+#include "..\include\moveeffect.h"
+#include "..\include\actor.h"
+#include "..\include\combat.h"
 
 
 MoveEffect::~MoveEffect(){

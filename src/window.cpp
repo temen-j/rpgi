@@ -1,4 +1,4 @@
-#include "include\window.h"
+#include "..\include\window.h"
 
 float Window::scale = 1.f;
 RenderTexture2D Window::rescaleTarget;

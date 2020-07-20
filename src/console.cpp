@@ -1,6 +1,6 @@
-#include "include\console.h"
-#include "include\game.h"
-#include "include\player.h"
+#include "..\include\console.h"
+#include "..\include\game.h"
+#include "..\include\player.h"
 
 
 void HandleClose(Console &console, GameState &gs){

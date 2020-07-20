@@ -1,4 +1,4 @@
-#include "include\sprite.h"
+#include "..\include\sprite.h"
 
 UMapHash<const char *, Texture, Hash_sbdm> TextureManager::textures;
 

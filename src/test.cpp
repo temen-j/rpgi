@@ -1,5 +1,5 @@
-#include "include\combat.h"
-#include "include\game.h"
+#include "..\include\combat.h"
+#include "..\include\game.h"
 
 CasterTargetsPair::CasterTargetsPair(Actor *c, struct Move *m, const Vec<Actor *> &t){
 	caster = c;

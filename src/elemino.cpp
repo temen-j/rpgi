@@ -1,5 +1,5 @@
-#include "include\elemino.h"
-#include "include\game.h"
+#include "..\include\elemino.h"
+#include "..\include\game.h"
 
 Texture Elemino::eleminoTile;
 Texture Grid::gridTile;

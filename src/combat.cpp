@@ -1,6 +1,6 @@
-/* #include "include\combat.h" */
-#include "include\game.h"
-#include "include\move_impl.h"
+/* #include "..\include\combat.h" */
+#include "..\include\game.h"
+#include "..\include\move_impl.h"
 
 UMap<Actor *, Vec<MoveEffect> > CombatData::effects;
 UMap<Actor *, StatusEffects> CombatData::statusEffects;

@@ -1,6 +1,6 @@
-#include "include\moveinventory.h"
-#include "include\move.h"
-#include "include\game.h"
+#include "..\include\moveinventory.h"
+#include "..\include\move.h"
+#include "..\include\game.h"
 
 void OpenMoveInventory(Game &game){
 	MoveInventoryData *minvData = game.player.minvData;

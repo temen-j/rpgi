@@ -1,7 +1,7 @@
-#include "include\inventory.h"
-#include "include\game.h"
-#include "include\player.h"
-#include "include\stattext.h"
+#include "..\include\inventory.h"
+#include "..\include\game.h"
+#include "..\include\player.h"
+#include "..\include\stattext.h"
 
 Elemino TotalEleminoes::storage[512];
 unsigned int TotalEleminoes::size = 0;

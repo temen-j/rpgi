@@ -1,6 +1,6 @@
-#include "include\gui.h"
-#include "include\player.h"
-#include "include\game.h"
+#include "..\include\gui.h"
+#include "..\include\player.h"
+#include "..\include\game.h"
 
 #ifndef RAYGUI_IMPLEMENTATION
 #define RAYGUI_IMPLEMENTATION

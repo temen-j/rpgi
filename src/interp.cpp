@@ -1,5 +1,5 @@
-#include "include\raylib\raylib.h"
-#include "include\interp.h"
+#include "..\include\raylib\raylib.h"
+#include "..\include\interp.h"
 
 float Lerp(const float t, const float a, const float b){
 	float v;

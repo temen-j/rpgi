@@ -1,5 +1,5 @@
-#include "include\actor.h"
-#include "include\move.h"
+#include "..\include\actor.h"
+#include "..\include\move.h"
 
 /* Actor::Actor(const Actor* a){ */
 /* 	for(int i = 0; i < NUMGRIDS; ++i) */

@@ -30,7 +30,7 @@ AAudioStream_requestStart	.\include\raylib\external\miniaudio.h	/^            ma
 AAudioStream_requestStop	.\include\raylib\external\miniaudio.h	/^            ma_proc AAudioStream_requestStop;$/;"	m	struct:ma_context::__anon207::__anon218
 AAudioStream_waitForStateChange	.\include\raylib\external\miniaudio.h	/^            ma_proc AAudioStream_waitForStateChange;$/;"	m	struct:ma_context::__anon207::__anon218
 AAudio_createStreamBuilder	.\include\raylib\external\miniaudio.h	/^            ma_proc AAudio_createStreamBuilder;$/;"	m	struct:ma_context::__anon207::__anon218
-ACORNASSAULT	.\move_impl.cpp	/^void MoveImplementation::ACORNASSAULT(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+ACORNASSAULT	.\src\move_impl.cpp	/^void MoveImplementation::ACORNASSAULT(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 ACTOR_H	.\include\actor.h	3;"	d
 ADDRESS_ANY	.\include\raylib\rnet.h	196;"	d
 ADDRESS_BROADCAST	.\include\raylib\rnet.h	198;"	d
@@ -59,16 +59,16 @@ ADDRESS_NONE	.\include\raylib\rnet.h	199;"	d
 ADDRESS_TYPE_ANY	.\include\raylib\rnet.h	189;"	d
 ADDRESS_TYPE_IPV4	.\include\raylib\rnet.h	190;"	d
 ADDRESS_TYPE_IPV6	.\include\raylib\rnet.h	191;"	d
-AIMakeCTPs	.\combat.cpp	/^void AIMakeCTPs(CombatData &cbtD){$/;"	f
-AIMakeCTPs	.\test.cpp	/^void AIMakeCTPs(CombatData &cbtD){$/;"	f
+AIMakeCTPs	.\src\combat.cpp	/^void AIMakeCTPs(CombatData &cbtD){$/;"	f
+AIMakeCTPs	.\src\test.cpp	/^void AIMakeCTPs(CombatData &cbtD){$/;"	f
 ALIGN	.\include\raylib\external\jar_xm.h	620;"	d
 ALIGN_PTR	.\include\raylib\external\jar_xm.h	621;"	d
 ALLMOVES_H	.\include\allmoves.h	3;"	d
-ALLOYASSAULT	.\move_impl.cpp	/^void MoveImplementation::ALLOYASSAULT(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+ALLOYASSAULT	.\src\move_impl.cpp	/^void MoveImplementation::ALLOYASSAULT(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 ALPHA_THRESHOLD	.\include\raylib\textures.c	1058;"	d	file:
 ANGLE_WINDOWSSTORE_H_	.\include\raylib\external\ANGLE\angle_windowsstore.h	9;"	d
-ANNEAL	.\move_impl.cpp	/^void MoveImplementation::ANNEAL(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-ANODIZE	.\move_impl.cpp	/^void MoveImplementation::ANODIZE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+ANNEAL	.\src\move_impl.cpp	/^void MoveImplementation::ANNEAL(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+ANODIZE	.\src\move_impl.cpp	/^void MoveImplementation::ANODIZE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 ANativeActivity_onCreate	.\include\raylib\external\android\native_app_glue\android_native_app_glue.c	/^void ANativeActivity_onCreate(ANativeActivity* activity, void* savedState,$/;"	f
 APIENTRY	.\include\raylib\external\glad.h	33;"	d
 APIENTRY	.\include\raylib\external\glad.h	37;"	d
@@ -95,7 +95,7 @@ APP_CMD_STOP	.\include\raylib\external\android\native_app_glue\android_native_ap
 APP_CMD_TERM_WINDOW	.\include\raylib\external\android\native_app_glue\android_native_app_glue.h	/^    APP_CMD_TERM_WINDOW,$/;"	e	enum:__anon18
 APP_CMD_WINDOW_REDRAW_NEEDED	.\include\raylib\external\android\native_app_glue\android_native_app_glue.h	/^    APP_CMD_WINDOW_REDRAW_NEEDED,$/;"	e	enum:__anon18
 APP_CMD_WINDOW_RESIZED	.\include\raylib\external\android\native_app_glue\android_native_app_glue.h	/^    APP_CMD_WINDOW_RESIZED,$/;"	e	enum:__anon18
-AQUAPRISON	.\move_impl.cpp	/^void MoveImplementation::AQUAPRISON(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+AQUAPRISON	.\src\move_impl.cpp	/^void MoveImplementation::AQUAPRISON(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 ARB_context_flush_control	.\include\raylib\external\glfw\src\glx_context.h	/^    GLFWbool        ARB_context_flush_control;$/;"	m	struct:_GLFWlibraryGLX
 ARB_context_flush_control	.\include\raylib\external\glfw\src\wgl_context.h	/^    GLFWbool                            ARB_context_flush_control;$/;"	m	struct:_GLFWlibraryWGL
 ARB_create_context	.\include\raylib\external\glfw\src\glx_context.h	/^    GLFWbool        ARB_create_context;$/;"	m	struct:_GLFWlibraryGLX
@@ -127,11 +127,11 @@ Activate	.\include\raylib\external\miniaudio.h	/^        HRESULT (STDMETHODCALLT
 ActivateCompleted	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * ActivateCompleted)(ma_completion_handler_uwp* pThis, ma_IActivateAudioInterfaceAsyncOperation* pActivateOperation);$/;"	m	struct:__anon275
 Actor	.\include\actor.h	/^	Actor(){$/;"	f	struct:Actor
 Actor	.\include\actor.h	/^struct Actor{$/;"	s
-AddCharacters	.\player.cpp	/^void AddCharacters(Player &player){$/;"	f
-AddFromAliveList	.\combat.cpp	/^void AddFromAliveList(CombatData &cbtD, int &prevActive){$/;"	f
-AddFromAliveList	.\test.cpp	/^void AddFromAliveList(CombatData &cbtD, int &prevActive){$/;"	f
-AddNumArgMessage	.\console.cpp	/^void AddNumArgMessage(Console &c, unsigned int exact){$/;"	f
-AddNumArgMessage	.\console.cpp	/^void AddNumArgMessage(Console &c, unsigned int min, unsigned int max){$/;"	f
+AddCharacters	.\src\player.cpp	/^void AddCharacters(Player &player){$/;"	f
+AddFromAliveList	.\src\combat.cpp	/^void AddFromAliveList(CombatData &cbtD, int &prevActive){$/;"	f
+AddFromAliveList	.\src\test.cpp	/^void AddFromAliveList(CombatData &cbtD, int &prevActive){$/;"	f
+AddNumArgMessage	.\src\console.cpp	/^void AddNumArgMessage(Console &c, unsigned int exact){$/;"	f
+AddNumArgMessage	.\src\console.cpp	/^void AddNumArgMessage(Console &c, unsigned int min, unsigned int max){$/;"	f
 AddRef	.\include\raylib\external\miniaudio.h	/^        ULONG   (STDMETHODCALLTYPE * AddRef)        (ma_IActivateAudioInterfaceAsyncOperation* pThis);$/;"	m	struct:__anon268
 AddRef	.\include\raylib\external\miniaudio.h	/^        ULONG   (STDMETHODCALLTYPE * AddRef)        (ma_IMMDevice* pThis);$/;"	m	struct:__anon267
 AddRef	.\include\raylib\external\miniaudio.h	/^        ULONG   (STDMETHODCALLTYPE * AddRef)        (ma_IMMDeviceCollection* pThis);$/;"	m	struct:__anon266
@@ -151,13 +151,13 @@ AddRef	.\include\raylib\external\miniaudio.h	/^    ULONG   (STDMETHODCALLTYPE * 
 AddRef	.\include\raylib\external\miniaudio.h	/^    ULONG   (STDMETHODCALLTYPE * AddRef)        (ma_IUnknown* pThis);$/;"	m	struct:__anon263
 AddRef	.\include\raylib\external\miniaudio.h	/^    ULONG   (STDMETHODCALLTYPE * AddRef)        (ma_completion_handler_uwp* pThis);$/;"	m	struct:__anon275
 AddSocket	.\include\raylib\rnet.h	/^int AddSocket(SocketSet *set, Socket *sock)$/;"	f
-AddToCurrentMoves	.\moveinventory.cpp	/^void AddToCurrentMoves(Player &player, int &prevActive){$/;"	f
+AddToCurrentMoves	.\src\moveinventory.cpp	/^void AddToCurrentMoves(Player &player, int &prevActive){$/;"	f
 AddressInformation	.\include\raylib\rnet.h	/^typedef struct _AddressInformation *AddressInformation;$/;"	t	typeref:struct:_AddressInformation
 AdjustWindowRectExForDpi	.\include\raylib\external\glfw\src\win32_platform.h	244;"	d
 AdjustWindowRectExForDpi_	.\include\raylib\external\glfw\src\win32_platform.h	/^        PFN_AdjustWindowRectExForDpi    AdjustWindowRectExForDpi_;$/;"	m	struct:_GLFWlibraryWin32::__anon103
 AllMoves	.\include\move.h	/^struct AllMoves{$/;"	s
-AllocEDiff	.\move_impl.cpp	/^inline EffectDiff *AllocEDiff(){$/;"	f
-AllocEDiff	.\move_impl.cpp	/^inline EffectDiff *AllocEDiff(size_t size){ \/\/WARNING: Make the assumption that size > 0$/;"	f
+AllocEDiff	.\src\move_impl.cpp	/^inline EffectDiff *AllocEDiff(){$/;"	f
+AllocEDiff	.\src\move_impl.cpp	/^inline EffectDiff *AllocEDiff(size_t size){ \/\/WARNING: Make the assumption that size > 0$/;"	f
 AllocGamma	.\include\raylib\external\glfw\src\x11_platform.h	/^        PFN_XRRAllocGamma AllocGamma;$/;"	m	struct:_GLFWlibraryX11::__anon113
 AllocList	.\include\raylib\rmem.h	/^typedef struct AllocList {$/;"	s
 AllocList	.\include\raylib\rmem.h	/^} AllocList;$/;"	t	typeref:struct:AllocList
@@ -169,30 +169,30 @@ AndroidButton	.\include\raylib\raylib.h	/^} AndroidButton;$/;"	t	typeref:enum:__
 AndroidCommandCallback	.\include\raylib\core.c	/^static void AndroidCommandCallback(struct android_app *app, int32_t cmd)$/;"	f	file:
 AndroidInputCallback	.\include\raylib\core.c	/^static int32_t AndroidInputCallback(struct android_app *app, AInputEvent *event)$/;"	f	file:
 Animation	.\include\sprite.h	/^struct Animation{$/;"	s
-ApplyCost	.\move_impl.cpp	/^void ApplyCost(CasterMove &cm){$/;"	f
-ApplyDamage	.\move_impl.cpp	/^void ApplyDamage(Actor &target, CasterMove &cm){$/;"	f
-ApplyDisableDiff	.\moveeffect.cpp	/^void ApplyDisableDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
-ApplyEffect	.\combat.cpp	/^void ApplyEffect(Actor &target, int id){$/;"	f
-ApplyEffectDiff	.\moveeffect.cpp	/^void ApplyEffectDiff(Actor &actor, MoveEffect &meff){$/;"	f
-ApplyHPBonusDiff	.\moveeffect.cpp	/^void ApplyHPBonusDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
-ApplyHeal	.\move_impl.cpp	/^void ApplyHeal(Actor &target, CasterMove &cm){$/;"	f
-ApplyImmunityDiff	.\moveeffect.cpp	/^void ApplyImmunityDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
-ApplyIncapicateDiff	.\moveeffect.cpp	/^void ApplyIncapicateDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
-ApplyMATKDiff	.\moveeffect.cpp	/^void ApplyMATKDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
-ApplyMDEFDiff	.\moveeffect.cpp	/^void ApplyMDEFDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
-ApplyMPBonusDiff	.\moveeffect.cpp	/^void ApplyMPBonusDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
-ApplyMaxHPDiff	.\moveeffect.cpp	/^void ApplyMaxHPDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
-ApplyMaxMPDiff	.\moveeffect.cpp	/^void ApplyMaxMPDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
-ApplyPATKDiff	.\moveeffect.cpp	/^void ApplyPATKDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
-ApplyPDEFDiff	.\moveeffect.cpp	/^void ApplyPDEFDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
-ApplyTypeDiff	.\moveeffect.cpp	/^void ApplyTypeDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
+ApplyCost	.\src\move_impl.cpp	/^void ApplyCost(CasterMove &cm){$/;"	f
+ApplyDamage	.\src\move_impl.cpp	/^void ApplyDamage(Actor &target, CasterMove &cm){$/;"	f
+ApplyDisableDiff	.\src\moveeffect.cpp	/^void ApplyDisableDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
+ApplyEffect	.\src\combat.cpp	/^void ApplyEffect(Actor &target, int id){$/;"	f
+ApplyEffectDiff	.\src\moveeffect.cpp	/^void ApplyEffectDiff(Actor &actor, MoveEffect &meff){$/;"	f
+ApplyHPBonusDiff	.\src\moveeffect.cpp	/^void ApplyHPBonusDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
+ApplyHeal	.\src\move_impl.cpp	/^void ApplyHeal(Actor &target, CasterMove &cm){$/;"	f
+ApplyImmunityDiff	.\src\moveeffect.cpp	/^void ApplyImmunityDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
+ApplyIncapicateDiff	.\src\moveeffect.cpp	/^void ApplyIncapicateDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
+ApplyMATKDiff	.\src\moveeffect.cpp	/^void ApplyMATKDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
+ApplyMDEFDiff	.\src\moveeffect.cpp	/^void ApplyMDEFDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
+ApplyMPBonusDiff	.\src\moveeffect.cpp	/^void ApplyMPBonusDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
+ApplyMaxHPDiff	.\src\moveeffect.cpp	/^void ApplyMaxHPDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
+ApplyMaxMPDiff	.\src\moveeffect.cpp	/^void ApplyMaxMPDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
+ApplyPATKDiff	.\src\moveeffect.cpp	/^void ApplyPATKDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
+ApplyPDEFDiff	.\src\moveeffect.cpp	/^void ApplyPDEFDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
+ApplyTypeDiff	.\src\moveeffect.cpp	/^void ApplyTypeDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
 ArpIndex	.\include\raylib\external\jar_mod.h	/^    muchar  ArpIndex;$/;"	m	struct:__anon126
 Arpperiods	.\include\raylib\external\jar_mod.h	/^    mint    Arpperiods[3];$/;"	m	struct:__anon126
-AssignElementGrid	.\inventory.cpp	/^void AssignElementGrid(Grid *g, Actor &a){$/;"	f
-AssignStats	.\actor.cpp	/^void AssignStats(Actor *a){$/;"	f
-AssignTargets	.\combat.cpp	/^void AssignTargets(CombatData &cbtD){$/;"	f
-AssignTargets	.\test.cpp	/^void AssignTargets(CombatData &cbtD){$/;"	f
-AssignType	.\actor.cpp	/^void AssignType(Actor &a){$/;"	f
+AssignElementGrid	.\src\inventory.cpp	/^void AssignElementGrid(Grid *g, Actor &a){$/;"	f
+AssignStats	.\src\actor.cpp	/^void AssignStats(Actor *a){$/;"	f
+AssignTargets	.\src\combat.cpp	/^void AssignTargets(CombatData &cbtD){$/;"	f
+AssignTargets	.\src\test.cpp	/^void AssignTargets(CombatData &cbtD){$/;"	f
+AssignType	.\src\actor.cpp	/^void AssignType(Actor &a){$/;"	f
 AudioBuffer	.\include\raylib\raudio.c	2138;"	d	file:
 AudioBuffer	.\include\raylib\raudio.c	291;"	d	file:
 AudioBufferUsage	.\include\raylib\raudio.c	/^} AudioBufferUsage;$/;"	t	typeref:enum:__anon400	file:
@@ -220,8 +220,8 @@ AudioUnitRender	.\include\raylib\external\miniaudio.h	/^            ma_proc Audi
 AudioUnitSetProperty	.\include\raylib\external\miniaudio.h	/^            ma_proc AudioUnitSetProperty;$/;"	m	struct:ma_context::__anon207::__anon214
 B	.\include\raylib\external\stb_vorbis.h	/^   float *A[2],*B[2],*C[2];$/;"	m	struct:stb_vorbis
 BACKGROUND_COLOR	.\include\raylib\raygui.h	/^    BACKGROUND_COLOR,$/;"	e	enum:__anon410
-BALLANDCHAIN	.\move_impl.cpp	/^void MoveImplementation::BALLANDCHAIN(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-BARBEDHUSK	.\move_impl.cpp	/^void MoveImplementation::BARBEDHUSK(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+BALLANDCHAIN	.\src\move_impl.cpp	/^void MoveImplementation::BALLANDCHAIN(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+BARBEDHUSK	.\src\move_impl.cpp	/^void MoveImplementation::BARBEDHUSK(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 BASE	.\include\raylib\raygui.h	/^typedef enum { BORDER = 0, BASE, TEXT, OTHER } GuiPropertyElement;$/;"	e	enum:__anon423
 BASECAP	.\include\team.h	/^const int BASECAP = 128; \/\/experience cap of first level$/;"	v
 BASE_COLOR_DISABLED	.\include\raylib\raygui.h	/^    BASE_COLOR_DISABLED,$/;"	e	enum:__anon409
@@ -240,7 +240,7 @@ BATTERY_TYPE_NIMH	.\include\raylib\external\glfw\deps\mingw\xinput.h	144;"	d
 BATTERY_TYPE_UNKNOWN	.\include\raylib\external\glfw\deps\mingw\xinput.h	145;"	d
 BATTERY_TYPE_WIRED	.\include\raylib\external\glfw\deps\mingw\xinput.h	142;"	d
 BEIGE	.\include\raylib\raylib.h	146;"	d
-BINDINGPAIN	.\move_impl.cpp	/^void MoveImplementation::BINDINGPAIN(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+BINDINGPAIN	.\src\move_impl.cpp	/^void MoveImplementation::BINDINGPAIN(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 BIT	.\include\raylib\core.c	4739;"	d	file:
 BITMAPINFOHEADER	.\include\raylib\raudio.c	/^} BITMAPINFOHEADER, *PBITMAPINFOHEADER;$/;"	t	typeref:struct:tagBITMAPINFOHEADER	file:
 BITMAP_ALPHA_THRESHOLD	.\include\raylib\text.c	490;"	d	file:
@@ -251,17 +251,17 @@ BIT_CHECK	.\include\raylib\text.c	127;"	d	file:
 BIT_CLEAR	.\include\raylib\raygui.h	3165;"	d
 BIT_SET	.\include\raylib\raygui.h	3155;"	d
 BLACK	.\include\raylib\raylib.h	151;"	d
-BLACKHOLE	.\move_impl.cpp	/^void MoveImplementation::BLACKHOLE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+BLACKHOLE	.\src\move_impl.cpp	/^void MoveImplementation::BLACKHOLE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 BLANK	.\include\raylib\raylib.h	152;"	d
-BLAZE	.\move_impl.cpp	/^void MoveImplementation::BLAZE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+BLAZE	.\src\move_impl.cpp	/^void MoveImplementation::BLAZE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 BLEND_ADDITIVE	.\include\raylib\raylib.h	/^    BLEND_ADDITIVE,         \/\/ Blend textures adding colors$/;"	e	enum:__anon441
 BLEND_ADDITIVE	.\include\raylib\rlgl.h	/^        BLEND_ADDITIVE,$/;"	e	enum:__anon452
 BLEND_ALPHA	.\include\raylib\raylib.h	/^    BLEND_ALPHA = 0,        \/\/ Blend textures considering alpha (default)$/;"	e	enum:__anon441
 BLEND_ALPHA	.\include\raylib\rlgl.h	/^        BLEND_ALPHA = 0,$/;"	e	enum:__anon452
 BLEND_MULTIPLIED	.\include\raylib\raylib.h	/^    BLEND_MULTIPLIED        \/\/ Blend textures multiplying colors$/;"	e	enum:__anon441
 BLEND_MULTIPLIED	.\include\raylib\rlgl.h	/^        BLEND_MULTIPLIED$/;"	e	enum:__anon452
-BLOODCURDLE	.\move_impl.cpp	/^void MoveImplementation::BLOODCURDLE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-BLOOM	.\move_impl.cpp	/^void MoveImplementation::BLOOM(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+BLOODCURDLE	.\src\move_impl.cpp	/^void MoveImplementation::BLOODCURDLE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+BLOOM	.\src\move_impl.cpp	/^void MoveImplementation::BLOOM(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 BLUE	.\include\raylib\raylib.h	141;"	d
 BONE_NAME_LENGTH	.\include\raylib\models.c	3007;"	d	file:
 BORDER	.\include\raylib\raygui.h	/^typedef enum { BORDER = 0, BASE, TEXT, OTHER } GuiPropertyElement;$/;"	e	enum:__anon423
@@ -270,7 +270,7 @@ BORDER_COLOR_FOCUSED	.\include\raylib\raygui.h	/^    BORDER_COLOR_FOCUSED,$/;"	e
 BORDER_COLOR_NORMAL	.\include\raylib\raygui.h	/^    BORDER_COLOR_NORMAL = 0,$/;"	e	enum:__anon409
 BORDER_COLOR_PRESSED	.\include\raylib\raygui.h	/^    BORDER_COLOR_PRESSED,$/;"	e	enum:__anon409
 BORDER_WIDTH	.\include\raylib\raygui.h	/^    BORDER_WIDTH,$/;"	e	enum:__anon409
-BRASSKNUCKLES	.\move_impl.cpp	/^void MoveImplementation::BRASSKNUCKLES(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+BRASSKNUCKLES	.\src\move_impl.cpp	/^void MoveImplementation::BRASSKNUCKLES(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 BRITTLE_DEBUFF_BONUS	.\include\moveeffect.h	/^const float BRITTLE_DEBUFF_BONUS = .15f;$/;"	v
 BROWN	.\include\raylib\raylib.h	147;"	d
 BUFFER_SIZE	.\include\raylib\external\stb_vorbis.h	5075;"	d
@@ -349,7 +349,7 @@ CAMERA_THIRD_PERSON_DISTANCE_CLAMP	.\include\raylib\camera.h	179;"	d
 CAMERA_THIRD_PERSON_MAX_CLAMP	.\include\raylib\camera.h	181;"	d
 CAMERA_THIRD_PERSON_MIN_CLAMP	.\include\raylib\camera.h	180;"	d
 CAMERA_THIRD_PERSON_OFFSET	.\include\raylib\camera.h	182;"	d
-CANNONBALL	.\move_impl.cpp	/^void MoveImplementation::CANNONBALL(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+CANNONBALL	.\src\move_impl.cpp	/^void MoveImplementation::CANNONBALL(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 CFRelease	.\include\raylib\external\miniaudio.h	/^            ma_proc CFRelease;$/;"	m	struct:ma_context::__anon207::__anon214
 CFStringGetCString	.\include\raylib\external\miniaudio.h	/^            ma_proc CFStringGetCString;$/;"	m	struct:ma_context::__anon207::__anon214
 CGLTF_ATOF	.\include\raylib\external\cgltf.h	715;"	d
@@ -370,8 +370,8 @@ CGLTF_PTRFIXUP	.\include\raylib\external\cgltf.h	1933;"	d
 CGLTF_PTRFIXUP_REQ	.\include\raylib\external\cgltf.h	1934;"	d
 CGLTF_PTRINDEX	.\include\raylib\external\cgltf.h	1932;"	d
 CHANGEFILTERSTRUCT	.\include\raylib\external\glfw\src\win32_platform.h	/^} CHANGEFILTERSTRUCT;$/;"	t	typeref:struct:__anon96
-CHAOSCLAW	.\move_impl.cpp	/^void MoveImplementation::CHAOSCLAW(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-CHARGE	.\move_impl.cpp	/^void MoveImplementation::CHARGE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+CHAOSCLAW	.\src\move_impl.cpp	/^void MoveImplementation::CHAOSCLAW(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+CHARGE	.\src\move_impl.cpp	/^void MoveImplementation::CHARGE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 CHARGED_BUFF_BONUS	.\include\moveeffect.h	/^const float CHARGED_BUFF_BONUS = .15f;$/;"	v
 CHDIR	.\include\raylib\core.c	180;"	d	file:
 CHDIR	.\include\raylib\core.c	185;"	d	file:
@@ -379,8 +379,8 @@ CHDIR	.\include\raylib\models.c	55;"	d	file:
 CHDIR	.\include\raylib\models.c	58;"	d	file:
 CHECKBOX	.\include\raylib\raygui.h	/^    CHECKBOX,$/;"	e	enum:__anon408
 CHECK_PADDING	.\include\raylib\raygui.h	/^    CHECK_PADDING = 16$/;"	e	enum:__anon414
-CHILLINGBLAST	.\move_impl.cpp	/^void MoveImplementation::CHILLINGBLAST(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-CHROMEPLATED	.\move_impl.cpp	/^void MoveImplementation::CHROMEPLATED(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+CHILLINGBLAST	.\src\move_impl.cpp	/^void MoveImplementation::CHILLINGBLAST(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+CHROMEPLATED	.\src\move_impl.cpp	/^void MoveImplementation::CHROMEPLATED(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 CIRCLE_ERROR_RATE	.\include\raylib\shapes.c	218;"	d	file:
 CIRCLE_ERROR_RATE	.\include\raylib\shapes.c	311;"	d	file:
 CIRCLE_ERROR_RATE	.\include\raylib\shapes.c	459;"	d	file:
@@ -392,8 +392,8 @@ CLIPBOARD	.\include\raylib\external\glfw\src\x11_platform.h	/^    Atom          
 CLIPBOARD_MANAGER	.\include\raylib\external\glfw\src\x11_platform.h	/^    Atom            CLIPBOARD_MANAGER;$/;"	m	struct:_GLFWlibraryX11
 CLITERAL	.\include\raylib\raylib.h	121;"	d
 CLITERAL	.\include\raylib\raylib.h	123;"	d
-CLOSEDCIRUIT	.\move_impl.cpp	/^void MoveImplementation::CLOSEDCIRUIT(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-COALESCE	.\move_impl.cpp	/^void MoveImplementation::COALESCE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+CLOSEDCIRUIT	.\src\move_impl.cpp	/^void MoveImplementation::CLOSEDCIRUIT(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+COALESCE	.\src\move_impl.cpp	/^void MoveImplementation::COALESCE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 COLORBARALPHA_CHECKED_SIZE	.\include\raylib\raygui.h	2406;"	d
 COLORPICKER	.\include\raylib\raygui.h	/^    COLORPICKER,$/;"	e	enum:__anon408
 COLOR_EQUAL	.\include\raylib\text.c	366;"	d	file:
@@ -441,11 +441,11 @@ COMPRESSED_PVRT_RGBA	.\include\raylib\rlgl.h	/^        COMPRESSED_PVRT_RGBA,    
 COMPRESSION_QUALITY_DEFLATE	.\include\raylib\core.c	2170;"	d	file:
 COM_NO_WINDOWS_H	.\include\raylib\external\glfw\deps\mingw\dinput.h	22;"	d
 CONSOLE_H	.\include\console.h	3;"	d
-COPPERCUTLASS	.\move_impl.cpp	/^void MoveImplementation::COPPERCUTLASS(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+COPPERCUTLASS	.\src\move_impl.cpp	/^void MoveImplementation::COPPERCUTLASS(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 CORE	.\include\raylib\core.c	/^static CoreData CORE = { 0 };               \/\/ Global CORE state context$/;"	v	file:
 CPOINT	.\include\raylib\external\glfw\deps\mingw\dinput.h	/^} CPOINT, *PCPOINT;$/;"	t	typeref:struct:_CPOINT
-CRUSH	.\move_impl.cpp	/^void MoveImplementation::CRUSH(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-CRYSTALCAGE	.\move_impl.cpp	/^void MoveImplementation::CRYSTALCAGE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+CRUSH	.\src\move_impl.cpp	/^void MoveImplementation::CRUSH(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+CRYSTALCAGE	.\src\move_impl.cpp	/^void MoveImplementation::CRYSTALCAGE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 CUBEMAP_AUTO_DETECT	.\include\raylib\raylib.h	/^    CUBEMAP_AUTO_DETECT = 0,        \/\/ Automatically detect layout type$/;"	e	enum:__anon438
 CUBEMAP_CROSS_FOUR_BY_THREE	.\include\raylib\raylib.h	/^    CUBEMAP_CROSS_FOUR_BY_THREE,    \/\/ Layout is defined by a 4x3 cross with cubemap faces$/;"	e	enum:__anon438
 CUBEMAP_CROSS_THREE_BY_FOUR	.\include\raylib\raylib.h	/^    CUBEMAP_CROSS_THREE_BY_FOUR,    \/\/ Layout is defined by a 3x4 cross with cubemap faces$/;"	e	enum:__anon438
@@ -455,7 +455,7 @@ CUBEMAP_PANORAMA	.\include\raylib\raylib.h	/^    CUBEMAP_PANORAMA               
 CURSED_DEBUFF_BONUS	.\include\moveeffect.h	/^const float CURSED_DEBUFF_BONUS = .15f;$/;"	v
 CUSTOM_MESH_GEN_CUBE	.\include\raylib\models.c	1427;"	d	file:
 CUSTOM_MESH_GEN_PLANE	.\include\raylib\models.c	1292;"	d	file:
-CalcLevelCap	.\team.cpp	/^void CalcLevelCap(const int &level){$/;"	f
+CalcLevelCap	.\src\team.cpp	/^void CalcLevelCap(const int &level){$/;"	f
 Camera	.\include\raylib\camera.h	/^    typedef Camera3D Camera;    \/\/ Camera type fallback, defaults to Camera3D$/;"	t
 Camera	.\include\raylib\raylib.h	/^typedef Camera3D Camera;    \/\/ Camera type fallback, defaults to Camera3D$/;"	t
 Camera	.\include\raylib\rlgl.h	/^    typedef struct Camera {$/;"	s
@@ -472,13 +472,13 @@ CameraMode	.\include\raylib\raylib.h	/^} CameraMode;$/;"	t	typeref:enum:__anon44
 CameraMove	.\include\raylib\camera.h	/^} CameraMove;$/;"	t	typeref:enum:__anon3
 CameraType	.\include\raylib\camera.h	/^    } CameraType;$/;"	t	typeref:enum:__anon2
 CameraType	.\include\raylib\raylib.h	/^} CameraType;$/;"	t	typeref:enum:__anon444
-CanExecMoves	.\combat.cpp	/^bool CanExecMoves(CombatData &cbtD){$/;"	f
-CanExecMoves	.\test.cpp	/^bool CanExecMoves(CombatData &cbtD){$/;"	f
+CanExecMoves	.\src\combat.cpp	/^bool CanExecMoves(CombatData &cbtD){$/;"	f
+CanExecMoves	.\src\test.cpp	/^bool CanExecMoves(CombatData &cbtD){$/;"	f
 CasterMove	.\include\combat.h	/^struct CasterMove{$/;"	s
-CasterTargetsPair	.\combat.cpp	/^CasterTargetsPair::CasterTargetsPair(Actor *c, struct Move *m, const Vec<Actor *> &t){$/;"	f	class:CasterTargetsPair
 CasterTargetsPair	.\include\combat.h	/^	CasterTargetsPair(){$/;"	f	struct:CasterTargetsPair
 CasterTargetsPair	.\include\combat.h	/^struct CasterTargetsPair : CasterMove{$/;"	s
-CasterTargetsPair	.\test.cpp	/^CasterTargetsPair::CasterTargetsPair(Actor *c, struct Move *m, const Vec<Actor *> &t){$/;"	f	class:CasterTargetsPair
+CasterTargetsPair	.\src\combat.cpp	/^CasterTargetsPair::CasterTargetsPair(Actor *c, struct Move *m, const Vec<Actor *> &t){$/;"	f	class:CasterTargetsPair
+CasterTargetsPair	.\src\test.cpp	/^CasterTargetsPair::CasterTargetsPair(Actor *c, struct Move *m, const Vec<Actor *> &t){$/;"	f	class:CasterTargetsPair
 ChangeDirectory	.\include\raylib\core.c	/^bool ChangeDirectory(const char *dir)$/;"	f
 ChangeWindowMessageFilterEx	.\include\raylib\external\glfw\src\win32_platform.h	240;"	d
 ChangeWindowMessageFilterEx_	.\include\raylib\external\glfw\src\win32_platform.h	/^        PFN_ChangeWindowMessageFilterEx ChangeWindowMessageFilterEx_;$/;"	m	struct:_GLFWlibraryWin32::__anon103
@@ -500,29 +500,28 @@ CheckCollisionRaySphere	.\include\raylib\models.c	/^bool CheckCollisionRaySphere
 CheckCollisionRaySphereEx	.\include\raylib\models.c	/^bool CheckCollisionRaySphereEx(Ray ray, Vector3 center, float radius, Vector3 *collisionPoint)$/;"	f
 CheckCollisionRecs	.\include\raylib\shapes.c	/^bool CheckCollisionRecs(Rectangle rec1, Rectangle rec2)$/;"	f
 CheckCollisionSpheres	.\include\raylib\models.c	/^bool CheckCollisionSpheres(Vector3 centerA, float radiusA, Vector3 centerB, float radiusB)$/;"	f
-CheckForEleminoClicked	.\inventory.cpp	/^void CheckForEleminoClicked(Game &game){$/;"	f
-CheckLClickEvent	.\draggable.cpp	/^void CheckLClickEvent(Draggable &d){$/;"	f
-CheckLClickEvent	.\menu.cpp	/^void CheckLClickEvent(Menu &m){$/;"	f
-CheckLDown	.\draggable.cpp	/^void CheckLDown(Draggable &d){$/;"	f
-CheckLDown	.\elemino.cpp	/^void CheckLDown(Elemino &e){$/;"	f
-CheckLPressed	.\draggable.cpp	/^void CheckLPressed(Draggable &d){$/;"	f
-CheckLPressed	.\elemino.cpp	/^bool CheckLPressed(Elemino &e, Mouse &mouse){$/;"	f
-CheckLReleased	.\draggable.cpp	/^void CheckLReleased(Draggable &d){$/;"	f
-CheckLReleased	.\elemino.cpp	/^void CheckLReleased(Elemino &e, Mouse &mouse){$/;"	f
-CheckLUp	.\draggable.cpp	/^void CheckLUp(Draggable &d){$/;"	f
-CheckLUp	.\elemino.cpp	/^void CheckLUp(Elemino &e){$/;"	f
-CheckRClickEvent	.\draggable.cpp	/^void CheckRClickEvent(Draggable &d){$/;"	f
-CheckRClickEvent	.\menu.cpp	/^void CheckRClickEvent(Menu &m){$/;"	f
-CheckRDown	.\draggable.cpp	/^void CheckRDown(Draggable &d){$/;"	f
-CheckRPressed	.\draggable.cpp	/^void CheckRPressed(Draggable &d){$/;"	f
-CheckRReleased	.\draggable.cpp	/^void CheckRReleased(Draggable &d){$/;"	f
-CheckRUp	.\draggable.cpp	/^void CheckRUp(Draggable &d){$/;"	f
+CheckForEleminoClicked	.\src\inventory.cpp	/^void CheckForEleminoClicked(Game &game){$/;"	f
+CheckLClickEvent	.\src\draggable.cpp	/^void CheckLClickEvent(Draggable &d){$/;"	f
+CheckLClickEvent	.\src\menu.cpp	/^void CheckLClickEvent(Menu &m){$/;"	f
+CheckLDown	.\src\draggable.cpp	/^void CheckLDown(Draggable &d){$/;"	f
+CheckLDown	.\src\elemino.cpp	/^void CheckLDown(Elemino &e){$/;"	f
+CheckLPressed	.\src\draggable.cpp	/^void CheckLPressed(Draggable &d){$/;"	f
+CheckLPressed	.\src\elemino.cpp	/^bool CheckLPressed(Elemino &e, Mouse &mouse){$/;"	f
+CheckLReleased	.\src\draggable.cpp	/^void CheckLReleased(Draggable &d){$/;"	f
+CheckLReleased	.\src\elemino.cpp	/^void CheckLReleased(Elemino &e, Mouse &mouse){$/;"	f
+CheckLUp	.\src\draggable.cpp	/^void CheckLUp(Draggable &d){$/;"	f
+CheckLUp	.\src\elemino.cpp	/^void CheckLUp(Elemino &e){$/;"	f
+CheckRClickEvent	.\src\draggable.cpp	/^void CheckRClickEvent(Draggable &d){$/;"	f
+CheckRClickEvent	.\src\menu.cpp	/^void CheckRClickEvent(Menu &m){$/;"	f
+CheckRDown	.\src\draggable.cpp	/^void CheckRDown(Draggable &d){$/;"	f
+CheckRPressed	.\src\draggable.cpp	/^void CheckRPressed(Draggable &d){$/;"	f
+CheckRReleased	.\src\draggable.cpp	/^void CheckRReleased(Draggable &d){$/;"	f
+CheckRUp	.\src\draggable.cpp	/^void CheckRUp(Draggable &d){$/;"	f
 CheckSockets	.\include\raylib\rnet.h	/^int CheckSockets(SocketSet *set, unsigned int timeout)$/;"	f
 Clamp	.\include\raylib\raymath.h	/^RMDEF float Clamp(float value, float min, float max)$/;"	f
-Clamp	.\window.cpp	/^Vector2 Clamp(Vector2 &v, Vector2 min, Vector2 max){$/;"	f
-ClampValue	.\core_window_letterbox.c	/^Vector2 ClampValue(Vector2 value, Vector2 min, Vector2 max)$/;"	f
+Clamp	.\src\window.cpp	/^Vector2 Clamp(const Vector2 &v, Vector2 min, Vector2 max){$/;"	f
 ClearBackground	.\include\raylib\core.c	/^void ClearBackground(Color color)$/;"	f
-ClearCommand	.\console.cpp	/^void ClearCommand(Console &c){$/;"	f
+ClearCommand	.\src\console.cpp	/^void ClearCommand(Console &c){$/;"	f
 ClearDirectoryFiles	.\include\raylib\core.c	/^void ClearDirectoryFiles(void)$/;"	f
 ClearDroppedFiles	.\include\raylib\core.c	/^void ClearDroppedFiles(void)$/;"	f
 Clip	.\include\raylib\physac.h	/^static int Clip(Vector2 normal, float clip, Vector2 *faceA, Vector2 *faceB)$/;"	f
@@ -551,7 +550,7 @@ ColorToHSV	.\include\raylib\core.c	/^Vector3 ColorToHSV(Color color)$/;"	f
 ColorToInt	.\include\raylib\core.c	/^int ColorToInt(Color color)$/;"	f
 ColorToInt	.\include\raylib\raygui.h	/^static int ColorToInt(Color color)$/;"	f
 CombatData	.\include\combat.h	/^struct CombatData{$/;"	s
-CombatState	.\game.cpp	/^int CombatState(Game &game){$/;"	f
+CombatState	.\src\game.cpp	/^int CombatState(Game &game){$/;"	f
 Command	.\include\console.h	/^	enum Command{$/;"	g	namespace:Dev
 Command	.\include\raylib\external\tinyobj_loader_c.h	/^} Command;$/;"	t	typeref:struct:__anon384
 CommandType	.\include\raylib\external\tinyobj_loader_c.h	/^} CommandType;$/;"	t	typeref:enum:__anon383
@@ -559,11 +558,11 @@ Commit	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * 
 Compact	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * Compact)             (ma_IDirectSound* pThis);$/;"	m	struct:__anon284
 CompileShader	.\include\raylib\rlgl.h	/^static unsigned int CompileShader(const char *shaderStr, int type)$/;"	f
 CompressData	.\include\raylib\core.c	/^unsigned char *CompressData(unsigned char *data, int dataLength, int *compDataLength)$/;"	f
-ComputeOffsets	.\elemino.cpp	/^void ComputeOffsets(Elemino &e, Vector2 point){$/;"	f
+ComputeOffsets	.\src\elemino.cpp	/^void ComputeOffsets(Elemino &e, Vector2 point){$/;"	f
 ConfigFlag	.\include\raylib\raylib.h	/^} ConfigFlag;$/;"	t	typeref:enum:__anon425
 Console	.\include\console.h	/^	Console(){$/;"	f	struct:Console
 Console	.\include\console.h	/^struct Console{$/;"	s
-ConsoleCommand	.\console.cpp	/^void ConsoleCommand(Console &c, Game &game){$/;"	f
+ConsoleCommand	.\src\console.cpp	/^void ConsoleCommand(Console &c, Game &game){$/;"	f
 ConvertHSVtoRGB	.\include\raylib\raygui.h	/^static Vector3 ConvertHSVtoRGB(Vector3 hsv)$/;"	f
 ConvertRGBtoHSV	.\include\raylib\raygui.h	/^static Vector3 ConvertRGBtoHSV(Vector3 rgb)$/;"	f
 CopyCurrentKeyboardLayoutInputSource	.\include\raylib\external\glfw\src\cocoa_platform.h	/^        PFN_TISCopyCurrentKeyboardLayoutInputSource CopyCurrentKeyboardLayoutInputSource;$/;"	m	struct:_GLFWlibraryNS::__anon85
@@ -580,8 +579,8 @@ CreateContextAttribs	.\include\raylib\external\glfw\src\osmesa_context.h	/^    P
 CreateContextAttribsARB	.\include\raylib\external\glfw\src\glx_context.h	/^    PFNGLXCREATECONTEXTATTRIBSARBPROC   CreateContextAttribsARB;$/;"	m	struct:_GLFWlibraryGLX
 CreateContextAttribsARB	.\include\raylib\external\glfw\src\wgl_context.h	/^    PFNWGLCREATECONTEXTATTRIBSARBPROC   CreateContextAttribsARB;$/;"	m	struct:_GLFWlibraryWGL
 CreateContextExt	.\include\raylib\external\glfw\src\osmesa_context.h	/^    PFN_OSMesaCreateContextExt      CreateContextExt;$/;"	m	struct:_GLFWlibraryOSMesa
-CreateGoons	.\combat.cpp	/^void CreateGoons(CombatData &cbtD){$/;"	f
-CreateGoons	.\test.cpp	/^void CreateGoons(CombatData &cbtD){$/;"	f
+CreateGoons	.\src\combat.cpp	/^void CreateGoons(CombatData &cbtD){$/;"	f
+CreateGoons	.\src\test.cpp	/^void CreateGoons(CombatData &cbtD){$/;"	f
 CreateMemPool	.\include\raylib\rmem.h	/^MemPool CreateMemPool(const size_t size)$/;"	f
 CreateMemPoolFromBuffer	.\include\raylib\rmem.h	/^MemPool CreateMemPoolFromBuffer(void *buf, const size_t size)$/;"	f
 CreateNewContext	.\include\raylib\external\glfw\src\glx_context.h	/^    PFNGLXCREATENEWCONTEXTPROC          CreateNewContext;$/;"	m	struct:_GLFWlibraryGLX
@@ -607,13 +606,13 @@ DARKBROWN	.\include\raylib\raylib.h	148;"	d
 DARKGRAY	.\include\raylib\raylib.h	130;"	d
 DARKGREEN	.\include\raylib\raylib.h	139;"	d
 DARKPURPLE	.\include\raylib\raylib.h	145;"	d
-DAZZLINGLIGHTS	.\move_impl.cpp	/^void MoveImplementation::DAZZLINGLIGHTS(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+DAZZLINGLIGHTS	.\src\move_impl.cpp	/^void MoveImplementation::DAZZLINGLIGHTS(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 DEBUG	.\include\raylib\external\jar_xm.h	2582;"	d
 DEBUG	.\include\raylib\external\jar_xm.h	2583;"	d
 DEBUG	.\include\raylib\external\jar_xm.h	318;"	d
 DEBUG	.\include\raylib\external\jar_xm.h	323;"	d
 DEBUG_ERR	.\include\raylib\external\jar_xm.h	2588;"	d
-DECAY	.\move_impl.cpp	/^void MoveImplementation::DECAY(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+DECAY	.\src\move_impl.cpp	/^void MoveImplementation::DECAY(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 DECLARE_INTERFACE_	.\include\raylib\external\glfw\deps\mingw\dinput.h	/^DECLARE_INTERFACE_(IDirectInput2A,IDirectInputA)$/;"	f
 DECLARE_INTERFACE_	.\include\raylib\external\glfw\deps\mingw\dinput.h	/^DECLARE_INTERFACE_(IDirectInput2W,IDirectInputW)$/;"	f
 DECLARE_INTERFACE_	.\include\raylib\external\glfw\deps\mingw\dinput.h	/^DECLARE_INTERFACE_(IDirectInput7A,IDirectInput2A)$/;"	f
@@ -655,8 +654,8 @@ DEFAULT_TTF_NUMCHARS	.\include\raylib\text.c	300;"	d	file:
 DEG2RAD	.\include\raylib\camera.h	142;"	d
 DEG2RAD	.\include\raylib\raylib.h	99;"	d
 DEG2RAD	.\include\raylib\raymath.h	82;"	d
-DELUGE	.\move_impl.cpp	/^void MoveImplementation::DELUGE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-DEWPOINT	.\move_impl.cpp	/^void MoveImplementation::DEWPOINT(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+DELUGE	.\src\move_impl.cpp	/^void MoveImplementation::DELUGE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+DEWPOINT	.\src\move_impl.cpp	/^void MoveImplementation::DEWPOINT(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 DI8DEVCLASS_ALL	.\include\raylib\external\glfw\deps\mingw\dinput.h	230;"	d
 DI8DEVCLASS_DEVICE	.\include\raylib\external\glfw\deps\mingw\dinput.h	231;"	d
 DI8DEVCLASS_GAMECTRL	.\include\raylib\external\glfw\deps\mingw\dinput.h	234;"	d
@@ -1297,7 +1296,7 @@ DIRENT_FREE	.\include\raylib\external\dirent.h	30;"	d
 DIRENT_H	.\include\raylib\external\dirent.h	23;"	d
 DIRENT_MALLOC	.\include\raylib\core.c	169;"	d	file:
 DIRENT_MALLOC	.\include\raylib\external\dirent.h	27;"	d
-DISCHARGE	.\move_impl.cpp	/^void MoveImplementation::DISCHARGE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+DISCHARGE	.\src\move_impl.cpp	/^void MoveImplementation::DISCHARGE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 DISCL_BACKGROUND	.\include\raylib\external\glfw\deps\mingw\dinput.h	943;"	d
 DISCL_EXCLUSIVE	.\include\raylib\external\glfw\deps\mingw\dinput.h	940;"	d
 DISCL_FOREGROUND	.\include\raylib\external\glfw\deps\mingw\dinput.h	942;"	d
@@ -1328,7 +1327,7 @@ DI_TRUNCATEDANDRESTARTED	.\include\raylib\external\glfw\deps\mingw\dinput.h	165;
 DI_WRITEPROTECT	.\include\raylib\external\glfw\deps\mingw\dinput.h	166;"	d
 DOUBLETAP_RANGE	.\include\raylib\gestures.h	171;"	d
 DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2	.\include\raylib\external\glfw\src\win32_platform.h	159;"	d
-DRAGONBREATH	.\move_impl.cpp	/^void MoveImplementation::DRAGONBREATH(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+DRAGONBREATH	.\src\move_impl.cpp	/^void MoveImplementation::DRAGONBREATH(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 DRFLAC_64BIT	.\include\raylib\external\dr_flac.h	176;"	d
 DRFLAC_ARM	.\include\raylib\external\dr_flac.h	895;"	d
 DRFLAC_ASSERT	.\include\raylib\external\dr_flac.h	1087;"	d
@@ -1562,7 +1561,7 @@ DRWAV_SIZE_MAX	.\include\raylib\external\dr_wav.h	963;"	d
 DRWAV_SUCCESS	.\include\raylib\external\dr_wav.h	938;"	d
 DRWAV_TRUE	.\include\raylib\external\dr_wav.h	180;"	d
 DRWAV_ZERO_MEMORY	.\include\raylib\external\dr_wav.h	924;"	d
-DRYADSCURSE	.\move_impl.cpp	/^void MoveImplementation::DRYADSCURSE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+DRYADSCURSE	.\src\move_impl.cpp	/^void MoveImplementation::DRYADSCURSE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 DR_FLAC_BUFFER_SIZE	.\include\raylib\external\dr_flac.h	167;"	d
 DR_FLAC_IMPLEMENTATION	.\include\raylib\raudio.c	205;"	d	file:
 DR_FLAC_NO_WIN32_IO	.\include\raylib\raudio.c	206;"	d	file:
@@ -1642,16 +1641,16 @@ DirectSoundEnumerateA	.\include\raylib\external\miniaudio.h	/^            ma_pro
 DirectoryExists	.\include\raylib\core.c	/^bool DirectoryExists(const char *dirPath)$/;"	f
 DisableCursor	.\include\raylib\camera.h	/^static void DisableCursor() {}      \/\/ Lock cursor$/;"	f
 DisableCursor	.\include\raylib\core.c	/^void DisableCursor(void)$/;"	f
-DisableUnusedButtons	.\combat.cpp	/^void DisableUnusedButtons(CombatData &cbtD){$/;"	f
-DisableUnusedButtons	.\test.cpp	/^void DisableUnusedButtons(CombatData &cbtD){$/;"	f
+DisableUnusedButtons	.\src\combat.cpp	/^void DisableUnusedButtons(CombatData &cbtD){$/;"	f
+DisableUnusedButtons	.\src\test.cpp	/^void DisableUnusedButtons(CombatData &cbtD){$/;"	f
 DistSqr	.\include\raylib\physac.h	/^static inline float DistSqr(Vector2 v1, Vector2 v2)$/;"	f
 DllMain	.\include\raylib\external\glfw\src\win32_init.c	/^BOOL WINAPI DllMain(HINSTANCE instance, DWORD reason, LPVOID reserved)$/;"	f
-Drag	.\draggable.cpp	/^void Drag(Draggable &d){$/;"	f
-Drag	.\elemino.cpp	/^void Drag(Elemino &e){$/;"	f
 Drag	.\include\raylib\gestures.h	/^    } Drag;$/;"	m	struct:__anon390	typeref:struct:__anon390::__anon393
-Draggable	.\draggable.cpp	/^Draggable::Draggable(){$/;"	f	class:Draggable
-Draggable	.\draggable.cpp	/^Draggable::Draggable(const Vector2 &pos, const Vector2 &size, const Color &on, const Color &off){$/;"	f	class:Draggable
-Draggable	.\draggable.cpp	/^Draggable::Draggable(const Vector2 &pos, const Vector2 &size, const Color &on, const Color &off, const std::string &s){$/;"	f	class:Draggable
+Drag	.\src\draggable.cpp	/^void Drag(Draggable &d){$/;"	f
+Drag	.\src\elemino.cpp	/^void Drag(Elemino &e){$/;"	f
+Draggable	.\src\draggable.cpp	/^Draggable::Draggable(){$/;"	f	class:Draggable
+Draggable	.\src\draggable.cpp	/^Draggable::Draggable(const Vector2 &pos, const Vector2 &size, const Color &on, const Color &off){$/;"	f	class:Draggable
+Draggable	.\src\draggable.cpp	/^Draggable::Draggable(const Vector2 &pos, const Vector2 &size, const Color &on, const Color &off, const std::string &s){$/;"	f	class:Draggable
 DrawBillboard	.\include\raylib\models.c	/^void DrawBillboard(Camera camera, Texture2D texture, Vector3 center, float size, Color tint)$/;"	f
 DrawBillboardRec	.\include\raylib\models.c	/^void DrawBillboardRec(Camera camera, Texture2D texture, Rectangle sourceRec, Vector3 center, float size, Color tint)$/;"	f
 DrawBoundingBox	.\include\raylib\models.c	/^void DrawBoundingBox(BoundingBox box, Color color)$/;"	f
@@ -1665,8 +1664,8 @@ DrawCircleLines	.\include\raylib\shapes.c	/^void DrawCircleLines(int centerX, in
 DrawCircleSector	.\include\raylib\shapes.c	/^void DrawCircleSector(Vector2 center, float radius, int startAngle, int endAngle, int segments, Color color)$/;"	f
 DrawCircleSectorLines	.\include\raylib\shapes.c	/^void DrawCircleSectorLines(Vector2 center, float radius, int startAngle, int endAngle, int segments, Color color)$/;"	f
 DrawCircleV	.\include\raylib\shapes.c	/^void DrawCircleV(Vector2 center, float radius, Color color)$/;"	f
-DrawCombat	.\gui.cpp	/^void DrawCombat(const Game &game){$/;"	f
-DrawConsole	.\gui.cpp	/^void DrawConsole(const Console &c, GlobalTextData &gtd){$/;"	f
+DrawCombat	.\src\gui.cpp	/^void DrawCombat(const Game &game){$/;"	f
+DrawConsole	.\src\gui.cpp	/^void DrawConsole(const Console &c, GlobalTextData &gtd){$/;"	f
 DrawCube	.\include\raylib\models.c	/^void DrawCube(Vector3 position, float width, float height, float length, Color color)$/;"	f
 DrawCubeTexture	.\include\raylib\models.c	/^void DrawCubeTexture(Texture2D texture, Vector3 position, float width, float height, float length, Color color)$/;"	f
 DrawCubeV	.\include\raylib\models.c	/^void DrawCubeV(Vector3 position, Vector3 size, Color color)$/;"	f
@@ -1674,23 +1673,23 @@ DrawCubeWires	.\include\raylib\models.c	/^void DrawCubeWires(Vector3 position, f
 DrawCubeWiresV	.\include\raylib\models.c	/^void DrawCubeWiresV(Vector3 position, Vector3 size, Color color)$/;"	f
 DrawCylinder	.\include\raylib\models.c	/^void DrawCylinder(Vector3 position, float radiusTop, float radiusBottom, float height, int sides, Color color)$/;"	f
 DrawCylinderWires	.\include\raylib\models.c	/^void DrawCylinderWires(Vector3 position, float radiusTop, float radiusBottom, float height, int sides, Color color)$/;"	f
-DrawElemino	.\gui.cpp	/^void DrawElemino(const Elemino &e){$/;"	f
+DrawElemino	.\src\gui.cpp	/^void DrawElemino(const Elemino &e){$/;"	f
 DrawEllipse	.\include\raylib\shapes.c	/^void DrawEllipse(int centerX, int centerY, float radiusH, float radiusV, Color color)$/;"	f
 DrawEllipseLines	.\include\raylib\shapes.c	/^void DrawEllipseLines(int centerX, int centerY, float radiusH, float radiusV, Color color)$/;"	f
 DrawFPS	.\include\raylib\text.c	/^void DrawFPS(int posX, int posY)$/;"	f
 DrawGizmo	.\include\raylib\models.c	/^void DrawGizmo(Vector3 position)$/;"	f
-DrawGrid	.\gui.cpp	/^void DrawGrid(const Grid &g){$/;"	f
 DrawGrid	.\include\raylib\models.c	/^void DrawGrid(int slices, float spacing)$/;"	f
-DrawGuiBoxLabel	.\gui.cpp	/^void DrawGuiBoxLabel(BoxLabel &label){$/;"	f
-DrawGuiButton	.\gui.cpp	/^void DrawGuiButton(Button &button){$/;"	f
-DrawGuiDropDown	.\gui.cpp	/^void DrawGuiDropDown(DropDown &dd){$/;"	f
-DrawGuiImageButton	.\gui.cpp	/^void DrawGuiImageButton(ImageButton &ib){$/;"	f
-DrawGuiImageToggle	.\gui.cpp	/^void DrawGuiImageToggle(ImageToggle &ito){$/;"	f
-DrawGuiLabel	.\gui.cpp	/^void DrawGuiLabel(Label &label){$/;"	f
-DrawGuiListView	.\gui.cpp	/^void DrawGuiListView(ListView &lw){$/;"	f
-DrawGuiPanel	.\gui.cpp	/^void DrawGuiPanel(Panel &p){$/;"	f
-DrawGuiScrollBar	.\gui.cpp	/^void DrawGuiScrollBar(ScrollBar &sb){$/;"	f
-DrawInventory	.\gui.cpp	/^void DrawInventory(const Player &player){$/;"	f
+DrawGrid	.\src\gui.cpp	/^void DrawGrid(const Grid &g){$/;"	f
+DrawGuiBoxLabel	.\src\gui.cpp	/^void DrawGuiBoxLabel(BoxLabel &label){$/;"	f
+DrawGuiButton	.\src\gui.cpp	/^void DrawGuiButton(Button &button){$/;"	f
+DrawGuiDropDown	.\src\gui.cpp	/^void DrawGuiDropDown(DropDown &dd){$/;"	f
+DrawGuiImageButton	.\src\gui.cpp	/^void DrawGuiImageButton(ImageButton &ib){$/;"	f
+DrawGuiImageToggle	.\src\gui.cpp	/^void DrawGuiImageToggle(ImageToggle &ito){$/;"	f
+DrawGuiLabel	.\src\gui.cpp	/^void DrawGuiLabel(Label &label){$/;"	f
+DrawGuiListView	.\src\gui.cpp	/^void DrawGuiListView(ListView &lw){$/;"	f
+DrawGuiPanel	.\src\gui.cpp	/^void DrawGuiPanel(Panel &p){$/;"	f
+DrawGuiScrollBar	.\src\gui.cpp	/^void DrawGuiScrollBar(ScrollBar &sb){$/;"	f
+DrawInventory	.\src\gui.cpp	/^void DrawInventory(const Player &player){$/;"	f
 DrawLine	.\include\raylib\shapes.c	/^void DrawLine(int startPosX, int startPosY, int endPosX, int endPosY, Color color)$/;"	f
 DrawLine3D	.\include\raylib\models.c	/^void DrawLine3D(Vector3 startPos, Vector3 endPos, Color color)$/;"	f
 DrawLineBezier	.\include\raylib\shapes.c	/^void DrawLineBezier(Vector2 startPos, Vector2 endPos, float thick, Color color)$/;"	f
@@ -1701,8 +1700,8 @@ DrawModel	.\include\raylib\models.c	/^void DrawModel(Model model, Vector3 positi
 DrawModelEx	.\include\raylib\models.c	/^void DrawModelEx(Model model, Vector3 position, Vector3 rotationAxis, float rotationAngle, Vector3 scale, Color tint)$/;"	f
 DrawModelWires	.\include\raylib\models.c	/^void DrawModelWires(Model model, Vector3 position, float scale, Color tint)$/;"	f
 DrawModelWiresEx	.\include\raylib\models.c	/^void DrawModelWiresEx(Model model, Vector3 position, Vector3 rotationAxis, float rotationAngle, Vector3 scale, Color tint)$/;"	f
-DrawMouse	.\gui.cpp	/^void DrawMouse(const Mouse &mouse){$/;"	f
-DrawMoveInventory	.\gui.cpp	/^void DrawMoveInventory(const Player &player){$/;"	f
+DrawMouse	.\src\gui.cpp	/^void DrawMouse(const Mouse &mouse){$/;"	f
+DrawMoveInventory	.\src\gui.cpp	/^void DrawMoveInventory(const Player &player){$/;"	f
 DrawPixel	.\include\raylib\shapes.c	/^void DrawPixel(int posX, int posY, Color color)$/;"	f
 DrawPixelV	.\include\raylib\shapes.c	/^void DrawPixelV(Vector2 position, Color color)$/;"	f
 DrawPlane	.\include\raylib\models.c	/^void DrawPlane(Vector3 centerPos, Vector2 size, Color color)$/;"	f
@@ -1755,7 +1754,7 @@ EASEDEF	.\include\raylib\easings.h	88;"	d
 EASEDEF	.\include\raylib\easings.h	90;"	d
 EASINGS_H	.\include\raylib\easings.h	83;"	d
 EASINGS_STATIC_INLINE	.\include\raylib\easings.h	85;"	d
-ECTORAY	.\move_impl.cpp	/^void MoveImplementation::ECTORAY(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+ECTORAY	.\src\move_impl.cpp	/^void MoveImplementation::ECTORAY(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 EDS_ROTATEDMODE	.\include\raylib\external\glfw\src\win32_platform.h	96;"	d
 EFFECT_ARPEGGIO	.\include\raylib\external\jar_mod.h	269;"	d
 EFFECT_EXTENDED	.\include\raylib\external\jar_mod.h	284;"	d
@@ -2373,21 +2372,21 @@ EGLsizeiANDROID	.\include\raylib\external\ANGLE\EGL\eglext.h	/^typedef khronos_s
 EGLuint64KHR	.\include\raylib\external\ANGLE\EGL\eglext.h	/^typedef khronos_uint64_t EGLuint64KHR;$/;"	t
 EGLuint64NV	.\include\raylib\external\ANGLE\EGL\eglext.h	/^typedef khronos_utime_nanoseconds_t EGLuint64NV;$/;"	t
 EINTR	.\include\raylib\rnet.h	171;"	d
-ELECTROSTORM	.\move_impl.cpp	/^void MoveImplementation::ELECTROSTORM(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+ELECTROSTORM	.\src\move_impl.cpp	/^void MoveImplementation::ELECTROSTORM(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 ELEMENT_H	.\include\element.h	3;"	d
 ELEMINO_H	.\include\elemino.h	3;"	d
-EMERALDEDGE	.\move_impl.cpp	/^void MoveImplementation::EMERALDEDGE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-ENSNARINGVINE	.\move_impl.cpp	/^void MoveImplementation::ENSNARINGVINE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-ENTOMB	.\move_impl.cpp	/^void MoveImplementation::ENTOMB(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+EMERALDEDGE	.\src\move_impl.cpp	/^void MoveImplementation::EMERALDEDGE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+ENSNARINGVINE	.\src\move_impl.cpp	/^void MoveImplementation::ENSNARINGVINE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+ENTOMB	.\src\move_impl.cpp	/^void MoveImplementation::ENTOMB(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 EPSILON	.\include\raylib\models.c	2747;"	d	file:
 EPSILON	.\include\raylib\models.c	2805;"	d	file:
 ERR	.\include\console.h	/^const std::string ERR = "ERROR: ";$/;"	v
 ERROR_INCOMPATIBLE_DEVICE_CONTEXTS_ARB	.\include\raylib\external\glfw\src\wgl_context.h	77;"	d
 ERROR_INVALID_PROFILE_ARB	.\include\raylib\external\glfw\src\wgl_context.h	76;"	d
 ERROR_INVALID_VERSION_ARB	.\include\raylib\external\glfw\src\wgl_context.h	75;"	d
-ETHEREALFOG	.\move_impl.cpp	/^void MoveImplementation::ETHEREALFOG(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-EVANESCENTFIELD	.\move_impl.cpp	/^void MoveImplementation::EVANESCENTFIELD(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-EXPLOSION	.\move_impl.cpp	/^void MoveImplementation::EXPLOSION(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+ETHEREALFOG	.\src\move_impl.cpp	/^void MoveImplementation::ETHEREALFOG(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+EVANESCENTFIELD	.\src\move_impl.cpp	/^void MoveImplementation::EVANESCENTFIELD(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+EXPLOSION	.\src\move_impl.cpp	/^void MoveImplementation::EXPLOSION(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 EXT_colorspace	.\include\raylib\external\glfw\src\wgl_context.h	/^    GLFWbool                            EXT_colorspace;$/;"	m	struct:_GLFWlibraryWGL
 EXT_create_context_es2_profile	.\include\raylib\external\glfw\src\glx_context.h	/^    GLFWbool        EXT_create_context_es2_profile;$/;"	m	struct:_GLFWlibraryGLX
 EXT_create_context_es2_profile	.\include\raylib\external\glfw\src\wgl_context.h	/^    GLFWbool                            EXT_create_context_es2_profile;$/;"	m	struct:_GLFWlibraryWGL
@@ -2426,12 +2425,12 @@ EaseQuadOut	.\include\raylib\easings.h	/^EASEDEF float EaseQuadOut(float t, floa
 EaseSineIn	.\include\raylib\easings.h	/^EASEDEF float EaseSineIn(float t, float b, float c, float d) { return (-c*cosf(t\/d*(PI\/2.0f)) + c + b); }$/;"	f
 EaseSineInOut	.\include\raylib\easings.h	/^EASEDEF float EaseSineInOut(float t, float b, float c, float d) { return (-c\/2.0f*(cosf(PI*t\/d) - 1.0f) + b); }$/;"	f
 EaseSineOut	.\include\raylib\easings.h	/^EASEDEF float EaseSineOut(float t, float b, float c, float d) { return (c*sinf(t\/d*(PI\/2.0f)) + b); }$/;"	f
-Effectiveness	.\element.cpp	/^float Effectiveness(const Element &attack, const Element defender[2]){$/;"	f
-ElementToColor	.\gui.cpp	/^Color ElementToColor(const Element &e){$/;"	f
-Elemino	.\elemino.cpp	/^Elemino::Elemino(const MinoShape &ms, const Element &el){$/;"	f	class:Elemino
+Effectiveness	.\src\element.cpp	/^float Effectiveness(const Element &attack, const Element defender[2]){$/;"	f
+ElementToColor	.\src\gui.cpp	/^Color ElementToColor(const Element &e){$/;"	f
 Elemino	.\include\elemino.h	/^	Elemino(){$/;"	f	struct:Elemino
 Elemino	.\include\elemino.h	/^struct Elemino{$/;"	s
-EleminoSnap	.\elemino.cpp	/^void EleminoSnap(Elemino &e, Grid &g){$/;"	f
+Elemino	.\src\elemino.cpp	/^Elemino::Elemino(const MinoShape &ms, const Element &el){$/;"	f	class:Elemino
+EleminoSnap	.\src\elemino.cpp	/^void EleminoSnap(Elemino &e, Grid &g){$/;"	f
 EmscriptenFullscreenChangeCallback	.\include\raylib\core.c	/^static EM_BOOL EmscriptenFullscreenChangeCallback(int eventType, const EmscriptenFullscreenChangeEvent *event, void *userData)$/;"	f	file:
 EmscriptenGamepadCallback	.\include\raylib\core.c	/^static EM_BOOL EmscriptenGamepadCallback(int eventType, const EmscriptenGamepadEvent *gamepadEvent, void *userData)$/;"	f	file:
 EmscriptenKeyboardCallback	.\include\raylib\core.c	/^static EM_BOOL EmscriptenKeyboardCallback(int eventType, const EmscriptenKeyboardEvent *keyEvent, void *userData)$/;"	f	file:
@@ -2451,17 +2450,17 @@ EndScissorMode	.\include\raylib\core.c	/^void EndScissorMode(void)$/;"	f
 EndShaderMode	.\include\raylib\rlgl.h	/^void EndShaderMode(void)$/;"	f
 EndTextureMode	.\include\raylib\core.c	/^void EndTextureMode(void)$/;"	f
 EndVrDrawing	.\include\raylib\rlgl.h	/^void EndVrDrawing(void)$/;"	f
-Enlarge	.\elemino.cpp	/^void Enlarge(Elemino &e){$/;"	f
+Enlarge	.\src\elemino.cpp	/^void Enlarge(Elemino &e){$/;"	f
 EnumAudioEndpoints	.\include\raylib\external\miniaudio.h	/^        HRESULT (STDMETHODCALLTYPE * EnumAudioEndpoints)                    (ma_IMMDeviceEnumerator* pThis, ma_EDataFlow dataFlow, DWORD dwStateMask, ma_IMMDeviceCollection** ppDevices);$/;"	m	struct:__anon265
 EnumerateInstanceExtensionProperties	.\include\raylib\external\glfw\src\internal.h	/^        PFN_vkEnumerateInstanceExtensionProperties EnumerateInstanceExtensionProperties;$/;"	m	struct:_GLFWlibrary::__anon94
 ErrorCallback	.\include\raylib\core.c	/^static void ErrorCallback(int error, const char *description)$/;"	f	file:
 EventThread	.\include\raylib\core.c	/^static void *EventThread(void *arg)$/;"	f	file:
 EventThreadSpawn	.\include\raylib\core.c	/^static void EventThreadSpawn(char *device)$/;"	f	file:
-ExecCommand	.\console.cpp	/^void ExecCommand(Console &c, Game &game){$/;"	f
-ExecMove	.\combat.cpp	/^void ExecMove(CasterTargetsPair &ctp){$/;"	f
-ExecMove	.\test.cpp	/^void ExecMove(CasterTargetsPair &ctp){$/;"	f
-ExecMoves	.\combat.cpp	/^void ExecMoves(CombatData &cbtD){$/;"	f
-ExecMoves	.\test.cpp	/^void ExecMoves(CombatData &cbtD){$/;"	f
+ExecCommand	.\src\console.cpp	/^void ExecCommand(Console &c, Game &game){$/;"	f
+ExecMove	.\src\combat.cpp	/^void ExecMove(CasterTargetsPair &ctp){$/;"	f
+ExecMove	.\src\test.cpp	/^void ExecMove(CasterTargetsPair &ctp){$/;"	f
+ExecMoves	.\src\combat.cpp	/^void ExecMoves(CombatData &cbtD){$/;"	f
+ExecMoves	.\src\test.cpp	/^void ExecMoves(CombatData &cbtD){$/;"	f
 ExportImage	.\include\raylib\textures.c	/^void ExportImage(Image image, const char *fileName)$/;"	f
 ExportImageAsCode	.\include\raylib\textures.c	/^void ExportImageAsCode(Image image, const char *fileName)$/;"	f
 ExportMesh	.\include\raylib\models.c	/^void ExportMesh(Mesh mesh, const char *fileName)$/;"	f
@@ -2485,11 +2484,11 @@ FILTER_POINT	.\include\raylib\raylib.h	/^    FILTER_POINT = 0,               \/\
 FILTER_POINT	.\include\raylib\rlgl.h	/^        FILTER_POINT = 0,               \/\/ No filter, just pixel aproximation$/;"	e	enum:__anon451
 FILTER_TRILINEAR	.\include\raylib\raylib.h	/^    FILTER_TRILINEAR,               \/\/ Trilinear filtering (linear with mipmaps)$/;"	e	enum:__anon437
 FILTER_TRILINEAR	.\include\raylib\rlgl.h	/^        FILTER_TRILINEAR,               \/\/ Trilinear filtering (linear with mipmaps)$/;"	e	enum:__anon451
-FIREBALL	.\move_impl.cpp	/^void MoveImplementation::FIREBALL(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-FIREBEAM	.\move_impl.cpp	/^void MoveImplementation::FIREBEAM(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+FIREBALL	.\src\move_impl.cpp	/^void MoveImplementation::FIREBALL(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+FIREBEAM	.\src\move_impl.cpp	/^void MoveImplementation::FIREBEAM(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 FIRECOLOR	.\include\gui.h	31;"	d
-FIREWALL	.\move_impl.cpp	/^void MoveImplementation::FIREWALL(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-FISSURE	.\move_impl.cpp	/^void MoveImplementation::FISSURE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+FIREWALL	.\src\move_impl.cpp	/^void MoveImplementation::FIREWALL(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+FISSURE	.\src\move_impl.cpp	/^void MoveImplementation::FISSURE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 FLAG_FULLSCREEN_MODE	.\include\raylib\raylib.h	/^    FLAG_FULLSCREEN_MODE    = 2,    \/\/ Set to run program in fullscreen$/;"	e	enum:__anon425
 FLAG_MSAA_4X_HINT	.\include\raylib\raylib.h	/^    FLAG_MSAA_4X_HINT       = 32,   \/\/ Set to try enabling MSAA 4X$/;"	e	enum:__anon425
 FLAG_RESERVED	.\include\raylib\raylib.h	/^    FLAG_RESERVED           = 1,    \/\/ Reserved$/;"	e	enum:__anon425
@@ -2499,24 +2498,24 @@ FLAG_WINDOW_HIDDEN	.\include\raylib\raylib.h	/^    FLAG_WINDOW_HIDDEN      = 128
 FLAG_WINDOW_RESIZABLE	.\include\raylib\raylib.h	/^    FLAG_WINDOW_RESIZABLE   = 4,    \/\/ Set to allow resizable window$/;"	e	enum:__anon425
 FLAG_WINDOW_TRANSPARENT	.\include\raylib\raylib.h	/^    FLAG_WINDOW_TRANSPARENT = 16,   \/\/ Set to allow transparent window$/;"	e	enum:__anon425
 FLAG_WINDOW_UNDECORATED	.\include\raylib\raylib.h	/^    FLAG_WINDOW_UNDECORATED = 8,    \/\/ Set to disable window decoration (frame and buttons)$/;"	e	enum:__anon425
-FLAMESWORD	.\move_impl.cpp	/^void MoveImplementation::FLAMESWORD(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-FLAREKICK	.\move_impl.cpp	/^void MoveImplementation::FLAREKICK(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-FLASHFREEZE	.\move_impl.cpp	/^void MoveImplementation::FLASHFREEZE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-FLASHFRICTION	.\move_impl.cpp	/^void MoveImplementation::FLASHFRICTION(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+FLAMESWORD	.\src\move_impl.cpp	/^void MoveImplementation::FLAMESWORD(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+FLAREKICK	.\src\move_impl.cpp	/^void MoveImplementation::FLAREKICK(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+FLASHFREEZE	.\src\move_impl.cpp	/^void MoveImplementation::FLASHFREEZE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+FLASHFRICTION	.\src\move_impl.cpp	/^void MoveImplementation::FLASHFRICTION(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 FONT_BITMAP	.\include\raylib\raylib.h	/^    FONT_BITMAP,            \/\/ Bitmap font generation, no anti-aliasing$/;"	e	enum:__anon440
 FONT_DEFAULT	.\include\raylib\raylib.h	/^    FONT_DEFAULT = 0,       \/\/ Default font generation, anti-aliased$/;"	e	enum:__anon440
 FONT_SDF	.\include\raylib\raylib.h	/^    FONT_SDF                \/\/ SDF font generation, requires external shader$/;"	e	enum:__anon440
 FORCE_TO_SWIPE	.\include\raylib\gestures.h	166;"	d
-FORTIFY	.\move_impl.cpp	/^void MoveImplementation::FORTIFY(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+FORTIFY	.\src\move_impl.cpp	/^void MoveImplementation::FORTIFY(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 FOURCC_DXT1	.\include\raylib\textures.c	3093;"	d	file:
 FOURCC_DXT3	.\include\raylib\textures.c	3094;"	d	file:
 FOURCC_DXT5	.\include\raylib\textures.c	3095;"	d	file:
 FPS_AVERAGE_TIME_SECONDS	.\include\raylib\core.c	1641;"	d	file:
 FPS_CAPTURE_FRAMES_COUNT	.\include\raylib\core.c	1640;"	d	file:
 FPS_STEP	.\include\raylib\core.c	1642;"	d	file:
-FROMTHEASHES	.\move_impl.cpp	/^void MoveImplementation::FROMTHEASHES(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+FROMTHEASHES	.\src\move_impl.cpp	/^void MoveImplementation::FROMTHEASHES(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 FULL_PERIOD_TABLE_LENGTH	.\include\raylib\external\jar_mod.h	304;"	d
-FUNGALSPORES	.\move_impl.cpp	/^void MoveImplementation::FUNGALSPORES(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+FUNGALSPORES	.\src\move_impl.cpp	/^void MoveImplementation::FUNGALSPORES(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 Fade	.\include\raylib\core.c	/^Color Fade(Color color, float alpha)$/;"	f
 Fade	.\include\raylib\raygui.h	/^static Color Fade(Color color, float alpha)$/;"	f
 FileExists	.\include\raylib\core.c	/^bool FileExists(const char *fileName)$/;"	f
@@ -2541,8 +2540,8 @@ FreeOutputInfo	.\include\raylib\external\glfw\src\x11_platform.h	/^        PFN_X
 FreePacket	.\include\raylib\rnet.h	/^void FreePacket(SocketDataPacket *packet)$/;"	f
 FreePacketList	.\include\raylib\rnet.h	/^void FreePacketList(SocketDataPacket **packetV)$/;"	f
 FreeScreenResources	.\include\raylib\external\glfw\src\x11_platform.h	/^        PFN_XRRFreeScreenResources FreeScreenResources;$/;"	m	struct:_GLFWlibraryX11::__anon113
-FullHealActor	.\actor.cpp	/^void FullHealActor(Actor &a){$/;"	f
-GALVANIZEDGLAIVE	.\move_impl.cpp	/^void MoveImplementation::GALVANIZEDGLAIVE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+FullHealActor	.\src\actor.cpp	/^void FullHealActor(Actor &a){$/;"	f
+GALVANIZEDGLAIVE	.\src\move_impl.cpp	/^void MoveImplementation::GALVANIZEDGLAIVE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 GAMEPAD_AXIS_LEFT_TRIGGER	.\include\raylib\raylib.h	/^    GAMEPAD_AXIS_LEFT_TRIGGER,      \/\/ [1..-1] (pressure-level)$/;"	e	enum:__anon432
 GAMEPAD_AXIS_LEFT_X	.\include\raylib\raylib.h	/^    GAMEPAD_AXIS_LEFT_X,$/;"	e	enum:__anon432
 GAMEPAD_AXIS_LEFT_Y	.\include\raylib\raylib.h	/^    GAMEPAD_AXIS_LEFT_Y,$/;"	e	enum:__anon432
@@ -2574,7 +2573,7 @@ GAMEPAD_PLAYER3	.\include\raylib\raylib.h	/^    GAMEPAD_PLAYER3     = 2,$/;"	e	e
 GAMEPAD_PLAYER4	.\include\raylib\raylib.h	/^    GAMEPAD_PLAYER4     = 3$/;"	e	enum:__anon430
 GAMESTATE_H	.\include\gamestate.h	3;"	d
 GAME_H	.\include\game.h	3;"	d
-GARNETGAZE	.\move_impl.cpp	/^void MoveImplementation::GARNETGAZE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+GARNETGAZE	.\src\move_impl.cpp	/^void MoveImplementation::GARNETGAZE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 GESTURES	.\include\raylib\gestures.h	/^static GesturesData GESTURES = {$/;"	v
 GESTURES_H	.\include\raylib\gestures.h	47;"	d
 GESTURES_IMPLEMENTATION	.\include\raylib\core.c	139;"	d	file:
@@ -7834,9 +7833,9 @@ GRAPHICS_API_OPENGL_33	.\include\raylib\rlgl.h	117;"	d
 GRAPHICS_API_OPENGL_33	.\include\raylib\rlgl.h	125;"	d
 GRAPHICS_API_OPENGL_33	.\include\raylib\rlgl.h	645;"	d
 GRAPHICS_API_OPENGL_ES2	.\include\raylib\rlgl.h	120;"	d
-GRASSBLADES	.\move_impl.cpp	/^void MoveImplementation::GRASSBLADES(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-GRAVELSPIN	.\move_impl.cpp	/^void MoveImplementation::GRAVELSPIN(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-GRAVETENDER	.\move_impl.cpp	/^void MoveImplementation::GRAVETENDER(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+GRASSBLADES	.\src\move_impl.cpp	/^void MoveImplementation::GRASSBLADES(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+GRAVELSPIN	.\src\move_impl.cpp	/^void MoveImplementation::GRAVELSPIN(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+GRAVETENDER	.\src\move_impl.cpp	/^void MoveImplementation::GRAVETENDER(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 GRAY	.\include\raylib\raylib.h	129;"	d
 GRAY_VALUE	.\include\raylib\models.c	1813;"	d	file:
 GREEN	.\include\raylib\raylib.h	137;"	d
@@ -7870,8 +7869,8 @@ GUI_TEXTBOX_EXTENDED_H	.\include\raylib\gui_textbox_extended.h	33;"	d
 GUI_TEXT_ALIGN_CENTER	.\include\raylib\raygui.h	/^    GUI_TEXT_ALIGN_CENTER,$/;"	e	enum:__anon407
 GUI_TEXT_ALIGN_LEFT	.\include\raylib\raygui.h	/^    GUI_TEXT_ALIGN_LEFT = 0,$/;"	e	enum:__anon407
 GUI_TEXT_ALIGN_RIGHT	.\include\raylib\raygui.h	/^    GUI_TEXT_ALIGN_RIGHT,$/;"	e	enum:__anon407
-Game	.\game.cpp	/^Game::Game(){$/;"	f	class:Game
 Game	.\include\game.h	/^struct Game{$/;"	s
+Game	.\src\game.cpp	/^Game::Game(){$/;"	f	class:Game
 GameState	.\include\gamestate.h	/^struct GameState{$/;"	s
 Gamepad	.\include\raylib\core.c	/^        } Gamepad;$/;"	m	struct:CoreData::__anon11	typeref:struct:CoreData::__anon11::__anon15	file:
 Gamepad	.\include\raylib\external\glfw\deps\mingw\xinput.h	/^    XINPUT_GAMEPAD Gamepad;$/;"	m	struct:_XINPUT_CAPABILITIES
@@ -7918,13 +7917,13 @@ GetAddressFamily	.\include\raylib\rnet.h	/^int GetAddressFamily(AddressInformati
 GetAddressHostAndPort	.\include\raylib\rnet.h	/^char *GetAddressHostAndPort(AddressInformation address, char *outhost, int *outport)$/;"	f
 GetAddressProtocol	.\include\raylib\rnet.h	/^int GetAddressProtocol(AddressInformation address)$/;"	f
 GetAddressSocketType	.\include\raylib\rnet.h	/^int GetAddressSocketType(AddressInformation address)$/;"	f
-GetAffordableMoves	.\combat.cpp	/^void GetAffordableMoves(Actor &actor, struct Move **affordable){$/;"	f
-GetAffordableMoves	.\test.cpp	/^void GetAffordableMoves(Actor &actor, struct Move **affordable){$/;"	f
+GetAffordableMoves	.\src\combat.cpp	/^void GetAffordableMoves(Actor &actor, struct Move **affordable){$/;"	f
+GetAffordableMoves	.\src\test.cpp	/^void GetAffordableMoves(Actor &actor, struct Move **affordable){$/;"	f
 GetAndroidApp	.\include\raylib\core.c	/^struct android_app *GetAndroidApp(void)$/;"	f
 GetAt	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * GetAt)   (ma_IPropertyStore* pThis, DWORD propIndex, PROPERTYKEY* pPropKey);$/;"	m	struct:__anon269
-GetAvailable	.\moveinventory.cpp	/^void GetAvailable(Player &player){$/;"	f
-GetAvailableList	.\moveinventory.cpp	/^void GetAvailableList(Player &player){$/;"	f
-GetAvailableMoves	.\moveinventory.cpp	/^void GetAvailableMoves(Player &player){$/;"	f
+GetAvailable	.\src\moveinventory.cpp	/^void GetAvailable(Player &player){$/;"	f
+GetAvailableList	.\src\moveinventory.cpp	/^void GetAvailableList(Player &player){$/;"	f
+GetAvailableMoves	.\src\moveinventory.cpp	/^void GetAvailableMoves(Player &player){$/;"	f
 GetBuffer	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * GetBuffer)        (ma_IAudioCaptureClient* pThis, BYTE** ppData, ma_uint32* pNumFramesToRead, DWORD* pFlags, ma_uint64* pDevicePosition, ma_uint64* pQPCPosition);$/;"	m	struct:__anon274
 GetBuffer	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * GetBuffer)    (ma_IAudioRenderClient* pThis, ma_uint32 numFramesRequested, BYTE** ppData);$/;"	m	struct:__anon273
 GetBufferSize	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * GetBufferSize)    (ma_IAudioClient* pThis, ma_uint32* pNumBufferFrames);$/;"	m	struct:__anon270
@@ -7957,11 +7956,11 @@ GetCount	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE 
 GetCrtcGamma	.\include\raylib\external\glfw\src\x11_platform.h	/^        PFN_XRRGetCrtcGamma GetCrtcGamma;$/;"	m	struct:_GLFWlibraryX11::__anon113
 GetCrtcGammaSize	.\include\raylib\external\glfw\src\x11_platform.h	/^        PFN_XRRGetCrtcGammaSize GetCrtcGammaSize;$/;"	m	struct:_GLFWlibraryX11::__anon113
 GetCrtcInfo	.\include\raylib\external\glfw\src\x11_platform.h	/^        PFN_XRRGetCrtcInfo GetCrtcInfo;$/;"	m	struct:_GLFWlibraryX11::__anon113
-GetCurrent	.\moveinventory.cpp	/^void GetCurrent(Player &player){$/;"	f
+GetCurrent	.\src\moveinventory.cpp	/^void GetCurrent(Player &player){$/;"	f
 GetCurrentContext	.\include\raylib\external\glfw\src\wgl_context.h	/^    PFN_wglGetCurrentContext            GetCurrentContext;$/;"	m	struct:_GLFWlibraryWGL
 GetCurrentDC	.\include\raylib\external\glfw\src\wgl_context.h	/^    PFN_wglGetCurrentDC                 GetCurrentDC;$/;"	m	struct:_GLFWlibraryWGL
-GetCurrentList	.\moveinventory.cpp	/^void GetCurrentList(Player &player){$/;"	f
-GetCurrentMoves	.\moveinventory.cpp	/^void GetCurrentMoves(Player &player){$/;"	f
+GetCurrentList	.\src\moveinventory.cpp	/^void GetCurrentList(Player &player){$/;"	f
+GetCurrentMoves	.\src\moveinventory.cpp	/^void GetCurrentMoves(Player &player){$/;"	f
 GetCurrentPadding	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * GetCurrentPadding)(ma_IAudioClient* pThis, ma_uint32* pNumPaddingFrames);$/;"	m	struct:__anon270
 GetCurrentPadding	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * GetCurrentPadding)(ma_IAudioClient2* pThis, ma_uint32* pNumPaddingFrames);$/;"	m	struct:__anon271
 GetCurrentPadding	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * GetCurrentPadding)(ma_IAudioClient3* pThis, ma_uint32* pNumPaddingFrames);$/;"	m	struct:__anon272
@@ -7986,15 +7985,15 @@ GetDpiForMonitor_	.\include\raylib\external\glfw\src\win32_platform.h	/^        
 GetDpiForWindow	.\include\raylib\external\glfw\src\win32_platform.h	243;"	d
 GetDpiForWindow_	.\include\raylib\external\glfw\src\win32_platform.h	/^        PFN_GetDpiForWindow             GetDpiForWindow_;$/;"	m	struct:_GLFWlibraryWin32::__anon103
 GetDroppedFiles	.\include\raylib\core.c	/^char **GetDroppedFiles(int *count)$/;"	f
-GetEffectDamage	.\moveeffect.cpp	/^int GetEffectDamage(int id){$/;"	f
-GetEffectHeal	.\moveeffect.cpp	/^float GetEffectHeal(int id){$/;"	f
-GetEffectPrimaryBuff	.\moveeffect.cpp	/^float GetEffectPrimaryBuff(int id){$/;"	f
-GetEffectPrimaryDebuff	.\moveeffect.cpp	/^float GetEffectPrimaryDebuff(int id){$/;"	f
-GetEffectPrimaryDuration	.\moveeffect.cpp	/^int GetEffectPrimaryDuration(int id){$/;"	f
-GetEffectSecondaryBuff	.\moveeffect.cpp	/^float GetEffectSecondaryBuff(int id){$/;"	f
-GetEffectSecondaryDebuff	.\moveeffect.cpp	/^float GetEffectSecondaryDebuff(int id){$/;"	f
-GetEffectSecondaryDuration	.\moveeffect.cpp	/^int GetEffectSecondaryDuration(int id){$/;"	f
-GetEleminoGridTextures	.\elemino.cpp	/^void GetEleminoGridTextures(){$/;"	f
+GetEffectDamage	.\src\moveeffect.cpp	/^int GetEffectDamage(int id){$/;"	f
+GetEffectHeal	.\src\moveeffect.cpp	/^float GetEffectHeal(int id){$/;"	f
+GetEffectPrimaryBuff	.\src\moveeffect.cpp	/^float GetEffectPrimaryBuff(int id){$/;"	f
+GetEffectPrimaryDebuff	.\src\moveeffect.cpp	/^float GetEffectPrimaryDebuff(int id){$/;"	f
+GetEffectPrimaryDuration	.\src\moveeffect.cpp	/^int GetEffectPrimaryDuration(int id){$/;"	f
+GetEffectSecondaryBuff	.\src\moveeffect.cpp	/^float GetEffectSecondaryBuff(int id){$/;"	f
+GetEffectSecondaryDebuff	.\src\moveeffect.cpp	/^float GetEffectSecondaryDebuff(int id){$/;"	f
+GetEffectSecondaryDuration	.\src\moveeffect.cpp	/^int GetEffectSecondaryDuration(int id){$/;"	f
+GetEleminoGridTextures	.\src\elemino.cpp	/^void GetEleminoGridTextures(){$/;"	f
 GetError	.\include\raylib\external\glfw\src\egl_context.h	/^    PFN_eglGetError             GetError;$/;"	m	struct:_GLFWlibraryEGL
 GetExtension	.\include\raylib\core.c	/^const char *GetExtension(const char *fileName)$/;"	f
 GetExtensionsStringARB	.\include\raylib\external\glfw\src\wgl_context.h	/^    PFNWGLGETEXTENSIONSSTRINGARBPROC    GetExtensionsStringARB;$/;"	m	struct:_GLFWlibraryWGL
@@ -8155,7 +8154,7 @@ GifWriteCode	.\include\raylib\external\rgif.h	/^static void GifWriteCode(FILE *f
 GifWriteFrame	.\include\raylib\external\rgif.h	/^RGIFDEF bool GifWriteFrame(const unsigned char *image, unsigned int width, unsigned int height, unsigned int delay, int bitDepth, bool dither)$/;"	f
 GifWriteLzwImage	.\include\raylib\external\rgif.h	/^static void GifWriteLzwImage(FILE *f, unsigned char *image, unsigned int left, unsigned int top, unsigned int width, unsigned int height, unsigned int delay, GifPalette *pPal)$/;"	f
 GifWritePalette	.\include\raylib\external\rgif.h	/^static void GifWritePalette(FILE *f, const GifPalette *pPal)$/;"	f
-GiveCommand	.\console.cpp	/^void GiveCommand(Console &c, Game &game){$/;"	f
+GiveCommand	.\src\console.cpp	/^void GiveCommand(Console &c, Game &game){$/;"	f
 GlVersion	.\include\raylib\rlgl.h	/^typedef enum { OPENGL_11 = 1, OPENGL_21, OPENGL_33, OPENGL_ES_20 } GlVersion;$/;"	t	typeref:enum:__anon447
 GlbChunkHeaderSize	.\include\raylib\external\cgltf.h	/^static const cgltf_size GlbChunkHeaderSize = 8;$/;"	v
 GlbHeaderSize	.\include\raylib\external\cgltf.h	/^static const cgltf_size GlbHeaderSize = 12;$/;"	v
@@ -8278,7 +8277,7 @@ GuiUnlock	.\include\raylib\raygui.h	/^void GuiUnlock(void) { guiLocked = false; 
 GuiValueBox	.\include\raylib\raygui.h	/^bool GuiValueBox(Rectangle bounds, const char *text, int *value, int minValue, int maxValue, bool editMode)$/;"	f
 GuiWindowBox	.\include\raylib\raygui.h	/^bool GuiWindowBox(Rectangle bounds, const char *title)$/;"	f
 GuidEffect	.\include\raylib\external\glfw\deps\mingw\dinput.h	/^  GUID        GuidEffect;$/;"	m	struct:DIFILEEFFECT
-HAILSTORM	.\move_impl.cpp	/^void MoveImplementation::HAILSTORM(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+HAILSTORM	.\src\move_impl.cpp	/^void MoveImplementation::HAILSTORM(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 HANDLE	.\include\raylib\external\ANGLE\EGL\eglplatform.h	/^typedef PVOID HANDLE;   \/\/ HANDLE is handle to an object. This type is declared in WinNT.h$/;"	t
 HANDLE	.\include\raylib\external\glfw\include\GLFW\glfw3native.h	/^ typedef PVOID HANDLE;$/;"	t
 HASH_TABLE_DEFAULT_SIZE	.\include\raylib\external\tinyobj_loader_c.h	550;"	d
@@ -8289,8 +8288,8 @@ HAS_TONE_PORTAMENTO	.\include\raylib\external\jar_xm.h	1278;"	d
 HAS_VIBRATO	.\include\raylib\external\jar_xm.h	1283;"	d
 HBITMAP	.\include\raylib\external\ANGLE\EGL\eglplatform.h	/^typedef HANDLE HBITMAP; \/\/ HBITMAP is a handle to a bitmap. This type is declared in WinDef.h$/;"	t
 HDC	.\include\raylib\external\ANGLE\EGL\eglplatform.h	/^typedef HANDLE HDC;     \/\/ HDC is a handle to a device context (DC). This type is declared in WinDef.h$/;"	t
-HELLBROTH	.\move_impl.cpp	/^void MoveImplementation::HELLBROTH(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-HIGHVOLTAGE	.\move_impl.cpp	/^void MoveImplementation::HIGHVOLTAGE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+HELLBROTH	.\src\move_impl.cpp	/^void MoveImplementation::HELLBROTH(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+HIGHVOLTAGE	.\src\move_impl.cpp	/^void MoveImplementation::HIGHVOLTAGE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 HPBADCOLOR	.\include\gui.h	40;"	d
 HPBONUS_FIRE	.\include\actor.h	/^static const int HPBONUS_FIRE = 2;$/;"	v
 HPBONUS_LIGHTNING	.\include\actor.h	/^static const int HPBONUS_LIGHTNING = 3;$/;"	v
@@ -8305,31 +8304,31 @@ HUEBAR_PADDING	.\include\raylib\raygui.h	/^    HUEBAR_PADDING,                \/
 HUEBAR_SELECTOR_HEIGHT	.\include\raylib\raygui.h	/^    HUEBAR_SELECTOR_HEIGHT,        \/\/ Right hue bar selector height$/;"	e	enum:__anon422
 HUEBAR_SELECTOR_OVERFLOW	.\include\raylib\raygui.h	/^    HUEBAR_SELECTOR_OVERFLOW       \/\/ Right hue bar selector overflow$/;"	e	enum:__anon422
 HUEBAR_WIDTH	.\include\raylib\raygui.h	/^    HUEBAR_WIDTH,                  \/\/ Right hue bar width$/;"	e	enum:__anon422
-HURLROCK	.\move_impl.cpp	/^void MoveImplementation::HURLROCK(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+HURLROCK	.\src\move_impl.cpp	/^void MoveImplementation::HURLROCK(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 HWND	.\include\raylib\external\ANGLE\EGL\eglplatform.h	/^typedef HANDLE HWND;    \/\/ HWND is a handle to a window. This type is declared in WinDef.h$/;"	t
 HWND	.\include\raylib\external\glfw\include\GLFW\glfw3native.h	/^ typedef HANDLE HWND;$/;"	t
-HandleAccept	.\console.cpp	/^void HandleAccept(Console &console){$/;"	f
-HandleClose	.\console.cpp	/^void HandleClose(Console &console, GameState &gs){$/;"	f
-HandleDelete	.\console.cpp	/^void HandleDelete(Console &console){$/;"	f
-HandleFlyingElemino	.\inventory.cpp	/^void HandleFlyingElemino(Game &game){$/;"	f
-HandleInventoryPortraits	.\combat.cpp	/^void HandleInventoryPortraits(CombatData &cbtD){$/;"	f
-HandleInventoryPortraits	.\inventory.cpp	/^void HandleInventoryPortraits(InventoryData &invD){$/;"	f
-HandleInventoryPortraits	.\moveinventory.cpp	/^void HandleInventoryPortraits(MoveInventoryData &minvD){$/;"	f
-HandleInventoryPortraits	.\test.cpp	/^void HandleInventoryPortraits(CombatData &cbtD){$/;"	f
-HandleMoveLeft	.\console.cpp	/^void HandleMoveLeft(Console &console){$/;"	f
-HandleMoveRight	.\console.cpp	/^void HandleMoveRight(Console &console){$/;"	f
-HandleRetrieveCommand	.\console.cpp	/^void HandleRetrieveCommand(Console &console){$/;"	f
-HasEffect	.\moveeffect.cpp	/^bool HasEffect(Actor &target, MoveEffect &meff, MoveEffect *match){$/;"	f
+HandleAccept	.\src\console.cpp	/^void HandleAccept(Console &console){$/;"	f
+HandleClose	.\src\console.cpp	/^void HandleClose(Console &console, GameState &gs){$/;"	f
+HandleDelete	.\src\console.cpp	/^void HandleDelete(Console &console){$/;"	f
+HandleFlyingElemino	.\src\inventory.cpp	/^void HandleFlyingElemino(Game &game){$/;"	f
+HandleInventoryPortraits	.\src\combat.cpp	/^void HandleInventoryPortraits(CombatData &cbtD){$/;"	f
+HandleInventoryPortraits	.\src\inventory.cpp	/^void HandleInventoryPortraits(InventoryData &invD){$/;"	f
+HandleInventoryPortraits	.\src\moveinventory.cpp	/^void HandleInventoryPortraits(MoveInventoryData &minvD){$/;"	f
+HandleInventoryPortraits	.\src\test.cpp	/^void HandleInventoryPortraits(CombatData &cbtD){$/;"	f
+HandleMoveLeft	.\src\console.cpp	/^void HandleMoveLeft(Console &console){$/;"	f
+HandleMoveRight	.\src\console.cpp	/^void HandleMoveRight(Console &console){$/;"	f
+HandleRetrieveCommand	.\src\console.cpp	/^void HandleRetrieveCommand(Console &console){$/;"	f
+HasEffect	.\src\moveeffect.cpp	/^bool HasEffect(Actor &target, MoveEffect &meff, MoveEffect *match){$/;"	f
 HasMessageFromUWP	.\include\raylib\utils.c	/^bool HasMessageFromUWP(void)$/;"	f
 Hash_sbdm	.\include\sprite.h	/^struct Hash_sbdm{$/;"	s
-HealActor	.\actor.cpp	/^void HealActor(Actor &a, const unsigned int amount){$/;"	f
-HealCommand	.\console.cpp	/^void HealCommand(Console &c, Game &game){$/;"	f
+HealActor	.\src\actor.cpp	/^void HealActor(Actor &a, const unsigned int amount){$/;"	f
+HealCommand	.\src\console.cpp	/^void HealCommand(Console &c, Game &game){$/;"	f
 HidCode	.\include\raylib\external\glfw\deps\mingw\xinput.h	/^    BYTE HidCode;$/;"	m	struct:_XINPUT_KEYSTROKE
 HideCursor	.\include\raylib\core.c	/^void HideCursor(void)$/;"	f
 HideWindow	.\include\raylib\core.c	/^void HideWindow(void)$/;"	f
 Hold	.\include\raylib\gestures.h	/^    } Hold;$/;"	m	struct:__anon390	typeref:struct:__anon390::__anon392
 I	.\include\elemino.h	/^	I,$/;"	e	enum:MinoShape
-ICARUSINFERNO	.\move_impl.cpp	/^void MoveImplementation::ICARUSINFERNO(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+ICARUSINFERNO	.\src\move_impl.cpp	/^void MoveImplementation::ICARUSINFERNO(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 ICON_TEXT_PADDING	.\include\raylib\raygui.h	3267;"	d
 IDirectInput	.\include\raylib\external\glfw\deps\mingw\dinput.h	123;"	d
 IDirectInput2	.\include\raylib\external\glfw\deps\mingw\dinput.h	126;"	d
@@ -8653,7 +8652,7 @@ IDirectInput_Release	.\include\raylib\external\glfw\deps\mingw\dinput.h	2200;"	d
 IDirectInput_Release	.\include\raylib\external\glfw\deps\mingw\dinput.h	2211;"	d
 IDirectInput_RunControlPanel	.\include\raylib\external\glfw\deps\mingw\dinput.h	2205;"	d
 IDirectInput_RunControlPanel	.\include\raylib\external\glfw\deps\mingw\dinput.h	2216;"	d
-IGNITE	.\move_impl.cpp	/^void MoveImplementation::IGNITE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+IGNITE	.\src\move_impl.cpp	/^void MoveImplementation::IGNITE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 II	.\include\elemino.h	/^	II,$/;"	e	enum:MinoShape
 IID_IDirectInput	.\include\raylib\external\glfw\deps\mingw\dinput.h	122;"	d
 IID_IDirectInput2	.\include\raylib\external\glfw\deps\mingw\dinput.h	125;"	d
@@ -8750,7 +8749,7 @@ INVENTORY_H	.\include\inventory.h	3;"	d
 INV_ELMN_OFFSET	.\include\inventory.h	/^const int INV_ELMN_OFFSET = 80;$/;"	v
 INV_GRID_WIDTH	.\include\inventory.h	/^const int INV_GRID_WIDTH = 400;$/;"	v
 INV_POS	.\include\inventory.h	/^const Vector2 INV_POS = (Vector2){320, 64};$/;"	v
-IONSTRIKE	.\move_impl.cpp	/^void MoveImplementation::IONSTRIKE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+IONSTRIKE	.\src\move_impl.cpp	/^void MoveImplementation::IONSTRIKE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 IPAddress	.\include\raylib\rnet.h	/^typedef struct IPAddress {$/;"	s
 IPAddress	.\include\raylib\rnet.h	/^} IPAddress;$/;"	t	typeref:struct:IPAddress
 IPTOS_LOWDELAY	.\include\raylib\rnet.h	143;"	d
@@ -8758,7 +8757,7 @@ IQM_MAGIC	.\include\raylib\models.c	3004;"	d	file:
 IQM_MAGIC	.\include\raylib\models.c	920;"	d	file:
 IQM_VERSION	.\include\raylib\models.c	3005;"	d	file:
 IQM_VERSION	.\include\raylib\models.c	921;"	d	file:
-IRONSPIKES	.\move_impl.cpp	/^void MoveImplementation::IRONSPIKES(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+IRONSPIKES	.\src\move_impl.cpp	/^void MoveImplementation::IRONSPIKES(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 ISRC	.\include\raylib\external\dr_flac.h	/^    char ISRC[12];$/;"	m	struct:__anon45
 IS_DIGIT	.\include\raylib\external\tinyobj_loader_c.h	134;"	d
 IS_NEW_LINE	.\include\raylib\external\tinyobj_loader_c.h	135;"	d
@@ -8816,7 +8815,7 @@ InitAssetManager	.\include\raylib\utils.c	/^void InitAssetManager(AAssetManager 
 InitAudioBufferPool	.\include\raylib\raudio.c	/^static void InitAudioBufferPool(void)$/;"	f	file:
 InitAudioDevice	.\include\raylib\raudio.c	/^void InitAudioDevice(void)$/;"	f
 InitAudioStream	.\include\raylib\raudio.c	/^AudioStream InitAudioStream(unsigned int sampleRate, unsigned int sampleSize, unsigned int channels)$/;"	f
-InitDraggable	.\draggable.cpp	/^void InitDraggable(Draggable &d, const Vector2 &pos, const Vector2 &size, const Color &on, const Color &off, const std::string &s){$/;"	f
+InitDraggable	.\src\draggable.cpp	/^void InitDraggable(Draggable &d, const Vector2 &pos, const Vector2 &size, const Color &on, const Color &off, const std::string &s){$/;"	f
 InitEvdevInput	.\include\raylib\core.c	/^static void InitEvdevInput(void)$/;"	f	file:
 InitGamepad	.\include\raylib\core.c	/^static void InitGamepad(void)$/;"	f	file:
 InitGraphicsDevice	.\include\raylib\core.c	/^static bool InitGraphicsDevice(int width, int height)$/;"	f	file:
@@ -8840,7 +8839,7 @@ Initialize	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYP
 InitializePhysicsManifolds	.\include\raylib\physac.h	/^static void InitializePhysicsManifolds(PhysicsManifold manifold)$/;"	f
 InitializeSharedAudioStream	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * InitializeSharedAudioStream)     (ma_IAudioClient3* pThis, DWORD streamFlags, UINT32 periodInFrames, const WAVEFORMATEX* pFormat, const GUID* pAudioSessionGuid);$/;"	m	struct:__anon272
 Input	.\include\raylib\core.c	/^    } Input;$/;"	m	struct:CoreData	typeref:struct:CoreData::__anon11	file:
-InputConsole	.\console.cpp	/^void InputConsole(Console &console, GameState &gs){$/;"	f
+InputConsole	.\src\console.cpp	/^void InputConsole(Console &console, GameState &gs){$/;"	f
 InputEventWorker	.\include\raylib\core.c	/^} InputEventWorker;$/;"	t	typeref:struct:__anon5	file:
 IntegratePhysicsForces	.\include\raylib\physac.h	/^static void IntegratePhysicsForces(PhysicsBody body)$/;"	f
 IntegratePhysicsImpulses	.\include\raylib\physac.h	/^static void IntegratePhysicsImpulses(PhysicsManifold manifold)$/;"	f
@@ -8848,7 +8847,7 @@ IntegratePhysicsVelocity	.\include\raylib\physac.h	/^static void IntegratePhysic
 Interface	.\include\gui.h	/^struct Interface{$/;"	s
 InventoryData	.\include\inventory.h	/^struct InventoryData{$/;"	s
 InventoryPortraits	.\include\gui.h	/^struct InventoryPortraits{$/;"	s
-InventoryState	.\game.cpp	/^int InventoryState(Game &game){$/;"	f
+InventoryState	.\src\game.cpp	/^int InventoryState(Game &game){$/;"	f
 IsActive	.\include\raylib\external\glfw\src\x11_platform.h	/^        PFN_XineramaIsActive IsActive;$/;"	m	struct:_GLFWlibraryX11::__anon118
 IsAudioBufferPlaying	.\include\raylib\raudio.c	/^bool IsAudioBufferPlaying(AudioBuffer *buffer)$/;"	f
 IsAudioDeviceReady	.\include\raylib\raudio.c	/^bool IsAudioDeviceReady(void)$/;"	f
@@ -8856,7 +8855,7 @@ IsAudioStreamPlaying	.\include\raylib\raudio.c	/^bool IsAudioStreamPlaying(Audio
 IsAudioStreamProcessed	.\include\raylib\raudio.c	/^bool IsAudioStreamProcessed(AudioStream stream)$/;"	f
 IsCompositionEnabled	.\include\raylib\external\glfw\src\win32_platform.h	/^        PFN_DwmIsCompositionEnabled     IsCompositionEnabled;$/;"	m	struct:_GLFWlibraryWin32::__anon104
 IsCursorHidden	.\include\raylib\core.c	/^bool IsCursorHidden(void)$/;"	f
-IsDead	.\actor.cpp	/^bool IsDead(const Actor &a){$/;"	f
+IsDead	.\src\actor.cpp	/^bool IsDead(const Actor &a){$/;"	f
 IsFileDropped	.\include\raylib\core.c	/^bool IsFileDropped(void)$/;"	f
 IsFileExtension	.\include\raylib\core.c	/^bool IsFileExtension(const char *fileName, const char *ext)$/;"	f
 IsFileExtension	.\include\raylib\raudio.c	/^bool IsFileExtension(const char *fileName, const char *ext)$/;"	f
@@ -9109,12 +9108,12 @@ Keyboard	.\include\raylib\core.c	/^        } Keyboard;$/;"	m	struct:CoreData::__
 KeyboardKey	.\include\raylib\raylib.h	/^} KeyboardKey;$/;"	t	typeref:enum:__anon427
 L	.\include\elemino.h	/^	L,$/;"	e	enum:MinoShape
 LABEL	.\include\raylib\raygui.h	/^    LABEL,          \/\/ LABELBUTTON$/;"	e	enum:__anon408
-LEAFLANCE	.\move_impl.cpp	/^void MoveImplementation::LEAFLANCE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+LEAFLANCE	.\src\move_impl.cpp	/^void MoveImplementation::LEAFLANCE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 LIBVORBIS_MDCT	.\include\raylib\external\stb_vorbis.h	2361;"	d
 LIGHTGRAY	.\include\raylib\raylib.h	128;"	d
-LIGHTNINGBOLT	.\move_impl.cpp	/^void MoveImplementation::LIGHTNINGBOLT(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+LIGHTNINGBOLT	.\src\move_impl.cpp	/^void MoveImplementation::LIGHTNINGBOLT(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 LIGHTNINGCOLOR	.\include\gui.h	34;"	d
-LIGHTNINGKICK	.\move_impl.cpp	/^void MoveImplementation::LIGHTNINGKICK(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+LIGHTNINGKICK	.\src\move_impl.cpp	/^void MoveImplementation::LIGHTNINGKICK(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 LIME	.\include\raylib\raylib.h	138;"	d
 LINE_COLOR	.\include\raylib\raygui.h	/^    LINE_COLOR,$/;"	e	enum:__anon410
 LINE_DIVISIONS	.\include\raylib\shapes.c	158;"	d	file:
@@ -9335,17 +9334,17 @@ LPSYSKEYBOARDA	.\include\raylib\external\glfw\deps\mingw\dinput.h	/^typedef stru
 LPSYSMOUSEA	.\include\raylib\external\glfw\deps\mingw\dinput.h	/^typedef struct SysMouseA *LPSYSMOUSEA;$/;"	t	typeref:struct:SysMouseA
 Label	.\include\gui.h	/^struct Label{$/;"	s
 Lerp	.\include\raylib\raymath.h	/^RMDEF float Lerp(float start, float end, float amount)$/;"	f
-Lerp	.\interp.cpp	/^Vector2 Lerp(const float t, const Vector2 a, const Vector2 b){$/;"	f
-Lerp	.\interp.cpp	/^float Lerp(const float t, const float a, const float b){$/;"	f
-LessThanCTP	.\combat.cpp	/^bool LessThanCTP(CasterTargetsPair *first, CasterTargetsPair *second){$/;"	f
-LessThanCTP	.\test.cpp	/^bool LessThanCTP(CasterTargetsPair *first, CasterTargetsPair *second){$/;"	f
+Lerp	.\src\interp.cpp	/^Vector2 Lerp(const float t, const Vector2 a, const Vector2 b){$/;"	f
+Lerp	.\src\interp.cpp	/^float Lerp(const float t, const float a, const float b){$/;"	f
+LessThanCTP	.\src\combat.cpp	/^bool LessThanCTP(CasterTargetsPair *first, CasterTargetsPair *second){$/;"	f
+LessThanCTP	.\src\test.cpp	/^bool LessThanCTP(CasterTargetsPair *first, CasterTargetsPair *second){$/;"	f
 LibraryLoadImage	.\include\raylib\external\glfw\src\x11_platform.h	/^        PFN_XcursorLibraryLoadImage LibraryLoadImage;$/;"	m	struct:_GLFWlibraryX11::__anon117
-LifeDrain	.\moveeffect.cpp	/^void LifeDrain(MoveEffect &meff, Actor *actor, int healing){$/;"	f
+LifeDrain	.\src\moveeffect.cpp	/^void LifeDrain(MoveEffect &meff, Actor *actor, int healing){$/;"	f
 LineInfo	.\include\raylib\external\tinyobj_loader_c.h	/^} LineInfo;$/;"	t	typeref:struct:__anon385
-LinearSnap	.\draggable.cpp	/^void LinearSnap(Draggable &d, Anchor &anchor){$/;"	f
-LinearSnap	.\draggable.cpp	/^void LinearSnap(Draggable &d, Vec<Anchor *> &anchors){$/;"	f
-LinearSnap	.\draggable.cpp	/^void LinearSnap(Draggable &d, Vec<Anchor> &anchors){$/;"	f
-LinearSnap	.\draggable.cpp	/^void LinearSnap(Vec<Interface *> &interfs, Vec<Anchor *> &anchors){$/;"	f
+LinearSnap	.\src\draggable.cpp	/^void LinearSnap(Draggable &d, Anchor &anchor){$/;"	f
+LinearSnap	.\src\draggable.cpp	/^void LinearSnap(Draggable &d, Vec<Anchor *> &anchors){$/;"	f
+LinearSnap	.\src\draggable.cpp	/^void LinearSnap(Draggable &d, Vec<Anchor> &anchors){$/;"	f
+LinearSnap	.\src\draggable.cpp	/^void LinearSnap(Vec<Interface *> &interfs, Vec<Anchor *> &anchors){$/;"	f
 ListView	.\include\gui.h	/^	ListView(){$/;"	f	struct:ListView
 ListView	.\include\gui.h	/^struct ListView{$/;"	s
 LoadASTC	.\include\raylib\textures.c	/^static Image LoadASTC(const char *fileName)$/;"	f	file:
@@ -9407,7 +9406,7 @@ Lock	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * Lo
 M1	.\include\raylib\external\stb_vorbis.h	/^mdct_lookup M1,M2;$/;"	v
 M2	.\include\raylib\external\stb_vorbis.h	/^mdct_lookup M1,M2;$/;"	v
 MAGENTA	.\include\raylib\raylib.h	153;"	d
-MAGNETIZE	.\move_impl.cpp	/^void MoveImplementation::MAGNETIZE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+MAGNETIZE	.\src\move_impl.cpp	/^void MoveImplementation::MAGNETIZE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 MAKEDIPROP	.\include\raylib\external\glfw\deps\mingw\dinput.h	829;"	d
 MAKEDIPROP	.\include\raylib\external\glfw\deps\mingw\dinput.h	831;"	d
 MANABURN_DEBUFF_BONUS	.\include\moveeffect.h	/^const float MANABURN_DEBUFF_BONUS = .125f;$/;"	v
@@ -10415,16 +10414,16 @@ MESH_NAME_LENGTH	.\include\raylib\models.c	3008;"	d	file:
 MESSAGEBOX_BUTTON_HEIGHT	.\include\raylib\raygui.h	2560;"	d
 MESSAGEBOX_BUTTON_PADDING	.\include\raylib\raygui.h	2561;"	d
 METALCOLOR	.\include\gui.h	35;"	d
-MIDASTOUCH	.\move_impl.cpp	/^void MoveImplementation::MIDASTOUCH(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+MIDASTOUCH	.\src\move_impl.cpp	/^void MoveImplementation::MIDASTOUCH(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 MIN	.\include\raylib\textures.c	1681;"	d	file:
-MINDINVASION	.\move_impl.cpp	/^void MoveImplementation::MINDINVASION(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+MINDINVASION	.\src\move_impl.cpp	/^void MoveImplementation::MINDINVASION(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 MINIAUDIO_IMPLEMENTATION	.\include\raylib\raudio.c	162;"	d	file:
 MINIMUM_DRAG	.\include\raylib\gestures.h	167;"	d
 MINIMUM_PINCH	.\include\raylib\gestures.h	168;"	d
-MJOLNIR	.\move_impl.cpp	/^void MoveImplementation::MJOLNIR(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+MJOLNIR	.\src\move_impl.cpp	/^void MoveImplementation::MJOLNIR(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 MMNOSOUND	.\include\raylib\rnet.h	91;"	d
 MODULE_NAME_LENGTH	.\include\raylib\external\jar_xm.h	336;"	d
-MOLTENMETEOR	.\move_impl.cpp	/^void MoveImplementation::MOLTENMETEOR(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+MOLTENMETEOR	.\src\move_impl.cpp	/^void MoveImplementation::MOLTENMETEOR(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 MONITOR_DPI_TYPE	.\include\raylib\external\glfw\src\win32_platform.h	/^} MONITOR_DPI_TYPE;$/;"	t	typeref:enum:__anon99
 MOTIF_WM_HINTS	.\include\raylib\external\glfw\src\x11_platform.h	/^    Atom            MOTIF_WM_HINTS;$/;"	m	struct:_GLFWlibraryX11
 MOUSE_LEFT_BUTTON	.\include\raylib\raygui.h	581;"	d
@@ -10463,15 +10462,15 @@ MVK_macos_surface	.\include\raylib\external\glfw\src\internal.h	/^        GLFWbo
 MWM_DECOR_ALL	.\include\raylib\external\glfw\src\x11_window.c	55;"	d	file:
 MWM_HINTS_DECORATIONS	.\include\raylib\external\glfw\src\x11_window.c	54;"	d	file:
 M_PI	.\include\raylib\external\stb_vorbis.h	1015;"	d
-MakeCTP	.\combat.cpp	/^void MakeCTP(CombatData &cbtD){$/;"	f
-MakeCTP	.\test.cpp	/^void MakeCTP(CombatData &cbtD){$/;"	f
+MakeCTP	.\src\combat.cpp	/^void MakeCTP(CombatData &cbtD){$/;"	f
+MakeCTP	.\src\test.cpp	/^void MakeCTP(CombatData &cbtD){$/;"	f
 MakeCurrent	.\include\raylib\external\glfw\src\egl_context.h	/^    PFN_eglMakeCurrent          MakeCurrent;$/;"	m	struct:_GLFWlibraryEGL
 MakeCurrent	.\include\raylib\external\glfw\src\glx_context.h	/^    PFNGLXMAKECURRENTPROC               MakeCurrent;$/;"	m	struct:_GLFWlibraryGLX
 MakeCurrent	.\include\raylib\external\glfw\src\osmesa_context.h	/^    PFN_OSMesaMakeCurrent           MakeCurrent;$/;"	m	struct:_GLFWlibraryOSMesa
 MakeCurrent	.\include\raylib\external\glfw\src\wgl_context.h	/^    PFN_wglMakeCurrent                  MakeCurrent;$/;"	m	struct:_GLFWlibraryWGL
-MakeMinoShape	.\elemino.cpp	/^void MakeMinoShape(Elemino &e, const MinoShape &ms){$/;"	f
-MakeRectangles	.\elemino.cpp	/^void MakeRectangles(Elemino &e){$/;"	f
-MakeRectanglesSmall	.\elemino.cpp	/^void MakeRectanglesSmall(Elemino &e){$/;"	f
+MakeMinoShape	.\src\elemino.cpp	/^void MakeMinoShape(Elemino &e, const MinoShape &ms){$/;"	f
+MakeRectangles	.\src\elemino.cpp	/^void MakeRectangles(Elemino &e){$/;"	f
+MakeRectanglesSmall	.\src\elemino.cpp	/^void MakeRectanglesSmall(Elemino &e){$/;"	f
 ManufacturerGuid	.\include\raylib\external\miniaudio.h	/^    GUID ManufacturerGuid;$/;"	m	struct:__anon291
 ManufacturerGuid	.\include\raylib\external\miniaudio.h	/^    GUID ManufacturerGuid;$/;"	m	struct:__anon292
 Mat2MultiplyVector2	.\include\raylib\physac.h	/^static inline Vector2 Mat2MultiplyVector2(Matrix2x2 matrix, Vector2 vector)$/;"	f
@@ -10533,9 +10532,9 @@ MemPoolDefrag	.\include\raylib\rmem.h	/^bool MemPoolDefrag(MemPool *const mempoo
 MemPoolFree	.\include\raylib\rmem.h	/^void MemPoolFree(MemPool *const restrict mempool, void *ptr)$/;"	f
 MemPoolRealloc	.\include\raylib\rmem.h	/^void *MemPoolRealloc(MemPool *const restrict mempool, void *ptr, const size_t size)$/;"	f
 MemPoolReset	.\include\raylib\rmem.h	/^void MemPoolReset(MemPool *const mempool)$/;"	f
-Menu	.\menu.cpp	/^Menu::Menu(){$/;"	f	class:Menu
-Menu	.\menu.cpp	/^Menu::Menu(const Vector2 &pos, const Vector2 &size, const Color &col){$/;"	f	class:Menu
-Menu	.\menu.cpp	/^Menu::Menu(const Vector2 &pos, const Vector2 &size, const Color &col, const std::string &s){$/;"	f	class:Menu
+Menu	.\src\menu.cpp	/^Menu::Menu(){$/;"	f	class:Menu
+Menu	.\src\menu.cpp	/^Menu::Menu(const Vector2 &pos, const Vector2 &size, const Color &col){$/;"	f	class:Menu
+Menu	.\src\menu.cpp	/^Menu::Menu(const Vector2 &pos, const Vector2 &size, const Color &col, const std::string &s){$/;"	f	class:Menu
 Mesh	.\include\raylib\raylib.h	/^typedef struct Mesh {$/;"	s
 Mesh	.\include\raylib\raylib.h	/^} Mesh;$/;"	t	typeref:struct:Mesh
 Mesh	.\include\raylib\rlgl.h	/^    typedef struct Mesh {$/;"	s
@@ -10556,23 +10555,23 @@ Mouse	.\include\window.h	/^struct Mouse{$/;"	s
 MouseButton	.\include\raylib\raylib.h	/^} MouseButton;$/;"	t	typeref:enum:__anon429
 MouseButtonCallback	.\include\raylib\core.c	/^static void MouseButtonCallback(GLFWwindow *window, int button, int action, int mods)$/;"	f	file:
 MouseCursorPosCallback	.\include\raylib\core.c	/^static void MouseCursorPosCallback(GLFWwindow *window, double x, double y)$/;"	f	file:
-MouseTouchElemino	.\inventory.cpp	/^void MouseTouchElemino(Game &game){$/;"	f
-Move	.\elemino.cpp	/^void Move(Elemino &e, const Vector2 &offset){$/;"	f
+MouseTouchElemino	.\src\inventory.cpp	/^void MouseTouchElemino(Game &game){$/;"	f
 Move	.\include\move.h	/^struct Move{$/;"	s
-Move	.\move.cpp	/^Move::Move(){$/;"	f	class:Move
-Move	.\move.cpp	/^Move::Move(int id, const char *name, Element elem, int levelObtained, int priority, int maxTargets, int damage, int healing, int cost,$/;"	f	class:Move
-MoveButtonsSetup	.\combat.cpp	/^void MoveButtonsSetup(CombatData &cbtD){$/;"	f
-MoveButtonsSetup	.\test.cpp	/^void MoveButtonsSetup(CombatData &cbtD){$/;"	f
-MoveButtonsTextSetup	.\combat.cpp	/^void MoveButtonsTextSetup(CombatData &cbtD){$/;"	f
-MoveButtonsTextSetup	.\test.cpp	/^void MoveButtonsTextSetup(CombatData &cbtD){$/;"	f
+Move	.\src\elemino.cpp	/^void Move(Elemino &e, const Vector2 &offset){$/;"	f
+Move	.\src\move.cpp	/^Move::Move(){$/;"	f	class:Move
+Move	.\src\move.cpp	/^Move::Move(int id, const char *name, Element elem, int levelObtained, int priority, int maxTargets, int damage, int healing, int cost,$/;"	f	class:Move
+MoveButtonsSetup	.\src\combat.cpp	/^void MoveButtonsSetup(CombatData &cbtD){$/;"	f
+MoveButtonsSetup	.\src\test.cpp	/^void MoveButtonsSetup(CombatData &cbtD){$/;"	f
+MoveButtonsTextSetup	.\src\combat.cpp	/^void MoveButtonsTextSetup(CombatData &cbtD){$/;"	f
+MoveButtonsTextSetup	.\src\test.cpp	/^void MoveButtonsTextSetup(CombatData &cbtD){$/;"	f
 MoveEffect	.\include\moveeffect.h	/^	MoveEffect(int id){$/;"	f
 MoveEffect	.\include\moveeffect.h	/^struct MoveEffect{$/;"	s
 MoveImplementation	.\include\move_impl.h	/^namespace MoveImplementation{$/;"	n
 MoveInventoryData	.\include\moveinventory.h	/^struct MoveInventoryData{$/;"	s
-MoveInventoryState	.\game.cpp	/^int MoveInventoryState(Game &game){$/;"	f
+MoveInventoryState	.\src\game.cpp	/^int MoveInventoryState(Game &game){$/;"	f
 MoveTextBoxCursorLeft	.\include\raylib\gui_textbox_extended.h	/^static inline void MoveTextBoxCursorLeft(const char* text)$/;"	f
 MoveTextBoxCursorRight	.\include\raylib\gui_textbox_extended.h	/^static inline void MoveTextBoxCursorRight(const char* text, int length, Rectangle textRec)$/;"	f
-MoveTo	.\elemino.cpp	/^void MoveTo(Elemino &e, const Vector2 &newPos){$/;"	f
+MoveTo	.\src\elemino.cpp	/^void MoveTo(Elemino &e, const Vector2 &newPos){$/;"	f
 MultiChannel	.\include\raylib\raudio.c	/^    } MultiChannel;$/;"	m	struct:AudioData	typeref:struct:AudioData::__anon403	file:
 Music	.\include\raylib\raudio.h	/^typedef struct Music {$/;"	s
 Music	.\include\raylib\raudio.h	/^} Music;$/;"	t	typeref:struct:Music
@@ -10587,7 +10586,7 @@ NAME_INFO_NUMERICHOST	.\include\raylib\rnet.h	204;"	d
 NAME_INFO_NUMERICSERV	.\include\raylib\rnet.h	206;"	d
 NATURECOLOR	.\include\gui.h	33;"	d
 NBITS	.\include\raylib\core.c	4737;"	d	file:
-NEEDLE	.\move_impl.cpp	/^void MoveImplementation::NEEDLE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+NEEDLE	.\src\move_impl.cpp	/^void MoveImplementation::NEEDLE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 NET_ACTIVE_WINDOW	.\include\raylib\external\glfw\src\x11_platform.h	/^    Atom            NET_ACTIVE_WINDOW;$/;"	m	struct:_GLFWlibraryX11
 NET_CURRENT_DESKTOP	.\include\raylib\external\glfw\src\x11_platform.h	/^    Atom            NET_CURRENT_DESKTOP;$/;"	m	struct:_GLFWlibraryX11
 NET_DEBUG_ENABLED	.\include\raylib\rnet.h	429;"	d
@@ -10684,7 +10683,7 @@ NOSYSMETRICS	.\include\raylib\rnet.h	56;"	d
 NOTEXTMETRIC	.\include\raylib\raudio.c	118;"	d	file:
 NOTEXTMETRIC	.\include\raylib\rnet.h	82;"	d
 NOTE_IS_VALID	.\include\raylib\external\jar_xm.h	1286;"	d
-NOURISH	.\move_impl.cpp	/^void MoveImplementation::NOURISH(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+NOURISH	.\src\move_impl.cpp	/^void MoveImplementation::NOURISH(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 NOUSER	.\include\raylib\raudio.c	107;"	d	file:
 NOUSER	.\include\raylib\rnet.h	71;"	d
 NOVIRTUALKEYCODES	.\include\raylib\raudio.c	89;"	d	file:
@@ -10697,7 +10696,7 @@ NOWINOFFSETS	.\include\raylib\raudio.c	120;"	d	file:
 NOWINOFFSETS	.\include\raylib\rnet.h	84;"	d
 NOWINSTYLES	.\include\raylib\raudio.c	91;"	d	file:
 NOWINSTYLES	.\include\raylib\rnet.h	55;"	d
-NOXIOUSVOID	.\move_impl.cpp	/^void MoveImplementation::NOXIOUSVOID(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+NOXIOUSVOID	.\src\move_impl.cpp	/^void MoveImplementation::NOXIOUSVOID(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 NO_CODE	.\include\raylib\external\stb_vorbis.h	1019;"	d
 NPT_3PATCH_HORIZONTAL	.\include\raylib\raylib.h	/^    NPT_3PATCH_HORIZONTAL   \/\/ Npatch defined by 3x1 tiles$/;"	e	enum:__anon445
 NPT_3PATCH_VERTICAL	.\include\raylib\raylib.h	/^    NPT_3PATCH_VERTICAL,    \/\/ Npatch defined by 1x3 tiles$/;"	e	enum:__anon445
@@ -10746,7 +10745,7 @@ NativeDisplayType	.\include\raylib\external\ANGLE\EGL\eglplatform.h	/^typedef EG
 NativePixmapType	.\include\raylib\external\ANGLE\EGL\eglplatform.h	/^typedef EGLNativePixmapType  NativePixmapType;$/;"	t
 NativeWindowType	.\include\raylib\external\ANGLE\EGL\eglplatform.h	/^typedef EGLNativeWindowType  NativeWindowType;$/;"	t
 O	.\include\elemino.h	/^	O,$/;"	e	enum:MinoShape
-OBSIDIANONSLAUGHT	.\move_impl.cpp	/^void MoveImplementation::OBSIDIANONSLAUGHT(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+OBSIDIANONSLAUGHT	.\src\move_impl.cpp	/^void MoveImplementation::OBSIDIANONSLAUGHT(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 OCR_HAND	.\include\raylib\external\glfw\src\win32_platform.h	114;"	d
 OEMRESOURCE	.\include\raylib\external\glfw\src\win32_platform.h	65;"	d
 OEMRESOURCE	.\include\raylib\raudio.c	99;"	d	file:
@@ -10777,7 +10776,7 @@ OSMesaGetDepthBuffer	.\include\raylib\external\glfw\src\osmesa_context.h	54;"	d
 OSMesaGetProcAddress	.\include\raylib\external\glfw\src\osmesa_context.h	55;"	d
 OSMesaMakeCurrent	.\include\raylib\external\glfw\src\osmesa_context.h	52;"	d
 OTHER	.\include\raylib\raygui.h	/^typedef enum { BORDER = 0, BASE, TEXT, OTHER } GuiPropertyElement;$/;"	e	enum:__anon423
-OVERLOAD	.\move_impl.cpp	/^void MoveImplementation::OVERLOAD(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+OVERLOAD	.\src\move_impl.cpp	/^void MoveImplementation::OVERLOAD(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 OVERWRITE_ARRAY_SIZE	.\include\raylib\external\stb_image_resize.h	2300;"	d
 ObjInfo	.\include\raylib\rmem.h	/^union ObjInfo {$/;"	u
 ObjPool	.\include\raylib\rmem.h	/^typedef struct ObjPool {$/;"	s
@@ -10785,8 +10784,8 @@ ObjPool	.\include\raylib\rmem.h	/^} ObjPool;$/;"	t	typeref:struct:ObjPool
 ObjPoolAlloc	.\include\raylib\rmem.h	/^void *ObjPoolAlloc(ObjPool *const objpool)$/;"	f
 ObjPoolCleanUp	.\include\raylib\rmem.h	/^void ObjPoolCleanUp(ObjPool *const restrict objpool, void **ptrref)$/;"	f
 ObjPoolFree	.\include\raylib\rmem.h	/^void ObjPoolFree(ObjPool *const restrict objpool, void *ptr)$/;"	f
-Occupy	.\elemino.cpp	/^Vector2 Occupy(Elemino &e, Grid &g){$/;"	f
-OffsetRotAxis	.\elemino.cpp	/^void OffsetRotAxis(Elemino &e){$/;"	f
+Occupy	.\src\elemino.cpp	/^Vector2 Occupy(Elemino &e, Grid &g){$/;"	f
+OffsetRotAxis	.\src\elemino.cpp	/^void OffsetRotAxis(Elemino &e){$/;"	f
 OnDefaultDeviceChanged	.\include\raylib\external\miniaudio.h	/^        HRESULT (STDMETHODCALLTYPE * OnDefaultDeviceChanged)(ma_IMMNotificationClient* pThis, ma_EDataFlow dataFlow, ma_ERole role, LPCWSTR pDefaultDeviceID);$/;"	m	struct:__anon264
 OnDeviceAdded	.\include\raylib\external\miniaudio.h	/^        HRESULT (STDMETHODCALLTYPE * OnDeviceAdded)         (ma_IMMNotificationClient* pThis, LPCWSTR pDeviceID);$/;"	m	struct:__anon264
 OnDeviceRemoved	.\include\raylib\external\miniaudio.h	/^        HRESULT (STDMETHODCALLTYPE * OnDeviceRemoved)       (ma_IMMNotificationClient* pThis, LPCWSTR pDeviceID);$/;"	m	struct:__anon264
@@ -10794,13 +10793,13 @@ OnDeviceStateChanged	.\include\raylib\external\miniaudio.h	/^        HRESULT (ST
 OnLog	.\include\raylib\raudio.c	/^static void OnLog(ma_context *pContext, ma_device *pDevice, ma_uint32 logLevel, const char *message)$/;"	f	file:
 OnPropertyValueChanged	.\include\raylib\external\miniaudio.h	/^        HRESULT (STDMETHODCALLTYPE * OnPropertyValueChanged)(ma_IMMNotificationClient* pThis, LPCWSTR pDeviceID, const PROPERTYKEY key);$/;"	m	struct:__anon264
 OnSendAudioDataToDevice	.\include\raylib\raudio.c	/^static void OnSendAudioDataToDevice(ma_device *pDevice, void *pFramesOut, const void *pFramesInput, ma_uint32 frameCount)$/;"	f	file:
-OpenInventory	.\inventory.cpp	/^void OpenInventory(Game &game){$/;"	f
-OpenMoveInventory	.\moveinventory.cpp	/^void OpenMoveInventory(Game &game){$/;"	f
+OpenInventory	.\src\inventory.cpp	/^void OpenInventory(Game &game){$/;"	f
+OpenMoveInventory	.\src\moveinventory.cpp	/^void OpenMoveInventory(Game &game){$/;"	f
 OpenPropertyStore	.\include\raylib\external\miniaudio.h	/^        HRESULT (STDMETHODCALLTYPE * OpenPropertyStore)(ma_IMMDevice* pThis, DWORD stgmAccess, ma_IPropertyStore** ppProperties);$/;"	m	struct:__anon267
 OpenURL	.\include\raylib\core.c	/^void OpenURL(const char *url)$/;"	f
-Overlap	.\elemino.cpp	/^unsigned int Overlap(const Elemino &e, const Grid &g){$/;"	f
-PANEL_BORDER_WIDTH	.\gui.cpp	465;"	d	file:
+Overlap	.\src\elemino.cpp	/^unsigned int Overlap(const Elemino &e, const Grid &g){$/;"	f
 PANEL_BORDER_WIDTH	.\include\raylib\raygui.h	832;"	d
+PANEL_BORDER_WIDTH	.\src\gui.cpp	465;"	d	file:
 PAR_CALLOC	.\include\raylib\external\par_shapes.h	186;"	d
 PAR_CALLOC	.\include\raylib\models.c	84;"	d	file:
 PAR_CLAMP	.\include\raylib\external\par_shapes.h	179;"	d
@@ -10822,8 +10821,8 @@ PATTERN_ORDER_TABLE_LENGTH	.\include\raylib\external\jar_xm.h	338;"	d
 PBITMAPINFOHEADER	.\include\raylib\raudio.c	/^} BITMAPINFOHEADER, *PBITMAPINFOHEADER;$/;"	t	typeref:struct:tagBITMAPINFOHEADER	file:
 PCPOINT	.\include\raylib\external\glfw\deps\mingw\dinput.h	/^} CPOINT, *PCPOINT;$/;"	t	typeref:struct:_CPOINT
 PERIOD_TABLE_LENGTH	.\include\raylib\external\jar_mod.h	303;"	d
-PETALPIKE	.\move_impl.cpp	/^void MoveImplementation::PETALPIKE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-PETRIFYINGWAIL	.\move_impl.cpp	/^void MoveImplementation::PETRIFYINGWAIL(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+PETALPIKE	.\src\move_impl.cpp	/^void MoveImplementation::PETALPIKE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+PETRIFYINGWAIL	.\src\move_impl.cpp	/^void MoveImplementation::PETRIFYINGWAIL(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 PFNBLITFRAMEBUFFERNVPROC	.\include\raylib\external\ANGLE\GLES2\gl2ext.h	/^typedef void (GL_APIENTRYP PFNBLITFRAMEBUFFERNVPROC) (GLint srcX0, GLint srcY0, GLint srcX1, GLint srcY1, GLint dstX0, GLint dstY0, GLint dstX1, GLint dstY1, GLbitfield mask, GLenum filter);$/;"	t
 PFNDRAWARRAYSINSTANCEDNVPROC	.\include\raylib\external\ANGLE\GLES2\gl2ext.h	/^typedef void (GL_APIENTRYP PFNDRAWARRAYSINSTANCEDNVPROC) (GLenum mode, GLint first, GLsizei count, GLsizei primcount);$/;"	t
 PFNDRAWELEMENTSINSTANCEDNVPROC	.\include\raylib\external\ANGLE\GLES2\gl2ext.h	/^typedef void (GL_APIENTRYP PFNDRAWELEMENTSINSTANCEDNVPROC) (GLenum mode, GLsizei count, GLenum type, const GLvoid *indices, GLsizei primcount);$/;"	t
@@ -12718,7 +12717,7 @@ PFN_xkb_state_new	.\include\raylib\external\glfw\src\wl_platform.h	/^typedef str
 PFN_xkb_state_serialize_mods	.\include\raylib\external\glfw\src\wl_platform.h	/^typedef xkb_mod_mask_t (* PFN_xkb_state_serialize_mods)(struct xkb_state*, enum xkb_state_component);$/;"	t
 PFN_xkb_state_unref	.\include\raylib\external\glfw\src\wl_platform.h	/^typedef void (* PFN_xkb_state_unref)(struct xkb_state*);$/;"	t
 PFN_xkb_state_update_mask	.\include\raylib\external\glfw\src\wl_platform.h	/^typedef enum xkb_state_component (* PFN_xkb_state_update_mask)(struct xkb_state*, xkb_mod_mask_t, xkb_mod_mask_t, xkb_mod_mask_t, xkb_layout_index_t, xkb_layout_index_t, xkb_layout_index_t);$/;"	t	typeref:enum:PFN_xkb_state_update_mask
-PHANTOMWALTS	.\move_impl.cpp	/^void MoveImplementation::PHANTOMWALTS(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+PHANTOMWALTS	.\src\move_impl.cpp	/^void MoveImplementation::PHANTOMWALTS(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 PHYSACDEF	.\include\raylib\physac.h	77;"	d
 PHYSACDEF	.\include\raylib\physac.h	80;"	d
 PHYSACDEF	.\include\raylib\physac.h	82;"	d
@@ -12745,12 +12744,12 @@ PI	.\include\raylib\easings.h	96;"	d
 PI	.\include\raylib\gestures.h	50;"	d
 PI	.\include\raylib\raylib.h	96;"	d
 PI	.\include\raylib\raymath.h	78;"	d
-PIERCINGPLATINUM	.\move_impl.cpp	/^void MoveImplementation::PIERCINGPLATINUM(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-PILFER	.\move_impl.cpp	/^void MoveImplementation::PILFER(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+PIERCINGPLATINUM	.\src\move_impl.cpp	/^void MoveImplementation::PIERCINGPLATINUM(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+PILFER	.\src\move_impl.cpp	/^void MoveImplementation::PILFER(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 PINCH_TIMEOUT	.\include\raylib\gestures.h	170;"	d
 PINK	.\include\raylib\raylib.h	134;"	d
-PLAGUE	.\move_impl.cpp	/^void MoveImplementation::PLAGUE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-PLASMAPULSE	.\move_impl.cpp	/^void MoveImplementation::PLASMAPULSE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+PLAGUE	.\src\move_impl.cpp	/^void MoveImplementation::PLAGUE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+PLASMAPULSE	.\src\move_impl.cpp	/^void MoveImplementation::PLASMAPULSE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 PLAYER_H	.\include\player.h	3;"	d
 PLAYER_MOVEMENT_SENSITIVITY	.\include\raylib\camera.h	185;"	d
 PORTRAIT_PADDING	.\include\inventory.h	/^const int PORTRAIT_PADDING = 8;$/;"	v
@@ -12789,7 +12788,7 @@ PacketWrite16	.\include\raylib\rnet.h	/^void PacketWrite16(Packet *packet, uint1
 PacketWrite32	.\include\raylib\rnet.h	/^void PacketWrite32(Packet *packet, uint32_t value)$/;"	f
 PacketWrite64	.\include\raylib\rnet.h	/^void PacketWrite64(Packet *packet, uint64_t value)$/;"	f
 Panel	.\include\gui.h	/^struct Panel{$/;"	s
-ParseConsole	.\console.cpp	/^Dev::Command ParseConsole(Console &c){$/;"	f
+ParseConsole	.\src\console.cpp	/^Dev::Command ParseConsole(Console &c){$/;"	f
 PauseAudioBuffer	.\include\raylib\raudio.c	/^void PauseAudioBuffer(AudioBuffer *buffer)$/;"	f
 PauseAudioStream	.\include\raylib\raudio.c	/^void PauseAudioStream(AudioStream stream)$/;"	f
 PauseMusicStream	.\include\raylib\raudio.c	/^void PauseMusicStream(Music music)$/;"	f
@@ -12813,7 +12812,7 @@ Pinch	.\include\raylib\gestures.h	/^    } Pinch;$/;"	m	struct:__anon390	typeref:
 PixelFormat	.\include\raylib\raylib.h	/^} PixelFormat;$/;"	t	typeref:enum:__anon436
 PixelFormat	.\include\raylib\rlgl.h	/^    } PixelFormat;$/;"	t	typeref:enum:__anon450
 Play	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * Play)              (ma_IDirectSoundBuffer* pThis, DWORD dwReserved1, DWORD dwPriority, DWORD dwFlags);$/;"	m	struct:__anon285
-PlayAnimation	.\sprite.cpp	/^void PlayAnimation(Sprite &spr, const char *str){$/;"	f
+PlayAnimation	.\src\sprite.cpp	/^void PlayAnimation(Sprite &spr, const char *str){$/;"	f
 PlayAudioBuffer	.\include\raylib\raudio.c	/^void PlayAudioBuffer(AudioBuffer *buffer)$/;"	f
 PlayAudioStream	.\include\raylib\raudio.c	/^void PlayAudioStream(AudioStream stream)$/;"	f
 PlayMusicStream	.\include\raylib\raudio.c	/^void PlayMusicStream(Music music)$/;"	f
@@ -12821,21 +12820,21 @@ PlaySound	.\include\raylib\raudio.c	/^void PlaySound(Sound sound)$/;"	f
 PlaySound	.\include\raylib\raudio.c	164;"	d	file:
 PlaySoundMulti	.\include\raylib\raudio.c	/^void PlaySoundMulti(Sound sound)$/;"	f
 Player	.\include\player.h	/^struct Player{$/;"	s
-Player	.\player.cpp	/^Player::Player(){$/;"	f	class:Player
+Player	.\src\player.cpp	/^Player::Player(){$/;"	f	class:Player
 Point	.\include\raylib\core.c	/^typedef struct { int x; int y; } Point;$/;"	t	typeref:struct:__anon7	file:
 PollInputEvents	.\include\raylib\core.c	/^static void PollInputEvents(void)$/;"	f	file:
 PolygonData	.\include\raylib\physac.h	/^typedef struct PolygonData {$/;"	s
 PolygonData	.\include\raylib\physac.h	/^} PolygonData;$/;"	t	typeref:struct:PolygonData
-PositionEleminoes	.\inventory.cpp	/^void PositionEleminoes(InventoryData &invD){$/;"	f
-PositionEleminoes	.\inventory.cpp	/^void PositionEleminoes(Player &player){$/;"	f
+PositionEleminoes	.\src\inventory.cpp	/^void PositionEleminoes(InventoryData &invD){$/;"	f
+PositionEleminoes	.\src\inventory.cpp	/^void PositionEleminoes(Player &player){$/;"	f
 PrintSocket	.\include\raylib\rnet.h	/^static void PrintSocket(struct sockaddr_storage *addr, const int family, const int socktype, const int protocol)$/;"	f
 ProcessGestureEvent	.\include\raylib\gestures.h	/^void ProcessGestureEvent(GestureEvent event)$/;"	f
 ProcessKeyboard	.\include\raylib\core.c	/^static void ProcessKeyboard(void)$/;"	f	file:
 ProductGuid	.\include\raylib\external\miniaudio.h	/^    GUID ProductGuid;$/;"	m	struct:__anon291
 ProductGuid	.\include\raylib\external\miniaudio.h	/^    GUID ProductGuid;$/;"	m	struct:__anon292
 PropVariantClear	.\include\raylib\external\miniaudio.h	/^            ma_proc PropVariantClear;$/;"	m	struct:ma_context::__anon222::__anon223
-QUICKSAND	.\move_impl.cpp	/^void MoveImplementation::QUICKSAND(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-QUICKSILVER	.\move_impl.cpp	/^void MoveImplementation::QUICKSILVER(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+QUICKSAND	.\src\move_impl.cpp	/^void MoveImplementation::QUICKSAND(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+QUICKSILVER	.\src\move_impl.cpp	/^void MoveImplementation::QUICKSILVER(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 Quaternion	.\include\raylib\raylib.h	/^typedef Vector4 Quaternion;$/;"	t
 Quaternion	.\include\raylib\raymath.h	/^    typedef struct Quaternion {$/;"	s
 Quaternion	.\include\raylib\raymath.h	/^    } Quaternion;$/;"	t	typeref:struct:Quaternion
@@ -12888,8 +12887,8 @@ QueryVersion	.\include\raylib\external\glfw\src\x11_platform.h	/^        PFN_XRe
 RAD2DEG	.\include\raylib\camera.h	145;"	d
 RAD2DEG	.\include\raylib\raylib.h	100;"	d
 RAD2DEG	.\include\raylib\raymath.h	86;"	d
-RAINSTORM	.\move_impl.cpp	/^void MoveImplementation::RAINSTORM(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-RANCIDROSES	.\move_impl.cpp	/^void MoveImplementation::RANCIDROSES(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+RAINSTORM	.\src\move_impl.cpp	/^void MoveImplementation::RAINSTORM(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+RANCIDROSES	.\src\move_impl.cpp	/^void MoveImplementation::RANCIDROSES(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 RAUDIO_H	.\include\raylib\raudio.h	54;"	d
 RAYGUIDEF	.\include\raylib\raygui.h	141;"	d
 RAYGUIDEF	.\include\raylib\raygui.h	144;"	d
@@ -12901,7 +12900,7 @@ RAYGUI_CLITERAL	.\include\raylib\raygui.h	530;"	d
 RAYGUI_CLITERAL	.\include\raylib\raygui.h	532;"	d
 RAYGUI_FREE	.\include\raylib\raygui.h	172;"	d
 RAYGUI_H	.\include\raylib\raygui.h	131;"	d
-RAYGUI_IMPLEMENTATION	.\gui.cpp	6;"	d	file:
+RAYGUI_IMPLEMENTATION	.\src\gui.cpp	6;"	d	file:
 RAYGUI_MALLOC	.\include\raylib\raygui.h	166;"	d
 RAYGUI_VERSION	.\include\raylib\raygui.h	133;"	d
 RAYLIB_H	.\include\raylib\raylib.h	75;"	d
@@ -12912,15 +12911,15 @@ RAYMATH_HEADER_ONLY	.\include\raylib\rlgl.h	66;"	d
 RAYMATH_IMPLEMENTATION	.\include\raylib\core.c	132;"	d	file:
 RAYMATH_STANDALONE	.\include\raylib\rlgl.h	65;"	d
 RAYWHITE	.\include\raylib\raylib.h	154;"	d
-RAZEEARTH	.\move_impl.cpp	/^void MoveImplementation::RAZEEARTH(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-RAZORWIRE	.\move_impl.cpp	/^void MoveImplementation::RAZORWIRE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+RAZEEARTH	.\src\move_impl.cpp	/^void MoveImplementation::RAZEEARTH(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+RAZORWIRE	.\src\move_impl.cpp	/^void MoveImplementation::RAZORWIRE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 READ_MEMCPY	.\include\raylib\external\jar_xm.h	793;"	d
 READ_U16	.\include\raylib\external\jar_xm.h	791;"	d
 READ_U32	.\include\raylib\external\jar_xm.h	792;"	d
 READ_U8	.\include\raylib\external\jar_xm.h	790;"	d
 RECT_WIDTH	.\include\elemino.h	/^static const int RECT_WIDTH = 32;$/;"	v
 RED	.\include\raylib\raylib.h	135;"	d
-REND	.\move_impl.cpp	/^void MoveImplementation::REND(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+REND	.\src\move_impl.cpp	/^void MoveImplementation::REND(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 RESERVED	.\include\raylib\raygui.h	/^    RESERVED$/;"	e	enum:__anon409
 RESULT_FAILURE	.\include\raylib\rnet.h	118;"	d
 RESULT_SUCCESS	.\include\raylib\rnet.h	114;"	d
@@ -13195,7 +13194,7 @@ RICON_ZOOM_BIG	.\include\raylib\ricons.h	/^    RICON_ZOOM_BIG                 = 
 RICON_ZOOM_CENTER	.\include\raylib\ricons.h	/^    RICON_ZOOM_CENTER              = 107,$/;"	e	enum:__anon446
 RICON_ZOOM_MEDIUM	.\include\raylib\ricons.h	/^    RICON_ZOOM_MEDIUM              = 104,$/;"	e	enum:__anon446
 RICON_ZOOM_SMALL	.\include\raylib\ricons.h	/^    RICON_ZOOM_SMALL               = 103,$/;"	e	enum:__anon446
-RIPTIDE	.\move_impl.cpp	/^void MoveImplementation::RIPTIDE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+RIPTIDE	.\src\move_impl.cpp	/^void MoveImplementation::RIPTIDE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 RLAPI	.\include\raylib\raylib.h	82;"	d
 RLAPI	.\include\raylib\raylib.h	84;"	d
 RLAPI	.\include\raylib\raylib.h	86;"	d
@@ -13248,15 +13247,15 @@ RMEMAPI	.\include\raylib\rmem.h	51;"	d
 RMEMAPI	.\include\raylib\rmem.h	53;"	d
 RMEMAPI	.\include\raylib\rmem.h	55;"	d
 RMEM_H	.\include\raylib\rmem.h	42;"	d
-RMEM_IMPLEMENTATION	.\tmem.c	6;"	d	file:
+RMEM_IMPLEMENTATION	.\src\tmem.c	6;"	d	file:
 RNET_CALLOC	.\include\raylib\rnet.h	98;"	d
 RNET_FREE	.\include\raylib\rnet.h	101;"	d
 RNET_H	.\include\raylib\rnet.h	41;"	d
 RNET_MALLOC	.\include\raylib\rnet.h	95;"	d
 ROCKCOLOR	.\include\gui.h	36;"	d
-ROCKSLIDE	.\move_impl.cpp	/^void MoveImplementation::ROCKSLIDE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-ROLLINGBOULDER	.\move_impl.cpp	/^void MoveImplementation::ROLLINGBOULDER(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-RUBYRUSH	.\move_impl.cpp	/^void MoveImplementation::RUBYRUSH(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+ROCKSLIDE	.\src\move_impl.cpp	/^void MoveImplementation::ROCKSLIDE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+ROLLINGBOULDER	.\src\move_impl.cpp	/^void MoveImplementation::ROLLINGBOULDER(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+RUBYRUSH	.\src\move_impl.cpp	/^void MoveImplementation::RUBYRUSH(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 Ray	.\include\raylib\raylib.h	/^typedef struct Ray {$/;"	s
 Ray	.\include\raylib\raylib.h	/^} Ray;$/;"	t	typeref:struct:Ray
 RayHitInfo	.\include\raylib\raylib.h	/^typedef struct RayHitInfo {$/;"	s
@@ -13293,9 +13292,9 @@ Release	.\include\raylib\external\miniaudio.h	/^    ULONG   (STDMETHODCALLTYPE *
 Release	.\include\raylib\external\miniaudio.h	/^    ULONG   (STDMETHODCALLTYPE * Release)       (ma_completion_handler_uwp* pThis);$/;"	m	struct:__anon275
 ReleaseBuffer	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * ReleaseBuffer)    (ma_IAudioCaptureClient* pThis, ma_uint32 numFramesRead);$/;"	m	struct:__anon274
 ReleaseBuffer	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * ReleaseBuffer)(ma_IAudioRenderClient* pThis, ma_uint32 numFramesWritten, DWORD dwFlags);$/;"	m	struct:__anon273
-RemoveFromCurrentMoves	.\moveinventory.cpp	/^void RemoveFromCurrentMoves(Player &player, int &prevActive){$/;"	f
-RemoveFromSelectedList	.\combat.cpp	/^void RemoveFromSelectedList(CombatData &cbtD, int &prevActive){$/;"	f
-RemoveFromSelectedList	.\test.cpp	/^void RemoveFromSelectedList(CombatData &cbtD, int &prevActive){$/;"	f
+RemoveFromCurrentMoves	.\src\moveinventory.cpp	/^void RemoveFromCurrentMoves(Player &player, int &prevActive){$/;"	f
+RemoveFromSelectedList	.\src\combat.cpp	/^void RemoveFromSelectedList(CombatData &cbtD, int &prevActive){$/;"	f
+RemoveFromSelectedList	.\src\test.cpp	/^void RemoveFromSelectedList(CombatData &cbtD, int &prevActive){$/;"	f
 RemoveSocket	.\include\raylib\rnet.h	/^int RemoveSocket(SocketSet *set, Socket *sock)$/;"	f
 RenderTexture	.\include\raylib\raylib.h	/^typedef RenderTexture2D RenderTexture;$/;"	t
 RenderTexture	.\include\raylib\rlgl.h	/^    typedef RenderTexture2D RenderTexture;$/;"	t
@@ -13307,8 +13306,8 @@ Reset	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * R
 Reset	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * Reset)            (ma_IAudioClient2* pThis);$/;"	m	struct:__anon271
 Reset	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * Reset)            (ma_IAudioClient3* pThis);$/;"	m	struct:__anon272
 ResetPhysics	.\include\raylib\physac.h	/^PHYSACDEF void ResetPhysics(void)$/;"	f
-ResetSelectAvailList	.\combat.cpp	/^void ResetSelectAvailList(CombatData &cbtD){$/;"	f
-ResetSelectAvailList	.\test.cpp	/^void ResetSelectAvailList(CombatData &cbtD){$/;"	f
+ResetSelectAvailList	.\src\combat.cpp	/^void ResetSelectAvailList(CombatData &cbtD){$/;"	f
+ResetSelectAvailList	.\src\test.cpp	/^void ResetSelectAvailList(CombatData &cbtD){$/;"	f
 ResizePacket	.\include\raylib\rnet.h	/^int ResizePacket(SocketDataPacket *packet, int newsize)$/;"	f
 ResolveHost	.\include\raylib\rnet.h	/^int ResolveHost(const char *address, const char *service, int addressType, int flags, AddressInformation *outAddr)$/;"	f
 ResolveIP	.\include\raylib\rnet.h	/^void ResolveIP(const char *ip, const char *port, int flags, char *host, char *serv)$/;"	f
@@ -13319,19 +13318,19 @@ ResumeAudioBuffer	.\include\raylib\raudio.c	/^void ResumeAudioBuffer(AudioBuffer
 ResumeAudioStream	.\include\raylib\raudio.c	/^void ResumeAudioStream(AudioStream stream)$/;"	f
 ResumeMusicStream	.\include\raylib\raudio.c	/^void ResumeMusicStream(Music music)$/;"	f
 ResumeSound	.\include\raylib\raudio.c	/^void ResumeSound(Sound sound)$/;"	f
-Rotate	.\elemino.cpp	/^void Rotate(Elemino &e){$/;"	f
-RotateUsedRect	.\elemino.cpp	/^void RotateUsedRect(Elemino &e){$/;"	f
+Rotate	.\src\elemino.cpp	/^void Rotate(Elemino &e){$/;"	f
+RotateUsedRect	.\src\elemino.cpp	/^void RotateUsedRect(Elemino &e){$/;"	f
 RtlVerifyVersionInfo	.\include\raylib\external\glfw\src\win32_platform.h	262;"	d
 RtlVerifyVersionInfo_	.\include\raylib\external\glfw\src\win32_platform.h	/^        PFN_RtlVerifyVersionInfo        RtlVerifyVersionInfo_;$/;"	m	struct:_GLFWlibraryWin32::__anon106
 RunPhysicsStep	.\include\raylib\physac.h	/^PHYSACDEF void RunPhysicsStep(void)$/;"	f
 S	.\include\elemino.h	/^	S,$/;"	e	enum:MinoShape
 SAMPLE_NAME_LENGTH	.\include\raylib\external\jar_xm.h	334;"	d
-SANDBOMB	.\move_impl.cpp	/^void MoveImplementation::SANDBOMB(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-SAPPHIRESTRIKE	.\move_impl.cpp	/^void MoveImplementation::SAPPHIRESTRIKE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-SAPPINGSTEMS	.\move_impl.cpp	/^void MoveImplementation::SAPPINGSTEMS(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+SANDBOMB	.\src\move_impl.cpp	/^void MoveImplementation::SANDBOMB(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+SAPPHIRESTRIKE	.\src\move_impl.cpp	/^void MoveImplementation::SAPPHIRESTRIKE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+SAPPINGSTEMS	.\src\move_impl.cpp	/^void MoveImplementation::SAPPINGSTEMS(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 SAVE_TARGETS	.\include\raylib\external\glfw\src\x11_platform.h	/^    Atom            SAVE_TARGETS;$/;"	m	struct:_GLFWlibraryX11
-SCORCHINGHEAT	.\move_impl.cpp	/^void MoveImplementation::SCORCHINGHEAT(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-SCRAPSLUG	.\move_impl.cpp	/^void MoveImplementation::SCRAPSLUG(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+SCORCHINGHEAT	.\src\move_impl.cpp	/^void MoveImplementation::SCORCHINGHEAT(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+SCRAPSLUG	.\src\move_impl.cpp	/^void MoveImplementation::SCRAPSLUG(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 SCREENHEIGHT	.\include\window.h	/^const int SCREENHEIGHT = 640;$/;"	v
 SCREENWIDTH	.\include\window.h	/^const int SCREENWIDTH = 960;$/;"	v
 SCROLLBAR	.\include\raylib\raygui.h	/^    SCROLLBAR,$/;"	e	enum:__anon408
@@ -13346,16 +13345,16 @@ SCROLL_SPEED	.\include\raylib\raygui.h	/^    SCROLL_SPEED,$/;"	e	enum:__anon419
 SDF_CHAR_PADDING	.\include\raylib\text.c	486;"	d	file:
 SDF_ON_EDGE_VALUE	.\include\raylib\text.c	487;"	d	file:
 SDF_PIXEL_DIST_SCALE	.\include\raylib\text.c	488;"	d	file:
-SEARINGFLESH	.\move_impl.cpp	/^void MoveImplementation::SEARINGFLESH(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-SEEDSHOT	.\move_impl.cpp	/^void MoveImplementation::SEEDSHOT(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+SEARINGFLESH	.\src\move_impl.cpp	/^void MoveImplementation::SEARINGFLESH(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+SEEDSHOT	.\src\move_impl.cpp	/^void MoveImplementation::SEEDSHOT(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 SGI_swap_control	.\include\raylib\external\glfw\src\glx_context.h	/^    GLFWbool        SGI_swap_control;$/;"	m	struct:_GLFWlibraryGLX
-SHADOWSLASH	.\move_impl.cpp	/^void MoveImplementation::SHADOWSLASH(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-SHARPEN	.\move_impl.cpp	/^void MoveImplementation::SHARPEN(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+SHADOWSLASH	.\src\move_impl.cpp	/^void MoveImplementation::SHADOWSLASH(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+SHARPEN	.\src\move_impl.cpp	/^void MoveImplementation::SHARPEN(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 SHARPENED_BUFF_BONUS	.\include\moveeffect.h	/^const float SHARPENED_BUFF_BONUS = .15f;$/;"	v
-SHATTERSHRAPNEL	.\move_impl.cpp	/^void MoveImplementation::SHATTERSHRAPNEL(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+SHATTERSHRAPNEL	.\src\move_impl.cpp	/^void MoveImplementation::SHATTERSHRAPNEL(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 SIG_ATOMIC_MAX	.\include\raylib\external\glfw\deps\vs2008\stdint.h	200;"	d
 SIG_ATOMIC_MIN	.\include\raylib\external\glfw\deps\vs2008\stdint.h	199;"	d
-SIRENSTEAR	.\move_impl.cpp	/^void MoveImplementation::SIRENSTEAR(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+SIRENSTEAR	.\src\move_impl.cpp	/^void MoveImplementation::SIRENSTEAR(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 SIZE_MAX	.\include\raylib\external\glfw\deps\vs2008\stdint.h	204;"	d
 SIZE_MAX	.\include\raylib\external\glfw\deps\vs2008\stdint.h	206;"	d
 SKYBLUE	.\include\raylib\raylib.h	140;"	d
@@ -13372,7 +13371,7 @@ SOCKET_MAX_UDPADDRESSES	.\include\raylib\rnet.h	184;"	d
 SOCKET_MAX_UDPCHANNELS	.\include\raylib\rnet.h	183;"	d
 SOCKET_TCP	.\include\raylib\rnet.h	/^    SOCKET_TCP = 0,             \/\/ SOCK_STREAM$/;"	e	enum:__anon460
 SOCKET_UDP	.\include\raylib\rnet.h	/^    SOCKET_UDP = 1              \/\/ SOCK_DGRAM$/;"	e	enum:__anon460
-SPARKINGSKIN	.\move_impl.cpp	/^void MoveImplementation::SPARKINGSKIN(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+SPARKINGSKIN	.\src\move_impl.cpp	/^void MoveImplementation::SPARKINGSKIN(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 SPEAKER_BACK_CENTER	.\include\raylib\external\miniaudio.h	8499;"	d
 SPEAKER_BACK_LEFT	.\include\raylib\external\miniaudio.h	8495;"	d
 SPEAKER_BACK_RIGHT	.\include\raylib\external\miniaudio.h	8496;"	d
@@ -13399,7 +13398,7 @@ SPRITE_H	.\include\sprite.h	2;"	d
 SQUISH_CONSTANT_2D	.\include\raylib\external\par_shapes.h	1758;"	d
 SQUISH_CONSTANT_3D	.\include\raylib\external\par_shapes.h	1760;"	d
 SQUISH_CONSTANT_4D	.\include\raylib\external\par_shapes.h	1762;"	d
-STATICSHOCK	.\move_impl.cpp	/^void MoveImplementation::STATICSHOCK(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+STATICSHOCK	.\src\move_impl.cpp	/^void MoveImplementation::STATICSHOCK(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 STATTEXT_H	.\include\stattext.h	2;"	d
 STATUSBAR	.\include\raylib\raygui.h	/^    STATUSBAR$/;"	e	enum:__anon408
 STBIDEF	.\include\raylib\external\stb_image.h	349;"	d
@@ -13721,13 +13720,13 @@ STB_VORBIS_NO_STDIO	.\include\raylib\external\stb_vorbis.h	536;"	d
 STB_VORBIS_NO_STDIO	.\include\raylib\external\stb_vorbis.h	540;"	d
 STB_VORBIS_NO_STDIO	.\include\raylib\external\stb_vorbis.h	67;"	d
 STB_VORBIS_PUSHDATA_CRC_COUNT	.\include\raylib\external\stb_vorbis.h	459;"	d
-STONESPEAR	.\move_impl.cpp	/^void MoveImplementation::STONESPEAR(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+STONESPEAR	.\src\move_impl.cpp	/^void MoveImplementation::STONESPEAR(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 STORAGE_DATA_FILE	.\include\raylib\core.c	301;"	d	file:
 STRETCH_CONSTANT_2D	.\include\raylib\external\par_shapes.h	1757;"	d
 STRETCH_CONSTANT_3D	.\include\raylib\external\par_shapes.h	1759;"	d
 STRETCH_CONSTANT_4D	.\include\raylib\external\par_shapes.h	1761;"	d
-SUPERCONDUCT	.\move_impl.cpp	/^void MoveImplementation::SUPERCONDUCT(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-SUPERNOVA	.\move_impl.cpp	/^void MoveImplementation::SUPERNOVA(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+SUPERCONDUCT	.\src\move_impl.cpp	/^void MoveImplementation::SUPERCONDUCT(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+SUPERNOVA	.\src\move_impl.cpp	/^void MoveImplementation::SUPERNOVA(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 SUPPORT_CAMERA_SYSTEM	.\include\raylib\config.h	40;"	d
 SUPPORT_COMPRESSION_API	.\include\raylib\config.h	62;"	d
 SUPPORT_DATA_STORAGE	.\include\raylib\config.h	64;"	d
@@ -13766,8 +13765,8 @@ SUPPORT_SCREEN_CAPTURE	.\include\raylib\config.h	56;"	d
 SUPPORT_SSH_KEYBOARD_RPI	.\include\raylib\config.h	46;"	d
 SUPPORT_TRACELOG	.\include\raylib\config.h	145;"	d
 SUPPORT_VR_SIMULATOR	.\include\raylib\config.h	70;"	d
-SURGE	.\move_impl.cpp	/^void MoveImplementation::SURGE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-SYMBIOSIS	.\move_impl.cpp	/^void MoveImplementation::SYMBIOSIS(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+SURGE	.\src\move_impl.cpp	/^void MoveImplementation::SURGE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+SYMBIOSIS	.\src\move_impl.cpp	/^void MoveImplementation::SYMBIOSIS(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 SYN_DROPPED	.\include\raylib\external\glfw\src\linux_joystick.c	45;"	d	file:
 Samples	.\include\raylib\external\miniaudio.h	/^    } Samples;$/;"	m	struct:__anon254	typeref:union:__anon254::__anon255
 SaveFileData	.\include\raylib\utils.c	/^void SaveFileData(const char *fileName, void *data, unsigned int bytesToWrite)$/;"	f
@@ -13775,14 +13774,14 @@ SaveFileText	.\include\raylib\utils.c	/^void SaveFileText(const char *fileName, 
 SaveKTX	.\include\raylib\textures.c	/^static int SaveKTX(Image image, const char *fileName)$/;"	f	file:
 SaveStorageValue	.\include\raylib\core.c	/^void SaveStorageValue(unsigned int position, int value)$/;"	f
 SaveWAV	.\include\raylib\raudio.c	/^static int SaveWAV(Wave wave, const char *fileName)$/;"	f	file:
-ScreenCenter	.\window.cpp	/^Vector2 ScreenCenter(){$/;"	f
+ScreenCenter	.\src\window.cpp	/^Vector2 ScreenCenter(){$/;"	f
 ScrollBar	.\include\gui.h	/^	ScrollBar(){$/;"	f	struct:ScrollBar
 ScrollBar	.\include\gui.h	/^struct ScrollBar{$/;"	s
 ScrollCallback	.\include\raylib\core.c	/^static void ScrollCallback(GLFWwindow *window, double xoffset, double yoffset)$/;"	f	file:
 SelectEvents	.\include\raylib\external\glfw\src\x11_platform.h	/^        PFN_XISelectEvents SelectEvents;$/;"	m	struct:_GLFWlibraryX11::__anon121
 SelectInput	.\include\raylib\external\glfw\src\x11_platform.h	/^        PFN_XRRSelectInput SelectInput;$/;"	m	struct:_GLFWlibraryX11::__anon113
-SelectMoves	.\combat.cpp	/^void SelectMoves(CombatData &cbtD){$/;"	f
-SelectMoves	.\test.cpp	/^void SelectMoves(CombatData &cbtD){$/;"	f
+SelectMoves	.\src\combat.cpp	/^void SelectMoves(CombatData &cbtD){$/;"	f
+SelectMoves	.\src\test.cpp	/^void SelectMoves(CombatData &cbtD){$/;"	f
 SendMessageToUWP	.\include\raylib\utils.c	/^void SendMessageToUWP(UWPMessage *msg)$/;"	f
 SetAudioBufferPitch	.\include\raylib\raudio.c	/^void SetAudioBufferPitch(AudioBuffer *buffer, float pitch)$/;"	f
 SetAudioBufferVolume	.\include\raylib\raudio.c	/^void SetAudioBufferVolume(AudioBuffer *buffer, float volume)$/;"	f
@@ -13794,7 +13793,7 @@ SetCameraMode	.\include\raylib\camera.h	/^void SetCameraMode(Camera camera, int 
 SetCameraMoveControls	.\include\raylib\camera.h	/^void SetCameraMoveControls(int frontKey, int backKey, int rightKey, int leftKey, int upKey, int downKey)$/;"	f
 SetCameraPanControl	.\include\raylib\camera.h	/^void SetCameraPanControl(int panKey) { CAMERA.panControl = panKey; }$/;"	f
 SetCameraSmoothZoomControl	.\include\raylib\camera.h	/^void SetCameraSmoothZoomControl(int szoomKey) { CAMERA.smoothZoomControl = szoomKey; }$/;"	f
-SetClicked	.\elemino.cpp	/^void SetClicked(Elemino &e, Mouse &mouse){$/;"	f
+SetClicked	.\src\elemino.cpp	/^void SetClicked(Elemino &e, Mouse &mouse){$/;"	f
 SetClientProperties	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * SetClientProperties)(ma_IAudioClient2* pThis, const ma_AudioClientProperties* pProperties);$/;"	m	struct:__anon271
 SetClientProperties	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * SetClientProperties)(ma_IAudioClient3* pThis, const ma_AudioClientProperties* pProperties);$/;"	m	struct:__anon272
 SetClipboardText	.\include\raylib\core.c	/^void SetClipboardText(const char *text)$/;"	f
@@ -13815,7 +13814,7 @@ SetMasterVolume	.\include\raylib\raudio.c	/^void SetMasterVolume(float volume)$/
 SetMaterialTexture	.\include\raylib\models.c	/^void SetMaterialTexture(Material *material, int mapType, Texture2D texture)$/;"	f
 SetMatrixModelview	.\include\raylib\rlgl.h	/^void SetMatrixModelview(Matrix view)$/;"	f
 SetMatrixProjection	.\include\raylib\rlgl.h	/^void SetMatrixProjection(Matrix projection)$/;"	f
-SetMaxLevel	.\player.cpp	/^void SetMaxLevel(Player &player){$/;"	f
+SetMaxLevel	.\src\player.cpp	/^void SetMaxLevel(Player &player){$/;"	f
 SetModelMeshMaterial	.\include\raylib\models.c	/^void SetModelMeshMaterial(Model *model, int meshId, int materialId)$/;"	f
 SetMouseOffset	.\include\raylib\core.c	/^void SetMouseOffset(int offsetX, int offsetY)$/;"	f
 SetMousePosition	.\include\raylib\core.c	/^void SetMousePosition(int x, int y)$/;"	f
@@ -13859,11 +13858,11 @@ SetWindowMonitor	.\include\raylib\core.c	/^void SetWindowMonitor(int monitor)$/;
 SetWindowPosition	.\include\raylib\core.c	/^void SetWindowPosition(int x, int y)$/;"	f
 SetWindowSize	.\include\raylib\core.c	/^void SetWindowSize(int width, int height)$/;"	f
 SetWindowTitle	.\include\raylib\core.c	/^void SetWindowTitle(const char *title)$/;"	f
-SetupDropDown	.\gui.cpp	/^void SetupDropDown(DropDown &dd){$/;"	f
+SetupDropDown	.\src\gui.cpp	/^void SetupDropDown(DropDown &dd){$/;"	f
 SetupFramebuffer	.\include\raylib\core.c	/^static void SetupFramebuffer(int width, int height)$/;"	f	file:
-SetupListView	.\gui.cpp	/^void SetupListView(ListView &lw){$/;"	f
-SetupMoveInfo	.\moveinventory.cpp	/^void SetupMoveInfo(MoveInventoryData &minvD){$/;"	f
-SetupScrollBar	.\gui.cpp	/^void SetupScrollBar(ScrollBar &sb){$/;"	f
+SetupListView	.\src\gui.cpp	/^void SetupListView(ListView &lw){$/;"	f
+SetupMoveInfo	.\src\moveinventory.cpp	/^void SetupMoveInfo(MoveInventoryData &minvD){$/;"	f
+SetupScrollBar	.\src\gui.cpp	/^void SetupScrollBar(ScrollBar &sb){$/;"	f
 SetupViewport	.\include\raylib\core.c	/^static void SetupViewport(int width, int height)$/;"	f	file:
 Shader	.\include\raylib\raylib.h	/^typedef struct Shader {$/;"	s
 Shader	.\include\raylib\raylib.h	/^} Shader;$/;"	t	typeref:struct:Shader
@@ -13877,9 +13876,9 @@ ShareLists	.\include\raylib\external\glfw\src\wgl_context.h	/^    PFN_wglShareLi
 ShowCursor	.\include\raylib\core.c	/^void ShowCursor(void)$/;"	f
 ShowWindow	.\include\raylib\raylib.h	160;"	d
 Size	.\include\raylib\core.c	/^typedef struct { unsigned int width; unsigned int height; } Size;$/;"	t	typeref:struct:__anon8	file:
-Snap	.\elemino.cpp	/^void Snap(Elemino &e, Grid &g){$/;"	f
-SnapTo	.\elemino.cpp	/^void SnapTo(Elemino &e, Grid &g){$/;"	f
-SnapToLinear	.\elemino.cpp	/^void SnapToLinear(Elemino &e, Grid &g){$/;"	f
+Snap	.\src\elemino.cpp	/^void Snap(Elemino &e, Grid &g){$/;"	f
+SnapTo	.\src\elemino.cpp	/^void SnapTo(Elemino &e, Grid &g){$/;"	f
+SnapToLinear	.\src\elemino.cpp	/^void SnapToLinear(Elemino &e, Grid &g){$/;"	f
 Socket	.\include\raylib\rnet.h	/^typedef struct Socket {$/;"	s
 Socket	.\include\raylib\rnet.h	/^} Socket;$/;"	t	typeref:struct:Socket
 SocketAccept	.\include\raylib\rnet.h	/^Socket *SocketAccept(Socket *server, SocketConfig *config)$/;"	f
@@ -13936,11 +13935,11 @@ Start	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * S
 Start	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * Start)            (ma_IAudioClient* pThis);$/;"	m	struct:__anon270
 Start	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * Start)            (ma_IAudioClient2* pThis);$/;"	m	struct:__anon271
 Start	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * Start)            (ma_IAudioClient3* pThis);$/;"	m	struct:__anon272
-StartCombat	.\combat.cpp	/^void StartCombat(Game &game){$/;"	f
-StartCombat	.\test.cpp	/^void StartCombat(Game &game){$/;"	f
+StartCombat	.\src\combat.cpp	/^void StartCombat(Game &game){$/;"	f
+StartCombat	.\src\test.cpp	/^void StartCombat(Game &game){$/;"	f
 StatBar	.\include\gui.h	/^struct StatBar{$/;"	s
-StatTextSetup	.\inventory.cpp	/^void StatTextSetup(InventoryData &invD, Actor &actor){$/;"	f
-StatToolTip	.\inventory.cpp	/^void StatToolTip(InventoryData &invD, Actor &actor){$/;"	f
+StatTextSetup	.\src\inventory.cpp	/^void StatTextSetup(InventoryData &invD, Actor &actor){$/;"	f
+StatToolTip	.\src\inventory.cpp	/^void StatToolTip(InventoryData &invD, Actor &actor){$/;"	f
 State	.\include\gamestate.h	/^enum State{$/;"	g
 State	.\include\raylib\rlgl.h	/^    } State;$/;"	m	struct:rlglData	typeref:struct:rlglData::__anon456
 StatusEffects	.\include\combat.h	/^struct StatusEffects{$/;"	s
@@ -14017,7 +14016,7 @@ TEXT_PDEF	.\include\stattext.h	/^const char *TEXT_PDEF = "PDEF: ";$/;"	v
 TEXT_SIZE	.\include\raylib\raygui.h	/^    TEXT_SIZE = 16,$/;"	e	enum:__anon410
 TEXT_SPACING	.\include\raylib\raygui.h	/^    TEXT_SPACING,$/;"	e	enum:__anon410
 TEXT_VALIGN_PIXEL_OFFSET	.\include\raylib\raygui.h	3258;"	d
-TIDALWAVE	.\move_impl.cpp	/^void MoveImplementation::TIDALWAVE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+TIDALWAVE	.\src\move_impl.cpp	/^void MoveImplementation::TIDALWAVE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 TINOBJ_LOADER_C_H_	.\include\raylib\external\tinyobj_loader_c.h	25;"	d
 TINYOBJ_CALLOC	.\include\raylib\external\tinyobj_loader_c.h	127;"	d
 TINYOBJ_CALLOC	.\include\raylib\models.c	65;"	d	file:
@@ -14037,11 +14036,11 @@ TINYOBJ_REALLOC	.\include\raylib\models.c	66;"	d	file:
 TINYOBJ_SUCCESS	.\include\raylib\external\tinyobj_loader_c.h	85;"	d
 TISCopyCurrentKeyboardLayoutInputSource	.\include\raylib\external\glfw\src\cocoa_platform.h	107;"	d
 TISGetInputSourceProperty	.\include\raylib\external\glfw\src\cocoa_platform.h	109;"	d
-TMEM_H	.\tmem.c	3;"	d	file:
+TMEM_H	.\src\tmem.c	3;"	d	file:
 TOGGLE	.\include\raylib\raygui.h	/^    TOGGLE,         \/\/ TOGGLEGROUP$/;"	e	enum:__anon408
 TOGGLEGROUP_MAX_ELEMENTS	.\include\raylib\raygui.h	1124;"	d
-TORMENT	.\move_impl.cpp	/^void MoveImplementation::TORMENT(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-TORRENT	.\move_impl.cpp	/^void MoveImplementation::TORRENT(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+TORMENT	.\src\move_impl.cpp	/^void MoveImplementation::TORMENT(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+TORRENT	.\src\move_impl.cpp	/^void MoveImplementation::TORRENT(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 TOUCH_DOWN	.\include\raylib\gestures.h	/^typedef enum { TOUCH_UP, TOUCH_DOWN, TOUCH_MOVE } TouchAction;$/;"	e	enum:__anon388
 TOUCH_MOVE	.\include\raylib\gestures.h	/^typedef enum { TOUCH_UP, TOUCH_DOWN, TOUCH_MOVE } TouchAction;$/;"	e	enum:__anon388
 TOUCH_UP	.\include\raylib\gestures.h	/^typedef enum { TOUCH_UP, TOUCH_DOWN, TOUCH_MOVE } TouchAction;$/;"	e	enum:__anon388
@@ -14061,17 +14060,17 @@ TRACELOGD	.\include\raylib\utils.h	39;"	d
 TRACELOGD	.\include\raylib\utils.h	41;"	d
 TRACELOGD	.\include\raylib\utils.h	45;"	d
 TRACKER_NAME_LENGTH	.\include\raylib\external\jar_xm.h	337;"	d
-TREECLEAVER	.\move_impl.cpp	/^void MoveImplementation::TREECLEAVER(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-TREMOR	.\move_impl.cpp	/^void MoveImplementation::TREMOR(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+TREECLEAVER	.\src\move_impl.cpp	/^void MoveImplementation::TREECLEAVER(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+TREMOR	.\src\move_impl.cpp	/^void MoveImplementation::TREMOR(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 TRUE	.\include\raylib\external\stb_vorbis.h	634;"	d
-TSUNAMI	.\move_impl.cpp	/^void MoveImplementation::TSUNAMI(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+TSUNAMI	.\src\move_impl.cpp	/^void MoveImplementation::TSUNAMI(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 TakeScreenshot	.\include\raylib\core.c	/^void TakeScreenshot(const char *fileName)$/;"	f
 Team	.\include\player.h	/^	Team(){$/;"	f	struct:Team
 Team	.\include\player.h	/^struct Team{$/;"	s
 Team	.\include\team.h	/^	Team(){$/;"	f	struct:Team
 Team	.\include\team.h	/^struct Team{$/;"	s
-TeamsSetup	.\combat.cpp	/^void TeamsSetup(CombatData &cbtD){$/;"	f
-TeamsSetup	.\test.cpp	/^void TeamsSetup(CombatData &cbtD){$/;"	f
+TeamsSetup	.\src\combat.cpp	/^void TeamsSetup(CombatData &cbtD){$/;"	f
+TeamsSetup	.\src\test.cpp	/^void TeamsSetup(CombatData &cbtD){$/;"	f
 Terminate	.\include\raylib\external\glfw\src\egl_context.h	/^    PFN_eglTerminate            Terminate;$/;"	m	struct:_GLFWlibraryEGL
 TextAppend	.\include\raylib\text.c	/^void TextAppend(char *text, const char *append, int *position)$/;"	f
 TextCopy	.\include\raylib\text.c	/^int TextCopy(char *dst, const char *src)$/;"	f
@@ -14106,10 +14105,10 @@ TextureFilterMode	.\include\raylib\raylib.h	/^} TextureFilterMode;$/;"	t	typeref
 TextureFilterMode	.\include\raylib\rlgl.h	/^    } TextureFilterMode;$/;"	t	typeref:enum:__anon451
 TextureManager	.\include\sprite.h	/^struct TextureManager{$/;"	s
 TextureWrapMode	.\include\raylib\raylib.h	/^} TextureWrapMode;$/;"	t	typeref:enum:__anon439
-Tick	.\moveeffect.cpp	/^void MoveEffect::Tick(Actor *actor){$/;"	f	class:MoveEffect
-TickDamage	.\moveeffect.cpp	/^void MoveEffect::TickDamage(int healing){$/;"	f	class:MoveEffect
-TickHealCaster	.\moveeffect.cpp	/^void MoveEffect::TickHealCaster(int healing){$/;"	f	class:MoveEffect
-TickHealTarget	.\moveeffect.cpp	/^void MoveEffect::TickHealTarget(int healing){$/;"	f	class:MoveEffect
+Tick	.\src\moveeffect.cpp	/^void MoveEffect::Tick(Actor *actor){$/;"	f	class:MoveEffect
+TickDamage	.\src\moveeffect.cpp	/^void MoveEffect::TickDamage(int healing){$/;"	f	class:MoveEffect
+TickHealCaster	.\src\moveeffect.cpp	/^void MoveEffect::TickHealCaster(int healing){$/;"	f	class:MoveEffect
+TickHealTarget	.\src\moveeffect.cpp	/^void MoveEffect::TickHealTarget(int healing){$/;"	f	class:MoveEffect
 Time	.\include\raylib\core.c	/^    } Time;$/;"	m	struct:CoreData	typeref:struct:CoreData::__anon16	file:
 Toggle	.\include\gui.h	/^struct Toggle{$/;"	s
 ToggleFullscreen	.\include\raylib\core.c	/^void ToggleFullscreen(void)$/;"	f
@@ -14171,7 +14170,7 @@ UNCOMPRESSED_R8G8B8	.\include\raylib\raylib.h	/^    UNCOMPRESSED_R8G8B8,        
 UNCOMPRESSED_R8G8B8	.\include\raylib\rlgl.h	/^        UNCOMPRESSED_R8G8B8,            \/\/ 24 bpp$/;"	e	enum:__anon450
 UNCOMPRESSED_R8G8B8A8	.\include\raylib\raylib.h	/^    UNCOMPRESSED_R8G8B8A8,          \/\/ 32 bpp$/;"	e	enum:__anon436
 UNCOMPRESSED_R8G8B8A8	.\include\raylib\rlgl.h	/^        UNCOMPRESSED_R8G8B8A8,          \/\/ 32 bpp$/;"	e	enum:__anon450
-UNDERGROWTH	.\move_impl.cpp	/^void MoveImplementation::UNDERGROWTH(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+UNDERGROWTH	.\src\move_impl.cpp	/^void MoveImplementation::UNDERGROWTH(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 UNICODE	.\include\raylib\external\glfw\src\win32_platform.h	48;"	d
 UNICODE_NOCHAR	.\include\raylib\external\glfw\src\win32_platform.h	87;"	d
 UNIFORM_FLOAT	.\include\raylib\raylib.h	/^    UNIFORM_FLOAT = 0,$/;"	e	enum:__anon434
@@ -14223,18 +14222,18 @@ UWP_MSG_SET_MOUSE_LOCATION	.\include\raylib\utils.h	/^    UWP_MSG_SET_MOUSE_LOCA
 UWP_MSG_SHOW_MOUSE	.\include\raylib\utils.h	/^    UWP_MSG_SHOW_MOUSE,$/;"	e	enum:__anon461
 UWP_MSG_UNLOCK_MOUSE	.\include\raylib\utils.h	/^    UWP_MSG_UNLOCK_MOUSE,$/;"	e	enum:__anon461
 UWP_MSG_UPDATE_MOUSE_LOCATION	.\include\raylib\utils.h	/^    UWP_MSG_UPDATE_MOUSE_LOCATION,  \/\/ paramVector0 (pos)$/;"	e	enum:__anon461
-UndoDisableDiff	.\moveeffect.cpp	/^void UndoDisableDiff(EffectDiff &ediff){$/;"	f
-UndoHPBonusDiff	.\moveeffect.cpp	/^void UndoHPBonusDiff(EffectDiff &ediff){$/;"	f
-UndoImmunityDiff	.\moveeffect.cpp	/^void UndoImmunityDiff(EffectDiff &ediff){$/;"	f
-UndoIncapicateDiff	.\moveeffect.cpp	/^void UndoIncapicateDiff(EffectDiff &ediff){$/;"	f
-UndoMATKDiff	.\moveeffect.cpp	/^void UndoMATKDiff(EffectDiff &ediff){$/;"	f
-UndoMDEFDiff	.\moveeffect.cpp	/^void UndoMDEFDiff(EffectDiff &ediff){$/;"	f
-UndoMPBonusDiff	.\moveeffect.cpp	/^void UndoMPBonusDiff(EffectDiff &ediff){$/;"	f
-UndoMaxHPDiff	.\moveeffect.cpp	/^void UndoMaxHPDiff(EffectDiff &ediff){$/;"	f
-UndoMaxMPDiff	.\moveeffect.cpp	/^void UndoMaxMPDiff(EffectDiff &ediff){$/;"	f
-UndoPATKDiff	.\moveeffect.cpp	/^void UndoPATKDiff(EffectDiff &ediff){$/;"	f
-UndoPDEFDiff	.\moveeffect.cpp	/^void UndoPDEFDiff(EffectDiff &ediff){$/;"	f
-UndoTypeDiff	.\moveeffect.cpp	/^void UndoTypeDiff(EffectDiff &ediff){$/;"	f
+UndoDisableDiff	.\src\moveeffect.cpp	/^void UndoDisableDiff(EffectDiff &ediff){$/;"	f
+UndoHPBonusDiff	.\src\moveeffect.cpp	/^void UndoHPBonusDiff(EffectDiff &ediff){$/;"	f
+UndoImmunityDiff	.\src\moveeffect.cpp	/^void UndoImmunityDiff(EffectDiff &ediff){$/;"	f
+UndoIncapicateDiff	.\src\moveeffect.cpp	/^void UndoIncapicateDiff(EffectDiff &ediff){$/;"	f
+UndoMATKDiff	.\src\moveeffect.cpp	/^void UndoMATKDiff(EffectDiff &ediff){$/;"	f
+UndoMDEFDiff	.\src\moveeffect.cpp	/^void UndoMDEFDiff(EffectDiff &ediff){$/;"	f
+UndoMPBonusDiff	.\src\moveeffect.cpp	/^void UndoMPBonusDiff(EffectDiff &ediff){$/;"	f
+UndoMaxHPDiff	.\src\moveeffect.cpp	/^void UndoMaxHPDiff(EffectDiff &ediff){$/;"	f
+UndoMaxMPDiff	.\src\moveeffect.cpp	/^void UndoMaxMPDiff(EffectDiff &ediff){$/;"	f
+UndoPATKDiff	.\src\moveeffect.cpp	/^void UndoPATKDiff(EffectDiff &ediff){$/;"	f
+UndoPDEFDiff	.\src\moveeffect.cpp	/^void UndoPDEFDiff(EffectDiff &ediff){$/;"	f
+UndoTypeDiff	.\src\moveeffect.cpp	/^void UndoTypeDiff(EffectDiff &ediff){$/;"	f
 UnhideWindow	.\include\raylib\core.c	/^void UnhideWindow(void)$/;"	f
 Unicode	.\include\raylib\external\glfw\deps\mingw\xinput.h	/^    WCHAR Unicode;$/;"	m	struct:_XINPUT_KEYSTROKE
 UnloadAddress	.\include\raylib\rnet.h	/^void UnloadAddress(AddressInformation *addressInfo)$/;"	f
@@ -14256,48 +14255,48 @@ UnloadSocketResult	.\include\raylib\rnet.h	/^void UnloadSocketResult(SocketResul
 UnloadSocketSet	.\include\raylib\rnet.h	/^void UnloadSocketSet(SocketSet *set)$/;"	f
 UnloadSound	.\include\raylib\raudio.c	/^void UnloadSound(Sound sound)$/;"	f
 UnloadTexture	.\include\raylib\textures.c	/^void UnloadTexture(Texture2D texture)$/;"	f
-UnloadTexturesFrom	.\inventory.cpp	/^void UnloadTexturesFrom(InventoryData &invData){$/;"	f
-UnloadTexturesFrom	.\moveinventory.cpp	/^void UnloadTexturesFrom(MoveInventoryData &minvData){$/;"	f
+UnloadTexturesFrom	.\src\inventory.cpp	/^void UnloadTexturesFrom(InventoryData &invData){$/;"	f
+UnloadTexturesFrom	.\src\moveinventory.cpp	/^void UnloadTexturesFrom(MoveInventoryData &minvData){$/;"	f
 UnloadWave	.\include\raylib\raudio.c	/^void UnloadWave(Wave wave)$/;"	f
 Unlock	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * Unlock)            (ma_IDirectSoundBuffer* pThis, void* pAudioPtr1, DWORD dwAudioBytes1, void* pAudioPtr2, DWORD dwAudioBytes2);$/;"	m	struct:__anon285
 Unlock	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * Unlock)            (ma_IDirectSoundCaptureBuffer* pThis, void* pAudioPtr1, DWORD dwAudioBytes1, void* pAudioPtr2, DWORD dwAudioBytes2);$/;"	m	struct:__anon287
-Unoccupy	.\elemino.cpp	/^void Unoccupy(Grid &g){$/;"	f
+Unoccupy	.\src\elemino.cpp	/^void Unoccupy(Grid &g){$/;"	f
 UnregisterEndpointNotificationCallback	.\include\raylib\external\miniaudio.h	/^        HRESULT (STDMETHODCALLTYPE * UnregisterEndpointNotificationCallback)(ma_IMMDeviceEnumerator* pThis, ma_IMMNotificationClient* pClient);$/;"	m	struct:__anon265
 UntrackAudioBuffer	.\include\raylib\raudio.c	/^void UntrackAudioBuffer(AudioBuffer *buffer)$/;"	f
-Update	.\gui.cpp	/^bool Update(DropDown &dd){$/;"	f
-Update	.\gui.cpp	/^bool Update(ImageToggle &toggle){$/;"	f
-Update	.\gui.cpp	/^bool Update(Toggle &toggle){$/;"	f
-Update	.\gui.cpp	/^void Update(Button &button){$/;"	f
-Update	.\gui.cpp	/^void Update(ImageButton &button){$/;"	f
-Update	.\gui.cpp	/^void Update(ListView &lw){$/;"	f
-Update	.\gui.cpp	/^void Update(ScrollBar &sb){$/;"	f
-Update	.\sprite.cpp	/^void Update(Animation &anim){$/;"	f
-Update	.\sprite.cpp	/^void Update(Sprite &spr){$/;"	f
-Update	.\window.cpp	/^void Update(Mouse &mouse){$/;"	f
+Update	.\src\gui.cpp	/^bool Update(DropDown &dd){$/;"	f
+Update	.\src\gui.cpp	/^bool Update(ImageToggle &toggle){$/;"	f
+Update	.\src\gui.cpp	/^bool Update(Toggle &toggle){$/;"	f
+Update	.\src\gui.cpp	/^void Update(Button &button){$/;"	f
+Update	.\src\gui.cpp	/^void Update(ImageButton &button){$/;"	f
+Update	.\src\gui.cpp	/^void Update(ListView &lw){$/;"	f
+Update	.\src\gui.cpp	/^void Update(ScrollBar &sb){$/;"	f
+Update	.\src\sprite.cpp	/^void Update(Animation &anim){$/;"	f
+Update	.\src\sprite.cpp	/^void Update(Sprite &spr){$/;"	f
+Update	.\src\window.cpp	/^void Update(Mouse &mouse){$/;"	f
 UpdateAudioStream	.\include\raylib\raudio.c	/^void UpdateAudioStream(AudioStream stream, const void *data, int samplesCount)$/;"	f
 UpdateBuffersDefault	.\include\raylib\rlgl.h	/^static void UpdateBuffersDefault(void)$/;"	f
 UpdateCamera	.\include\raylib\camera.h	/^void UpdateCamera(Camera *camera)$/;"	f
 UpdateConfiguration	.\include\raylib\external\glfw\src\x11_platform.h	/^        PFN_XRRUpdateConfiguration UpdateConfiguration;$/;"	m	struct:_GLFWlibraryX11::__anon113
-UpdateEffectDuration	.\moveeffect.cpp	/^bool UpdateEffectDuration(Actor &target, MoveEffect &meff){$/;"	f
+UpdateEffectDuration	.\src\moveeffect.cpp	/^bool UpdateEffectDuration(Actor &target, MoveEffect &meff){$/;"	f
 UpdateGestures	.\include\raylib\gestures.h	/^void UpdateGestures(void)$/;"	f
-UpdateInteractable	.\inventory.cpp	/^void UpdateInteractable(Player &player){$/;"	f
+UpdateInteractable	.\src\inventory.cpp	/^void UpdateInteractable(Player &player){$/;"	f
 UpdateModelAnimation	.\include\raylib\models.c	/^void UpdateModelAnimation(Model model, ModelAnimation anim, int frame)$/;"	f
 UpdateMusicStream	.\include\raylib\raudio.c	/^void UpdateMusicStream(Music music)$/;"	f
-UpdatePos	.\elemino.cpp	/^void Grid::UpdatePos(){$/;"	f	class:Grid
-UpdatePos	.\elemino.cpp	/^void Grid::UpdatePos(Vector2 &p){$/;"	f	class:Grid
+UpdatePos	.\src\elemino.cpp	/^void Grid::UpdatePos(){$/;"	f	class:Grid
+UpdatePos	.\src\elemino.cpp	/^void Grid::UpdatePos(Vector2 &p){$/;"	f	class:Grid
 UpdateSound	.\include\raylib\raudio.c	/^void UpdateSound(Sound sound, const void *data, int samplesCount)$/;"	f
-UpdateStatText	.\inventory.cpp	/^void UpdateStatText(InventoryData &invD, Actor &actor){$/;"	f
+UpdateStatText	.\src\inventory.cpp	/^void UpdateStatText(InventoryData &invD, Actor &actor){$/;"	f
 UpdateTexture	.\include\raylib\textures.c	/^void UpdateTexture(Texture2D texture, const void *pixels)$/;"	f
 UpdateVrTracking	.\include\raylib\rlgl.h	/^void UpdateVrTracking(Camera *camera)$/;"	f
-UpdateWindow	.\window.cpp	/^void UpdateWindow(){$/;"	f
+UpdateWindow	.\src\window.cpp	/^void UpdateWindow(){$/;"	f
 UserIndex	.\include\raylib\external\glfw\deps\mingw\xinput.h	/^    BYTE UserIndex;$/;"	m	struct:_XINPUT_KEYSTROKE
 VALUEBOX	.\include\raylib\raygui.h	/^    VALUEBOX,$/;"	e	enum:__anon408
 VALUEBOX_MAX_CHARS	.\include\raylib\raygui.h	1576;"	d
-VAPORVORTEX	.\move_impl.cpp	/^void MoveImplementation::VAPORVORTEX(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+VAPORVORTEX	.\src\move_impl.cpp	/^void MoveImplementation::VAPORVORTEX(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 VC_EXTRALEAN	.\include\raylib\external\glfw\src\win32_platform.h	34;"	d
-VENOMCOATING	.\move_impl.cpp	/^void MoveImplementation::VENOMCOATING(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+VENOMCOATING	.\src\move_impl.cpp	/^void MoveImplementation::VENOMCOATING(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 VIOLET	.\include\raylib\raylib.h	144;"	d
-VIVIDNIGHTMARE	.\move_impl.cpp	/^void MoveImplementation::VIVIDNIGHTMARE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+VIVIDNIGHTMARE	.\src\move_impl.cpp	/^void MoveImplementation::VIVIDNIGHTMARE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 VKAPI_ATTR	.\include\raylib\external\glfw\deps\glad\vk_platform.h	51;"	d
 VKAPI_ATTR	.\include\raylib\external\glfw\deps\glad\vk_platform.h	61;"	d
 VKAPI_ATTR	.\include\raylib\external\glfw\deps\glad\vk_platform.h	66;"	d
@@ -15303,7 +15302,7 @@ VORBIS_too_many_channels	.\include\raylib\external\stb_vorbis.h	/^   VORBIS_too_
 VORBIS_unexpected_eof	.\include\raylib\external\stb_vorbis.h	/^   VORBIS_unexpected_eof=10,            \/\/ file is truncated?$/;"	e	enum:STBVorbisError
 VULKAN_CORE_H_	.\include\raylib\external\glfw\deps\glad\vulkan.h	38;"	d
 VULKAN_H_	.\include\raylib\external\glfw\deps\glad\vulkan.h	33;"	d
-Valid	.\element.cpp	/^bool Valid(const Element &e){$/;"	f
+Valid	.\src\element.cpp	/^bool Valid(const Element &e){$/;"	f
 ValidChannel	.\include\raylib\rnet.h	/^static int ValidChannel(int channel)$/;"	f
 Vector2	.\include\raylib\camera.h	/^    typedef struct Vector2 {$/;"	s
 Vector2	.\include\raylib\camera.h	/^    } Vector2;$/;"	t	typeref:struct:Vector2
@@ -16060,7 +16059,7 @@ VrStereoConfig	.\include\raylib\rlgl.h	/^    } VrStereoConfig;$/;"	t	typeref:str
 VrStereoConfig	.\include\raylib\rlgl.h	/^typedef struct VrStereoConfig {$/;"	s
 VrStereoConfig	.\include\raylib\rlgl.h	/^} VrStereoConfig;$/;"	t	typeref:struct:VrStereoConfig
 WATERCOLOR	.\include\gui.h	32;"	d
-WATERWHIP	.\move_impl.cpp	/^void MoveImplementation::WATERWHIP(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+WATERWHIP	.\src\move_impl.cpp	/^void MoveImplementation::WATERWHIP(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 WAVEFORMATEXTENSIBLE	.\include\raylib\external\miniaudio.h	/^} WAVEFORMATEXTENSIBLE;$/;"	t	typeref:struct:__anon254
 WAVE_FORMAT_44M08	.\include\raylib\external\miniaudio.h	8476;"	d
 WAVE_FORMAT_44M16	.\include\raylib\external\miniaudio.h	8478;"	d
@@ -16124,10 +16123,10 @@ WGL_STENCIL_BITS_ARB	.\include\raylib\external\glfw\src\wgl_context.h	49;"	d
 WGL_STEREO_ARB	.\include\raylib\external\glfw\src\wgl_context.h	51;"	d
 WGL_SUPPORT_OPENGL_ARB	.\include\raylib\external\glfw\src\wgl_context.h	29;"	d
 WGL_TYPE_RGBA_ARB	.\include\raylib\external\glfw\src\wgl_context.h	32;"	d
-WHIRLPOOL	.\move_impl.cpp	/^void MoveImplementation::WHIRLPOOL(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+WHIRLPOOL	.\src\move_impl.cpp	/^void MoveImplementation::WHIRLPOOL(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 WHITE	.\include\raylib\raylib.h	150;"	d
-WICKEDHEX	.\move_impl.cpp	/^void MoveImplementation::WICKEDHEX(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
-WILDFIRE	.\move_impl.cpp	/^void MoveImplementation::WILDFIRE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+WICKEDHEX	.\src\move_impl.cpp	/^void MoveImplementation::WICKEDHEX(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+WILDFIRE	.\src\move_impl.cpp	/^void MoveImplementation::WILDFIRE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 WIN32_LEAN_AND_MEAN	.\include\raylib\external\ANGLE\EGL\eglplatform.h	72;"	d
 WIN32_LEAN_AND_MEAN	.\include\raylib\external\glad.h	30;"	d
 WIN32_LEAN_AND_MEAN	.\include\raylib\external\glfw\src\win32_platform.h	38;"	d
@@ -16169,7 +16168,7 @@ Window	.\include\raylib\core.c	/^    } Window;$/;"	m	struct:CoreData	typeref:str
 Window	.\include\window.h	/^struct Window{$/;"	s
 WindowDropCallback	.\include\raylib\core.c	/^static void WindowDropCallback(GLFWwindow *window, int count, const char **paths)$/;"	f	file:
 WindowIconifyCallback	.\include\raylib\core.c	/^static void WindowIconifyCallback(GLFWwindow *window, int iconified)$/;"	f	file:
-WindowSetup	.\window.cpp	/^void WindowSetup(){$/;"	f
+WindowSetup	.\src\window.cpp	/^void WindowSetup(){$/;"	f
 WindowShouldClose	.\include\raylib\core.c	/^bool WindowShouldClose(void)$/;"	f
 WindowSizeCallback	.\include\raylib\core.c	/^static void WindowSizeCallback(GLFWwindow *window, int width, int height)$/;"	f	file:
 XF86VidModeGetGammaRamp	.\include\raylib\external\glfw\src\x11_platform.h	116;"	d
@@ -16270,7 +16269,7 @@ Xlist	.\include\raylib\external\stb_vorbis.h	/^   stbv_uint16 Xlist[31*8+2]; \/\
 YCbCr_to_RGB_kernel	.\include\raylib\external\stb_image.h	/^   void (*YCbCr_to_RGB_kernel)(stbi_uc *out, const stbi_uc *y, const stbi_uc *pcb, const stbi_uc *pcr, int count, int step);$/;"	m	struct:__anon320
 YELLOW	.\include\raylib\raylib.h	131;"	d
 Z	.\include\elemino.h	/^	Z,$/;"	e	enum:MinoShape
-ZAP	.\move_impl.cpp	/^void MoveImplementation::ZAP(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+ZAP	.\src\move_impl.cpp	/^void MoveImplementation::ZAP(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 _ANDROID_NATIVE_APP_GLUE_H	.\include\raylib\external\android\native_app_glue\android_native_app_glue.h	19;"	d
 _ANONYMOUS_STRUCT	.\include\raylib\external\glfw\deps\mingw\_mingw_dxhelper.h	30;"	d
 _ANONYMOUS_STRUCT	.\include\raylib\external\glfw\deps\mingw\_mingw_dxhelper.h	33;"	d
@@ -16582,7 +16581,7 @@ __STB_INCLUDE_STB_TRUETYPE_H__	.\include\raylib\external\stb_truetype.h	496;"	d
 __USE_BSD	.\include\raylib\external\dr_flac.h	871;"	d
 __USE_W32_SOCKETS	.\include\raylib\rnet.h	138;"	d
 __WINE_XINPUT_H	.\include\raylib\external\glfw\deps\mingw\xinput.h	21;"	d
-__cpluplus	.\gui.cpp	7;"	d	file:
+__cpluplus	.\src\gui.cpp	7;"	d	file:
 __eglMustCastToProperFunctionPointerType	.\include\raylib\external\ANGLE\EGL\egl.h	/^typedef void (*__eglMustCastToProperFunctionPointerType)(void);$/;"	t
 __egl_h_	.\include\raylib\external\ANGLE\EGL\egl.h	2;"	d
 __eglext_h_	.\include\raylib\external\ANGLE\EGL\eglext.h	2;"	d
@@ -17066,7 +17065,7 @@ active_port	.\include\raylib\external\miniaudio.h	/^    void* active_port;$/;"	m
 activity	.\include\raylib\external\android\native_app_glue\android_native_app_glue.h	/^    ANativeActivity* activity;$/;"	m	struct:android_app
 activityState	.\include\raylib\external\android\native_app_glue\android_native_app_glue.h	/^    int activityState;$/;"	m	struct:android_app
 actors	.\include\player.h	/^	static Actor actors[NUM_PLAYER_CHARACTERS];$/;"	m	struct:Character
-actors	.\player.cpp	/^Actor Character::actors[NUM_PLAYER_CHARACTERS];$/;"	m	class:Character	file:
+actors	.\src\player.cpp	/^Actor Character::actors[NUM_PLAYER_CHARACTERS];$/;"	m	class:Character	file:
 actualPeriodSizeInFramesCapture	.\include\raylib\external\miniaudio.h	/^            ma_uint32 actualPeriodSizeInFramesCapture;$/;"	m	struct:ma_device::__anon230::__anon231
 actualPeriodSizeInFramesPlayback	.\include\raylib\external\miniaudio.h	/^            ma_uint32 actualPeriodSizeInFramesPlayback;        \/* Value from GetBufferSize(). internalPeriodSizeInFrames is not set to the _actual_ buffer size when low-latency shared mode is being used due to the way the IAudioClient3 API works. *\/$/;"	m	struct:ma_device::__anon230::__anon231
 actual_panning	.\include\raylib\external\jar_xm.h	/^     float actual_panning;$/;"	m	struct:jar_xm_channel_context_s
@@ -18389,8 +18388,8 @@ deviceType	.\include\raylib\external\miniaudio.h	/^    ma_device_type deviceType
 deviceUUID	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint8_t                            deviceUUID [ VK_UUID_SIZE ];$/;"	m	struct:VkPhysicalDeviceIDProperties
 dics	.\include\raylib\external\glfw\deps\mingw\dinput.h	/^	DICOLORSET		dics;$/;"	m	struct:_DICONFIGUREDEVICESPARAMSA
 dics	.\include\raylib\external\glfw\deps\mingw\dinput.h	/^	DICOLORSET		dics;$/;"	m	struct:_DICONFIGUREDEVICESPARAMSW
-diffMemPool	.\combat.cpp	/^MemPool CombatData::diffMemPool = CreateMemPool(DIFF_MEM_SIZE);$/;"	m	class:CombatData	file:
 diffMemPool	.\include\combat.h	/^	static MemPool diffMemPool;$/;"	m	struct:CombatData
+diffMemPool	.\src\combat.cpp	/^MemPool CombatData::diffMemPool = CreateMemPool(DIFF_MEM_SIZE);$/;"	m	class:CombatData	file:
 diffs	.\include\moveeffect.h	/^	struct EffectDiff *diffs = nullptr;$/;"	v	typeref:struct:EffectDiff
 diffuse	.\include\raylib\external\tinyobj_loader_c.h	/^  float diffuse[3];$/;"	m	struct:__anon378
 diffuse_factor	.\include\raylib\external\cgltf.h	/^	cgltf_float diffuse_factor[4];$/;"	m	struct:cgltf_pbr_specular_glossiness
@@ -18445,7 +18444,7 @@ ditherMode	.\include\raylib\external\miniaudio.h	/^    ma_dither_mode ditherMode
 ditherMode	.\include\raylib\external\miniaudio.h	/^    ma_dither_mode ditherMode;$/;"	m	struct:__anon246
 doTransform	.\include\raylib\rlgl.h	/^        bool doTransform;                   \/\/ Use transform matrix against vertex (if required)$/;"	m	struct:rlglData::__anon456
 domainOrigin	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkTessellationDomainOrigin      domainOrigin;$/;"	m	struct:VkPipelineTessellationDomainOriginStateCreateInfo
-dot	.\tmath.cpp	/^float dot(const Vector2 &a, const Vector2 &b){$/;"	f
+dot	.\src\tmath.cpp	/^float dot(const Vector2 &a, const Vector2 &b){$/;"	f
 double_sided	.\include\raylib\external\cgltf.h	/^	cgltf_bool double_sided;$/;"	m	struct:cgltf_material
 doublebuffer	.\include\raylib\external\glfw\src\internal.h	/^    GLFWbool    doublebuffer;$/;"	m	struct:_GLFWfbconfig
 downDragPosition	.\include\raylib\gestures.h	/^        Vector2 downDragPosition;       \/\/ Touch drag position$/;"	m	struct:__anon390::__anon391
@@ -19319,8 +19318,8 @@ effect	.\include\raylib\external\jar_mod.h	/^    muchar  effect;$/;"	m	struct:__
 effect_code	.\include\raylib\external\jar_mod.h	/^    muint   effect_code;$/;"	m	struct:__anon126
 effect_param	.\include\raylib\external\jar_xm.h	/^     uint8_t effect_param;$/;"	m	struct:jar_xm_pattern_slot_s
 effect_type	.\include\raylib\external\jar_xm.h	/^     uint8_t effect_type;$/;"	m	struct:jar_xm_pattern_slot_s
-effects	.\combat.cpp	/^UMap<Actor *, Vec<MoveEffect> > CombatData::effects;$/;"	m	class:CombatData	file:
 effects	.\include\combat.h	/^	static UMap<Actor *, Vec<MoveEffect> > effects;$/;"	m	struct:CombatData
+effects	.\src\combat.cpp	/^UMap<Actor *, Vec<MoveEffect> > CombatData::effects;$/;"	m	class:CombatData	file:
 efficient	.\include\moveeffect.h	/^		efficient,$/;"	m	struct:MoveEffect	typeref:enum:MoveEffect::
 eflags	.\include\raylib\external\stb_image.h	/^   int flags, bgindex, ratio, transparent, eflags;$/;"	m	struct:__anon331
 egl	.\include\raylib\external\glfw\src\wl_platform.h	/^    } egl;$/;"	m	struct:_GLFWlibraryWayland	typeref:struct:_GLFWlibraryWayland::__anon112
@@ -19344,8 +19343,8 @@ elem	.\include\elemino.h	/^	Element elem;$/;"	m	struct:Elemino
 elem	.\include\elemino.h	/^	Element elem[NUM_RECT];$/;"	m	struct:Grid
 elem	.\include\move.h	/^	Element elem;$/;"	m	struct:Move
 elemdd	.\include\inventory.h	/^	DropDown elemdd;$/;"	m	struct:InventoryData
-eleminoTile	.\elemino.cpp	/^Texture Elemino::eleminoTile;$/;"	m	class:Elemino	file:
 eleminoTile	.\include\elemino.h	/^	static Texture eleminoTile;$/;"	m	struct:Elemino
+eleminoTile	.\src\elemino.cpp	/^Texture Elemino::eleminoTile;$/;"	m	class:Elemino	file:
 eleminoesAvail	.\include\inventory.h	/^	Vec<Elemino *> eleminoesAvail; \/\/The eleminoes available to the pages$/;"	m	struct:InventoryData
 emission	.\include\raylib\external\tinyobj_loader_c.h	/^  float emission[3];$/;"	m	struct:__anon378
 emissive_factor	.\include\raylib\external\cgltf.h	/^	cgltf_float emissive_factor[3];$/;"	m	struct:cgltf_material
@@ -24466,8 +24465,8 @@ green	.\include\raylib\external\glfw\include\GLFW\glfw3.h	/^    unsigned short* 
 greenBits	.\include\raylib\external\glfw\include\GLFW\glfw3.h	/^    int greenBits;$/;"	m	struct:GLFWvidmode
 greenBits	.\include\raylib\external\glfw\src\internal.h	/^    int         greenBits;$/;"	m	struct:_GLFWfbconfig
 gridMat	.\include\game.h	/^	Grid gridMat[4][3]; \/\/array of 4 characters' elematrices$/;"	m	struct:Game
-gridTile	.\elemino.cpp	/^Texture Grid::gridTile;$/;"	m	class:Grid	file:
 gridTile	.\include\elemino.h	/^	static Texture gridTile;$/;"	m	struct:Grid
+gridTile	.\src\elemino.cpp	/^Texture Grid::gridTile;$/;"	m	class:Grid	file:
 grids	.\include\actor.h	/^	Element grids[NUMGRIDS][NUMCELLS];$/;"	m	struct:Actor
 grids	.\include\inventory.h	/^	Grid *grids;$/;"	m	struct:InventoryData
 gridsize	.\include\raylib\external\par_shapes.h	/^    int gridsize;$/;"	m	struct:__anon312
@@ -27253,9 +27252,8 @@ ma_zero_pcm_frames	.\include\raylib\external\miniaudio.h	/^void ma_zero_pcm_fram
 magFilter	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkFilter                 magFilter;$/;"	m	struct:VkSamplerCreateInfo
 mag_filter	.\include\raylib\external\cgltf.h	/^	cgltf_int mag_filter;$/;"	m	struct:cgltf_sampler
 magnitude	.\include\raylib\external\stb_vorbis.h	/^   stbv_uint8 magnitude;$/;"	m	struct:__anon369
-main	.\core_window_letterbox.c	/^int main(void)$/;"	f
 main	.\include\raylib\external\stb_truetype.h	/^int main(int argc, char **argv)$/;"	f
-main	.\main.cpp	/^int main(int argc, char **argv){$/;"	f
+main	.\src\main.cpp	/^int main(int argc, char **argv){$/;"	f
 mainWindow	.\include\raylib\external\glfw\src\wl_platform.h	/^    mainWindow,$/;"	e	enum:_GLFWdecorationSideWayland
 maindata	.\include\raylib\external\dr_mp3.h	/^    drmp3_uint8 maindata[DRMP3_MAX_BITRESERVOIR_BYTES + DRMP3_MAX_L3_FRAME_PAYLOAD_BYTES];$/;"	m	struct:__anon66
 major	.\include\raylib\external\glad.h	/^    int major;$/;"	m	struct:gladGLversionStruct
@@ -27303,7 +27301,6 @@ materials	.\include\raylib\external\cgltf.h	/^	cgltf_material* materials;$/;"	m	
 materials	.\include\raylib\raylib.h	/^    Material *materials;    \/\/ Materials array$/;"	m	struct:Model
 materials_count	.\include\raylib\external\cgltf.h	/^	cgltf_size materials_count;$/;"	m	struct:cgltf_data
 matrix	.\include\raylib\external\cgltf.h	/^	cgltf_float matrix[16];$/;"	m	struct:cgltf_node
-max	.\core_window_letterbox.c	16;"	d	file:
 max	.\include\raylib\external\cgltf.h	/^	cgltf_float max[16];$/;"	m	struct:cgltf_accessor
 max	.\include\raylib\physac.h	218;"	d
 max	.\include\raylib\raylib.h	/^    Vector3 max;            \/\/ Maximum vertex box-corner$/;"	m	struct:BoundingBox
@@ -27481,7 +27478,6 @@ midiUnityNotes	.\include\raylib\external\dr_wav.h	/^    drwav_uint32 midiUnityNo
 mime	.\include\raylib\external\dr_flac.h	/^            const char* mime;$/;"	m	struct:__anon28::__anon29::__anon35
 mimeLength	.\include\raylib\external\dr_flac.h	/^            drflac_uint32 mimeLength;$/;"	m	struct:__anon28::__anon29::__anon35
 mime_type	.\include\raylib\external\cgltf.h	/^	char* mime_type;$/;"	m	struct:cgltf_image
-min	.\core_window_letterbox.c	17;"	d	file:
 min	.\include\raylib\external\cgltf.h	/^	cgltf_float min[16];$/;"	m	struct:cgltf_accessor
 min	.\include\raylib\external\glfw\src\wl_init.c	/^static inline int min(int n1, int n2)$/;"	f	file:
 min	.\include\raylib\physac.h	217;"	d
@@ -27582,8 +27578,8 @@ monitors	.\include\raylib\external\glfw\src\wl_platform.h	/^    _GLFWmonitor**  
 monitorsCount	.\include\raylib\external\glfw\src\wl_platform.h	/^    int                         monitorsCount;$/;"	m	struct:_GLFWwindowWayland
 monitorsSize	.\include\raylib\external\glfw\src\wl_platform.h	/^    int                         monitorsSize;$/;"	m	struct:_GLFWwindowWayland
 monotonic	.\include\raylib\external\glfw\src\posix_time.h	/^    GLFWbool    monotonic;$/;"	m	struct:_GLFWtimerPOSIX
-mouse	.\game.cpp	/^Mouse Game::mouse;$/;"	m	class:Game	file:
 mouse	.\include\game.h	/^	static Mouse mouse;$/;"	m	struct:Game
+mouse	.\src\game.cpp	/^Mouse Game::mouse;$/;"	m	class:Game	file:
 mouseButton	.\include\raylib\external\glfw\src\internal.h	/^        GLFWmousebuttonfun      mouseButton;$/;"	m	struct:_GLFWwindow::__anon91
 mouseButtons	.\include\raylib\external\glfw\src\internal.h	/^    char                mouseButtons[GLFW_MOUSE_BUTTON_LAST + 1];$/;"	m	struct:_GLFWwindow
 mouseTrailSize	.\include\raylib\external\glfw\src\win32_platform.h	/^    UINT                mouseTrailSize;$/;"	m	struct:_GLFWlibraryWin32
@@ -27593,9 +27589,9 @@ moveControl	.\include\raylib\camera.h	/^    int moveControl[6];$/;"	m	struct:__a
 moveDownPositionA	.\include\raylib\gestures.h	/^        Vector2 moveDownPositionA;      \/\/ First touch down position on move$/;"	m	struct:__anon390::__anon391
 moveDownPositionB	.\include\raylib\gestures.h	/^        Vector2 moveDownPositionB;      \/\/ Second touch down position on move$/;"	m	struct:__anon390::__anon391
 moveInfo	.\include\moveinventory.h	/^	BoxLabel moveInfo;$/;"	m	struct:MoveInventoryData
-moves	.\allmoves.cpp	/^Move AllMoves::moves[126] = {$/;"	m	class:AllMoves	file:
 moves	.\include\actor.h	/^	struct Move *moves[NUM_ACTOR_MOVES];$/;"	m	struct:Actor	typeref:struct:Actor::Move
 moves	.\include\move.h	/^	static struct Move moves[126];$/;"	m	struct:AllMoves	typeref:struct:AllMoves::Move
+moves	.\src\allmoves.cpp	/^Move AllMoves::moves[126] = {$/;"	m	class:AllMoves	file:
 movesAvail	.\include\moveinventory.h	/^	Vec<struct Move *> movesAvail; \/\/Internal list rep. the moves the focused character can have$/;"	m	struct:MoveInventoryData
 movesAvailList	.\include\moveinventory.h	/^	ListView movesAvailList; \/\/ListView of the move that are available to the character$/;"	m	struct:MoveInventoryData
 movesCurr	.\include\moveinventory.h	/^	Vec<struct Move *> movesCurr; \/\/Internal list rep. the current moves the focused character has$/;"	m	struct:MoveInventoryData
@@ -27901,17 +27897,17 @@ operationCompletionEvent	.\include\raylib\external\miniaudio.h	/^            ma_
 operationEvent	.\include\raylib\external\miniaudio.h	/^            ma_event operationEvent;$/;"	m	struct:ma_device::__anon230::__anon244
 operationResult	.\include\raylib\external\miniaudio.h	/^            ma_result operationResult;$/;"	m	struct:ma_device::__anon230::__anon244
 operator ()	.\include\sprite.h	/^	size_t operator()(const char *str) const {$/;"	f	struct:Hash_sbdm
-operator *	.\tmath.cpp	/^Vector2 operator*(const Vector2 &a, const float &f){$/;"	f
-operator *=	.\tmath.cpp	/^void operator*=(Vector2 &a, const float &f){$/;"	f
-operator +	.\tmath.cpp	/^Vector2 operator+(const Vector2 &a, const Vector2 &b){$/;"	f
-operator +=	.\tmath.cpp	/^void operator+=(Vector2 &a, const Vector2 &b){$/;"	f
-operator -	.\tmath.cpp	/^Vector2 operator-(const Vector2 &a, const Vector2 &b){$/;"	f
-operator -=	.\tmath.cpp	/^void operator-=(Vector2 &a, const Vector2 &b){$/;"	f
-operator /	.\tmath.cpp	/^Vector2 operator\/(const Vector2 &a, const Vector2 &b){$/;"	f
-operator /	.\tmath.cpp	/^Vector2 operator\/(const Vector2 &a, const float &f){$/;"	f
-operator /=	.\tmath.cpp	/^void operator\/=(Vector2 &a, const Vector2 &b){$/;"	f
-operator /=	.\tmath.cpp	/^void operator\/=(Vector2 &a, const float &f){$/;"	f
-operator =	.\gui.cpp	/^void Anchor::operator=(const Vector2 &v){$/;"	f	class:Anchor
+operator *	.\src\tmath.cpp	/^Vector2 operator*(const Vector2 &a, const float &f){$/;"	f
+operator *=	.\src\tmath.cpp	/^void operator*=(Vector2 &a, const float &f){$/;"	f
+operator +	.\src\tmath.cpp	/^Vector2 operator+(const Vector2 &a, const Vector2 &b){$/;"	f
+operator +=	.\src\tmath.cpp	/^void operator+=(Vector2 &a, const Vector2 &b){$/;"	f
+operator -	.\src\tmath.cpp	/^Vector2 operator-(const Vector2 &a, const Vector2 &b){$/;"	f
+operator -=	.\src\tmath.cpp	/^void operator-=(Vector2 &a, const Vector2 &b){$/;"	f
+operator /	.\src\tmath.cpp	/^Vector2 operator\/(const Vector2 &a, const Vector2 &b){$/;"	f
+operator /	.\src\tmath.cpp	/^Vector2 operator\/(const Vector2 &a, const float &f){$/;"	f
+operator /=	.\src\tmath.cpp	/^void operator\/=(Vector2 &a, const Vector2 &b){$/;"	f
+operator /=	.\src\tmath.cpp	/^void operator\/=(Vector2 &a, const float &f){$/;"	f
+operator =	.\src\gui.cpp	/^void Anchor::operator=(const Vector2 &v){$/;"	f	class:Anchor
 operator []	.\include\sprite.h	/^	Texture & operator[](const char *path){$/;"	f	struct:TextureManager
 optarg	.\include\raylib\external\glfw\deps\getopt.c	/^char* optarg;$/;"	v
 optcursor	.\include\raylib\external\glfw\deps\getopt.c	/^static char* optcursor = NULL;$/;"	v	file:
@@ -28859,7 +28855,7 @@ resampling	.\include\raylib\external\miniaudio.h	/^    } resampling;$/;"	m	struc
 resampling	.\include\raylib\external\miniaudio.h	/^    } resampling;$/;"	m	struct:__anon246	typeref:struct:__anon246::__anon247
 resampling	.\include\raylib\external\miniaudio.h	/^    } resampling;$/;"	m	struct:ma_device	typeref:struct:ma_device::__anon225
 rescaleTarget	.\include\window.h	/^	static RenderTexture rescaleTarget;$/;"	m	struct:Window
-rescaleTarget	.\window.cpp	/^RenderTexture2D Window::rescaleTarget;$/;"	m	class:Window	file:
+rescaleTarget	.\src\window.cpp	/^RenderTexture2D Window::rescaleTarget;$/;"	m	class:Window	file:
 reserv	.\include\raylib\external\dr_mp3.h	/^    int reserv, free_format_bytes;$/;"	m	struct:__anon51
 reserv_buf	.\include\raylib\external\dr_mp3.h	/^    unsigned char header[4], reserv_buf[511];$/;"	m	struct:__anon51
 reserved	.\include\raylib\external\dr_flac.h	/^    drflac_uint8 reserved[3];$/;"	m	struct:__anon44
@@ -29275,7 +29271,7 @@ scale	.\include\raylib\external\par_shapes.h	/^    float scale[3];$/;"	m	struct:
 scale	.\include\raylib\external\stb_vorbis.h	/^  float scale;$/;"	m	struct:__anon376
 scale	.\include\raylib\raylib.h	/^    Vector3 scale;          \/\/ Scale$/;"	m	struct:Transform
 scale	.\include\window.h	/^	static float scale;$/;"	m	struct:Window
-scale	.\window.cpp	/^float Window::scale = 1.f;$/;"	m	class:Window	file:
+scale	.\src\window.cpp	/^float Window::scale = 1.f;$/;"	m	class:Window	file:
 scaleToMonitor	.\include\raylib\external\glfw\src\internal.h	/^    GLFWbool      scaleToMonitor;$/;"	m	struct:_GLFWwndconfig
 scaleToMonitor	.\include\raylib\external\glfw\src\win32_platform.h	/^    GLFWbool            scaleToMonitor;$/;"	m	struct:_GLFWwindowWin32
 scalefac_compress	.\include\raylib\external\dr_mp3.h	/^    drmp3_uint16 part_23_length, big_values, scalefac_compress;$/;"	m	struct:__anon65
@@ -29446,7 +29442,7 @@ size	.\include\raylib\rmem.h	/^    size_t size;$/;"	m	struct:BiStack
 size	.\include\raylib\rmem.h	/^    size_t size;$/;"	m	struct:MemNode
 size	.\include\raylib\rmem.h	/^    size_t size;$/;"	m	struct:Stack
 size	.\include\raylib\rnet.h	/^    uint32_t size;              \/\/ The total size of bytes in data$/;"	m	struct:Packet
-size	.\inventory.cpp	/^unsigned int TotalEleminoes::size = 0;$/;"	m	class:TotalEleminoes	file:
+size	.\src\inventory.cpp	/^unsigned int TotalEleminoes::size = 0;$/;"	m	class:TotalEleminoes	file:
 sizeInBytes	.\include\raylib\external\dr_wav.h	/^    drwav_uint64 sizeInBytes;$/;"	m	struct:__anon70
 sizeInFrames	.\include\raylib\raudio.c	/^    unsigned int sizeInFrames;      \/\/ Total buffer size in frames$/;"	m	struct:rAudioBuffer	file:
 skeleton	.\include\raylib\external\cgltf.h	/^	cgltf_node* skeleton;$/;"	m	struct:cgltf_skin
@@ -29643,8 +29639,8 @@ staticFriction	.\include\raylib\physac.h	/^    float staticFriction;            
 status	.\include\raylib\rnet.h	/^    int status;                 \/\/ Packet status after sending$/;"	m	struct:SocketDataPacket
 status	.\include\raylib\rnet.h	/^    int status;                 \/\/ Socket result state$/;"	m	struct:SocketResult
 status	.\include\raylib\rnet.h	/^    int status;                 \/\/ The last status code to have occured using this socket$/;"	m	struct:Socket
-statusEffects	.\combat.cpp	/^UMap<Actor *, StatusEffects> CombatData::statusEffects;$/;"	m	class:CombatData	file:
 statusEffects	.\include\combat.h	/^	static UMap<Actor *, StatusEffects> statusEffects;$/;"	m	struct:CombatData
+statusEffects	.\src\combat.cpp	/^UMap<Actor *, StatusEffects> CombatData::statusEffects;$/;"	m	class:CombatData	file:
 stb__perlin_ease	.\include\raylib\external\stb_perlin.h	231;"	d
 stb__perlin_ease	.\include\raylib\external\stb_perlin.h	351;"	d
 stb__perlin_fastfloor	.\include\raylib\external\stb_perlin.h	/^static int stb__perlin_fastfloor(float a)$/;"	f
@@ -30460,7 +30456,7 @@ stopCallback	.\include\raylib\external\miniaudio.h	/^    ma_stop_proc stopCallba
 stopEvent	.\include\raylib\external\miniaudio.h	/^            ma_event stopEvent;$/;"	m	struct:ma_device::__anon230::__anon237
 stopEvent	.\include\raylib\external\miniaudio.h	/^    ma_event stopEvent;$/;"	m	struct:ma_device
 storage	.\include\inventory.h	/^	static Elemino storage[MAX_TOTAL_ELMN];$/;"	m	struct:TotalEleminoes
-storage	.\inventory.cpp	/^Elemino TotalEleminoes::storage[512];$/;"	m	class:TotalEleminoes	file:
+storage	.\src\inventory.cpp	/^Elemino TotalEleminoes::storage[512];$/;"	m	class:TotalEleminoes	file:
 storageBuffer16BitAccess	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkBool32                           storageBuffer16BitAccess;$/;"	m	struct:VkPhysicalDevice16BitStorageFeatures
 storageImageSampleCounts	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkSampleCountFlags       storageImageSampleCounts;$/;"	m	struct:VkPhysicalDeviceLimits
 storageInputOutput16	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkBool32                           storageInputOutput16;$/;"	m	struct:VkPhysicalDevice16BitStorageFeatures
@@ -30596,7 +30592,7 @@ taunted	.\include\moveeffect.h	/^		taunted,$/;"	m	struct:MoveEffect	typeref:enum
 tcCounter	.\include\raylib\rlgl.h	/^    int tcCounter;              \/\/ vertex texcoord counter to process (and draw) from full buffer$/;"	m	struct:DynamicBuffer
 tcoords	.\include\raylib\external\par_shapes.h	/^    float* tcoords;          \/\/ Optional list of 2-tuples (U V U V U V...)$/;"	m	struct:par_shapes_mesh_s
 team	.\include\player.h	/^	Team team;$/;"	m	struct:Player
-team	.\team.cpp	/^team::team(const int &n){$/;"	f	class:team
+team	.\src\team.cpp	/^team::team(const int &n){$/;"	f	class:team
 temp_bitmap	.\include\raylib\external\stb_truetype.h	/^unsigned char temp_bitmap[512*512];$/;"	v
 temp_memory_required	.\include\raylib\external\stb_vorbis.h	/^   unsigned int temp_memory_required;$/;"	m	struct:__anon363
 temp_memory_required	.\include\raylib\external\stb_vorbis.h	/^   unsigned int temp_memory_required;$/;"	m	struct:stb_vorbis
@@ -30647,11 +30643,11 @@ textureCompressionASTC_LDR	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^ 
 textureCompressionBC	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkBool32                 textureCompressionBC;$/;"	m	struct:VkPhysicalDeviceFeatures
 textureCompressionETC2	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkBool32                 textureCompressionETC2;$/;"	m	struct:VkPhysicalDeviceFeatures
 textureId	.\include\raylib\rlgl.h	/^    unsigned int textureId;     \/\/ Texture id to be used on the draw$/;"	m	struct:DrawCall
-textures	.\game.cpp	/^TextureManager Game::textures;$/;"	m	class:Game	file:
 textures	.\include\game.h	/^	static TextureManager textures;$/;"	m	struct:Game
 textures	.\include\raylib\external\cgltf.h	/^	cgltf_texture* textures;$/;"	m	struct:cgltf_data
 textures	.\include\sprite.h	/^	static UMapHash<const char *, Texture, Hash_sbdm> textures;$/;"	m	struct:TextureManager
-textures	.\sprite.cpp	/^UMapHash<const char *, Texture, Hash_sbdm> TextureManager::textures;$/;"	m	class:TextureManager	file:
+textures	.\src\game.cpp	/^TextureManager Game::textures;$/;"	m	class:Game	file:
+textures	.\src\sprite.cpp	/^UMapHash<const char *, Texture, Hash_sbdm> TextureManager::textures;$/;"	m	class:TextureManager	file:
 textures_count	.\include\raylib\external\cgltf.h	/^	cgltf_size textures_count;$/;"	m	struct:cgltf_data
 theme_destroy	.\include\raylib\external\glfw\src\wl_platform.h	/^        PFN_wl_cursor_theme_destroy theme_destroy;$/;"	m	struct:_GLFWlibraryWayland::__anon111
 theme_get_cursor	.\include\raylib\external\glfw\src\wl_platform.h	/^        PFN_wl_cursor_theme_get_cursor theme_get_cursor;$/;"	m	struct:_GLFWlibraryWayland::__anon111
@@ -30699,7 +30695,7 @@ title	.\include\raylib\external\glfw\src\wl_platform.h	/^    char*              
 title	.\include\raylib\external\jar_mod.h	/^    muchar  title[20];$/;"	m	struct:__anon125
 tlength	.\include\raylib\external\miniaudio.h	/^    ma_uint32 tlength;$/;"	m	struct:__anon298
 toGLFWKeyCode	.\include\raylib\external\glfw\src\wl_init.c	/^static int toGLFWKeyCode(uint32_t key)$/;"	f	file:
-to_string	.\element.cpp	/^std::string to_string(const Element &e){$/;"	f
+to_string	.\src\element.cpp	/^std::string to_string(const Element &e){$/;"	f
 todo	.\include\raylib\external\stb_image.h	/^   int restart_interval, todo;$/;"	m	struct:__anon320
 toggleAudio	.\include\raylib\shell.html	/^        function toggleAudio() {$/;"	f
 toggled	.\include\console.h	/^	bool toggled;$/;"	m	struct:Console
@@ -31598,12 +31594,12 @@ zoom	.\include\raylib\raylib.h	/^    float zoom;             \/\/ Camera zoom (s
 zout	.\include\raylib\external\stb_image.h	/^   char *zout;$/;"	m	struct:__anon324
 zout_end	.\include\raylib\external\stb_image.h	/^   char *zout_end;$/;"	m	struct:__anon324
 zout_start	.\include\raylib\external\stb_image.h	/^   char *zout_start;$/;"	m	struct:__anon324
-~EffectDiff	.\moveeffect.cpp	/^EffectDiff::~EffectDiff(){$/;"	f	class:EffectDiff
-~Game	.\game.cpp	/^Game::~Game(){$/;"	f	class:Game
+~EffectDiff	.\src\moveeffect.cpp	/^EffectDiff::~EffectDiff(){$/;"	f	class:EffectDiff
+~Game	.\src\game.cpp	/^Game::~Game(){$/;"	f	class:Game
 ~Grid	.\include\elemino.h	/^	~Grid(){$/;"	f	struct:Grid
-~Menu	.\menu.cpp	/^Menu::~Menu(){$/;"	f	class:Menu
-~MoveEffect	.\moveeffect.cpp	/^MoveEffect::~MoveEffect(){$/;"	f	class:MoveEffect
-~Player	.\player.cpp	/^Player::~Player(){$/;"	f	class:Player
+~Menu	.\src\menu.cpp	/^Menu::~Menu(){$/;"	f	class:Menu
+~MoveEffect	.\src\moveeffect.cpp	/^MoveEffect::~MoveEffect(){$/;"	f	class:MoveEffect
+~Player	.\src\player.cpp	/^Player::~Player(){$/;"	f	class:Player
 ~Team	.\include\player.h	/^	~Team(){$/;"	f	struct:Team
 ~Team	.\include\team.h	/^	~Team(){$/;"	f	struct:Team
-~team	.\team.cpp	/^team::~team(){$/;"	f	class:team
+~team	.\src\team.cpp	/^team::~team(){$/;"	f	class:team

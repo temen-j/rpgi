@@ -1,4 +1,4 @@
-#include "include\move.h"
+#include "..\include\move.h"
 
 Move AllMoves::moves[126] = {
 	Move(1,"Ignite",Element::fire,1,125,1,50,0,0,true,false,true,Ownership::general),

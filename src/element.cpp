@@ -1,4 +1,4 @@
-#include "include\element.h"
+#include "..\include\element.h"
 
 bool Valid(const Element &e){
 	return !(e < Element::fire || e > Element::spectre);

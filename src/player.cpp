@@ -1,6 +1,6 @@
-#include "include\player.h"
-#include "include\move.h"
-#include "include\moveinventory.h"
+#include "..\include\player.h"
+#include "..\include\move.h"
+#include "..\include\moveinventory.h"
 
 Actor Character::actors[NUM_PLAYER_CHARACTERS];
 
