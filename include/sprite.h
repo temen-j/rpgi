@@ -54,7 +54,8 @@ struct Sprite{
 	Texture *texture = nullptr;
 	Rectangle *bounds = nullptr;
 	Vector2 pos{0, 0};
-	UMapHash<const char *, Animation, Hash_sbdm> anims;
+	/* UMapHash<const char *, Animation, Hash_sbdm> anims; */
+	UMap<std::string, Animation> anims;
 
 	Animation *currAnim = nullptr;
 	
@@ -63,7 +64,7 @@ struct Sprite{
 
 
 struct TextureManager{
-	static UMapHash<const char *, Texture, Hash_sbdm> textures;
+	static UMap<std::string, Texture> textures;
 
 	Texture & operator[](const char *path){
 		return textures[path];

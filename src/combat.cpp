@@ -7,6 +7,18 @@ UMap<Actor *, StatusEffects> CombatData::statusEffects;
 MemPool CombatData::diffMemPool = CreateMemPool(DIFF_MEM_SIZE);
 
 
+Vec<Actor *> CombatData::playerAlive;
+Vec<Actor *> CombatData::botAlive;
+Vec<Actor *> CombatData::potTargets;
+Vec<Actor *> CombatData::chosenTargets;
+
+Vec<CasterTargetsPair> CombatData::ctps;
+Vec<CasterTargetsPair *> CombatData::ctpsPtrs;
+
+
+/* bool CombatData::canAssign */
+
+
 CasterTargetsPair::CasterTargetsPair(Actor *c, struct Move *m, const Vec<Actor *> &t){
 	caster = c;
 	move = m;
@@ -38,15 +50,15 @@ void StartCombat(Game &game){
 	TeamsSetup(*cbtData);
 
 	CombatData::effects.clear();
-	for(auto &it : cbtData->playerAlive)
+	for(auto &it : CombatData::playerAlive)
 		CombatData::effects.emplace(it, Vec<MoveEffect>());
-	for(auto &it : cbtData->botAlive)
+	for(auto &it : CombatData::botAlive)
 		CombatData::effects.emplace(it, Vec<MoveEffect>());
 
 	CombatData::statusEffects.clear();
-	for(auto &it : cbtData->playerAlive)
+	for(auto &it : CombatData::playerAlive)
 		CombatData::statusEffects.emplace(it, StatusEffects());
-	for(auto &it : cbtData->botAlive)
+	for(auto &it : CombatData::botAlive)
 		CombatData::statusEffects.emplace(it, StatusEffects());
 
 	MoveButtonsSetup(*cbtData);
@@ -54,7 +66,7 @@ void StartCombat(Game &game){
 	cbtData->chosenMove = nullptr;
 	cbtData->aiMakePairs = true;
 
-	cbtData->hasMoveChosen.resize(cbtData->playerAlive.size());
+	cbtData->hasMoveChosen.resize(CombatData::playerAlive.size());
 	for(unsigned int i = 0; i < cbtData->hasMoveChosen.size(); ++i)
 		cbtData->hasMoveChosen[i] = false;
 
@@ -68,38 +80,38 @@ void StartCombat(Game &game){
 
 
 void AIMakeCTPs(CombatData &cbtD){
-	for(unsigned int i = 0; i < cbtD.botAlive.size(); ++i){ //FIXME: turn into for-range
+	for(unsigned int i = 0; i < CombatData::botAlive.size(); ++i){ //FIXME: turn into for-range
 		Vec<Actor *> targets;
-		struct Move *move = cbtD.botAlive[i]->moves[0];
+		struct Move *move = CombatData::botAlive[i]->moves[0];
 
 		if(move->maxTargets == TARGET_ALL){
-			targets.reserve(cbtD.playerAlive.size() + cbtD.botAlive.size());
+			targets.reserve(CombatData::playerAlive.size() + CombatData::botAlive.size());
 
-			for(auto &it : cbtD.playerAlive)
+			for(auto &it : CombatData::playerAlive)
 				targets.push_back(it);
-			for(auto &it : cbtD.botAlive)
+			for(auto &it : CombatData::botAlive)
 				targets.push_back(it);
 		}
 		else if(move->maxTargets == TARGET_SELF){
-			targets.push_back(cbtD.botAlive[i]);
+			targets.push_back(CombatData::botAlive[i]);
 		}
 		else if(move->isFriendly){
 			for(int j = 0; j < move->maxTargets; ++j) //Take the first actors it can
-				targets.push_back(cbtD.botAlive[j]);
+				targets.push_back(CombatData::botAlive[j]);
 		}
 		else if(move->isHostile){
 			for(int j = 0; j < move->maxTargets; ++j) //Take the first actors it can
-				targets.push_back(cbtD.playerAlive[j]);
+				targets.push_back(CombatData::playerAlive[j]);
 		}
 
-		cbtD.ctps.push_back(CasterTargetsPair(cbtD.botAlive[i], move, targets));
+		CombatData::ctps.push_back(CasterTargetsPair(CombatData::botAlive[i], move, targets));
 	}
 	cbtD.aiMakePairs = false;
 }
 
 
 void SelectMoves(CombatData &cbtD){
-	/* Actor *actor = cbtD.playerAlive[cbtD.focus]; //FIXME: won't work if a character dies! */
+	/* Actor *actor = CombatData::playerAlive[cbtD.focus]; //FIXME: won't work if a character dies! */
 	Actor *actor = cbtD.playerTeam->members[cbtD.focus];
 
 	for(size_t i = 0; i < NUM_ACTOR_MOVES; ++i){
@@ -148,15 +160,15 @@ void AssignTargets(CombatData &cbtD){
 
 		//Get potential targets
 		if(cbtD.chosenMove->isFriendly){
-			for(auto it : cbtD.playerAlive)
-				cbtD.potTargets.push_back(it);
+			for(auto it : CombatData::playerAlive)
+				CombatData::potTargets.push_back(it);
 		}
 		if(cbtD.chosenMove->isHostile){
-			for(auto it : cbtD.botAlive)
-				cbtD.potTargets.push_back(it);
+			for(auto it : CombatData::botAlive)
+				CombatData::potTargets.push_back(it);
 		}
 		
-		for(auto &it : cbtD.potTargets) //TODO: Make this into a function, (GetAliveList())
+		for(auto &it : CombatData::potTargets) //TODO: Make this into a function, (GetAliveList())
 			cbtD.targetAliveList.text.push_back(it->name);
 
 		SetupListView(cbtD.targetAliveList);
@@ -164,7 +176,7 @@ void AssignTargets(CombatData &cbtD){
 
 		cbtD.begunAssigning = true;
 	}
-	if((int)cbtD.chosenTargets.size() < cbtD.chosenMove->maxTargets){
+	if((int)CombatData::chosenTargets.size() < cbtD.chosenMove->maxTargets){
 		int prevActiveAlive = cbtD.targetAliveList.active;
 		int prevActiveSelect = cbtD.targetSelectedList.active;
 		Update(cbtD.targetAliveList);
@@ -184,7 +196,7 @@ void AssignTargets(CombatData &cbtD){
 
 void MakeCTP(CombatData &cbtD){
 	Actor *&actor = cbtD.playerTeam->members[cbtD.focus];
-	cbtD.ctps.emplace( cbtD.ctps.begin(), CasterTargetsPair(actor, cbtD.chosenMove, cbtD.chosenTargets));
+	CombatData::ctps.emplace( CombatData::ctps.begin(), CasterTargetsPair(actor, cbtD.chosenMove, CombatData::chosenTargets));
 	cbtD.dispTargetLists = false;
 	cbtD.begunAssigning = false;
 	cbtD.hasMoveChosen[cbtD.focus] = true;
@@ -195,14 +207,14 @@ void MakeCTP(CombatData &cbtD){
 
 //TODO: make me more elegant?
 void AddFromAliveList(CombatData &cbtD, int &prevActive){
-	cbtD.chosenTargets.push_back(cbtD.potTargets[prevActive]);
+	CombatData::chosenTargets.push_back(CombatData::potTargets[prevActive]);
 	cbtD.targetSelectedList.text.push_back(cbtD.targetAliveList.text[prevActive]);
 	SetupListView(cbtD.targetSelectedList);
 }
 
 
 void RemoveFromSelectedList(CombatData &cbtD, int &prevActive){
-	cbtD.chosenTargets.erase(cbtD.chosenTargets.begin() + prevActive);
+	CombatData::chosenTargets.erase(CombatData::chosenTargets.begin() + prevActive);
 	cbtD.targetSelectedList.text.erase(cbtD.targetSelectedList.text.begin() + prevActive);
 	SetupListView(cbtD.targetSelectedList);
 }
@@ -269,12 +281,12 @@ void TeamsSetup(CombatData &cbtD){
 	for(unsigned int i = 0; i < cbtD.playerTeam->members.size(); ++i){
 		Actor *actor = cbtD.playerTeam->members[i];
 		if(!IsDead(*actor))
-			cbtD.playerAlive.push_back(actor);
+			CombatData::playerAlive.push_back(actor);
 	}
 	for(unsigned int i = 0; i < cbtD.botTeam->members.size(); ++i){
 		Actor *actor = cbtD.botTeam->members[i];
 		if(!IsDead(*actor))
-			cbtD.botAlive.push_back(actor);
+			CombatData::botAlive.push_back(actor);
 	}
 }
 
@@ -292,16 +304,16 @@ void DisableUnusedButtons(CombatData &cbtD){
 
 bool CanExecMoves(CombatData &cbtD){
 	Vec<Actor *> allInCombat;
-	for(auto &it : cbtD.playerAlive)
+	for(auto &it : CombatData::playerAlive)
 		allInCombat.push_back(it);
-	for(auto &it : cbtD.botAlive)
+	for(auto &it : CombatData::botAlive)
 		allInCombat.push_back(it);
 
 	//O(n^2), 
 	//TODO: find a better way of doing this...
 	for(auto &it : allInCombat){
 		bool found = false;
-		for(auto &jt : cbtD.ctps){
+		for(auto &jt : CombatData::ctps){
 			if(it == jt.caster){
 				found = true;
 				break;
@@ -339,394 +351,418 @@ bool LessThanCTP(CasterTargetsPair *first, CasterTargetsPair *second){
 //animating / playing audio, the confirmation will most likely be a boolean with the combat data
 void ExecMoves(CombatData &cbtD){
 	if(!cbtD.executingMoves){
-		cbtD.ctpsPtrs.resize(0);
+		CombatData::ctpsPtrs.resize(0);
 
-		for(auto &it : cbtD.ctps)
-			cbtD.ctpsPtrs.push_back(&it);
+		for(auto &it : CombatData::ctps)
+			CombatData::ctpsPtrs.push_back(&it);
 
-		std::sort(cbtD.ctpsPtrs.begin(), cbtD.ctpsPtrs.end(), LessThanCTP); //sort on priority 
+		std::sort(CombatData::ctpsPtrs.begin(), CombatData::ctpsPtrs.end(), LessThanCTP); //sort on priority 
 
 		cbtD.execIndex = 0;
 		cbtD.executingMoves = true;
 	}
 
-	if(cbtD.executingMove){
-		ExecMove(*cbtD.ctpsPtrs[cbtD.execIndex]);
-		if(!cbtD.executingMove){
+	if(cbtD.executingMoves){
+		for(size_t i = 0; i < CombatData::ctpsPtrs.size(); ++i){
+			ExecMove(*CombatData::ctpsPtrs[i]);
 			cbtD.execIndex++;
-			cbtD.executingMove = cbtD.execIndex < cbtD.ctpsPtrs.size();
+			cbtD.executingMoves = cbtD.execIndex < CombatData::ctpsPtrs.size();
 		}
+
+		cbtD.aiMakePairs = true;
+		cbtD.canAssign = true;
 	}
+
+	/* if(!(cbtD.execIndex < CombatData::ctpsPtrs.size())){ */
+	/* 	//TODO: Tick effects here... */
+	/* } */
 }
 
 
 void ExecMove(CasterTargetsPair &ctp){
 	for(auto &it : ctp.targets){
-		/* switch(ctp.move->id){ */
-		/* case IGNITE: */
-		/* 	/1* ApplyDamage(*it, *ctp.move); *1/ */
-		/* 	break; */
-		/* case BLAZE: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	/1* MoveEffect meff(ctp.move->id); *1/ */ 
-		/* 	/1* meff.duration = GetEffectPrimaryDuration(meff.id); *1/ */
-		/* 	break; */
-		/* case FIREBALL: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case EXPLOSION: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case FIREBEAM: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case FLAMESWORD: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case FLAREKICK: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case FIREWALL: */
-		/* 	/1* MoveEffect meff(ctp.move->id); *1/ */ 
-		/* 	/1* meff.duration = GetEffectPrimaryDuration(meff.id); *1/ */
-		/* 	break; */
-		/* case SEARINGFLESH: */
-		/* 	break; */
-		/* case MOLTENMETEOR: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case WILDFIRE: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case RAZEEARTH: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case FROMTHEASHES: */
-		/* 	break; */
-		/* case SUPERNOVA: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case WATERWHIP: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case TORRENT: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case TIDALWAVE: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case COALESCE: */
-		/* 	break; */
-		/* case WHIRLPOOL: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case HAILSTORM: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case AQUAPRISON: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case RAINSTORM: */
-		/* 	break; */
-		/* case DEWPOINT: */
-		/* 	break; */
-		/* case FLASHFREEZE: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case RIPTIDE: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case VAPORVORTEX: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case HELLBROTH: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case TSUNAMI: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case SEEDSHOT: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case ACORNASSAULT: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case SAPPINGSTEMS: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case NOURISH: */
-		/* 	break; */
-		/* case LEAFLANCE: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case FUNGALSPORES: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case BARBEDHUSK: */
-		/* 	break; */
-		/* case GRASSBLADES: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case PETALPIKE: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case UNDERGROWTH: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case SYMBIOSIS: */
-		/* 	break; */
-		/* case ENSNARINGVINE: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case RANCIDROSES: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case DRYADSCURSE: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case ZAP: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case CHARGE: */
-		/* 	break; */
-		/* case DISCHARGE: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case LIGHTNINGBOLT: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case DAZZLINGLIGHTS: */
-		/* 	break; */
-		/* case ELECTROSTORM: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case LIGHTNINGKICK: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case SPARKINGSKIN: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case SUPERCONDUCT: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case STATICSHOCK: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case EVANESCENTFIELD: */
-		/* 	break; */
-		/* case HIGHVOLTAGE: */
-		/* 	break; */
-		/* case MJOLNIR: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case CLOSEDCIRUIT: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case IRONSPIKES: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case CANNONBALL: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case SHARPEN: */
-		/* 	break; */
-		/* case SHATTERSHRAPNEL: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case BALLANDCHAIN: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case QUICKSILVER: */
-		/* 	break; */
-		/* case COPPERCUTLASS: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case RAZORWIRE: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case MIDASTOUCH: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case CHROMEPLATED: */
-		/* 	break; */
-		/* case MAGNETIZE: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case BRASSKNUCKLES: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case ALLOYASSAULT: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case PIERCINGPLATINUM: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case HURLROCK: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case STONESPEAR: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case FORTIFY: */
-		/* 	break; */
-		/* case QUICKSAND: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case ENTOMB: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case CRUSH: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case TREMOR: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case ROCKSLIDE: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case ROLLINGBOULDER: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case SAPPHIRESTRIKE: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case RUBYRUSH: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case GARNETGAZE: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case EMERALDEDGE: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case OBSIDIANONSLAUGHT: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case ECTORAY: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case TORMENT: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case CHAOSCLAW: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case PHANTOMWALTS: */
-		/* 	break; */
-		/* case GRAVETENDER: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case MINDINVASION: */
-		/* 	break; */
-		/* case BINDINGPAIN: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case PLAGUE: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case WICKEDHEX: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case PETRIFYINGWAIL: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case DECAY: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case VIVIDNIGHTMARE: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case ETHEREALFOG: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case NOXIOUSVOID: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case FLASHFRICTION: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case SCORCHINGHEAT: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case DRAGONBREATH: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case ICARUSINFERNO: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case REND: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case SIRENSTEAR: */
-		/* 	break; */
-		/* case CHILLINGBLAST: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case DELUGE: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case NEEDLE: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case BLOOM: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case TREECLEAVER: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case VENOMCOATING: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case SURGE: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case OVERLOAD: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case IONSTRIKE: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case PLASMAPULSE: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case SCRAPSLUG: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case ANNEAL: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case ANODIZE: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case GALVANIZEDGLAIVE: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case GRAVELSPIN: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case SANDBOMB: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case CRYSTALCAGE: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case FISSURE: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case SHADOWSLASH: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case PILFER: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* case BLOODCURDLE: */
-		/* 	break; */
-		/* case BLACKHOLE: */
-		/* 	ApplyDamage(*it, *ctp.move); */
-		/* 	break; */
-		/* default: */
-		/* 	break; */
-		/* } */
+		switch(ctp.move->id){
+		case IGNITE:
+			MoveImplementation::IGNITE(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case BLAZE:
+			MoveImplementation::BLAZE(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case FIREBALL:
+			MoveImplementation::FIREBALL(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case EXPLOSION:
+			MoveImplementation::EXPLOSION(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case FIREBEAM:
+			MoveImplementation::FIREBEAM(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case FLAMESWORD:
+			MoveImplementation::FLAMESWORD(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case FLAREKICK:
+			MoveImplementation::FLAREKICK(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case FIREWALL:
+			MoveImplementation::FIREWALL(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case SEARINGFLESH:
+			MoveImplementation::SEARINGFLESH(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case MOLTENMETEOR:
+			MoveImplementation::MOLTENMETEOR(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case WILDFIRE:
+			MoveImplementation::WILDFIRE(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case RAZEEARTH:
+			MoveImplementation::RAZEEARTH(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case FROMTHEASHES:
+			MoveImplementation::FROMTHEASHES(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case SUPERNOVA:
+			MoveImplementation::SUPERNOVA(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case WATERWHIP:
+			MoveImplementation::WATERWHIP(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case TORRENT:
+			MoveImplementation::TORRENT(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case TIDALWAVE:
+			MoveImplementation::TIDALWAVE(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case COALESCE:
+			MoveImplementation::COALESCE(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case WHIRLPOOL:
+			MoveImplementation::WHIRLPOOL(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case HAILSTORM:
+			MoveImplementation::HAILSTORM(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case AQUAPRISON:
+			MoveImplementation::AQUAPRISON(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case RAINSTORM:
+			MoveImplementation::RAINSTORM(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case DEWPOINT:
+			MoveImplementation::DEWPOINT(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case FLASHFREEZE:
+			MoveImplementation::FLASHFREEZE(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case RIPTIDE:
+			MoveImplementation::RIPTIDE(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case VAPORVORTEX:
+			MoveImplementation::VAPORVORTEX(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case HELLBROTH:
+			MoveImplementation::HELLBROTH(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case TSUNAMI:
+			MoveImplementation::TSUNAMI(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case SEEDSHOT:
+			MoveImplementation::SEEDSHOT(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case ACORNASSAULT:
+			MoveImplementation::ACORNASSAULT(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case SAPPINGSTEMS:
+			MoveImplementation::SAPPINGSTEMS(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case NOURISH:
+			MoveImplementation::NOURISH(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case LEAFLANCE:
+			MoveImplementation::LEAFLANCE(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case FUNGALSPORES:
+			MoveImplementation::FUNGALSPORES(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case BARBEDHUSK:
+			MoveImplementation::BARBEDHUSK(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case GRASSBLADES:
+			MoveImplementation::GRASSBLADES(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case PETALPIKE:
+			MoveImplementation::PETALPIKE(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case UNDERGROWTH:
+			MoveImplementation::UNDERGROWTH(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case SYMBIOSIS:
+			MoveImplementation::SYMBIOSIS(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case ENSNARINGVINE:
+			MoveImplementation::ENSNARINGVINE(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case RANCIDROSES:
+			MoveImplementation::RANCIDROSES(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case DRYADSCURSE:
+			MoveImplementation::DRYADSCURSE(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case ZAP:
+			MoveImplementation::ZAP(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case CHARGE:
+			MoveImplementation::CHARGE(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case DISCHARGE:
+			MoveImplementation::DISCHARGE(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case LIGHTNINGBOLT:
+			MoveImplementation::LIGHTNINGBOLT(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case DAZZLINGLIGHTS:
+			MoveImplementation::DAZZLINGLIGHTS(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case ELECTROSTORM:
+			MoveImplementation::ELECTROSTORM(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case LIGHTNINGKICK:
+			MoveImplementation::LIGHTNINGKICK(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case SPARKINGSKIN:
+			MoveImplementation::SPARKINGSKIN(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case SUPERCONDUCT:
+			MoveImplementation::SUPERCONDUCT(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case STATICSHOCK:
+			MoveImplementation::STATICSHOCK(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case EVANESCENTFIELD:
+			MoveImplementation::EVANESCENTFIELD(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case HIGHVOLTAGE:
+			MoveImplementation::HIGHVOLTAGE(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case MJOLNIR:
+			MoveImplementation::MJOLNIR(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case CLOSEDCIRUIT:
+			MoveImplementation::CLOSEDCIRUIT(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case IRONSPIKES:
+			MoveImplementation::IRONSPIKES(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case CANNONBALL:
+			MoveImplementation::CANNONBALL(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case SHARPEN:
+			MoveImplementation::SHARPEN(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case SHATTERSHRAPNEL:
+			MoveImplementation::SHATTERSHRAPNEL(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case BALLANDCHAIN:
+			MoveImplementation::BALLANDCHAIN(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case QUICKSILVER:
+			MoveImplementation::QUICKSILVER(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case COPPERCUTLASS:
+			MoveImplementation::COPPERCUTLASS(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case RAZORWIRE:
+			MoveImplementation::RAZORWIRE(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case MIDASTOUCH:
+			MoveImplementation::MIDASTOUCH(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case CHROMEPLATED:
+			MoveImplementation::CHROMEPLATED(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case MAGNETIZE:
+			MoveImplementation::MAGNETIZE(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case BRASSKNUCKLES:
+			MoveImplementation::BRASSKNUCKLES(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case ALLOYASSAULT:
+			MoveImplementation::ALLOYASSAULT(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case PIERCINGPLATINUM:
+			MoveImplementation::PIERCINGPLATINUM(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case HURLROCK:
+			MoveImplementation::HURLROCK(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case STONESPEAR:
+			MoveImplementation::STONESPEAR(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case FORTIFY:
+			MoveImplementation::FORTIFY(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case QUICKSAND:
+			MoveImplementation::QUICKSAND(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case ENTOMB:
+			MoveImplementation::ENTOMB(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case CRUSH:
+			MoveImplementation::CRUSH(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case TREMOR:
+			MoveImplementation::TREMOR(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case ROCKSLIDE:
+			MoveImplementation::ROCKSLIDE(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case ROLLINGBOULDER:
+			MoveImplementation::ROLLINGBOULDER(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case SAPPHIRESTRIKE:
+			MoveImplementation::SAPPHIRESTRIKE(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case RUBYRUSH:
+			MoveImplementation::RUBYRUSH(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case GARNETGAZE:
+			MoveImplementation::GARNETGAZE(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case EMERALDEDGE:
+			MoveImplementation::EMERALDEDGE(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case OBSIDIANONSLAUGHT:
+			MoveImplementation::OBSIDIANONSLAUGHT(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case ECTORAY:
+			MoveImplementation::ECTORAY(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case TORMENT:
+			MoveImplementation::TORMENT(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case CHAOSCLAW:
+			MoveImplementation::CHAOSCLAW(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case PHANTOMWALTS:
+			MoveImplementation::PHANTOMWALTS(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case GRAVETENDER:
+			MoveImplementation::GRAVETENDER(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case MINDINVASION:
+			MoveImplementation::MINDINVASION(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case BINDINGPAIN:
+			MoveImplementation::BINDINGPAIN(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case PLAGUE:
+			MoveImplementation::PLAGUE(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case WICKEDHEX:
+			MoveImplementation::WICKEDHEX(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case PETRIFYINGWAIL:
+			MoveImplementation::PETRIFYINGWAIL(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case DECAY:
+			MoveImplementation::DECAY(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case VIVIDNIGHTMARE:
+			MoveImplementation::VIVIDNIGHTMARE(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case ETHEREALFOG:
+			MoveImplementation::ETHEREALFOG(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case NOXIOUSVOID:
+			MoveImplementation::NOXIOUSVOID(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case FLASHFRICTION:
+			MoveImplementation::FLASHFRICTION(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case SCORCHINGHEAT:
+			MoveImplementation::SCORCHINGHEAT(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case DRAGONBREATH:
+			MoveImplementation::DRAGONBREATH(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case ICARUSINFERNO:
+			MoveImplementation::ICARUSINFERNO(*it, *static_cast<CasterMove *>(&ctp));
+			break;
+		case REND:
+			/* MoveImplementation::REND(*it, *static_cast<CasterMove *>(&ctp)); */
+			break;
+		case SIRENSTEAR:
+			/* MoveImplementation::SIRENSTEAR(*it, *static_cast<CasterMove *>(&ctp)); */
+			break;
+		case CHILLINGBLAST:
+			/* MoveImplementation::CHILLINGBLAST(*it, *static_cast<CasterMove *>(&ctp)); */
+			break;
+		case DELUGE:
+			/* MoveImplementation::DELUGE(*it, *static_cast<CasterMove *>(&ctp)); */
+			break;
+		case NEEDLE:
+			/* MoveImplementation::NEEDLE(*it, *static_cast<CasterMove *>(&ctp)); */
+			break;
+		case BLOOM:
+			/* MoveImplementation::BLOOM(*it, *static_cast<CasterMove *>(&ctp)); */
+			break;
+		case TREECLEAVER:
+			/* MoveImplementation::TREECLEAVER(*it, *static_cast<CasterMove *>(&ctp)); */
+			break;
+		case VENOMCOATING:
+			/* MoveImplementation::VENOMCOATING(*it, *static_cast<CasterMove *>(&ctp)); */
+			break;
+		case SURGE:
+			/* MoveImplementation::SURGE(*it, *static_cast<CasterMove *>(&ctp)); */
+			break;
+		case OVERLOAD:
+			/* MoveImplementation::OVERLOAD(*it, *static_cast<CasterMove *>(&ctp)); */
+			break;
+		case IONSTRIKE:
+			/* MoveImplementation::IONSTRIKE(*it, *static_cast<CasterMove *>(&ctp)); */
+			break;
+		case PLASMAPULSE:
+			/* MoveImplementation::PLASMAPULSE(*it, *static_cast<CasterMove *>(&ctp)); */
+			break;
+		case SCRAPSLUG:
+			/* MoveImplementation::SCRAPSLUG(*it, *static_cast<CasterMove *>(&ctp)); */
+			break;
+		case ANNEAL:
+			/* MoveImplementation::ANNEAL(*it, *static_cast<CasterMove *>(&ctp)); */
+			break;
+		case ANODIZE:
+			/* MoveImplementation::ANODIZE(*it, *static_cast<CasterMove *>(&ctp)); */
+			break;
+		case GALVANIZEDGLAIVE:
+			/* MoveImplementation::GALVANIZEDGLAIVE(*it, *static_cast<CasterMove *>(&ctp)); */
+			break;
+		case GRAVELSPIN:
+			/* MoveImplementation::GRAVELSPIN(*it, *static_cast<CasterMove *>(&ctp)); */
+			break;
+		case SANDBOMB:
+			/* MoveImplementation::SANDBOMB(*it, *static_cast<CasterMove *>(&ctp)); */
+			break;
+		case CRYSTALCAGE:
+			/* MoveImplementation::CRYSTALCAGE(*it, *static_cast<CasterMove *>(&ctp)); */
+			break;
+		case FISSURE:
+			/* MoveImplementation::FISSURE(*it, *static_cast<CasterMove *>(&ctp)); */
+			break;
+		case SHADOWSLASH:
+			/* MoveImplementation::SHADOWSLASH(*it, *static_cast<CasterMove *>(&ctp)); */
+			break;
+		case PILFER:
+			/* MoveImplementation::PILFER(*it, *static_cast<CasterMove *>(&ctp)); */
+			break;
+		case BLOODCURDLE:
+			/* MoveImplementation::BLOODCURDLE(*it, *static_cast<CasterMove *>(&ctp)); */
+			break;
+		case BLACKHOLE:
+			/* MoveImplementation::BLACKHOLE(*it, *static_cast<CasterMove *>(&ctp)); */
+			break;
+		default:
+			break;
+		}
 	}
 	return;
 }
@@ -772,8 +808,8 @@ void CreateGoons(CombatData &cbtD){
 
 
 void ResetSelectAvailList(CombatData &cbtD){
-	cbtD.chosenTargets.resize(0);
-	cbtD.potTargets.resize(0);
+	CombatData::chosenTargets.resize(0);
+	CombatData::potTargets.resize(0);
 	cbtD.targetAliveList.text.resize(0);
 	cbtD.targetSelectedList.text.resize(0);
 }
@@ -782,36 +818,6 @@ void ResetSelectAvailList(CombatData &cbtD){
 void ApplyEffect(Actor &target, int id){
 
 }
-
-
-/* void ApplyDamage(Actor &target, struct Move &move){ */
-/* 	int dmg = move.damage; */
-/* 	float effectiveness = Effectiveness(move.elem, target.type); */
-/* 	dmg = (int) ceil(dmg * effectiveness); */
-
-/* 	if(move.isPhysical) */
-/* 		dmg = (int) ceil(dmg * (1.f - (COMBATBONUS_MULT *  target.pDef[move.elem-1]))); */
-/* 	else */
-/* 		dmg = (int) ceil(dmg * (1.f - (COMBATBONUS_MULT *  target.mDef[move.elem-1]))); */
-
-/* 	target.remHP -= dmg; */
-
-/* 	if(target.remHP < 0) */
-/* 		target.remHP = 0; */
-/* } */
-
-
-/* void ApplyHeal(Actor &caster, Actor &target, struct Move &move){ */
-/* 	int heal = move.healing; */
-/* 	float effectiveness = Effectiveness(move.elem, caster.type); */
-/* 	heal = (int) ceil(heal * effectiveness); */
-	
-/* 	target.remHP += heal; */
-
-/* 	if(target.remHP > target.maxHP) */
-/* 		target.remHP = target.maxHP; */
-/* } */
-
 
 /* void tickEffects(casterTargetsPairs &ctp){ */
 /* 	//In reverse order of moves, tick all effects of every actor */

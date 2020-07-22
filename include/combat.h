@@ -44,16 +44,22 @@ struct StatusEffects{
 };
 
 struct CombatData{
-	InventoryPortraits portraits;
-	Texture halo;
+
+	enum CombatStates{
+		selectionPhase,
+		executionPhase
+	};
+
+	static InventoryPortraits portraits;
+	static Texture halo;
 
 	Team *playerTeam = nullptr;
 	Team *botTeam = nullptr;
 
-	Vec<Actor *> playerAlive;
-	Vec<Actor *> botAlive;
-	Vec<Actor *> potTargets; //potential targets
-	Vec<Actor *> chosenTargets;
+	static Vec<Actor *> playerAlive;
+	static Vec<Actor *> botAlive;
+	static Vec<Actor *> potTargets; //potential targets
+	static Vec<Actor *> chosenTargets;
 
 	static UMap<Actor *, Vec<MoveEffect> > effects;
 	static MemPool diffMemPool;
@@ -66,13 +72,14 @@ struct CombatData{
 	bool dispTargetLists = false;
 	bool begunAssigning = false;
 	bool canAssign = false;
+	/* static bool canAssign = false; */
 	bool canMakePair = false;
 	bool executingMoves = false;
 	bool executingMove = false;
 
 	Vec<bool> hasMoveChosen; //index is the character
-	Vec<CasterTargetsPair> ctps; //When exectuting moves, create an array of pointer and heapify that
-	Vec<CasterTargetsPair *> ctpsPtrs;
+	static Vec<CasterTargetsPair> ctps; //When exectuting moves, create an array of pointer and heapify that
+	static Vec<CasterTargetsPair *> ctpsPtrs;
 	unsigned int execIndex = 0;
 	CasterTargetsPair *execCTP; //the iterator
 

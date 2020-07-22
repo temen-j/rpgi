@@ -37,7 +37,7 @@ int main(int argc, char **argv){
 
 	GlobalTextData gtd;
 	gtd.defaultFont = LoadFontEx("../fonts/Inconsolata-SemiBold.ttf", 64, 0, 0);
-	GenTextureMipmaps(gtd.defaultFont.texture);
+	GenTextureMipmaps(&gtd.defaultFont.texture);
 	SetTextureFilter(gtd.defaultFont.texture, FILTER_BILINEAR);
 	gtd.imageText = GenImageColor(GetScreenWidth(), GetScreenHeight(), CLEAR);
 	GuiSetFont(gtd.defaultFont);
