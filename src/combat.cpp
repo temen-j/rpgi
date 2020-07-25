@@ -1,11 +1,19 @@
 /* #include "..\include\combat.h" */
 #include "..\include\game.h"
 #include "..\include\move_impl.h"
+#include "..\include\embed\cassandra_combat_sprite.h"
+#include "..\include\sprite.h"
 
 UMap<Actor *, Vec<MoveEffect> > CombatData::effects;
 UMap<Actor *, StatusEffects> CombatData::statusEffects;
 MemPool CombatData::diffMemPool = CreateMemPool(DIFF_MEM_SIZE);
 
+CombatPortraits CombatData::portraits;
+Texture CombatData::halo;
+Vec<bool> CombatData::hasMoveChosen;
+
+UMap<Actor *, Sprite> CombatData::actorSprites;
+bool CombatData::moveAnimPlaying = false;
 
 Vec<Actor *> CombatData::playerAlive;
 Vec<Actor *> CombatData::botAlive;
@@ -15,9 +23,9 @@ Vec<Actor *> CombatData::chosenTargets;
 Vec<CasterTargetsPair> CombatData::ctps;
 Vec<CasterTargetsPair *> CombatData::ctpsPtrs;
 
+unsigned char CombatData::focus = 0;
 
 /* bool CombatData::canAssign */
-
 
 CasterTargetsPair::CasterTargetsPair(Actor *c, struct Move *m, const Vec<Actor *> &t){
 	caster = c;
@@ -31,11 +39,13 @@ void StartCombat(Game &game){
 
 	cbtData->focus = 0;
 
-	cbtData->portraits.toggles[0].active = true;
-	cbtData->portraits.toggles[0].texture = LoadTexture("../img/cassandra_dev.png");
-	cbtData->portraits.toggles[1].texture = LoadTexture("../img/gordon_dev.png");
-	cbtData->portraits.toggles[2].texture = LoadTexture("../img/lou_dev.png");
-	cbtData->portraits.toggles[3].texture = LoadTexture("../img/persy_dev.png");
+	CombatData::portraits.toggles.resize(4);
+	CombatData::portraits.toggles[0].active = true;
+	//FIXME: Use the texture manager instead of loading them with each state change
+	CombatData::portraits.toggles[0].texture = LoadTexture("../img/cassandra_dev.png");
+	CombatData::portraits.toggles[1].texture = LoadTexture("../img/gordon_dev.png");
+	CombatData::portraits.toggles[2].texture = LoadTexture("../img/lou_dev.png");
+	CombatData::portraits.toggles[3].texture = LoadTexture("../img/persy_dev.png");
 	cbtData->halo = LoadTexture("../img/portrait_halo.png");
 
 	for(size_t i = 0; i < 4; ++i){
@@ -45,6 +55,15 @@ void StartCombat(Game &game){
 	}
 
 	cbtData->playerTeam = &game.player.team;
+
+	CombatData::actorSprites[cbtData->playerTeam->members[0]] = LoadSprite(cassandra_combat_anim); 
+	//FIXME: kind of hacky, need to store looping in the anim file and embedded file
+	auto &cass_spr = CombatData::actorSprites[cbtData->playerTeam->members[0]];
+	TextureManager::textures["../img/cassandra_combat.png"] = LoadTexture("../img/cassandra_combat.png")	;
+	cass_spr.texture = &TextureManager::textures["../img/cassandra_combat.png"];
+	cass_spr.pos = {440, 360};
+	cass_spr.anims["Combat Idle"].looping = true;
+	cass_spr.playAnimation("Combat Idle");
 
 	CreateGoons(*cbtData);
 	TeamsSetup(*cbtData);
@@ -73,6 +92,7 @@ void StartCombat(Game &game){
 	cbtData->targetSelectedList.bounds = (Rectangle){256, 64, 192, 192};
 	cbtData->targetAliveList.bounds = (Rectangle){256 + 192 + 128, 64, 192, 192};
 
+	//TODO: Also call this when returning to phase 1
 	GetAffordableMoves(*cbtData->playerTeam->members[game.cbtData->focus], cbtData->affordable);
 
 	game.justEnteredState = true;
@@ -84,7 +104,7 @@ void AIMakeCTPs(CombatData &cbtD){
 		Vec<Actor *> targets;
 		struct Move *move = CombatData::botAlive[i]->moves[0];
 
-		if(move->maxTargets == TARGET_ALL){
+		if(move->maxTargets == TARGET_ALL_ACTORS){
 			targets.reserve(CombatData::playerAlive.size() + CombatData::botAlive.size());
 
 			for(auto &it : CombatData::playerAlive)
@@ -194,6 +214,40 @@ void AssignTargets(CombatData &cbtD){
 }
 
 
+void AssignTargetsSetup(CombatData &cbtD){
+	//TODO: Add checks for maxTargets == all enemies
+	//TODO: Add checks for maxTargets == all actors
+	if(cbtD.chosenMove->maxTargets == TARGET_ALL_ACTORS){ //
+		for(auto &it : CombatData::playerAlive)
+			CombatData::chosenTargets.push_back(it);
+		for(auto &it : CombatData::botAlive)
+			CombatData::chosenTargets.push_back(it);
+		
+		cbtD.targetAliveList.text.push_back("ALL");
+	}
+	ResetSelectAvailList(cbtD);
+
+	//Get potential targets
+	if(cbtD.chosenMove->isFriendly){
+		for(auto it : CombatData::playerAlive)
+			CombatData::potTargets.push_back(it);
+	}
+	if(cbtD.chosenMove->isHostile){
+		for(auto it : CombatData::botAlive)
+			CombatData::potTargets.push_back(it);
+	}
+	
+	for(auto &it : CombatData::potTargets) //TODO: Make this into a function, (GetAliveList())
+		cbtD.targetAliveList.text.push_back(it->name);
+
+	//Populate list views with
+	SetupListView(cbtD.targetAliveList);
+	SetupListView(cbtD.targetSelectedList);
+
+	cbtD.begunAssigning = true;
+}
+
+
 void MakeCTP(CombatData &cbtD){
 	Actor *&actor = cbtD.playerTeam->members[cbtD.focus];
 	CombatData::ctps.emplace( CombatData::ctps.begin(), CasterTargetsPair(actor, cbtD.chosenMove, CombatData::chosenTargets));
@@ -220,39 +274,45 @@ void RemoveFromSelectedList(CombatData &cbtD, int &prevActive){
 }
 
 
-void HandleInventoryPortraits(CombatData &cbtD){
-	InventoryPortraits *invP = &cbtD.portraits;
-	bool isToggled[4]; //Keep track of previous activation
-	for(size_t i = 0; i < 4; ++i)
-		isToggled[i] = invP->toggles[i].active;
+void HandleInventoryPortraits(CombatData &cbtD){ //TODO: rename HandleCombatPortraits()
+	bool *isToggled = new bool[CombatData::playerAlive.size()]; //Keep track of previous activation
 
-	for(size_t i = 0; i < 4; ++i){
-		bool update = Update(invP->toggles[i]);
-		if(isToggled[i] && cbtD.hasMoveChosen[i]){
-			for(size_t j = 0; j < 4 && cbtD.hasMoveChosen[i]; ++j){ //Cycle through characters who have yet to select moves
-				i = (i + 1) % 4; //FIXME: magic numbers!
-				invP->toggles[i].active = true;
-				cbtD.focus = i;
+	for(size_t i = 0; i < CombatData::playerAlive.size(); ++i)
+		isToggled[i] = CombatData::portraits.toggles[i].active;
+
+	for(size_t i = 0; i < CombatData::playerAlive.size(); ++i){
+		bool update = Update(CombatData::portraits.toggles[i]); //a group toggling
+
+		if(isToggled[i] && CombatData::hasMoveChosen[i]){
+
+			for(size_t j = 0; j < CombatData::playerAlive.size() && CombatData::hasMoveChosen[i]; ++j){ //Cycle through characters who have yet to select moves
+				i = (i + 1) % CombatData::playerAlive.size();
+				CombatData::portraits.toggles[i].active = true;
+				CombatData::focus = i;
 			}
-			for(size_t j = 0; j < 4; ++j){
+
+			for(size_t j = 0; j < CombatData::playerAlive.size(); ++j){
 				if(j != i) //Turn the others in the toggle group off
-					invP->toggles[j].active = false;
-			}
-			break;
-		}
-		if(update != isToggled[i] && !update && isToggled[i])
-			invP->toggles[i].active = true;
-		if(update != isToggled[i] && update){
-			cbtD.focus = i;
-			for(size_t j = 0; j < 4; ++j){
-				if(j != i) //Turn the others in the toggle group off
-					invP->toggles[j].active = false;
+					CombatData::portraits.toggles[j].active = false;
 			}
 			break;
 		}
 
+		if(update != isToggled[i]){
+			if(update){
+
+				CombatData::focus = i;
+				for(size_t j = 0; j < 4; ++j){
+					if(j != i) //Turn the others in the toggle group off
+						CombatData::portraits.toggles[j].active = false;
+				}
+				break;
+			}
+			else
+				CombatData::portraits.toggles[i].active = true;
+		}
 	}
-
+	delete[] isToggled;
 }
 
 
@@ -384,381 +444,509 @@ void ExecMove(CasterTargetsPair &ctp){
 		switch(ctp.move->id){
 		case IGNITE:
 			MoveImplementation::IGNITE(*it, *static_cast<CasterMove *>(&ctp));
+			CombatData::actorSprites[ctp.caster].playAnimation("Use Physical");
+			/* CombatData::actorSprites[it].playAnimation("Hurt Physical", 12); */
+			CombatData::moveAnimPlaying = true;
 			break;
 		case BLAZE:
 			MoveImplementation::BLAZE(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case FIREBALL:
 			MoveImplementation::FIREBALL(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case EXPLOSION:
 			MoveImplementation::EXPLOSION(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case FIREBEAM:
 			MoveImplementation::FIREBEAM(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case FLAMESWORD:
 			MoveImplementation::FLAMESWORD(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case FLAREKICK:
 			MoveImplementation::FLAREKICK(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case FIREWALL:
 			MoveImplementation::FIREWALL(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case SEARINGFLESH:
 			MoveImplementation::SEARINGFLESH(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case MOLTENMETEOR:
 			MoveImplementation::MOLTENMETEOR(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case WILDFIRE:
 			MoveImplementation::WILDFIRE(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case RAZEEARTH:
 			MoveImplementation::RAZEEARTH(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case FROMTHEASHES:
 			MoveImplementation::FROMTHEASHES(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case SUPERNOVA:
 			MoveImplementation::SUPERNOVA(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case WATERWHIP:
 			MoveImplementation::WATERWHIP(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case TORRENT:
 			MoveImplementation::TORRENT(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case TIDALWAVE:
 			MoveImplementation::TIDALWAVE(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case COALESCE:
 			MoveImplementation::COALESCE(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case WHIRLPOOL:
 			MoveImplementation::WHIRLPOOL(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case HAILSTORM:
 			MoveImplementation::HAILSTORM(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case AQUAPRISON:
 			MoveImplementation::AQUAPRISON(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case RAINSTORM:
 			MoveImplementation::RAINSTORM(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case DEWPOINT:
 			MoveImplementation::DEWPOINT(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case FLASHFREEZE:
 			MoveImplementation::FLASHFREEZE(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case RIPTIDE:
 			MoveImplementation::RIPTIDE(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case VAPORVORTEX:
 			MoveImplementation::VAPORVORTEX(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case HELLBROTH:
 			MoveImplementation::HELLBROTH(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case TSUNAMI:
 			MoveImplementation::TSUNAMI(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case SEEDSHOT:
 			MoveImplementation::SEEDSHOT(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case ACORNASSAULT:
 			MoveImplementation::ACORNASSAULT(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case SAPPINGSTEMS:
 			MoveImplementation::SAPPINGSTEMS(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case NOURISH:
 			MoveImplementation::NOURISH(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case LEAFLANCE:
 			MoveImplementation::LEAFLANCE(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case FUNGALSPORES:
 			MoveImplementation::FUNGALSPORES(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case BARBEDHUSK:
 			MoveImplementation::BARBEDHUSK(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case GRASSBLADES:
 			MoveImplementation::GRASSBLADES(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case PETALPIKE:
 			MoveImplementation::PETALPIKE(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case UNDERGROWTH:
 			MoveImplementation::UNDERGROWTH(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case SYMBIOSIS:
 			MoveImplementation::SYMBIOSIS(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case ENSNARINGVINE:
 			MoveImplementation::ENSNARINGVINE(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case RANCIDROSES:
 			MoveImplementation::RANCIDROSES(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case DRYADSCURSE:
 			MoveImplementation::DRYADSCURSE(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case ZAP:
 			MoveImplementation::ZAP(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case CHARGE:
 			MoveImplementation::CHARGE(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case DISCHARGE:
 			MoveImplementation::DISCHARGE(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case LIGHTNINGBOLT:
 			MoveImplementation::LIGHTNINGBOLT(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case DAZZLINGLIGHTS:
 			MoveImplementation::DAZZLINGLIGHTS(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case ELECTROSTORM:
 			MoveImplementation::ELECTROSTORM(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case LIGHTNINGKICK:
 			MoveImplementation::LIGHTNINGKICK(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case SPARKINGSKIN:
 			MoveImplementation::SPARKINGSKIN(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case SUPERCONDUCT:
 			MoveImplementation::SUPERCONDUCT(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case STATICSHOCK:
 			MoveImplementation::STATICSHOCK(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case EVANESCENTFIELD:
 			MoveImplementation::EVANESCENTFIELD(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case HIGHVOLTAGE:
 			MoveImplementation::HIGHVOLTAGE(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case MJOLNIR:
 			MoveImplementation::MJOLNIR(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case CLOSEDCIRUIT:
 			MoveImplementation::CLOSEDCIRUIT(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case IRONSPIKES:
 			MoveImplementation::IRONSPIKES(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case CANNONBALL:
 			MoveImplementation::CANNONBALL(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case SHARPEN:
 			MoveImplementation::SHARPEN(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case SHATTERSHRAPNEL:
 			MoveImplementation::SHATTERSHRAPNEL(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case BALLANDCHAIN:
 			MoveImplementation::BALLANDCHAIN(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case QUICKSILVER:
 			MoveImplementation::QUICKSILVER(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case COPPERCUTLASS:
 			MoveImplementation::COPPERCUTLASS(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case RAZORWIRE:
 			MoveImplementation::RAZORWIRE(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case MIDASTOUCH:
 			MoveImplementation::MIDASTOUCH(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case CHROMEPLATED:
 			MoveImplementation::CHROMEPLATED(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case MAGNETIZE:
 			MoveImplementation::MAGNETIZE(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case BRASSKNUCKLES:
 			MoveImplementation::BRASSKNUCKLES(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case ALLOYASSAULT:
 			MoveImplementation::ALLOYASSAULT(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case PIERCINGPLATINUM:
 			MoveImplementation::PIERCINGPLATINUM(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case HURLROCK:
 			MoveImplementation::HURLROCK(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case STONESPEAR:
 			MoveImplementation::STONESPEAR(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case FORTIFY:
 			MoveImplementation::FORTIFY(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case QUICKSAND:
 			MoveImplementation::QUICKSAND(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case ENTOMB:
 			MoveImplementation::ENTOMB(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case CRUSH:
 			MoveImplementation::CRUSH(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case TREMOR:
 			MoveImplementation::TREMOR(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case ROCKSLIDE:
 			MoveImplementation::ROCKSLIDE(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case ROLLINGBOULDER:
 			MoveImplementation::ROLLINGBOULDER(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case SAPPHIRESTRIKE:
 			MoveImplementation::SAPPHIRESTRIKE(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case RUBYRUSH:
 			MoveImplementation::RUBYRUSH(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case GARNETGAZE:
 			MoveImplementation::GARNETGAZE(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case EMERALDEDGE:
 			MoveImplementation::EMERALDEDGE(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case OBSIDIANONSLAUGHT:
 			MoveImplementation::OBSIDIANONSLAUGHT(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case ECTORAY:
 			MoveImplementation::ECTORAY(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case TORMENT:
 			MoveImplementation::TORMENT(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case CHAOSCLAW:
 			MoveImplementation::CHAOSCLAW(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case PHANTOMWALTS:
 			MoveImplementation::PHANTOMWALTS(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case GRAVETENDER:
 			MoveImplementation::GRAVETENDER(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case MINDINVASION:
 			MoveImplementation::MINDINVASION(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case BINDINGPAIN:
 			MoveImplementation::BINDINGPAIN(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case PLAGUE:
 			MoveImplementation::PLAGUE(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case WICKEDHEX:
 			MoveImplementation::WICKEDHEX(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case PETRIFYINGWAIL:
 			MoveImplementation::PETRIFYINGWAIL(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case DECAY:
 			MoveImplementation::DECAY(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case VIVIDNIGHTMARE:
 			MoveImplementation::VIVIDNIGHTMARE(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case ETHEREALFOG:
 			MoveImplementation::ETHEREALFOG(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case NOXIOUSVOID:
 			MoveImplementation::NOXIOUSVOID(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case FLASHFRICTION:
 			MoveImplementation::FLASHFRICTION(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case SCORCHINGHEAT:
 			MoveImplementation::SCORCHINGHEAT(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case DRAGONBREATH:
 			MoveImplementation::DRAGONBREATH(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case ICARUSINFERNO:
 			MoveImplementation::ICARUSINFERNO(*it, *static_cast<CasterMove *>(&ctp));
+			//TODO: play the associated anims
 			break;
 		case REND:
 			/* MoveImplementation::REND(*it, *static_cast<CasterMove *>(&ctp)); */
+			//TODO: play the associated anims
 			break;
 		case SIRENSTEAR:
 			/* MoveImplementation::SIRENSTEAR(*it, *static_cast<CasterMove *>(&ctp)); */
+			//TODO: play the associated anims
 			break;
 		case CHILLINGBLAST:
 			/* MoveImplementation::CHILLINGBLAST(*it, *static_cast<CasterMove *>(&ctp)); */
+			//TODO: play the associated anims
 			break;
 		case DELUGE:
 			/* MoveImplementation::DELUGE(*it, *static_cast<CasterMove *>(&ctp)); */
+			//TODO: play the associated anims
 			break;
 		case NEEDLE:
 			/* MoveImplementation::NEEDLE(*it, *static_cast<CasterMove *>(&ctp)); */
+			//TODO: play the associated anims
 			break;
 		case BLOOM:
 			/* MoveImplementation::BLOOM(*it, *static_cast<CasterMove *>(&ctp)); */
+			//TODO: play the associated anims
 			break;
 		case TREECLEAVER:
 			/* MoveImplementation::TREECLEAVER(*it, *static_cast<CasterMove *>(&ctp)); */
+			//TODO: play the associated anims
 			break;
 		case VENOMCOATING:
 			/* MoveImplementation::VENOMCOATING(*it, *static_cast<CasterMove *>(&ctp)); */
+			//TODO: play the associated anims
 			break;
 		case SURGE:
 			/* MoveImplementation::SURGE(*it, *static_cast<CasterMove *>(&ctp)); */
+			//TODO: play the associated anims
 			break;
 		case OVERLOAD:
 			/* MoveImplementation::OVERLOAD(*it, *static_cast<CasterMove *>(&ctp)); */
+			//TODO: play the associated anims
 			break;
 		case IONSTRIKE:
 			/* MoveImplementation::IONSTRIKE(*it, *static_cast<CasterMove *>(&ctp)); */
+			//TODO: play the associated anims
 			break;
 		case PLASMAPULSE:
 			/* MoveImplementation::PLASMAPULSE(*it, *static_cast<CasterMove *>(&ctp)); */
+			//TODO: play the associated anims
 			break;
 		case SCRAPSLUG:
 			/* MoveImplementation::SCRAPSLUG(*it, *static_cast<CasterMove *>(&ctp)); */
+			//TODO: play the associated anims
 			break;
 		case ANNEAL:
 			/* MoveImplementation::ANNEAL(*it, *static_cast<CasterMove *>(&ctp)); */
+			//TODO: play the associated anims
 			break;
 		case ANODIZE:
 			/* MoveImplementation::ANODIZE(*it, *static_cast<CasterMove *>(&ctp)); */
+			//TODO: play the associated anims
 			break;
 		case GALVANIZEDGLAIVE:
 			/* MoveImplementation::GALVANIZEDGLAIVE(*it, *static_cast<CasterMove *>(&ctp)); */
+			//TODO: play the associated anims
 			break;
 		case GRAVELSPIN:
 			/* MoveImplementation::GRAVELSPIN(*it, *static_cast<CasterMove *>(&ctp)); */
+			//TODO: play the associated anims
 			break;
 		case SANDBOMB:
 			/* MoveImplementation::SANDBOMB(*it, *static_cast<CasterMove *>(&ctp)); */
+			//TODO: play the associated anims
 			break;
 		case CRYSTALCAGE:
 			/* MoveImplementation::CRYSTALCAGE(*it, *static_cast<CasterMove *>(&ctp)); */
+			//TODO: play the associated anims
 			break;
 		case FISSURE:
 			/* MoveImplementation::FISSURE(*it, *static_cast<CasterMove *>(&ctp)); */
+			//TODO: play the associated anims
 			break;
 		case SHADOWSLASH:
 			/* MoveImplementation::SHADOWSLASH(*it, *static_cast<CasterMove *>(&ctp)); */
+			//TODO: play the associated anims
 			break;
 		case PILFER:
 			/* MoveImplementation::PILFER(*it, *static_cast<CasterMove *>(&ctp)); */
+			//TODO: play the associated anims
 			break;
 		case BLOODCURDLE:
 			/* MoveImplementation::BLOODCURDLE(*it, *static_cast<CasterMove *>(&ctp)); */
+			//TODO: play the associated anims
 			break;
 		case BLACKHOLE:
 			/* MoveImplementation::BLACKHOLE(*it, *static_cast<CasterMove *>(&ctp)); */
+			//TODO: play the associated anims
 			break;
 		default:
 			break;

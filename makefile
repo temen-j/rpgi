@@ -30,9 +30,9 @@ game:
 	make game.exe
 	move game.exe bin
 
-game.exe: src\main.cpp $(GUI_OBJ) $(MATH_OBJ) $(GAME_OBJ) $(DEV_OBJ) $(INVENTORY_OBJ) $(MOVE_OBJ) $(COMBAT_OBJ)
+game.exe: src\main.cpp $(GUI_OBJ) $(MATH_OBJ) $(GAME_OBJ) $(DEV_OBJ) $(INVENTORY_OBJ) $(MOVE_OBJ) $(COMBAT_OBJ) $(GRAPHICS_OBJ)
 	$(CXX) $(CXXFLAGS) src\main.cpp $(EMPTY) \
-		$(GUI_OBJ) $(MATH_OBJ) $(GAME_OBJ) $(INVENTORY_OBJ) $(MOVE_OBJ) $(COMBAT_OBJ) $(DEV_OBJ) \
+		$(GUI_OBJ) $(MATH_OBJ) $(GAME_OBJ) $(INVENTORY_OBJ) $(MOVE_OBJ) $(COMBAT_OBJ) $(DEV_OBJ) $(GRAPHICS_OBJ)\
 		-L. $(LIB) -o $@
 
 

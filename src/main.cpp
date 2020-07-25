@@ -48,6 +48,7 @@ int main(int argc, char **argv){
 	while(!WindowShouldClose()){
 		UpdateWindow();
 		Update(Game::mouse);
+		UpdateAnimationFrame(GetFrameTime());
 		ImageClearBackground(&(gtd.imageText), CLEAR); //Clear batched text
 
 

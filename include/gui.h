@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "window.h"
+#include "sprite.h"
 #include "interp.h"
 #include "elemino.h"
 #include "console.h"
@@ -172,6 +173,11 @@ struct DropDown{
 struct InventoryPortraits{
 	ImageToggle toggles[4];
 };
+
+struct CombatPortraits{
+	Vec<ImageToggle> toggles;
+};
+
 
 struct StatBar{
 	float k; //Coeff of proportionality of HP/MP

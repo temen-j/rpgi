@@ -658,16 +658,21 @@ void DrawMoveInventory(const Player &player){
 
 
 void DrawCombat(const Game &game){
-	for(size_t i = 0; i < 4; ++i)
-		DrawGuiImageToggle(game.cbtData->portraits.toggles[i]);
+	for(size_t i = 0; i < CombatData::portraits.toggles.size(); ++i)
+		DrawGuiImageToggle(CombatData::portraits.toggles[i]);
 
-	for(size_t i = 0; i < 4; ++i){
-		auto &toggle = game.cbtData->portraits.toggles[i];
+	for(size_t i = 0; i < CombatData::portraits.toggles.size(); ++i){
+		auto &toggle = CombatData::portraits.toggles[i];
 		if(toggle.active){
-			DrawTextureV(game.cbtData->halo, (Vector2){toggle.bounds.x - 8, toggle.bounds.y - 8}, WHITE);
+			DrawTextureV(CombatData::halo, (Vector2){toggle.bounds.x - 8, toggle.bounds.y - 8}, WHITE);
 			break;
 		}
 	}
+
+	for(auto &it : CombatData::actorSprites){
+		DrawSprite(it.second);
+	}
+
 	
 	for(size_t i = 0; i < NUM_ACTOR_MOVES; ++i)
 		DrawGuiButton(game.cbtData->moveButtons[i]);

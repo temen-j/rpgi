@@ -141,6 +141,10 @@ int CombatState(Game &game){
 		game.cbtData = new CombatData();
 		StartCombat(game);
 	}
+
+	for(auto &it : CombatData::actorSprites)
+		Update(it.second);
+
 	if(game.gs.curr == State::combat_act){
 		if(game.cbtData->aiMakePairs)
 			AIMakeCTPs(*game.cbtData);

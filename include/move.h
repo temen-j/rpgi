@@ -8,8 +8,9 @@ struct Actor;
 struct Team;
 
 const int NUM_MOVES = 126;
-const int TARGET_ALL = 127;
-const int TARGET_SELF = -1;
+const int TARGET_ALL_ACTORS = 127; //To be used with maxTargets
+const int TARGET_ALL_ENEMY= 126;
+const int TARGET_SELF = -1; //To be used with maxTargets
 
 enum Ownership : int {
 	general = 0,

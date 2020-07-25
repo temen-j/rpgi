@@ -9,7 +9,10 @@
 #include "raylib\rmem.h"
 #include "gui.h"
 #include "move.h"
+#include "sprite.h"
 #include "inventory.h"
+#include "sprite.h"
+
 constexpr size_t DIFF_MEM_SIZE = 1024 * sizeof(EffectDiff);
 
 template<typename T>
@@ -50,8 +53,10 @@ struct CombatData{
 		executionPhase
 	};
 
-	static InventoryPortraits portraits;
+	static CombatPortraits portraits;
 	static Texture halo;
+	static UMap<Actor *, Sprite> actorSprites;
+	static bool moveAnimPlaying;
 
 	Team *playerTeam = nullptr;
 	Team *botTeam = nullptr;
@@ -77,7 +82,7 @@ struct CombatData{
 	bool executingMoves = false;
 	bool executingMove = false;
 
-	Vec<bool> hasMoveChosen; //index is the character
+	static Vec<bool> hasMoveChosen; //index is the character
 	static Vec<CasterTargetsPair> ctps; //When exectuting moves, create an array of pointer and heapify that
 	static Vec<CasterTargetsPair *> ctpsPtrs;
 	unsigned int execIndex = 0;
@@ -87,7 +92,7 @@ struct CombatData{
 	ListView targetSelectedList;
 	Button moveButtons[NUM_ACTOR_MOVES];
 
-	unsigned char focus = 0;
+	static unsigned char focus;
 };
 
 //The main combat loop of the game
@@ -101,8 +106,10 @@ void SelectMoves(CombatData &);
 void GetAffordableMoves(Actor &, struct Move **); //2nd arg is the populated arr
 
 //Based on the maxTargets of the move, select the target(s)
-/* void getMoveTargets(actor*&, const team&, const team&, casterTargetsPairs&); */
 void AssignTargets(CombatData &);
+
+//Based on the maxTargets of the move, select the target(s)
+void AssignTargetsSetup(CombatData &);
 
 //Once targets have been assigned make the caster-targets pair
 void MakeCTP(CombatData &);
