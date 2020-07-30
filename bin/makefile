@@ -6,4 +6,4 @@ debug:
 
 prof:
 	gprof game.exe > profile.txt
-	vim profile.txt
+	gvim profile.txt

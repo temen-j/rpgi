@@ -142,8 +142,6 @@ int CombatState(Game &game){
 		StartCombat(game);
 	}
 
-	for(auto &it : CombatData::actorSprites)
-		Update(it.second);
 
 	if(game.gs.curr == State::combat_act){
 		if(game.cbtData->aiMakePairs)
@@ -166,14 +164,19 @@ int CombatState(Game &game){
 		if(game.cbtData->canMakePair){ //TODO: turn into a function (MakeCTP())?
 			MakeCTP(*game.cbtData);
 		}
-		if(CanExecMoves(*game.cbtData)){
+		if(game.gs.curr != State::combat_watch && CanExecMoves(*game.cbtData)){
 			ResetSelectAvailList(*game.cbtData);
 			game.gs.prev = game.gs.curr;
 			game.gs.curr = State::combat_watch;
 			ExecMoves(*game.cbtData); //TODO: make this work with animations
 		}
 	}
-	//else watch battle anims
+
+	for(auto &it : CombatData::actorSprites){
+		Update(it.second);
+		if(!it.second.currAnim)
+			it.second.playAnimation("Combat Idle");
+	}
 	//if(battle is over)
 	//delete goons
 	return 0;

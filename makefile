@@ -19,7 +19,7 @@ ifeq ($(BUILD),DEBUG)
 	CXXFLAGS += -pg -g
 endif
 ifeq ($(BUILD),RELEASE)
-	CXXFLAGS += -s -O3
+	CXXFLAGS += -O3 -pg -g
 endif
 ifeq ($(SYSTEM),WINDOWS)
 	CXXFLAGS += -mwindows

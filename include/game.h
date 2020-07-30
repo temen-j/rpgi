@@ -20,7 +20,7 @@ struct Game{
 
 	Console console;
 	Player player;
-	GameState gs;
+	static GameState gs;
 	static Mouse mouse;
 	CombatData *cbtData = nullptr;
 	static TextureManager textures;

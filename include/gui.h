@@ -192,7 +192,7 @@ struct StatBar{
 void Update(Button &);
 void Update(ImageButton &);
 bool Update(Toggle &);
-bool Update(ImageToggle &);
+inline bool Update(ImageToggle &toggle){ return Update(*static_cast<Toggle *>(&toggle)); }
 void Update(ScrollBar &);
 void Update(ListView &);
 bool Update(DropDown &);

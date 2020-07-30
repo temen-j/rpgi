@@ -60,9 +60,9 @@ bool Update(Toggle &toggle){
 }
 
 
-bool Update(ImageToggle &toggle){
-	return Update(*static_cast<Toggle *>(&toggle));
-}
+/* inline bool Update(ImageToggle &toggle){ */
+/* 	return Update(*static_cast<Toggle *>(&toggle)); */
+/* } */
 
 
 void Update(ScrollBar &sb){

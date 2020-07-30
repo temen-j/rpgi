@@ -9,36 +9,45 @@ void Sprite::playAnimation(const char *str){
 	auto iter = anims.find(str);
 
 	if(iter != anims.end()){
-		if(currAnim && currAnim->playing && currAnim == &iter->second)
-			return; //Early-ish exit b/c already at currAnim
+		if(currAnim && playing && currAnim == &iter->second)
+			return; //Early-ish exit b/c already at and playing currAnim
 
 		currAnim = &iter->second;
-		currAnim->playing = true;
-		updateAnimation(true);
+		playing = true;
 		delay = 0;
 	}
 }
 
 
 void Sprite::playAnimation(const char *str, unsigned int delay){
-	this->delay = delay;
-	animToBePlayed = str;
-
 	auto iter = anims.find(str);
 
 	if(iter != anims.end()){
-		if(currAnim && currAnim->playing && currAnim == &iter->second)
+		if(currAnim && playing && currAnim == &iter->second)
 			return; //Early-ish exit b/c already at currAnim
 
-		currAnim = &iter->second;
-		currAnim->playing = true;
-		updateAnimation(true);
+		this->delay = delay;
+		animToBePlayed = &iter->second;
 	}
 }
 
 
-void Sprite::updateAnimation(bool b){
-	if(Sprite::updateAnimFrames && currAnim && currAnim->playing){
+void Sprite::updateAnimation(){
+	//arith. with bool for optimization
+	/* bool foo = Sprite::updateAnimFrames && currAnim && playing; */
+	/* bool bar = foo && currAnim->frameCount > currAnim->durations[currAnim->index]; */
+	/* bool baz = bar && currAnim->index > currAnim->durations.size()-1; */
+
+	/* currAnim->frameCount += foo; */
+
+	/* currAnim->frameCount = currAnim->frameCount * !bar; */
+	/* currAnim->index += bar; */
+
+	/* currAnim->index = currAnim->index * !baz; */
+	/* playing = (playing * !baz) || (currAnim->looping * baz); */
+	/* currAnim = playing ? currAnim : nullptr; */
+
+	if(Sprite::updateAnimFrames && currAnim && playing){
 		currAnim->frameCount++;
 
 		if(currAnim->frameCount > currAnim->durations[currAnim->index]){
@@ -47,17 +56,13 @@ void Sprite::updateAnimation(bool b){
 
 			if(currAnim->index > currAnim->durations.size()-1){
 				currAnim->index = 0;
-				currAnim->playing = currAnim->looping;
+				playing = currAnim->looping;
+
+				if(!playing)
+					currAnim = nullptr;
 			}
 		}
 	}
-}
-
-
-void Animation::reset(){
-	index = 0;
-	frameCount = 0;
-	playing = true;
 }
 
 
@@ -66,7 +71,7 @@ void UpdateAnimationFrame(float dt){
 
 	Sprite::timer += dt; //Could adjust speed depending on this op
 	if(fabs(Sprite::timer - Sprite::frametime) < epsilon || Sprite::timer > Sprite::frametime){
-		Sprite::timer = 0.f;
+		Sprite::timer = 0.f; //could be timer - frametime
 		Sprite::updateAnimFrames = true;
 	}
 	else
@@ -75,23 +80,28 @@ void UpdateAnimationFrame(float dt){
 
 
 void Update(Sprite &spr){
-	if(Sprite::updateAnimFrames)
+	if(Sprite::updateAnimFrames && spr.delay > 0)
 		spr.delay--;
-	if(spr.delay == 0 && (spr.currAnim && !spr.currAnim->playing))
-		spr.playAnimation(spr.animToBePlayed.c_str());
+	if(spr.delay < 1 && spr.animToBePlayed){
+		spr.playing = true;
+		spr.currAnim->reset();
+		spr.currAnim = spr.animToBePlayed;
+		spr.animToBePlayed = nullptr;
+	}
 
-	spr.updateAnimation(true);
+	spr.updateAnimation();
 }
 
 
 void DrawSprite(Sprite &spr){
 	if(spr.currAnim){
-		Rectangle &src = spr.currAnim->rects[spr.currAnim->index];
+		Rectangle src = spr.currAnim->rects[spr.currAnim->index];
 		Rectangle dest = {spr.pos.x, spr.pos.y, src.width, src.height};
-		DrawTexturePro(*spr.texture, src, dest, {0,0}, 0.f, WHITE);
+		src.width = spr.flipX ? -src.width : src.width;
+		DrawTexturePro(spr.texture, src, dest, {0,0}, 0.f, WHITE);
 	}
 	else{
-		DrawTextureEx(*spr.texture, {0,0}, 0.f, 0.f, WHITE);
+		DrawTextureEx(spr.texture, {0,0}, 0.f, 0.f, WHITE);
 	}
 }
 
@@ -114,6 +124,8 @@ Sprite LoadSprite(unsigned char *embedded){
 		const int numFrames = *(int*)iter;
 		iter += sizeof(int);
 		Animation anim;
+		anim.durations.reserve(numFrames); //Do only one alloc for optimization
+		anim.rects.reserve(numFrames);
 		
 		int len = 0; //To be length of data decompressed
 		const unsigned int compressedSize = *(unsigned int*)iter; //Length of data compressed

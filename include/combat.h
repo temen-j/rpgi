@@ -152,6 +152,8 @@ bool CanExecMoves(CombatData &);
 void CreateGoons(CombatData &);
 void UpdateFocus(CombatData &); //Update the combat data's character focus
 void ResetSelectAvailList(CombatData &);
+void CombatSpriteSetup(CombatData &);
+void GoonSpriteSetup(CombatData &);
 
 bool LessThan(CasterTargetsPair *, CasterTargetsPair *);
 

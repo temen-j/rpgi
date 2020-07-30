@@ -1,7 +1,15 @@
 /* #include "..\include\combat.h" */
 #include "..\include\game.h"
 #include "..\include\move_impl.h"
+
 #include "..\include\embed\cassandra_combat_sprite.h"
+#include "..\include\embed\gordon_combat_sprite.h"
+#include "..\include\embed\lou_combat_sprite.h"
+#include "..\include\embed\persy_combat_sprite.h"
+
+#include "..\include\embed\metis_combat_sprite.h"
+#include "..\include\embed\callisto_combat_sprite.h"
+
 #include "..\include\sprite.h"
 
 UMap<Actor *, Vec<MoveEffect> > CombatData::effects;
@@ -56,17 +64,12 @@ void StartCombat(Game &game){
 
 	cbtData->playerTeam = &game.player.team;
 
-	CombatData::actorSprites[cbtData->playerTeam->members[0]] = LoadSprite(cassandra_combat_anim); 
-	//FIXME: kind of hacky, need to store looping in the anim file and embedded file
-	auto &cass_spr = CombatData::actorSprites[cbtData->playerTeam->members[0]];
-	TextureManager::textures["../img/cassandra_combat.png"] = LoadTexture("../img/cassandra_combat.png")	;
-	cass_spr.texture = &TextureManager::textures["../img/cassandra_combat.png"];
-	cass_spr.pos = {440, 360};
-	cass_spr.anims["Combat Idle"].looping = true;
-	cass_spr.playAnimation("Combat Idle");
+	CombatSpriteSetup(*cbtData);
 
 	CreateGoons(*cbtData);
 	TeamsSetup(*cbtData);
+
+	GoonSpriteSetup(*cbtData);
 
 	CombatData::effects.clear();
 	for(auto &it : CombatData::playerAlive)
@@ -348,6 +351,73 @@ void TeamsSetup(CombatData &cbtD){
 		if(!IsDead(*actor))
 			CombatData::botAlive.push_back(actor);
 	}
+}
+
+
+void CombatSpriteSetup(CombatData &cbtD){
+	CombatData::actorSprites[cbtD.playerTeam->members[0]] = LoadSprite(cassandra_combat_anim); 
+	
+	//FIXME: kind of hacky, need to store looping in the anim file and embedded file
+	for(size_t i = 0; i < cbtD.playerTeam->members.size(); ++i){
+		switch(i){
+		case 0:
+			CombatData::actorSprites[cbtD.playerTeam->members[i]] = LoadSprite(cassandra_combat_anim); break;
+		case 1:
+			CombatData::actorSprites[cbtD.playerTeam->members[i]] = LoadSprite(gordon_combat_anim); break;
+		case 2:
+			CombatData::actorSprites[cbtD.playerTeam->members[i]] = LoadSprite(lou_combat_anim); break;
+		case 3:
+			CombatData::actorSprites[cbtD.playerTeam->members[i]] = LoadSprite(persy_combat_anim); break;
+		default:
+			break;
+		}
+	}
+
+	for(size_t i = 0; i < cbtD.playerTeam->members.size(); ++i){
+		auto &spr = CombatData::actorSprites[cbtD.playerTeam->members[i]];
+		spr.pos = {440 + i * 64, 360}; //FIXME: magic numbers!
+		spr.anims["Combat Idle"].looping = true;
+		spr.playAnimation("Combat Idle");
+	}
+
+	for(size_t i = 0; i < cbtD.playerTeam->members.size(); ++i){
+		auto &spr = CombatData::actorSprites[cbtD.playerTeam->members[i]];
+		switch(i){
+		case 0:
+			spr.texture = LoadTexture("../img/cassandra_combat.png");
+			break;
+		case 1:
+			spr.texture = LoadTexture("../img/gordon_combat.png");
+			break;
+		case 2:
+			spr.texture = LoadTexture("../img/lou_combat.png");
+			break;
+		case 3:
+			spr.texture = LoadTexture("../img/persy_combat.png");
+			break;
+		default:
+			break;
+		}
+	}
+}
+
+
+void GoonSpriteSetup(CombatData &cbtD){
+	CombatData::actorSprites[cbtD.botTeam->members[0]] = LoadSprite(metis_combat_anim);
+	auto &spr0 = CombatData::actorSprites[cbtD.botTeam->members[0]];
+	spr0.pos = {248, 232};
+	spr0.anims["Combat Idle"].looping = true;
+
+	CombatData::actorSprites[cbtD.botTeam->members[1]] = LoadSprite(callisto_combat_anim);
+	auto &spr1 = CombatData::actorSprites[cbtD.botTeam->members[1]];
+	spr1.pos = {312, 232};
+	spr1.anims["Combat Idle"].looping = true;
+
+	spr0.playAnimation("Combat Idle");
+	spr1.playAnimation("Combat Idle");
+
+	spr0.texture = LoadTexture("../img/metis_combat.png");
+	spr1.texture = LoadTexture("../img/callisto_combat.png");
 }
 
 

@@ -552,6 +552,7 @@ ColorToInt	.\include\raylib\core.c	/^int ColorToInt(Color color)$/;"	f
 ColorToInt	.\include\raylib\raygui.h	/^static int ColorToInt(Color color)$/;"	f
 CombatData	.\include\combat.h	/^struct CombatData{$/;"	s
 CombatPortraits	.\include\gui.h	/^struct CombatPortraits{$/;"	s
+CombatSpriteSetup	.\src\combat.cpp	/^void CombatSpriteSetup(CombatData &cbtD){$/;"	f
 CombatState	.\src\game.cpp	/^int CombatState(Game &game){$/;"	f
 CombatStates	.\include\combat.h	/^	enum CombatStates{$/;"	g	struct:CombatData
 Command	.\include\console.h	/^	enum Command{$/;"	g	namespace:Dev
@@ -24467,6 +24468,7 @@ glyf	.\include\raylib\external\stb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,
 glyph1	.\include\raylib\external\stb_truetype.h	/^   int glyph1; \/\/ use stbtt_FindGlyphIndex$/;"	m	struct:stbtt_kerningentry
 glyph2	.\include\raylib\external\stb_truetype.h	/^   int glyph2;$/;"	m	struct:stbtt_kerningentry
 goal_crc	.\include\raylib\external\stb_vorbis.h	/^   stbv_uint32  goal_crc;    \/\/ expected crc if match$/;"	m	struct:__anon372
+gordon_combat_anim	.\include\embed\gordon_combat_sprite.h	/^static unsigned char gordon_combat_anim[] = {$/;"	v
 gpos	.\include\raylib\external\stb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo
 gr_info	.\include\raylib\external\dr_mp3.h	/^    drmp3_L3_gr_info gr_info[4];$/;"	m	struct:__anon66
 gradients2D	.\include\raylib\external\par_shapes.h	/^static const int8_t gradients2D[] = {$/;"	v
@@ -25524,6 +25526,7 @@ looper	.\include\raylib\external\android\native_app_glue\android_native_app_glue
 looping	.\include\raylib\raudio.c	/^    bool looping;                   \/\/ Audio buffer looping, always true for AudioStreams$/;"	m	struct:rAudioBuffer	file:
 looping	.\include\sprite.h	/^	bool looping = false;$/;"	m	struct:Animation
 loops	.\include\raylib\external\dr_wav.h	/^    drwav_smpl_loop loops[DRWAV_MAX_SMPL_LOOPS];$/;"	m	struct:__anon77
+lou_combat_anim	.\include\embed\lou_combat_sprite.h	/^static unsigned char lou_combat_anim[] = {$/;"	v
 lpDSCFXDesc	.\include\raylib\external\miniaudio.h	/^    void* lpDSCFXDesc;  \/* <-- miniaudio doesn't use this, so set to void*. *\/$/;"	m	struct:__anon278
 lpDiEffect	.\include\raylib\external\glfw\deps\mingw\dinput.h	/^  LPCDIEFFECT lpDiEffect;$/;"	m	struct:DIFILEEFFECT
 lpEnvelope	.\include\raylib\external\glfw\deps\mingw\dinput.h	/^	LPDIENVELOPE		lpEnvelope;$/;"	m	struct:DIEFFECT
@@ -28539,6 +28542,7 @@ periodtable	.\include\raylib\external\jar_mod.h	/^static const short periodtable
 perm	.\include\raylib\external\par_shapes.h	/^    int16_t* perm;$/;"	m	struct:osn_context
 permGradIndex3D	.\include\raylib\external\par_shapes.h	/^    int16_t* permGradIndex3D;$/;"	m	struct:osn_context
 perspective	.\include\raylib\external\cgltf.h	/^		cgltf_camera_perspective perspective;$/;"	m	union:cgltf_camera::__anon20
+persy_combat_anim	.\include\embed\persy_combat_sprite.h	/^static unsigned char persy_combat_anim[] = {$/;"	v
 pfnAllocation	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    PFN_vkAllocationFunction     pfnAllocation;$/;"	m	struct:VkAllocationCallbacks
 pfnCallback	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    PFN_vkDebugReportCallbackEXT       pfnCallback;$/;"	m	struct:VkDebugReportCallbackCreateInfoEXT
 pfnFree	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    PFN_vkFreeFunction      pfnFree;$/;"	m	struct:VkAllocationCallbacks
@@ -30660,7 +30664,7 @@ texture	.\include\raylib\raylib.h	/^    Texture2D texture;      \/\/ Color buffe
 texture	.\include\raylib\raylib.h	/^    Texture2D texture;      \/\/ Material map texture$/;"	m	struct:MaterialMap
 texture	.\include\raylib\rlgl.h	/^        Texture2D texture;      \/\/ Color buffer attachment texture$/;"	m	struct:RenderTexture2D
 texture	.\include\raylib\rlgl.h	/^        Texture2D texture;      \/\/ Material map texture$/;"	m	struct:MaterialMap
-texture	.\include\sprite.h	/^	Texture *texture = nullptr;$/;"	m	struct:Sprite
+texture	.\include\sprite.h	/^	Texture texture;$/;"	m	struct:Sprite
 textureCompressionASTC_LDR	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkBool32                 textureCompressionASTC_LDR;$/;"	m	struct:VkPhysicalDeviceFeatures
 textureCompressionBC	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkBool32                 textureCompressionBC;$/;"	m	struct:VkPhysicalDeviceFeatures
 textureCompressionETC2	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkBool32                 textureCompressionETC2;$/;"	m	struct:VkPhysicalDeviceFeatures

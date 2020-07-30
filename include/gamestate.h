@@ -6,13 +6,14 @@
 
 struct Grid;
 
-enum State{
+enum class State{
 	console_dialog,
 	limbo,
 	inventory,
 	overworld_move,
 	overworld_idle,
 	combat_act,
+	combat_act_transition,
 	combat_watch
 };
 

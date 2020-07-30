@@ -49,7 +49,7 @@ int main(int argc, char **argv){
 		UpdateWindow();
 		Update(Game::mouse);
 		UpdateAnimationFrame(GetFrameTime());
-		ImageClearBackground(&(gtd.imageText), CLEAR); //Clear batched text
+		/* ImageClearBackground(&(gtd.imageText), CLEAR); //Clear batched text */
 
 
 		if(IsKeyPressed(KEY_GRAVE) && !console->justToggled && !console->toggled){
