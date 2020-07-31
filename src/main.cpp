@@ -29,7 +29,7 @@ int main(int argc, char **argv){
 	AddCharacters(*player);
 	SetMaxLevel(*player);
 	Console *console =  &game.console;
-	GameState *gs = &game.gs;
+	GameState *gs = &game.gamestate;
 
 	gs->curr = State::limbo;
 	gs->prev = gs->curr;
@@ -60,8 +60,8 @@ int main(int argc, char **argv){
 		//State Transistion (Toggle): to inventory, from inventory
 		if(!console->toggled && gs->curr != State::combat_act && gs->curr != State::combat_watch){
 			if(IsKeyPressed(KEY_C)){
-				game.gs.prev = game.gs.curr;
-				game.gs.curr = State::combat_act;
+				game.gamestate.prev = game.gamestate.curr;
+				game.gamestate.curr = State::combat_act;
 			}
 			//Open/Close inventory?
 			else if(gs->curr != State::combat_act && gs->curr != State::combat_watch){
@@ -138,7 +138,7 @@ int main(int argc, char **argv){
 		BeginTextureMode(Window::rescaleTarget);
 		ClearBackground(RAYWHITE);
 
-		if(game.gs.curr == State::combat_act || game.gs.curr == State::combat_watch){
+		if(game.gamestate.curr == State::combat_act || game.gamestate.curr == State::combat_watch){
 			DrawCombat(game);
 		}
 		else{

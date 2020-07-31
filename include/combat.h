@@ -93,6 +93,7 @@ struct CombatData{
 	Button moveButtons[NUM_ACTOR_MOVES];
 
 	static unsigned char focus;
+	static unsigned int animLockouts;
 };
 
 //The main combat loop of the game

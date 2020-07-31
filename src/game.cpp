@@ -1,8 +1,11 @@
 #include "..\include\game.h"
 #include "..\include\moveinventory.h"
 
+GameState Game::gamestate;
 Mouse Game::mouse;
 TextureManager Game::textures;
+
+unsigned int Game::delay = 0;
 
 Game::Game(){
 	justEnteredState = false;
@@ -142,8 +145,9 @@ int CombatState(Game &game){
 		StartCombat(game);
 	}
 
+	CombatData::moveAnimPlaying = CombatData::animLockouts > 0;
 
-	if(game.gs.curr == State::combat_act){
+	if(Game::gamestate.curr == State::combat_act){
 		if(game.cbtData->aiMakePairs)
 			AIMakeCTPs(*game.cbtData);
 		
@@ -164,11 +168,15 @@ int CombatState(Game &game){
 		if(game.cbtData->canMakePair){ //TODO: turn into a function (MakeCTP())?
 			MakeCTP(*game.cbtData);
 		}
-		if(game.gs.curr != State::combat_watch && CanExecMoves(*game.cbtData)){
-			ResetSelectAvailList(*game.cbtData);
-			game.gs.prev = game.gs.curr;
-			game.gs.curr = State::combat_watch;
-			ExecMoves(*game.cbtData); //TODO: make this work with animations
+		if(CanExecMoves(*game.cbtData)){
+			Game::gamestate.prev = Game::gamestate.curr;
+			Game::gamestate.curr = State::combat_watch;
+			ExecMoves(*game.cbtData);
+		}
+	}
+	else if(Game::gamestate.curr == State::combat_watch){
+		if(!CombatData::moveAnimPlaying){
+			ExecMoves(*game.cbtData);
 		}
 	}
 
@@ -177,6 +185,7 @@ int CombatState(Game &game){
 		if(!it.second.currAnim)
 			it.second.playAnimation("Combat Idle");
 	}
+
 	//if(battle is over)
 	//delete goons
 	return 0;

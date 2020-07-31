@@ -48,13 +48,19 @@ struct Sprite{
 	unsigned int delay = 0;
 	Animation *animToBePlayed = nullptr;
 
+	/* bool animDone = false; */
+	void (*onAnimationEnd)() = nullptr;
+
 	static constexpr float frametime = 1.f / 24.f; //NOTE: to be used with GetFrameTime() from raylib
 	static float timer;
 	static bool updateAnimFrames;
 
 	void playAnimation(const char *);
 	void playAnimation(const char *, unsigned int); //Play an animation after a delay (in frames)
+	void playAnimation(const char *, void (*func)()); //Exec the function on animation end
+	void playAnimation(const char *, unsigned int, void (*func)());
 	void updateAnimation();
+
 };
 
 
@@ -95,5 +101,7 @@ Sprite LoadSprite(const char *);
 
 //-
 Sprite LoadSprite(unsigned char *);
+
+
 
 #endif

@@ -20,7 +20,7 @@ struct Game{
 
 	Console console;
 	Player player;
-	static GameState gs;
+	static GameState gamestate;
 	static Mouse mouse;
 	CombatData *cbtData = nullptr;
 	static TextureManager textures;
@@ -29,6 +29,8 @@ struct Game{
 	bool consoleOpen;
 	bool inventoryOpen;
 	bool minventoryOpen;
+
+	static unsigned int delay;
 
 	Grid gridMat[4][3]; //array of 4 characters' elematrices
 

@@ -1,4 +1,5 @@
 #include "..\include\sprite.h"
+#include "..\include\combat.h"
 
 UMap<std::string, Texture> TextureManager::textures;
 float Sprite::timer = 0.f;
@@ -32,21 +33,21 @@ void Sprite::playAnimation(const char *str, unsigned int delay){
 }
 
 
+void Sprite::playAnimation(const char *str, void (*func)()){
+	playAnimation(str);
+	if(currAnim || animToBePlayed)
+		onAnimationEnd = func;
+}
+
+
+void Sprite::playAnimation(const char *str, unsigned int delay, void (*func)()){
+	playAnimation(str, delay);
+	if(currAnim || animToBePlayed)
+		onAnimationEnd = func;
+}
+
+
 void Sprite::updateAnimation(){
-	//arith. with bool for optimization
-	/* bool foo = Sprite::updateAnimFrames && currAnim && playing; */
-	/* bool bar = foo && currAnim->frameCount > currAnim->durations[currAnim->index]; */
-	/* bool baz = bar && currAnim->index > currAnim->durations.size()-1; */
-
-	/* currAnim->frameCount += foo; */
-
-	/* currAnim->frameCount = currAnim->frameCount * !bar; */
-	/* currAnim->index += bar; */
-
-	/* currAnim->index = currAnim->index * !baz; */
-	/* playing = (playing * !baz) || (currAnim->looping * baz); */
-	/* currAnim = playing ? currAnim : nullptr; */
-
 	if(Sprite::updateAnimFrames && currAnim && playing){
 		currAnim->frameCount++;
 
@@ -58,8 +59,13 @@ void Sprite::updateAnimation(){
 				currAnim->index = 0;
 				playing = currAnim->looping;
 
-				if(!playing)
+				if(!playing){
 					currAnim = nullptr;
+					if(onAnimationEnd){
+						onAnimationEnd();
+						onAnimationEnd = nullptr;
+					}
+				}
 			}
 		}
 	}
@@ -149,4 +155,5 @@ Sprite LoadSprite(unsigned char *embedded){
 	
 	return spr;
 }
+
 

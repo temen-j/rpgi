@@ -32,6 +32,7 @@ Vec<CasterTargetsPair> CombatData::ctps;
 Vec<CasterTargetsPair *> CombatData::ctpsPtrs;
 
 unsigned char CombatData::focus = 0;
+unsigned int CombatData::animLockouts = 0;
 
 /* bool CombatData::canAssign */
 
@@ -434,13 +435,14 @@ void DisableUnusedButtons(CombatData &cbtD){
 
 bool CanExecMoves(CombatData &cbtD){
 	Vec<Actor *> allInCombat;
+	allInCombat.reserve(CombatData::playerAlive.size() + CombatData::botAlive.size());
+
 	for(auto &it : CombatData::playerAlive)
 		allInCombat.push_back(it);
 	for(auto &it : CombatData::botAlive)
 		allInCombat.push_back(it);
 
-	//O(n^2), 
-	//TODO: find a better way of doing this...
+	//O(n^2) 
 	for(auto &it : allInCombat){
 		bool found = false;
 		for(auto &jt : CombatData::ctps){
@@ -479,8 +481,12 @@ bool LessThanCTP(CasterTargetsPair *first, CasterTargetsPair *second){
 //These will be added at a later date, hopefully... So in order to keep the same relative flow control
 //Create a macro-loop bounded by ctpsPtrs.size(), and iterate on confirmation that a move has finished
 //animating / playing audio, the confirmation will most likely be a boolean with the combat data
+//NOTE: July 31, 2020
+//This function willl execute a move and play the corresponding animations and sounds
+//TODO: play the corresponding sounds
 void ExecMoves(CombatData &cbtD){
 	if(!cbtD.executingMoves){
+		ResetSelectAvailList(cbtD);
 		CombatData::ctpsPtrs.resize(0);
 
 		for(auto &it : CombatData::ctps)
@@ -493,14 +499,11 @@ void ExecMoves(CombatData &cbtD){
 	}
 
 	if(cbtD.executingMoves){
-		for(size_t i = 0; i < CombatData::ctpsPtrs.size(); ++i){
-			ExecMove(*CombatData::ctpsPtrs[i]);
-			cbtD.execIndex++;
-			cbtD.executingMoves = cbtD.execIndex < CombatData::ctpsPtrs.size();
-		}
-
-		cbtD.aiMakePairs = true;
-		cbtD.canAssign = true;
+		ExecMove(*CombatData::ctpsPtrs[cbtD.execIndex]);
+		cbtD.execIndex++;
+		
+		cbtD.executingMoves = cbtD.execIndex < CombatData::ctpsPtrs.size();
+		cbtD.aiMakePairs = cbtD.canAssign = !cbtD.executingMoves;
 	}
 
 	/* if(!(cbtD.execIndex < CombatData::ctpsPtrs.size())){ */
@@ -510,518 +513,2029 @@ void ExecMoves(CombatData &cbtD){
 
 
 void ExecMove(CasterTargetsPair &ctp){
+	bool playedCasterAnim = false;
 	for(auto &it : ctp.targets){
 		switch(ctp.move->id){
 		case IGNITE:
 			MoveImplementation::IGNITE(*it, *static_cast<CasterMove *>(&ctp));
-			CombatData::actorSprites[ctp.caster].playAnimation("Use Physical");
-			/* CombatData::actorSprites[it].playAnimation("Hurt Physical", 12); */
-			CombatData::moveAnimPlaying = true;
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case BLAZE:
 			MoveImplementation::BLAZE(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case FIREBALL:
 			MoveImplementation::FIREBALL(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case EXPLOSION:
 			MoveImplementation::EXPLOSION(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case FIREBEAM:
 			MoveImplementation::FIREBEAM(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case FLAMESWORD:
 			MoveImplementation::FLAMESWORD(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case FLAREKICK:
 			MoveImplementation::FLAREKICK(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case FIREWALL:
 			MoveImplementation::FIREWALL(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case SEARINGFLESH:
 			MoveImplementation::SEARINGFLESH(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case MOLTENMETEOR:
 			MoveImplementation::MOLTENMETEOR(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case WILDFIRE:
 			MoveImplementation::WILDFIRE(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case RAZEEARTH:
 			MoveImplementation::RAZEEARTH(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case FROMTHEASHES:
 			MoveImplementation::FROMTHEASHES(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case SUPERNOVA:
 			MoveImplementation::SUPERNOVA(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case WATERWHIP:
 			MoveImplementation::WATERWHIP(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case TORRENT:
 			MoveImplementation::TORRENT(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case TIDALWAVE:
 			MoveImplementation::TIDALWAVE(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case COALESCE:
 			MoveImplementation::COALESCE(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case WHIRLPOOL:
 			MoveImplementation::WHIRLPOOL(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case HAILSTORM:
 			MoveImplementation::HAILSTORM(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case AQUAPRISON:
 			MoveImplementation::AQUAPRISON(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case RAINSTORM:
 			MoveImplementation::RAINSTORM(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case DEWPOINT:
 			MoveImplementation::DEWPOINT(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case FLASHFREEZE:
 			MoveImplementation::FLASHFREEZE(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case RIPTIDE:
 			MoveImplementation::RIPTIDE(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case VAPORVORTEX:
 			MoveImplementation::VAPORVORTEX(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case HELLBROTH:
 			MoveImplementation::HELLBROTH(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case TSUNAMI:
 			MoveImplementation::TSUNAMI(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case SEEDSHOT:
 			MoveImplementation::SEEDSHOT(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case ACORNASSAULT:
 			MoveImplementation::ACORNASSAULT(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case SAPPINGSTEMS:
 			MoveImplementation::SAPPINGSTEMS(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case NOURISH:
 			MoveImplementation::NOURISH(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case LEAFLANCE:
 			MoveImplementation::LEAFLANCE(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case FUNGALSPORES:
 			MoveImplementation::FUNGALSPORES(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case BARBEDHUSK:
 			MoveImplementation::BARBEDHUSK(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case GRASSBLADES:
 			MoveImplementation::GRASSBLADES(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case PETALPIKE:
 			MoveImplementation::PETALPIKE(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case UNDERGROWTH:
 			MoveImplementation::UNDERGROWTH(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case SYMBIOSIS:
 			MoveImplementation::SYMBIOSIS(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case ENSNARINGVINE:
 			MoveImplementation::ENSNARINGVINE(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case RANCIDROSES:
 			MoveImplementation::RANCIDROSES(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case DRYADSCURSE:
 			MoveImplementation::DRYADSCURSE(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case ZAP:
 			MoveImplementation::ZAP(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case CHARGE:
 			MoveImplementation::CHARGE(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case DISCHARGE:
 			MoveImplementation::DISCHARGE(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case LIGHTNINGBOLT:
 			MoveImplementation::LIGHTNINGBOLT(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case DAZZLINGLIGHTS:
 			MoveImplementation::DAZZLINGLIGHTS(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case ELECTROSTORM:
 			MoveImplementation::ELECTROSTORM(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case LIGHTNINGKICK:
 			MoveImplementation::LIGHTNINGKICK(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case SPARKINGSKIN:
 			MoveImplementation::SPARKINGSKIN(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case SUPERCONDUCT:
 			MoveImplementation::SUPERCONDUCT(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case STATICSHOCK:
 			MoveImplementation::STATICSHOCK(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case EVANESCENTFIELD:
 			MoveImplementation::EVANESCENTFIELD(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case HIGHVOLTAGE:
 			MoveImplementation::HIGHVOLTAGE(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case MJOLNIR:
 			MoveImplementation::MJOLNIR(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case CLOSEDCIRUIT:
 			MoveImplementation::CLOSEDCIRUIT(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case IRONSPIKES:
 			MoveImplementation::IRONSPIKES(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case CANNONBALL:
 			MoveImplementation::CANNONBALL(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case SHARPEN:
 			MoveImplementation::SHARPEN(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case SHATTERSHRAPNEL:
 			MoveImplementation::SHATTERSHRAPNEL(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case BALLANDCHAIN:
 			MoveImplementation::BALLANDCHAIN(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case QUICKSILVER:
 			MoveImplementation::QUICKSILVER(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case COPPERCUTLASS:
 			MoveImplementation::COPPERCUTLASS(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case RAZORWIRE:
 			MoveImplementation::RAZORWIRE(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case MIDASTOUCH:
 			MoveImplementation::MIDASTOUCH(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case CHROMEPLATED:
 			MoveImplementation::CHROMEPLATED(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case MAGNETIZE:
 			MoveImplementation::MAGNETIZE(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case BRASSKNUCKLES:
 			MoveImplementation::BRASSKNUCKLES(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case ALLOYASSAULT:
 			MoveImplementation::ALLOYASSAULT(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case PIERCINGPLATINUM:
 			MoveImplementation::PIERCINGPLATINUM(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case HURLROCK:
 			MoveImplementation::HURLROCK(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case STONESPEAR:
 			MoveImplementation::STONESPEAR(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case FORTIFY:
 			MoveImplementation::FORTIFY(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case QUICKSAND:
 			MoveImplementation::QUICKSAND(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case ENTOMB:
 			MoveImplementation::ENTOMB(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case CRUSH:
 			MoveImplementation::CRUSH(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case TREMOR:
 			MoveImplementation::TREMOR(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case ROCKSLIDE:
 			MoveImplementation::ROCKSLIDE(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case ROLLINGBOULDER:
 			MoveImplementation::ROLLINGBOULDER(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case SAPPHIRESTRIKE:
 			MoveImplementation::SAPPHIRESTRIKE(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case RUBYRUSH:
 			MoveImplementation::RUBYRUSH(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case GARNETGAZE:
 			MoveImplementation::GARNETGAZE(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case EMERALDEDGE:
 			MoveImplementation::EMERALDEDGE(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case OBSIDIANONSLAUGHT:
 			MoveImplementation::OBSIDIANONSLAUGHT(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case ECTORAY:
 			MoveImplementation::ECTORAY(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case TORMENT:
 			MoveImplementation::TORMENT(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case CHAOSCLAW:
 			MoveImplementation::CHAOSCLAW(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case PHANTOMWALTS:
 			MoveImplementation::PHANTOMWALTS(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case GRAVETENDER:
 			MoveImplementation::GRAVETENDER(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case MINDINVASION:
 			MoveImplementation::MINDINVASION(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case BINDINGPAIN:
 			MoveImplementation::BINDINGPAIN(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case PLAGUE:
 			MoveImplementation::PLAGUE(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case WICKEDHEX:
 			MoveImplementation::WICKEDHEX(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case PETRIFYINGWAIL:
 			MoveImplementation::PETRIFYINGWAIL(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case DECAY:
 			MoveImplementation::DECAY(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case VIVIDNIGHTMARE:
 			MoveImplementation::VIVIDNIGHTMARE(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case ETHEREALFOG:
 			MoveImplementation::ETHEREALFOG(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case NOXIOUSVOID:
 			MoveImplementation::NOXIOUSVOID(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case FLASHFRICTION:
 			MoveImplementation::FLASHFRICTION(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case SCORCHINGHEAT:
 			MoveImplementation::SCORCHINGHEAT(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case DRAGONBREATH:
 			MoveImplementation::DRAGONBREATH(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case ICARUSINFERNO:
 			MoveImplementation::ICARUSINFERNO(*it, *static_cast<CasterMove *>(&ctp));
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case REND:
 			/* MoveImplementation::REND(*it, *static_cast<CasterMove *>(&ctp)); */
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case SIRENSTEAR:
 			/* MoveImplementation::SIRENSTEAR(*it, *static_cast<CasterMove *>(&ctp)); */
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case CHILLINGBLAST:
 			/* MoveImplementation::CHILLINGBLAST(*it, *static_cast<CasterMove *>(&ctp)); */
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case DELUGE:
 			/* MoveImplementation::DELUGE(*it, *static_cast<CasterMove *>(&ctp)); */
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case NEEDLE:
 			/* MoveImplementation::NEEDLE(*it, *static_cast<CasterMove *>(&ctp)); */
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case BLOOM:
 			/* MoveImplementation::BLOOM(*it, *static_cast<CasterMove *>(&ctp)); */
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case TREECLEAVER:
 			/* MoveImplementation::TREECLEAVER(*it, *static_cast<CasterMove *>(&ctp)); */
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case VENOMCOATING:
 			/* MoveImplementation::VENOMCOATING(*it, *static_cast<CasterMove *>(&ctp)); */
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case SURGE:
 			/* MoveImplementation::SURGE(*it, *static_cast<CasterMove *>(&ctp)); */
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case OVERLOAD:
 			/* MoveImplementation::OVERLOAD(*it, *static_cast<CasterMove *>(&ctp)); */
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case IONSTRIKE:
 			/* MoveImplementation::IONSTRIKE(*it, *static_cast<CasterMove *>(&ctp)); */
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case PLASMAPULSE:
 			/* MoveImplementation::PLASMAPULSE(*it, *static_cast<CasterMove *>(&ctp)); */
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case SCRAPSLUG:
 			/* MoveImplementation::SCRAPSLUG(*it, *static_cast<CasterMove *>(&ctp)); */
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case ANNEAL:
 			/* MoveImplementation::ANNEAL(*it, *static_cast<CasterMove *>(&ctp)); */
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case ANODIZE:
 			/* MoveImplementation::ANODIZE(*it, *static_cast<CasterMove *>(&ctp)); */
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case GALVANIZEDGLAIVE:
 			/* MoveImplementation::GALVANIZEDGLAIVE(*it, *static_cast<CasterMove *>(&ctp)); */
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case GRAVELSPIN:
 			/* MoveImplementation::GRAVELSPIN(*it, *static_cast<CasterMove *>(&ctp)); */
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case SANDBOMB:
 			/* MoveImplementation::SANDBOMB(*it, *static_cast<CasterMove *>(&ctp)); */
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case CRYSTALCAGE:
 			/* MoveImplementation::CRYSTALCAGE(*it, *static_cast<CasterMove *>(&ctp)); */
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case FISSURE:
 			/* MoveImplementation::FISSURE(*it, *static_cast<CasterMove *>(&ctp)); */
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case SHADOWSLASH:
 			/* MoveImplementation::SHADOWSLASH(*it, *static_cast<CasterMove *>(&ctp)); */
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case PILFER:
 			/* MoveImplementation::PILFER(*it, *static_cast<CasterMove *>(&ctp)); */
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case BLOODCURDLE:
 			/* MoveImplementation::BLOODCURDLE(*it, *static_cast<CasterMove *>(&ctp)); */
-			//TODO: play the associated anims
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 			break;
 		case BLACKHOLE:
 			/* MoveImplementation::BLACKHOLE(*it, *static_cast<CasterMove *>(&ctp)); */
-			//TODO: play the associated anims
-			break;
+			{
+				if(!playedCasterAnim){
+					CombatData::actorSprites[ctp.caster].playAnimation("Use Magical", 
+						[](){ CombatData::animLockouts--; }
+					);
+					playedCasterAnim = true;
+					CombatData::animLockouts++;
+				}
+			}
+			CombatData::actorSprites[it].playAnimation("Hurt", 8, 
+				[](){ CombatData::animLockouts--; }
+			);
+			CombatData::animLockouts++;
 		default:
 			break;
 		}
 	}
+	CombatData::moveAnimPlaying = true;
 	return;
 }
 

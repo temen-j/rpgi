@@ -8168,6 +8168,7 @@ GlbMagicBinChunk	.\include\raylib\external\cgltf.h	/^static const uint32_t GlbMa
 GlbMagicJsonChunk	.\include\raylib\external\cgltf.h	/^static const uint32_t GlbMagicJsonChunk = 0x4E4F534A;$/;"	v
 GlbVersion	.\include\raylib\external\cgltf.h	/^static const uint32_t GlbVersion = 2;$/;"	v
 GlobalTextData	.\include\gui.h	/^struct GlobalTextData{$/;"	s
+GoonSpriteSetup	.\src\combat.cpp	/^void GoonSpriteSetup(CombatData &cbtD){$/;"	f
 Grid	.\include\elemino.h	/^	Grid(){$/;"	f	struct:Grid
 Grid	.\include\elemino.h	/^struct Grid{$/;"	s
 GuiButton	.\include\raylib\raygui.h	/^bool GuiButton(Rectangle bounds, const char *text)$/;"	f
@@ -13944,7 +13945,7 @@ StartCombat	.\src\test.cpp	/^void StartCombat(Game &game){$/;"	f
 StatBar	.\include\gui.h	/^struct StatBar{$/;"	s
 StatTextSetup	.\src\inventory.cpp	/^void StatTextSetup(InventoryData &invD, Actor &actor){$/;"	f
 StatToolTip	.\src\inventory.cpp	/^void StatToolTip(InventoryData &invD, Actor &actor){$/;"	f
-State	.\include\gamestate.h	/^enum State{$/;"	g
+State	.\include\gamestate.h	/^enum class State{$/;"	c
 State	.\include\raylib\rlgl.h	/^    } State;$/;"	m	struct:rlglData	typeref:struct:rlglData::__anon456
 StatusEffects	.\include\combat.h	/^struct StatusEffects{$/;"	s
 StbvCRCscan	.\include\raylib\external\stb_vorbis.h	/^} StbvCRCscan;$/;"	t	typeref:struct:__anon372
@@ -14268,8 +14269,8 @@ Unlock	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * 
 Unoccupy	.\src\elemino.cpp	/^void Unoccupy(Grid &g){$/;"	f
 UnregisterEndpointNotificationCallback	.\include\raylib\external\miniaudio.h	/^        HRESULT (STDMETHODCALLTYPE * UnregisterEndpointNotificationCallback)(ma_IMMDeviceEnumerator* pThis, ma_IMMNotificationClient* pClient);$/;"	m	struct:__anon265
 UntrackAudioBuffer	.\include\raylib\raudio.c	/^void UntrackAudioBuffer(AudioBuffer *buffer)$/;"	f
+Update	.\include\gui.h	/^inline bool Update(ImageToggle &toggle){ return Update(*static_cast<Toggle *>(&toggle)); }$/;"	f
 Update	.\src\gui.cpp	/^bool Update(DropDown &dd){$/;"	f
-Update	.\src\gui.cpp	/^bool Update(ImageToggle &toggle){$/;"	f
 Update	.\src\gui.cpp	/^bool Update(Toggle &toggle){$/;"	f
 Update	.\src\gui.cpp	/^void Update(Button &button){$/;"	f
 Update	.\src\gui.cpp	/^void Update(ImageButton &button){$/;"	f
@@ -17180,9 +17181,11 @@ angle	.\include\raylib\external\stb_vorbis.h	/^   stbv_uint8 angle;$/;"	m	struct
 angle	.\include\raylib\gestures.h	/^        float angle;                    \/\/ DRAG angle (relative to x-axis)$/;"	m	struct:__anon390::__anon393
 angle	.\include\raylib\gestures.h	/^        float angle;                    \/\/ PINCH angle (relative to x-axis)$/;"	m	struct:__anon390::__anon395
 angularVelocity	.\include\raylib\physac.h	/^    float angularVelocity;                      \/\/ Current angular velocity applied to orient$/;"	m	struct:PhysicsBodyData
+animLockouts	.\include\combat.h	/^	static unsigned int animLockouts;$/;"	m	struct:CombatData
+animLockouts	.\src\combat.cpp	/^unsigned int CombatData::animLockouts = 0;$/;"	m	class:CombatData	file:
 animNormals	.\include\raylib\raylib.h	/^    float *animNormals;     \/\/ Animated normals (after bones transformations)$/;"	m	struct:Mesh
 animNormals	.\include\raylib\rlgl.h	/^        float *animNormals;     \/\/ Animated normals (after bones transformations)$/;"	m	struct:Mesh
-animToBePlayed	.\include\sprite.h	/^	std::string animToBePlayed;$/;"	m	struct:Sprite
+animToBePlayed	.\include\sprite.h	/^	Animation *animToBePlayed = nullptr;$/;"	m	struct:Sprite
 animVertices	.\include\raylib\raylib.h	/^    float *animVertices;    \/\/ Animated vertex positions (after bones transformations)$/;"	m	struct:Mesh
 animVertices	.\include\raylib\rlgl.h	/^        float *animVertices;    \/\/ Animated vertex positions (after bones transformations)$/;"	m	struct:Mesh
 animations	.\include\raylib\external\cgltf.h	/^	cgltf_animation* animations;$/;"	m	struct:cgltf_data
@@ -17494,6 +17497,7 @@ callback	.\include\raylib\external\miniaudio.h	/^    ma_enum_devices_callback_pr
 callback	.\include\raylib\external\miniaudio.h	/^    ma_enum_devices_callback_proc callback;$/;"	m	struct:__anon305
 callbacks	.\include\raylib\external\glfw\src\internal.h	/^    } callbacks;$/;"	m	struct:_GLFWlibrary	typeref:struct:_GLFWlibrary::__anon95
 callbacks	.\include\raylib\external\glfw\src\internal.h	/^    } callbacks;$/;"	m	struct:_GLFWwindow	typeref:struct:_GLFWwindow::__anon91
+callisto_combat_anim	.\include\embed\callisto_combat_sprite.h	/^static unsigned char callisto_combat_anim[] = {$/;"	v
 camera	.\include\raylib\external\cgltf.h	/^	cgltf_camera* camera;$/;"	m	struct:cgltf_node
 cameras	.\include\raylib\external\cgltf.h	/^	cgltf_camera* cameras;$/;"	m	struct:cgltf_data
 cameras_count	.\include\raylib\external\cgltf.h	/^	cgltf_size cameras_count;$/;"	m	struct:cgltf_data
@@ -17935,8 +17939,8 @@ colors	.\include\raylib\raylib.h	/^    unsigned char *colors;  \/\/ Vertex color
 colors	.\include\raylib\rlgl.h	/^        unsigned char *colors;  \/\/ vertex colors (RGBA - 4 components per vertex) (shader-location = 3)$/;"	m	struct:Mesh
 colors	.\include\raylib\rlgl.h	/^    unsigned char *colors;      \/\/ vertex colors (RGBA - 4 components per vertex) (shader-location = 3)$/;"	m	struct:DynamicBuffer
 colorspace	.\include\raylib\external\stb_image_resize.h	/^    stbir_colorspace colorspace;$/;"	m	struct:__anon338
-combat_act	.\include\gamestate.h	/^	combat_act,$/;"	e	enum:State
-combat_watch	.\include\gamestate.h	/^	combat_watch$/;"	e	enum:State
+combat_act	.\include\gamestate.h	/^	combat_act,$/;"	m	class:State
+combat_act_transition	.\include\gamestate.h	/^	combat_act_transition,$/;"	m	class:State
 combinedImageSamplerDescriptorCount	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t                           combinedImageSamplerDescriptorCount;$/;"	m	struct:VkSamplerYcbcrConversionImageFormatProperties
 comma	.\include\elemino.h	/^	comma,$/;"	e	enum:MinoShape
 command	.\include\console.h	/^	Dev::Command command;$/;"	m	struct:Console
@@ -17991,7 +17995,7 @@ confs	.\include\raylib\external\miniaudio.h	/^    struct ma_sio_conf confs[MA_SI
 connection	.\include\raylib\external\glfw\src\x11_platform.h	/^    xcb_connection_t*           connection;$/;"	m	struct:VkXcbSurfaceCreateInfoKHR
 console	.\include\game.h	/^	Console console;$/;"	m	struct:Game
 consoleOpen	.\include\game.h	/^	bool consoleOpen;$/;"	m	struct:Game
-console_dialog	.\include\gamestate.h	/^	console_dialog,$/;"	e	enum:State
+console_dialog	.\include\gamestate.h	/^	console_dialog,$/;"	m	class:State
 constantID	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t                       constantID;$/;"	m	struct:VkSpecializationMapEntry
 consumedBits	.\include\raylib\external\dr_flac.h	/^    drflac_uint32 consumedBits;$/;"	m	struct:__anon37
 contacts	.\include\raylib\physac.h	/^    Vector2 contacts[2];                        \/\/ Points of contact during collision$/;"	m	struct:PhysicsManifoldData
@@ -18295,9 +18299,11 @@ defaultShader	.\include\raylib\rlgl.h	/^        Shader defaultShader;           
 defaultSize	.\include\raylib\raudio.c	/^        int defaultSize;            \/\/ Default audio buffer size for audio streams$/;"	m	struct:AudioData::__anon402	file:
 defaultTextureId	.\include\raylib\rlgl.h	/^        unsigned int defaultTextureId;      \/\/ Default texture used on shapes\/poly drawing (required by shader)$/;"	m	struct:rlglData::__anon456
 defaultVShaderId	.\include\raylib\rlgl.h	/^        unsigned int defaultVShaderId;      \/\/ Default vertex shader id (used by default shader program)$/;"	m	struct:rlglData::__anon456
+delay	.\include\game.h	/^	static unsigned int delay;$/;"	m	struct:Game
 delay	.\include\raylib\external\glfw\src\wl_platform.h	/^    uint32_t delay;$/;"	m	struct:wl_cursor_image
 delay	.\include\raylib\external\stb_image.h	/^   int delay;$/;"	m	struct:__anon331
 delay	.\include\sprite.h	/^	unsigned int delay = 0;$/;"	m	struct:Sprite
+delay	.\src\game.cpp	/^unsigned int Game::delay = 0;$/;"	m	class:Game	file:
 delegate	.\include\raylib\external\glfw\src\cocoa_platform.h	/^    id                  delegate;$/;"	m	struct:_GLFWlibraryNS
 delegate	.\include\raylib\external\glfw\src\cocoa_platform.h	/^    id              delegate;$/;"	m	struct:_GLFWwindowNS
 delta	.\include\raylib\external\dr_wav.h	/^        drwav_int32  delta[2];$/;"	m	struct:__anon78::__anon80
@@ -19646,6 +19652,8 @@ flags	.\include\raylib\external\miniaudio.h	/^    ma_pa_sink_flags_t flags;$/;"	
 flags	.\include\raylib\external\miniaudio.h	/^    ma_pa_source_flags_t flags;$/;"	m	struct:__anon303
 flags	.\include\raylib\external\stb_image.h	/^   int flags, bgindex, ratio, transparent, eflags;$/;"	m	struct:__anon331
 flags	.\include\raylib\external\stb_image_resize.h	/^    stbir_uint32 flags;$/;"	m	struct:__anon338
+flipX	.\include\sprite.h	/^	bool flipX = false;$/;"	m	struct:Sprite
+flipY	.\include\sprite.h	/^	bool flipY = false;$/;"	m	struct:Sprite
 float16	.\include\raylib\raymath.h	/^typedef struct float16 { float v[16]; } float16;$/;"	s
 float16	.\include\raylib\raymath.h	/^typedef struct float16 { float v[16]; } float16;$/;"	t	typeref:struct:float16
 float3	.\include\raylib\raymath.h	/^typedef struct float3 { float v[3]; } float3;$/;"	s
@@ -19828,6 +19836,8 @@ g_maStandardSampleRatePriorities	.\include\raylib\external\miniaudio.h	/^ma_uint
 g_ma_TimerFrequency	.\include\raylib\external\miniaudio.h	/^LARGE_INTEGER g_ma_TimerFrequency = {{0}};$/;"	v
 g_ma_TimerFrequency	.\include\raylib\external\miniaudio.h	/^ma_uint64 g_ma_TimerFrequency = 0;$/;"	v
 g_ppTrackedDevices_CoreAudio	.\include\raylib\external\miniaudio.h	/^static ma_device** g_ppTrackedDevices_CoreAudio = NULL;$/;"	v
+gamestate	.\include\game.h	/^	static GameState gamestate;$/;"	m	struct:Game
+gamestate	.\src\game.cpp	/^GameState Game::gamestate;$/;"	m	class:Game	file:
 gammaBroken	.\include\raylib\external\glfw\src\x11_platform.h	/^        GLFWbool    gammaBroken;$/;"	m	struct:_GLFWlibraryX11::__anon113
 generated_samples	.\include\raylib\external\jar_xm.h	/^     uint64_t generated_samples;$/;"	m	struct:jar_xm_context_s
 generator	.\include\raylib\external\cgltf.h	/^	char* generator;$/;"	m	struct:cgltf_asset
@@ -24490,7 +24500,6 @@ group	.\include\raylib\external\glfw\src\x11_platform.h	/^        unsigned int g
 group_name	.\include\raylib\external\tinyobj_loader_c.h	/^  const char *group_name;$/;"	m	struct:__anon384
 group_name_len	.\include\raylib\external\tinyobj_loader_c.h	/^  unsigned int group_name_len;$/;"	m	struct:__anon384
 growClipboardString	.\include\raylib\external\glfw\src\wl_window.c	/^static GLFWbool growClipboardString(void)$/;"	f	file:
-gs	.\include\game.h	/^	GameState gs;$/;"	m	struct:Game
 gsubrs	.\include\raylib\external\stb_truetype.h	/^   stbtt__buf gsubrs;                 \/\/ global charstring subroutines index$/;"	m	struct:stbtt_fontinfo
 guiAlpha	.\include\raylib\raygui.h	/^static float guiAlpha = 1.0f;           \/\/ Gui element transpacency on drawing$/;"	v
 guiFont	.\include\raylib\raygui.h	/^static Font guiFont = { 0 };            \/\/ Gui current font (WARNING: highly coupled to raylib)$/;"	v
@@ -24972,7 +24981,7 @@ intmax_t	.\include\raylib\external\glfw\deps\vs2008\stdint.h	/^typedef int64_t  
 intptr_t	.\include\raylib\external\glfw\deps\vs2008\stdint.h	/^   typedef _W64 signed int   intptr_t;$/;"	t
 intptr_t	.\include\raylib\external\glfw\deps\vs2008\stdint.h	/^   typedef signed __int64    intptr_t;$/;"	t
 invData	.\include\player.h	/^	InventoryData *invData;$/;"	m	struct:Player
-inventory	.\include\gamestate.h	/^	inventory,$/;"	e	enum:State
+inventory	.\include\gamestate.h	/^	inventory,$/;"	m	class:State
 inventory	.\include\player.h	/^	Vec<Elemino *> inventory;$/;"	m	struct:Player
 inventoryOpen	.\include\game.h	/^	bool inventoryOpen;$/;"	m	struct:Game
 inverseInertia	.\include\raylib\physac.h	/^    float inverseInertia;                       \/\/ Inverse value of inertia$/;"	m	struct:PhysicsBodyData
@@ -25425,7 +25434,7 @@ lifeDrain	.\include\moveeffect.h	/^		lifeDrain,$/;"	m	struct:MoveEffect	typeref:
 light	.\include\raylib\external\cgltf.h	/^	cgltf_light* light;$/;"	m	struct:cgltf_node
 lights	.\include\raylib\external\cgltf.h	/^	cgltf_light* lights;$/;"	m	struct:cgltf_data
 lights_count	.\include\raylib\external\cgltf.h	/^	cgltf_size lights_count;$/;"	m	struct:cgltf_data
-limbo	.\include\gamestate.h	/^	limbo,$/;"	e	enum:State
+limbo	.\include\gamestate.h	/^	limbo,$/;"	m	class:State
 limit	.\include\raylib\external\dr_mp3.h	/^    int pos, limit;$/;"	m	struct:__anon62
 limits	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkPhysicalDeviceLimits   limits;$/;"	m	struct:VkPhysicalDeviceProperties
 line0	.\include\raylib\external\stb_image.h	/^   stbi_uc *line0,*line1;$/;"	m	struct:__anon322
@@ -27489,6 +27498,7 @@ meshes	.\include\raylib\raylib.h	/^    Mesh *meshes;           \/\/ Meshes array
 meshes_count	.\include\raylib\external\cgltf.h	/^	cgltf_size meshes_count;$/;"	m	struct:cgltf_data
 metallic_factor	.\include\raylib\external\cgltf.h	/^	cgltf_float metallic_factor;$/;"	m	struct:cgltf_pbr_metallic_roughness
 metallic_roughness_texture	.\include\raylib\external\cgltf.h	/^	cgltf_texture_view metallic_roughness_texture;$/;"	m	struct:cgltf_pbr_metallic_roughness
+metis_combat_anim	.\include\embed\metis_combat_sprite.h	/^static unsigned char metis_combat_anim[] = {$/;"	v
 mg	.\include\raylib\external\stb_image.h	/^   unsigned int mr,mg,mb,ma, all_a;$/;"	m	struct:__anon328
 midiPitchFraction	.\include\raylib\external\dr_wav.h	/^    drwav_uint32 midiPitchFraction;$/;"	m	struct:__anon77
 midiUnityNotes	.\include\raylib\external\dr_wav.h	/^    drwav_uint32 midiUnityNotes;$/;"	m	struct:__anon77
@@ -27856,6 +27866,7 @@ oldLayout	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkImageLayout 
 oldMode	.\include\raylib\external\glfw\src\x11_platform.h	/^    RRMode          oldMode;$/;"	m	struct:_GLFWmonitorX11
 oldSwapchain	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkSwapchainKHR     oldSwapchain;$/;"	m	struct:VkSwapchainCreateInfoKHR
 oldk	.\include\raylib\external\jar_mod.h	/^    mint    oldk;$/;"	m	struct:__anon126
+onAnimationEnd	.\include\sprite.h	/^	void (*onAnimationEnd)() = nullptr;$/;"	m	struct:Sprite
 onAppCmd	.\include\raylib\external\android\native_app_glue\android_native_app_glue.h	/^    void (*onAppCmd)(struct android_app* app, int32_t cmd);$/;"	m	struct:android_app
 onConfigurationChanged	.\include\raylib\external\android\native_app_glue\android_native_app_glue.c	/^static void onConfigurationChanged(ANativeActivity* activity) {$/;"	f	file:
 onData	.\include\raylib\external\miniaudio.h	/^    ma_device_callback_proc onData;         \/* Set once at initialization time and should not be changed after. *\/$/;"	m	struct:ma_device
@@ -27976,8 +27987,8 @@ output_stride_bytes	.\include\raylib\external\stb_image_resize.h	/^    int outpu
 output_w	.\include\raylib\external\stb_image_resize.h	/^    int output_w;$/;"	m	struct:__anon338
 outputs	.\include\raylib\external\stb_vorbis.h	/^   float *outputs        [STB_VORBIS_MAX_CHANNELS];$/;"	m	struct:stb_vorbis
 overrideRedirect	.\include\raylib\external\glfw\src\x11_platform.h	/^    GLFWbool        overrideRedirect;$/;"	m	struct:_GLFWwindowX11
-overworld_idle	.\include\gamestate.h	/^	overworld_idle,$/;"	e	enum:State
-overworld_move	.\include\gamestate.h	/^	overworld_move,$/;"	e	enum:State
+overworld_idle	.\include\gamestate.h	/^	overworld_idle,$/;"	m	class:State
+overworld_move	.\include\gamestate.h	/^	overworld_move,$/;"	m	class:State
 owner	.\include\move.h	/^	Ownership owner;$/;"	m	struct:Move
 owner_module	.\include\raylib\external\miniaudio.h	/^    ma_uint32 owner_module;$/;"	m	struct:__anon302
 owner_module	.\include\raylib\external\miniaudio.h	/^    ma_uint32 owner_module;$/;"	m	struct:__anon303
@@ -28577,6 +28588,8 @@ planeAspect	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkImageAspec
 planeAspect	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkImageAspectFlagBits              planeAspect;$/;"	m	struct:VkImagePlaneMemoryRequirementsInfo
 playAnimation	.\src\sprite.cpp	/^void Sprite::playAnimation(const char *str){$/;"	f	class:Sprite
 playAnimation	.\src\sprite.cpp	/^void Sprite::playAnimation(const char *str, unsigned int delay){$/;"	f	class:Sprite
+playAnimation	.\src\sprite.cpp	/^void Sprite::playAnimation(const char *str, unsigned int delay, void (*func)()){$/;"	f	class:Sprite
+playAnimation	.\src\sprite.cpp	/^void Sprite::playAnimation(const char *str, void (*func)()){$/;"	f	class:Sprite
 playCount	.\include\raylib\external\dr_wav.h	/^    drwav_uint32 playCount;$/;"	m	struct:__anon76
 playback	.\include\raylib\external\miniaudio.h	/^    } playback;$/;"	m	struct:__anon193	typeref:struct:__anon193::__anon197
 playback	.\include\raylib\external\miniaudio.h	/^    } playback;$/;"	m	struct:ma_device	typeref:struct:ma_device::__anon228
@@ -28587,7 +28600,7 @@ playerAlive	.\src\combat.cpp	/^Vec<Actor *> CombatData::playerAlive;$/;"	m	class
 playerEyesPosition	.\include\raylib\camera.h	/^    float playerEyesPosition;       \/\/ Default player eyes position from ground (in meters)$/;"	m	struct:__anon4
 playerTeam	.\include\combat.h	/^	Team *playerTeam = nullptr;$/;"	m	struct:CombatData
 playing	.\include\raylib\raudio.c	/^    bool playing;                   \/\/ Audio buffer state: AUDIO_PLAYING$/;"	m	struct:rAudioBuffer	file:
-playing	.\include\sprite.h	/^	bool playing = false;$/;"	m	struct:Animation
+playing	.\include\sprite.h	/^	bool playing = false;$/;"	m	struct:Sprite
 playrate	.\include\raylib\external\jar_mod.h	/^    mulong  playrate;$/;"	m	struct:__anon127
 plusPage	.\include\inventory.h	/^	Button plusPage;$/;"	m	struct:InventoryData
 pointClippingBehavior	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkPointClippingBehavior        pointClippingBehavior;$/;"	m	struct:VkPhysicalDevicePointClippingProperties
@@ -28883,7 +28896,7 @@ rescaleTarget	.\src\window.cpp	/^RenderTexture2D Window::rescaleTarget;$/;"	m	cl
 reserv	.\include\raylib\external\dr_mp3.h	/^    int reserv, free_format_bytes;$/;"	m	struct:__anon51
 reserv_buf	.\include\raylib\external\dr_mp3.h	/^    unsigned char header[4], reserv_buf[511];$/;"	m	struct:__anon51
 reserved	.\include\raylib\external\dr_flac.h	/^    drflac_uint8 reserved[3];$/;"	m	struct:__anon44
-reset	.\src\sprite.cpp	/^void Animation::reset(){$/;"	f	class:Animation
+reset	.\include\sprite.h	/^	void reset(){$/;"	f	struct:Animation
 resetRequired	.\include\raylib\gestures.h	/^        bool resetRequired;             \/\/ HOLD reset to get first touch point again$/;"	m	struct:__anon390::__anon392
 residencyAlignedMipSize	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkBool32                 residencyAlignedMipSize;$/;"	m	struct:VkPhysicalDeviceSparseProperties
 residencyNonResidentStrict	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkBool32                 residencyNonResidentStrict;$/;"	m	struct:VkPhysicalDeviceSparseProperties
@@ -30919,7 +30932,7 @@ upPosition	.\include\raylib\gestures.h	/^        Vector2 upPosition;            
 update	.\include\raylib\core.c	/^        double update;                      \/\/ Time measure for frame update$/;"	m	struct:CoreData::__anon16	file:
 updateAnimFrames	.\include\sprite.h	/^	static bool updateAnimFrames;$/;"	m	struct:Sprite
 updateAnimFrames	.\src\sprite.cpp	/^bool Sprite::updateAnimFrames = false;$/;"	m	class:Sprite	file:
-updateAnimation	.\src\sprite.cpp	/^void Sprite::updateAnimation(bool b){$/;"	f	class:Sprite
+updateAnimation	.\src\sprite.cpp	/^void Sprite::updateAnimation(){$/;"	f	class:Sprite
 updateClipRect	.\include\raylib\external\glfw\src\win32_window.c	/^static void updateClipRect(_GLFWwindow* window)$/;"	f	file:
 updateCursorImage	.\include\raylib\external\glfw\src\win32_window.c	/^static void updateCursorImage(_GLFWwindow* window)$/;"	f	file:
 updateCursorImage	.\include\raylib\external\glfw\src\x11_window.c	/^static void updateCursorImage(_GLFWwindow* window)$/;"	f	file:
