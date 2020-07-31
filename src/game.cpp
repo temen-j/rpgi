@@ -165,18 +165,25 @@ int CombatState(Game &game){
 			game.cbtData->dispTargetLists = true;
 			AssignTargets(*game.cbtData);
 		}
-		if(game.cbtData->canMakePair){ //TODO: turn into a function (MakeCTP())?
+		if(game.cbtData->canMakePair){
 			MakeCTP(*game.cbtData);
 		}
-		if(CanExecMoves(*game.cbtData)){
+		if(CanExecMoves(*game.cbtData)){ //You are now watching a movie :)
 			Game::gamestate.prev = Game::gamestate.curr;
 			Game::gamestate.curr = State::combat_watch;
-			ExecMoves(*game.cbtData);
 		}
 	}
-	else if(Game::gamestate.curr == State::combat_watch){
-		if(!CombatData::moveAnimPlaying){
+	if(Game::gamestate.curr == State::combat_watch){
+		if(!CombatData::moveAnimPlaying && CombatData::executingMoves){
 			ExecMoves(*game.cbtData);
+			//TODO: Lerp health bars
+			//TODO: Resolve deaths
+		}
+		//TODO: Tick Effects here!
+		//TODO: Resolve deaths
+		if(!CombatData::executingMoves){ //Stopped exec moves go back to input
+			Game::gamestate.prev = Game::gamestate.curr;
+			Game::gamestate.curr = State::combat_act;
 		}
 	}
 
@@ -186,8 +193,7 @@ int CombatState(Game &game){
 			it.second.playAnimation("Combat Idle");
 	}
 
-	//if(battle is over)
-	//delete goons
+	//TODO: End the battle and delete goons
 	return 0;
 }
 

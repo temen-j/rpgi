@@ -34,6 +34,9 @@ Vec<CasterTargetsPair *> CombatData::ctpsPtrs;
 unsigned char CombatData::focus = 0;
 unsigned int CombatData::animLockouts = 0;
 
+bool CombatData::executingMoves = false;
+unsigned int CombatData::execIndex = 0;
+
 /* bool CombatData::canAssign */
 
 CasterTargetsPair::CasterTargetsPair(Actor *c, struct Move *m, const Vec<Actor *> &t){
@@ -455,6 +458,7 @@ bool CanExecMoves(CombatData &cbtD){
 			return false;
 	}
 
+	BeginExecMoves();
 	return true;
 }
 
@@ -476,28 +480,27 @@ bool LessThanCTP(CasterTargetsPair *first, CasterTargetsPair *second){
 }
 
 
-//NOTE: June 9, 2020
-//This function will try to execute within one frame, this does not account for animations/sound
-//These will be added at a later date, hopefully... So in order to keep the same relative flow control
-//Create a macro-loop bounded by ctpsPtrs.size(), and iterate on confirmation that a move has finished
-//animating / playing audio, the confirmation will most likely be a boolean with the combat data
-//NOTE: July 31, 2020
-//This function willl execute a move and play the corresponding animations and sounds
-//TODO: play the corresponding sounds
-void ExecMoves(CombatData &cbtD){
-	if(!cbtD.executingMoves){
+void BeginExecMoves(){
+	if(!CombatData::executingMoves){
 		ResetSelectAvailList(cbtD);
-		CombatData::ctpsPtrs.resize(0);
 
+		CombatData::ctpsPtrs.resize(0);
+		CombatData::ctpsPtrs.reserve(CombatData::ctps.size());
 		for(auto &it : CombatData::ctps)
 			CombatData::ctpsPtrs.push_back(&it);
 
 		std::sort(CombatData::ctpsPtrs.begin(), CombatData::ctpsPtrs.end(), LessThanCTP); //sort on priority 
 
-		cbtD.execIndex = 0;
-		cbtD.executingMoves = true;
+		CombatData::execIndex = 0;
+		CombatData::executingMoves = true;
 	}
+}
 
+
+//NOTE: July 31, 2020
+//This function will execute a move and play the corresponding animations and sounds
+//TODO: play the corresponding sounds
+void ExecMoves(CombatData &cbtD){
 	if(cbtD.executingMoves){
 		ExecMove(*CombatData::ctpsPtrs[cbtD.execIndex]);
 		cbtD.execIndex++;
@@ -505,10 +508,6 @@ void ExecMoves(CombatData &cbtD){
 		cbtD.executingMoves = cbtD.execIndex < CombatData::ctpsPtrs.size();
 		cbtD.aiMakePairs = cbtD.canAssign = !cbtD.executingMoves;
 	}
-
-	/* if(!(cbtD.execIndex < CombatData::ctpsPtrs.size())){ */
-	/* 	//TODO: Tick effects here... */
-	/* } */
 }
 
 

@@ -77,15 +77,13 @@ struct CombatData{
 	bool dispTargetLists = false;
 	bool begunAssigning = false;
 	bool canAssign = false;
-	/* static bool canAssign = false; */
 	bool canMakePair = false;
-	bool executingMoves = false;
-	bool executingMove = false;
+	static bool executingMoves = false;
 
 	static Vec<bool> hasMoveChosen; //index is the character
 	static Vec<CasterTargetsPair> ctps; //When exectuting moves, create an array of pointer and heapify that
 	static Vec<CasterTargetsPair *> ctpsPtrs;
-	unsigned int execIndex = 0;
+	static unsigned int execIndex = 0;
 	CasterTargetsPair *execCTP; //the iterator
 
 	ListView targetAliveList;
@@ -116,7 +114,9 @@ void AssignTargetsSetup(CombatData &);
 void MakeCTP(CombatData &);
 
 //From the pairs, the caster uses a move on all the targets
-/* void executeMoves(casterTargetsPairs&); */
+void BeginExecMoves();
+
+//From the pairs, the caster uses a move on all the targets
 void ExecMoves(CombatData &);
 
 //Go through a hellish switch statement and execute moves
