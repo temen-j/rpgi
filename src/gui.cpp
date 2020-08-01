@@ -669,17 +669,27 @@ void DrawCombat(const Game &game){
 		}
 	}
 
-	for(auto &it : CombatData::actorSprites){
-		DrawSprite(it.second);
-	}
+	for(auto &it : CombatData::statBars)
+		DrawStatBar(it);
 
-	
+	for(auto &it : CombatData::actorSprites)
+		DrawSprite(it.second);
+
 	for(size_t i = 0; i < NUM_ACTOR_MOVES; ++i)
 		DrawGuiButton(game.cbtData->moveButtons[i]);
-
+	
 	if(game.cbtData->canAssign){
-		DrawGuiListView(game.cbtData->targetAliveList);
-		DrawGuiListView(game.cbtData->targetSelectedList);
+		if(game.cbtData->dispTargetLists){
+			DrawGuiListView(CombatData::targetAliveList);
+			DrawGuiListView(CombatData::targetSelectedList);
+		}
 	}
+}
+
+
+void DrawStatBar(const StatBar &sb){
+	Rectangle rect = {sb.bounds.x, sb.bounds.y, sb.bounds.width * sb.k, sb.bounds.height};
+	DrawRectangleRec(sb.bounds, sb.colorBad);
+	DrawRectangleRec(rect, sb.colorGood);
 }
 

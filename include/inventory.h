@@ -12,6 +12,8 @@
 const int PORTRAIT_PADDING = 8;
 const int PORTRAIT_SEPARATION = 80;
 const int PORTRAIT_WIDTH = 64;
+const int STATBAR_WIDTH = 128;
+const int STATBAR_HEIGHT = 16;
 const int NUM_STATS = 6;
 
 const Vector2 INV_POS = (Vector2){320, 64};

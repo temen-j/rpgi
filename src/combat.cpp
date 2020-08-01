@@ -37,7 +37,11 @@ unsigned int CombatData::animLockouts = 0;
 bool CombatData::executingMoves = false;
 unsigned int CombatData::execIndex = 0;
 
-/* bool CombatData::canAssign */
+ListView CombatData::targetAliveList;
+ListView CombatData::targetSelectedList;
+
+Vec<StatBar> CombatData::statBars;
+
 
 CasterTargetsPair::CasterTargetsPair(Actor *c, struct Move *m, const Vec<Actor *> &t){
 	caster = c;
@@ -92,15 +96,21 @@ void StartCombat(Game &game){
 	cbtData->chosenMove = nullptr;
 	cbtData->aiMakePairs = true;
 
-	cbtData->hasMoveChosen.resize(CombatData::playerAlive.size());
-	for(unsigned int i = 0; i < cbtData->hasMoveChosen.size(); ++i)
-		cbtData->hasMoveChosen[i] = false;
+	CombatData::hasMoveChosen.resize(CombatData::playerAlive.size(), false);
 
 	cbtData->targetSelectedList.bounds = (Rectangle){256, 64, 192, 192};
 	cbtData->targetAliveList.bounds = (Rectangle){256 + 192 + 128, 64, 192, 192};
 
 	//TODO: Also call this when returning to phase 1
 	GetAffordableMoves(*cbtData->playerTeam->members[game.cbtData->focus], cbtData->affordable);
+
+	CombatData::statBars.resize(2 * cbtData->playerAlive.size());
+	for(unsigned int i = 0; i < CombatData::statBars.size(); i += 2){
+		Rectangle hpBounds = {PORTRAIT_WIDTH + 2 * PORTRAIT_PADDING, (float)(i/2 * PORTRAIT_SEPARATION + PORTRAIT_PADDING + PORTRAIT_PADDING / 2), STATBAR_WIDTH, STATBAR_HEIGHT};
+		Rectangle mpBounds = {PORTRAIT_WIDTH + 2 * PORTRAIT_PADDING, (float)(i/2 * PORTRAIT_SEPARATION + PORTRAIT_PADDING +  PORTRAIT_PADDING / 2 + STATBAR_HEIGHT * 2), STATBAR_WIDTH, STATBAR_HEIGHT};
+		CombatData::statBars[i] = StatBar(1.f, hpBounds, HPGOODCOLOR, HPBADCOLOR);
+		CombatData::statBars[i+1] = StatBar(1.f, mpBounds, MPGOODCOLOR, MPBADCOLOR);
+	}
 
 	game.justEnteredState = true;
 }
@@ -146,7 +156,7 @@ void SelectMoves(CombatData &cbtD){
 		if(cbtD.moveButtons[i].state == GuiControlState::GUI_STATE_PRESSED && cbtD.affordable){
 			bool found = false;
 			for(size_t j = 0; j < NUM_ACTOR_MOVES; ++j){
-				if(actor->moves[i] == cbtD.affordable[j]){ //If the selection is in the affordable move list
+				if(actor->moves[i] && actor->moves[i] == cbtD.affordable[j]){ //If the selection is in the affordable move list
 					found = true;
 					break;
 				}
@@ -181,37 +191,18 @@ void AssignTargets(CombatData &cbtD){
 	//Make a macro-loop
 	//TODO: Make this into a function, (AssignTargetsSetup())
 	if(!cbtD.begunAssigning){
-		//TODO: Add checks for maxTargets == all enemies
-		//TODO: Add checks for maxTargets == all actors
-		ResetSelectAvailList(cbtD);
-
-		//Get potential targets
-		if(cbtD.chosenMove->isFriendly){
-			for(auto it : CombatData::playerAlive)
-				CombatData::potTargets.push_back(it);
-		}
-		if(cbtD.chosenMove->isHostile){
-			for(auto it : CombatData::botAlive)
-				CombatData::potTargets.push_back(it);
-		}
-		
-		for(auto &it : CombatData::potTargets) //TODO: Make this into a function, (GetAliveList())
-			cbtD.targetAliveList.text.push_back(it->name);
-
-		SetupListView(cbtD.targetAliveList);
-		SetupListView(cbtD.targetSelectedList);
-
-		cbtD.begunAssigning = true;
+		AssignTargetsSetup(cbtD);
 	}
 	if((int)CombatData::chosenTargets.size() < cbtD.chosenMove->maxTargets){
-		int prevActiveAlive = cbtD.targetAliveList.active;
-		int prevActiveSelect = cbtD.targetSelectedList.active;
-		Update(cbtD.targetAliveList);
-		Update(cbtD.targetSelectedList);
+		//Detect changes in selection and add/remove the list
+		int prevActiveAlive = CombatData::targetAliveList.active;
+		int prevActiveSelect = CombatData::targetSelectedList.active;
+		Update(CombatData::targetAliveList);
+		Update(CombatData::targetSelectedList);
 
-		if(prevActiveAlive != -1 && cbtD.targetAliveList.active != prevActiveAlive)
+		if(prevActiveAlive != -1 && CombatData::targetAliveList.active != prevActiveAlive)
 			AddFromAliveList(cbtD, prevActiveAlive);
-		if(prevActiveSelect != -1 && cbtD.targetSelectedList.active != prevActiveSelect)
+		if(prevActiveSelect != -1 && CombatData::targetSelectedList.active != prevActiveSelect)
 			RemoveFromSelectedList(cbtD, prevActiveSelect);
 	}
 	else{
@@ -223,8 +214,8 @@ void AssignTargets(CombatData &cbtD){
 
 void AssignTargetsSetup(CombatData &cbtD){
 	//TODO: Add checks for maxTargets == all enemies
-	//TODO: Add checks for maxTargets == all actors
-	if(cbtD.chosenMove->maxTargets == TARGET_ALL_ACTORS){ //
+	if(cbtD.chosenMove->maxTargets == TARGET_ALL_ACTORS){
+		CombatData::chosenTargets.reserve(CombatData::playerAlive.size() + CombatData::botAlive.size());
 		for(auto &it : CombatData::playerAlive)
 			CombatData::chosenTargets.push_back(it);
 		for(auto &it : CombatData::botAlive)
@@ -232,10 +223,10 @@ void AssignTargetsSetup(CombatData &cbtD){
 		
 		cbtD.targetAliveList.text.push_back("ALL");
 	}
-	ResetSelectAvailList(cbtD);
+	ResetSelectAvailList();
 
 	//Get potential targets
-	if(cbtD.chosenMove->isFriendly){
+	if(cbtD.chosenMove->isFriendly){ //Potential optimization: potTargets.reserve(is... * ...Alive.size())
 		for(auto it : CombatData::playerAlive)
 			CombatData::potTargets.push_back(it);
 	}
@@ -244,6 +235,7 @@ void AssignTargetsSetup(CombatData &cbtD){
 			CombatData::potTargets.push_back(it);
 	}
 	
+	cbtD.targetAliveList.text.reserve(CombatData::potTargets.size());
 	for(auto &it : CombatData::potTargets) //TODO: Make this into a function, (GetAliveList())
 		cbtD.targetAliveList.text.push_back(it->name);
 
@@ -257,16 +249,15 @@ void AssignTargetsSetup(CombatData &cbtD){
 
 void MakeCTP(CombatData &cbtD){
 	Actor *&actor = cbtD.playerTeam->members[cbtD.focus];
-	CombatData::ctps.emplace( CombatData::ctps.begin(), CasterTargetsPair(actor, cbtD.chosenMove, CombatData::chosenTargets));
+	CombatData::ctps.emplace(CombatData::ctps.begin(), CasterTargetsPair(actor, cbtD.chosenMove, CombatData::chosenTargets));
 	cbtD.dispTargetLists = false;
 	cbtD.begunAssigning = false;
 	cbtD.hasMoveChosen[cbtD.focus] = true;
 
 	cbtD.canMakePair = false;
-
 }
 
-//TODO: make me more elegant?
+
 void AddFromAliveList(CombatData &cbtD, int &prevActive){
 	CombatData::chosenTargets.push_back(CombatData::potTargets[prevActive]);
 	cbtD.targetSelectedList.text.push_back(cbtD.targetAliveList.text[prevActive]);
@@ -482,7 +473,7 @@ bool LessThanCTP(CasterTargetsPair *first, CasterTargetsPair *second){
 
 void BeginExecMoves(){
 	if(!CombatData::executingMoves){
-		ResetSelectAvailList(cbtD);
+		ResetSelectAvailList();
 
 		CombatData::ctpsPtrs.resize(0);
 		CombatData::ctpsPtrs.reserve(CombatData::ctps.size());
@@ -501,13 +492,11 @@ void BeginExecMoves(){
 //This function will execute a move and play the corresponding animations and sounds
 //TODO: play the corresponding sounds
 void ExecMoves(CombatData &cbtD){
-	if(cbtD.executingMoves){
-		ExecMove(*CombatData::ctpsPtrs[cbtD.execIndex]);
-		cbtD.execIndex++;
-		
-		cbtD.executingMoves = cbtD.execIndex < CombatData::ctpsPtrs.size();
-		cbtD.aiMakePairs = cbtD.canAssign = !cbtD.executingMoves;
-	}
+	ExecMove(*CombatData::ctpsPtrs[cbtD.execIndex]);
+	cbtD.execIndex++;
+	
+	cbtD.executingMoves = cbtD.execIndex < CombatData::ctpsPtrs.size();
+	cbtD.aiMakePairs = cbtD.canAssign = !cbtD.executingMoves;
 }
 
 
@@ -2578,11 +2567,11 @@ void CreateGoons(CombatData &cbtD){
 }
 
 
-void ResetSelectAvailList(CombatData &cbtD){
+void ResetSelectAvailList(){
 	CombatData::chosenTargets.resize(0);
 	CombatData::potTargets.resize(0);
-	cbtD.targetAliveList.text.resize(0);
-	cbtD.targetSelectedList.text.resize(0);
+	CombatData::targetAliveList.text.resize(0);
+	CombatData::targetSelectedList.text.resize(0);
 }
 
 

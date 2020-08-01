@@ -78,17 +78,18 @@ struct CombatData{
 	bool begunAssigning = false;
 	bool canAssign = false;
 	bool canMakePair = false;
-	static bool executingMoves = false;
+	static bool executingMoves;
 
 	static Vec<bool> hasMoveChosen; //index is the character
 	static Vec<CasterTargetsPair> ctps; //When exectuting moves, create an array of pointer and heapify that
 	static Vec<CasterTargetsPair *> ctpsPtrs;
-	static unsigned int execIndex = 0;
+	static unsigned int execIndex;
 	CasterTargetsPair *execCTP; //the iterator
 
-	ListView targetAliveList;
-	ListView targetSelectedList;
+	static ListView targetAliveList;
+	static ListView targetSelectedList;
 	Button moveButtons[NUM_ACTOR_MOVES];
+	static Vec<StatBar> statBars;
 
 	static unsigned char focus;
 	static unsigned int animLockouts;
@@ -152,7 +153,7 @@ void RemoveFromSelectedList(CombatData &, int &);
 bool CanExecMoves(CombatData &);
 void CreateGoons(CombatData &);
 void UpdateFocus(CombatData &); //Update the combat data's character focus
-void ResetSelectAvailList(CombatData &);
+void ResetSelectAvailList();
 void CombatSpriteSetup(CombatData &);
 void GoonSpriteSetup(CombatData &);
 

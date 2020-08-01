@@ -181,10 +181,23 @@ struct CombatPortraits{
 
 struct StatBar{
 	float k; //Coeff of proportionality of HP/MP
-	float thickness, length;
-	Vector2 pos; //Origin is top left
+	Rectangle bounds = {0};
 	bool showNum;
 	Color colorGood, colorBad;
+
+	StatBar(){
+		k = 1.f;
+		showNum = false;
+		colorGood = WHITE;
+		colorBad = BLACK;
+	}
+	StatBar(float coeff, Rectangle rect, Color good, Color bad){
+		k = coeff;
+		bounds = rect;
+		showNum = false;
+		colorGood = good;
+		colorBad = bad;
+	}
 };
 
 

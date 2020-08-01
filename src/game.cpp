@@ -169,6 +169,7 @@ int CombatState(Game &game){
 			MakeCTP(*game.cbtData);
 		}
 		if(CanExecMoves(*game.cbtData)){ //You are now watching a movie :)
+			CombatData::hasMoveChosen.resize(CombatData::playerAlive.size(), false);
 			Game::gamestate.prev = Game::gamestate.curr;
 			Game::gamestate.curr = State::combat_watch;
 		}
@@ -182,6 +183,9 @@ int CombatState(Game &game){
 		//TODO: Tick Effects here!
 		//TODO: Resolve deaths
 		if(!CombatData::executingMoves){ //Stopped exec moves go back to input
+			CombatData::ctps.clear();
+			GetAffordableMoves(*game.cbtData->playerTeam->members[game.cbtData->focus], game.cbtData->affordable);
+
 			Game::gamestate.prev = Game::gamestate.curr;
 			Game::gamestate.curr = State::combat_act;
 		}
