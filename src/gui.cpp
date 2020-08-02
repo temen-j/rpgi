@@ -679,8 +679,8 @@ void DrawCombat(const Game &game){
 	for(auto &it : CombatData::actorSprites)
 		DrawSprite(it.second);
 
-	if(!CombatData::moveAnnouncment.disabled)
-		DrawGuiBoxLabel(CombatData::moveAnnouncment);
+	if(!CombatData::moveAnnouncement.disabled)
+		DrawGuiBoxLabel(CombatData::moveAnnouncement);
 
 	if(Game::gamestate.curr == State::combat_act){
 		for(size_t i = 0; i < NUM_ACTOR_MOVES; ++i)

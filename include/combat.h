@@ -13,6 +13,12 @@
 #include "inventory.h"
 #include "sprite.h"
 
+#ifndef EASINGS_HEADER
+#define EASINGS_HEADER
+#define __cpluscplus
+#include "..\include\raylib\easings.h"
+#endif
+
 constexpr size_t DIFF_MEM_SIZE = 1024 * sizeof(EffectDiff);
 
 template<typename T>
@@ -80,6 +86,7 @@ struct CombatData{
 	bool canMakePair = false;
 	static bool executingMoves;
 	static bool interpStats;
+	static bool announceMove;
 
 	static UMap<Actor *, bool> hasMoveChosen;
 	static Vec<CasterTargetsPair> ctps; //When exectuting moves, create an array of pointer and heapify that
@@ -93,9 +100,9 @@ struct CombatData{
 	static UMap<Actor *, StatBar[2]> statBars;
 	static float statBarInterpTimer;
 	static constexpr float statBarInterpTime = .375f;
-	static BoxLabel moveAnnouncment;
-	static float moveAnnouncementTimer;
-	static constexpr float announcementTime = .875f;
+	static BoxLabel moveAnnouncement;
+	static float announcementTimer;
+	static constexpr float announcementTime = 1.125f;
 
 	static unsigned char focus;
 	static unsigned int animLockouts;
@@ -133,7 +140,7 @@ void ExecMove(CasterTargetsPair &);
 void TickEffects(CasterTargetsPair &);
 
 //Remove dead actors from the teams
-void CleanupDead(CombatData &);
+void ResolveDeaths(CombatData &);
 
 
 //AI Functions---------------------------------------------------------------------------------------
@@ -148,7 +155,7 @@ void AIMakeCTPs(CombatData &);
 
 
 //Helper Functions-----------------------------------------------------------------------------------
-void HandleInventoryPortraits(CombatData &);
+void HandleCombatPortraits(CombatData &);
 void MoveButtonsSetup(CombatData &);
 void MoveButtonsTextSetup(CombatData &);
 void DisableUnusedButtons(CombatData &);
@@ -162,6 +169,10 @@ void UpdateFocus(CombatData &); //Update the combat data's character focus
 void ResetSelectAvailList();
 void CombatSpriteSetup(CombatData &);
 void GoonSpriteSetup(CombatData &);
+
+void BeginAnnounceMove(CombatData &);
+void AnnounceMove(CombatData &);
+void InterpolateStatBars(UMap<Actor *, float> &, UMap<Actor *, float> &); //Pass the previous ...p stats to interp from
 
 bool LessThan(CasterTargetsPair *, CasterTargetsPair *);
 

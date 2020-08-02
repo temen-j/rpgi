@@ -169,6 +169,7 @@ AndroidButton	.\include\raylib\raylib.h	/^} AndroidButton;$/;"	t	typeref:enum:__
 AndroidCommandCallback	.\include\raylib\core.c	/^static void AndroidCommandCallback(struct android_app *app, int32_t cmd)$/;"	f	file:
 AndroidInputCallback	.\include\raylib\core.c	/^static int32_t AndroidInputCallback(struct android_app *app, AInputEvent *event)$/;"	f	file:
 Animation	.\include\sprite.h	/^struct Animation{$/;"	s
+AnnounceMove	.\src\combat.cpp	/^void AnnounceMove(CombatData &cbtD){$/;"	f
 ApplyCost	.\src\move_impl.cpp	/^void ApplyCost(CasterMove &cm){$/;"	f
 ApplyDamage	.\src\move_impl.cpp	/^void ApplyDamage(Actor &target, CasterMove &cm){$/;"	f
 ApplyDisableDiff	.\src\moveeffect.cpp	/^void ApplyDisableDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
@@ -281,6 +282,7 @@ BYTES_TEXT_PER_LINE	.\include\raylib\raudio.c	776;"	d	file:
 BYTES_TEXT_PER_LINE	.\include\raylib\textures.c	852;"	d	file:
 BatteryLevel	.\include\raylib\external\glfw\deps\mingw\xinput.h	/^    BYTE BatteryLevel;$/;"	m	struct:_XINPUT_BATTERY_INFORMATION
 BatteryType	.\include\raylib\external\glfw\deps\mingw\xinput.h	/^    BYTE BatteryType;$/;"	m	struct:_XINPUT_BATTERY_INFORMATION
+BeginAnnounceMove	.\src\combat.cpp	/^void BeginAnnounceMove(CombatData &cbtD){$/;"	f
 BeginBlendMode	.\include\raylib\rlgl.h	/^void BeginBlendMode(int mode)$/;"	f
 BeginDrawing	.\include\raylib\core.c	/^void BeginDrawing(void)$/;"	f
 BeginExecMoves	.\src\combat.cpp	/^void BeginExecMoves(){$/;"	f
@@ -1760,7 +1762,7 @@ DynamicBuffer	.\include\raylib\rlgl.h	/^} DynamicBuffer;$/;"	t	typeref:struct:Dy
 EASEDEF	.\include\raylib\easings.h	88;"	d
 EASEDEF	.\include\raylib\easings.h	90;"	d
 EASINGS_H	.\include\raylib\easings.h	83;"	d
-EASINGS_HEADER	.\src\game.cpp	5;"	d	file:
+EASINGS_HEADER	.\include\combat.h	17;"	d
 EASINGS_STATIC_INLINE	.\include\raylib\easings.h	85;"	d
 ECTORAY	.\src\move_impl.cpp	/^void MoveImplementation::ECTORAY(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 EDS_ROTATEDMODE	.\include\raylib\external\glfw\src\win32_platform.h	96;"	d
@@ -8033,6 +8035,7 @@ GetGestureHoldDuration	.\include\raylib\gestures.h	/^float GetGestureHoldDuratio
 GetGesturePinchAngle	.\include\raylib\gestures.h	/^float GetGesturePinchAngle(void)$/;"	f
 GetGesturePinchVector	.\include\raylib\gestures.h	/^Vector2 GetGesturePinchVector(void)$/;"	f
 GetGlyphIndex	.\include\raylib\text.c	/^int GetGlyphIndex(Font font, int codepoint)$/;"	f
+GetGuiTextWidth	.\src\gui.cpp	/^int GetGuiTextWidth(const char *str){$/;"	f
 GetId	.\include\raylib\external\miniaudio.h	/^        HRESULT (STDMETHODCALLTYPE * GetId)            (ma_IMMDevice* pThis, LPWSTR *pID);$/;"	m	struct:__anon267
 GetImageAlphaBorder	.\include\raylib\textures.c	/^Rectangle GetImageAlphaBorder(Image image, float threshold)$/;"	f
 GetImageData	.\include\raylib\textures.c	/^Color *GetImageData(Image image)$/;"	f
@@ -8318,9 +8321,9 @@ HWND	.\include\raylib\external\ANGLE\EGL\eglplatform.h	/^typedef HANDLE HWND;   
 HWND	.\include\raylib\external\glfw\include\GLFW\glfw3native.h	/^ typedef HANDLE HWND;$/;"	t
 HandleAccept	.\src\console.cpp	/^void HandleAccept(Console &console){$/;"	f
 HandleClose	.\src\console.cpp	/^void HandleClose(Console &console, GameState &gs){$/;"	f
+HandleCombatPortraits	.\src\combat.cpp	/^void HandleCombatPortraits(CombatData &cbtD){ \/\/TODO: rename HandleCombatPortraits()$/;"	f
 HandleDelete	.\src\console.cpp	/^void HandleDelete(Console &console){$/;"	f
 HandleFlyingElemino	.\src\inventory.cpp	/^void HandleFlyingElemino(Game &game){$/;"	f
-HandleInventoryPortraits	.\src\combat.cpp	/^void HandleInventoryPortraits(CombatData &cbtD){ \/\/TODO: rename HandleCombatPortraits()$/;"	f
 HandleInventoryPortraits	.\src\inventory.cpp	/^void HandleInventoryPortraits(InventoryData &invD){$/;"	f
 HandleInventoryPortraits	.\src\moveinventory.cpp	/^void HandleInventoryPortraits(MoveInventoryData &minvD){$/;"	f
 HandleInventoryPortraits	.\src\test.cpp	/^void HandleInventoryPortraits(CombatData &cbtD){$/;"	f
@@ -8853,6 +8856,7 @@ IntegratePhysicsForces	.\include\raylib\physac.h	/^static void IntegratePhysicsF
 IntegratePhysicsImpulses	.\include\raylib\physac.h	/^static void IntegratePhysicsImpulses(PhysicsManifold manifold)$/;"	f
 IntegratePhysicsVelocity	.\include\raylib\physac.h	/^static void IntegratePhysicsVelocity(PhysicsBody body)$/;"	f
 Interface	.\include\gui.h	/^struct Interface{$/;"	s
+InterpolateStatBars	.\src\combat.cpp	/^void InterpolateStatBars(UMap<Actor *, float> &prevHP, UMap<Actor *, float> &prevMP){$/;"	f
 InventoryData	.\include\inventory.h	/^struct InventoryData{$/;"	s
 InventoryPortraits	.\include\gui.h	/^struct InventoryPortraits{$/;"	s
 InventoryState	.\src\game.cpp	/^int InventoryState(Game &game){$/;"	f
@@ -10808,7 +10812,7 @@ OpenPropertyStore	.\include\raylib\external\miniaudio.h	/^        HRESULT (STDME
 OpenURL	.\include\raylib\core.c	/^void OpenURL(const char *url)$/;"	f
 Overlap	.\src\elemino.cpp	/^unsigned int Overlap(const Elemino &e, const Grid &g){$/;"	f
 PANEL_BORDER_WIDTH	.\include\raylib\raygui.h	832;"	d
-PANEL_BORDER_WIDTH	.\src\gui.cpp	465;"	d	file:
+PANEL_BORDER_WIDTH	.\src\gui.cpp	467;"	d	file:
 PAR_CALLOC	.\include\raylib\external\par_shapes.h	186;"	d
 PAR_CALLOC	.\include\raylib\models.c	84;"	d	file:
 PAR_CLAMP	.\include\raylib\external\par_shapes.h	179;"	d
@@ -13317,6 +13321,7 @@ ResetPhysics	.\include\raylib\physac.h	/^PHYSACDEF void ResetPhysics(void)$/;"	f
 ResetSelectAvailList	.\src\combat.cpp	/^void ResetSelectAvailList(){$/;"	f
 ResetSelectAvailList	.\src\test.cpp	/^void ResetSelectAvailList(CombatData &cbtD){$/;"	f
 ResizePacket	.\include\raylib\rnet.h	/^int ResizePacket(SocketDataPacket *packet, int newsize)$/;"	f
+ResolveDeaths	.\src\combat.cpp	/^void ResolveDeaths(CombatData &cbtD){$/;"	f
 ResolveHost	.\include\raylib\rnet.h	/^int ResolveHost(const char *address, const char *service, int addressType, int flags, AddressInformation *outAddr)$/;"	f
 ResolveIP	.\include\raylib\rnet.h	/^void ResolveIP(const char *ip, const char *port, int flags, char *host, char *serv)$/;"	f
 Restore	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * Restore)           (ma_IDirectSoundBuffer* pThis);$/;"	m	struct:__anon285
@@ -13949,6 +13954,7 @@ StartCombat	.\src\combat.cpp	/^void StartCombat(Game &game){$/;"	f
 StartCombat	.\src\test.cpp	/^void StartCombat(Game &game){$/;"	f
 StatBar	.\include\gui.h	/^	StatBar(){$/;"	f	struct:StatBar
 StatBar	.\include\gui.h	/^	StatBar(float coeff, Rectangle rect, Color good, Color bad){$/;"	f	struct:StatBar
+StatBar	.\include\gui.h	/^	StatBar(float coeff, Rectangle rect, int denominator, Color good, Color bad){$/;"	f	struct:StatBar
 StatBar	.\include\gui.h	/^struct StatBar{$/;"	s
 StatTextSetup	.\src\inventory.cpp	/^void StatTextSetup(InventoryData &invD, Actor &actor){$/;"	f
 StatToolTip	.\src\inventory.cpp	/^void StatToolTip(InventoryData &invD, Actor &actor){$/;"	f
@@ -16595,7 +16601,7 @@ __USE_BSD	.\include\raylib\external\dr_flac.h	871;"	d
 __USE_W32_SOCKETS	.\include\raylib\rnet.h	138;"	d
 __WINE_XINPUT_H	.\include\raylib\external\glfw\deps\mingw\xinput.h	21;"	d
 __cpluplus	.\src\gui.cpp	7;"	d	file:
-__cpluscplus	.\src\game.cpp	6;"	d	file:
+__cpluscplus	.\include\combat.h	18;"	d
 __eglMustCastToProperFunctionPointerType	.\include\raylib\external\ANGLE\EGL\egl.h	/^typedef void (*__eglMustCastToProperFunctionPointerType)(void);$/;"	t
 __egl_h_	.\include\raylib\external\ANGLE\EGL\egl.h	2;"	d
 __eglext_h_	.\include\raylib\external\ANGLE\EGL\eglext.h	2;"	d
@@ -17117,6 +17123,7 @@ algorithm	.\include\raylib\external\miniaudio.h	/^        ma_resample_algorithm 
 algorithm	.\include\raylib\external\miniaudio.h	/^    ma_resample_algorithm algorithm;$/;"	m	struct:__anon150
 align	.\include\raylib\external\stb_rect_pack.h	/^   int align;$/;"	m	struct:stbrp_context
 aligned	.\include\elemino.h	/^	bool dragging, disabled, aligned, snapping;$/;"	m	struct:Elemino
+alignment	.\include\gui.h	/^	int alignment = GUI_TEXT_ALIGN_LEFT;$/;"	m	struct:Label
 alignment	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkDeviceSize             alignment;$/;"	m	struct:VkMemoryRequirements
 all_a	.\include\raylib\external\stb_image.h	/^   unsigned int mr,mg,mb,ma, all_a;$/;"	m	struct:__anon328
 alloc	.\include\raylib\external\cgltf.h	/^	void* (*alloc)(void* user, cgltf_size size);$/;"	m	struct:cgltf_memory_options
@@ -17200,6 +17207,11 @@ animations	.\include\raylib\external\cgltf.h	/^	cgltf_animation* animations;$/;"
 animations_count	.\include\raylib\external\cgltf.h	/^	cgltf_size animations_count;$/;"	m	struct:cgltf_data
 anims	.\include\sprite.h	/^	UMap<std::string, Animation> anims;$/;"	m	struct:Sprite
 anisotropyEnable	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkBool32                 anisotropyEnable;$/;"	m	struct:VkSamplerCreateInfo
+announceMove	.\include\combat.h	/^	static bool announceMove;$/;"	m	struct:CombatData
+announceMove	.\src\combat.cpp	/^bool CombatData::announceMove = false;$/;"	m	class:CombatData	file:
+announcementTime	.\include\combat.h	/^	static constexpr float announcementTime = 1.125f;$/;"	m	struct:CombatData
+announcementTimer	.\include\combat.h	/^	static float announcementTimer;$/;"	m	struct:CombatData
+announcementTimer	.\src\combat.cpp	/^float CombatData::announcementTimer = 0.f;$/;"	m	class:CombatData	file:
 api	.\include\raylib\external\glfw\src\win32_platform.h	/^        IDirectInput8W*                 api;$/;"	m	struct:_GLFWlibraryWin32::__anon101
 apiVersion	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t          apiVersion;$/;"	m	struct:VkApplicationInfo
 apiVersion	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t         apiVersion;$/;"	m	struct:VkPhysicalDeviceProperties
@@ -17397,7 +17409,8 @@ borderColor	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkBorderColo
 bosPageHeader	.\include\raylib\external\dr_flac.h	/^    drflac_ogg_page_header bosPageHeader;   \/* Used for seeking. *\/$/;"	m	struct:__anon49
 botAlive	.\include\combat.h	/^	static Vec<Actor *> botAlive;$/;"	m	struct:CombatData
 botAlive	.\src\combat.cpp	/^Vec<Actor *> CombatData::botAlive;$/;"	m	class:CombatData	file:
-botTeam	.\include\combat.h	/^	Team *botTeam = nullptr;$/;"	m	struct:CombatData
+botTeam	.\include\combat.h	/^	static Team *botTeam;$/;"	m	struct:CombatData
+botTeam	.\src\combat.cpp	/^Team *CombatData::botTeam = nullptr;$/;"	m	class:CombatData	file:
 bottom	.\include\raylib\external\glfw\src\wl_platform.h	/^        _GLFWdecorationWayland             top, left, right, bottom;$/;"	m	struct:_GLFWwindowWayland::__anon109
 bottom	.\include\raylib\raylib.h	/^    int bottom;            \/\/ bottom border offset$/;"	m	struct:NPatchInfo
 bottomDecoration	.\include\raylib\external\glfw\src\wl_platform.h	/^    bottomDecoration,$/;"	e	enum:_GLFWdecorationSideWayland
@@ -18320,6 +18333,7 @@ delta	.\include\raylib\external\stb_image.h	/^   int    delta[17];   \/\/ old 'f
 deltaTime	.\include\raylib\external\miniaudio.h	/^    double deltaTime;$/;"	m	struct:__anon252
 deltaTime	.\include\raylib\physac.h	/^static double deltaTime = 1.0\/60.0\/10.0 * 1000;             \/\/ Delta time used for physics steps, in milliseconds$/;"	v
 delta_value	.\include\raylib\external\stb_vorbis.h	/^   float  delta_value;$/;"	m	struct:__anon364
+denom	.\include\gui.h	/^	int denom;$/;"	m	struct:StatBar
 denom	.\include\raylib\external\glfw\src\internal.h	/^    int                 numer, denom;$/;"	m	struct:_GLFWwindow
 dependencyCount	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t                 dependencyCount;$/;"	m	struct:VkRenderPassMultiviewCreateInfo
 dependencyCount	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t         dependencyCount;$/;"	m	struct:VkRenderPassCreateInfo
@@ -24639,8 +24653,8 @@ hasChannelConverter	.\include\raylib\external\miniaudio.h	/^    ma_bool32 hasCha
 hasDefaultCaptureDeviceChanged	.\include\raylib\external\miniaudio.h	/^            ma_bool32 hasDefaultCaptureDeviceChanged;          \/* <-- Make sure this is always a whole 32-bits because we use atomic assignments. *\/$/;"	m	struct:ma_device::__anon230::__anon231
 hasDefaultPlaybackDeviceChanged	.\include\raylib\external\miniaudio.h	/^            ma_bool32 hasDefaultPlaybackDeviceChanged;         \/* <-- Make sure this is always a whole 32-bits because we use atomic assignments. *\/$/;"	m	struct:ma_device::__anon230::__anon231
 hasMetadataBlocks	.\include\raylib\external\dr_flac.h	/^    drflac_bool32 hasMetadataBlocks;$/;"	m	struct:__anon47
-hasMoveChosen	.\include\combat.h	/^	static Vec<bool> hasMoveChosen; \/\/index is the character$/;"	m	struct:CombatData
-hasMoveChosen	.\src\combat.cpp	/^Vec<bool> CombatData::hasMoveChosen;$/;"	m	class:CombatData	file:
+hasMoveChosen	.\include\combat.h	/^	static UMap<Actor *, bool> hasMoveChosen;$/;"	m	struct:CombatData
+hasMoveChosen	.\src\combat.cpp	/^UMap<Actor *, bool> CombatData::hasMoveChosen;$/;"	m	class:CombatData	file:
 hasPC	.\include\raylib\external\glfw\src\win32_platform.h	/^    GLFWbool            hasPC;$/;"	m	struct:_GLFWtimerWin32
 hasPostFormatConversion	.\include\raylib\external\miniaudio.h	/^    ma_bool32 hasPostFormatConversion : 1;$/;"	m	struct:__anon163
 hasPreFormatConversion	.\include\raylib\external\miniaudio.h	/^    ma_bool32 hasPreFormatConversion  : 1;$/;"	m	struct:__anon163
@@ -27624,6 +27638,8 @@ mouseTrailSize	.\include\raylib\external\glfw\src\win32_platform.h	/^    UINT   
 move	.\include\combat.h	/^	struct Move *move;$/;"	m	struct:CasterMove	typeref:struct:CasterMove::Move
 moveAnimPlaying	.\include\combat.h	/^	static bool moveAnimPlaying;$/;"	m	struct:CombatData
 moveAnimPlaying	.\src\combat.cpp	/^bool CombatData::moveAnimPlaying = false;$/;"	m	class:CombatData	file:
+moveAnnouncement	.\include\combat.h	/^	static BoxLabel moveAnnouncement;$/;"	m	struct:CombatData
+moveAnnouncement	.\src\combat.cpp	/^BoxLabel CombatData::moveAnnouncement;$/;"	m	class:CombatData	file:
 moveButtons	.\include\combat.h	/^	Button moveButtons[NUM_ACTOR_MOVES];$/;"	m	struct:CombatData
 moveControl	.\include\raylib\camera.h	/^    int moveControl[6];$/;"	m	struct:__anon4
 moveDownPositionA	.\include\raylib\gestures.h	/^        Vector2 moveDownPositionA;      \/\/ First touch down position on move$/;"	m	struct:__anon390::__anon391
@@ -28609,7 +28625,8 @@ player	.\include\game.h	/^	Player player;$/;"	m	struct:Game
 playerAlive	.\include\combat.h	/^	static Vec<Actor *> playerAlive;$/;"	m	struct:CombatData
 playerAlive	.\src\combat.cpp	/^Vec<Actor *> CombatData::playerAlive;$/;"	m	class:CombatData	file:
 playerEyesPosition	.\include\raylib\camera.h	/^    float playerEyesPosition;       \/\/ Default player eyes position from ground (in meters)$/;"	m	struct:__anon4
-playerTeam	.\include\combat.h	/^	Team *playerTeam = nullptr;$/;"	m	struct:CombatData
+playerTeam	.\include\combat.h	/^	static Team *playerTeam;$/;"	m	struct:CombatData
+playerTeam	.\src\combat.cpp	/^Team *CombatData::playerTeam = nullptr;$/;"	m	class:CombatData	file:
 playing	.\include\raylib\raudio.c	/^    bool playing;                   \/\/ Audio buffer state: AUDIO_PLAYING$/;"	m	struct:rAudioBuffer	file:
 playing	.\include\sprite.h	/^	bool playing = false;$/;"	m	struct:Sprite
 playrate	.\include\raylib\external\jar_mod.h	/^    mulong  playrate;$/;"	m	struct:__anon127
