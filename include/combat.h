@@ -58,8 +58,8 @@ struct CombatData{
 	static UMap<Actor *, Sprite> actorSprites;
 	static bool moveAnimPlaying;
 
-	Team *playerTeam = nullptr;
-	Team *botTeam = nullptr;
+	static Team *playerTeam;
+	static Team *botTeam;
 
 	static Vec<Actor *> playerAlive;
 	static Vec<Actor *> botAlive;
@@ -79,8 +79,9 @@ struct CombatData{
 	bool canAssign = false;
 	bool canMakePair = false;
 	static bool executingMoves;
+	static bool interpStats;
 
-	static Vec<bool> hasMoveChosen; //index is the character
+	static UMap<Actor *, bool> hasMoveChosen;
 	static Vec<CasterTargetsPair> ctps; //When exectuting moves, create an array of pointer and heapify that
 	static Vec<CasterTargetsPair *> ctpsPtrs;
 	static unsigned int execIndex;
@@ -89,7 +90,12 @@ struct CombatData{
 	static ListView targetAliveList;
 	static ListView targetSelectedList;
 	Button moveButtons[NUM_ACTOR_MOVES];
-	static Vec<StatBar> statBars;
+	static UMap<Actor *, StatBar[2]> statBars;
+	static float statBarInterpTimer;
+	static constexpr float statBarInterpTime = .375f;
+	static BoxLabel moveAnnouncment;
+	static float moveAnnouncementTimer;
+	static constexpr float announcementTime = .875f;
 
 	static unsigned char focus;
 	static unsigned int animLockouts;

@@ -283,6 +283,7 @@ BatteryLevel	.\include\raylib\external\glfw\deps\mingw\xinput.h	/^    BYTE Batte
 BatteryType	.\include\raylib\external\glfw\deps\mingw\xinput.h	/^    BYTE BatteryType;$/;"	m	struct:_XINPUT_BATTERY_INFORMATION
 BeginBlendMode	.\include\raylib\rlgl.h	/^void BeginBlendMode(int mode)$/;"	f
 BeginDrawing	.\include\raylib\core.c	/^void BeginDrawing(void)$/;"	f
+BeginExecMoves	.\src\combat.cpp	/^void BeginExecMoves(){$/;"	f
 BeginMode2D	.\include\raylib\core.c	/^void BeginMode2D(Camera2D camera)$/;"	f
 BeginMode3D	.\include\raylib\core.c	/^void BeginMode3D(Camera3D camera)$/;"	f
 BeginScissorMode	.\include\raylib\core.c	/^void BeginScissorMode(int x, int y, int width, int height)$/;"	f
@@ -1731,6 +1732,7 @@ DrawSphere	.\include\raylib\models.c	/^void DrawSphere(Vector3 centerPos, float 
 DrawSphereEx	.\include\raylib\models.c	/^void DrawSphereEx(Vector3 centerPos, float radius, int rings, int slices, Color color)$/;"	f
 DrawSphereWires	.\include\raylib\models.c	/^void DrawSphereWires(Vector3 centerPos, float radius, int rings, int slices, Color color)$/;"	f
 DrawSprite	.\src\sprite.cpp	/^void DrawSprite(Sprite &spr){$/;"	f
+DrawStatBar	.\src\gui.cpp	/^void DrawStatBar(const StatBar &sb){$/;"	f
 DrawText	.\include\raylib\text.c	/^void DrawText(const char *text, int posX, int posY, int fontSize, Color color)$/;"	f
 DrawTextCodepoint	.\include\raylib\text.c	/^void DrawTextCodepoint(Font font, int codepoint, Vector2 position, float scale, Color tint)$/;"	f
 DrawTextEx	.\include\raylib\text.c	/^void DrawTextEx(Font font, const char *text, Vector2 position, float fontSize, float spacing, Color tint)$/;"	f
@@ -1758,6 +1760,7 @@ DynamicBuffer	.\include\raylib\rlgl.h	/^} DynamicBuffer;$/;"	t	typeref:struct:Dy
 EASEDEF	.\include\raylib\easings.h	88;"	d
 EASEDEF	.\include\raylib\easings.h	90;"	d
 EASINGS_H	.\include\raylib\easings.h	83;"	d
+EASINGS_HEADER	.\src\game.cpp	5;"	d	file:
 EASINGS_STATIC_INLINE	.\include\raylib\easings.h	85;"	d
 ECTORAY	.\src\move_impl.cpp	/^void MoveImplementation::ECTORAY(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 EDS_ROTATEDMODE	.\include\raylib\external\glfw\src\win32_platform.h	96;"	d
@@ -13311,7 +13314,7 @@ Reset	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * R
 Reset	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * Reset)            (ma_IAudioClient2* pThis);$/;"	m	struct:__anon271
 Reset	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * Reset)            (ma_IAudioClient3* pThis);$/;"	m	struct:__anon272
 ResetPhysics	.\include\raylib\physac.h	/^PHYSACDEF void ResetPhysics(void)$/;"	f
-ResetSelectAvailList	.\src\combat.cpp	/^void ResetSelectAvailList(CombatData &cbtD){$/;"	f
+ResetSelectAvailList	.\src\combat.cpp	/^void ResetSelectAvailList(){$/;"	f
 ResetSelectAvailList	.\src\test.cpp	/^void ResetSelectAvailList(CombatData &cbtD){$/;"	f
 ResizePacket	.\include\raylib\rnet.h	/^int ResizePacket(SocketDataPacket *packet, int newsize)$/;"	f
 ResolveHost	.\include\raylib\rnet.h	/^int ResolveHost(const char *address, const char *service, int addressType, int flags, AddressInformation *outAddr)$/;"	f
@@ -13403,6 +13406,8 @@ SPRITE_H	.\include\sprite.h	2;"	d
 SQUISH_CONSTANT_2D	.\include\raylib\external\par_shapes.h	1758;"	d
 SQUISH_CONSTANT_3D	.\include\raylib\external\par_shapes.h	1760;"	d
 SQUISH_CONSTANT_4D	.\include\raylib\external\par_shapes.h	1762;"	d
+STATBAR_HEIGHT	.\include\inventory.h	/^const int STATBAR_HEIGHT = 16;$/;"	v
+STATBAR_WIDTH	.\include\inventory.h	/^const int STATBAR_WIDTH = 128;$/;"	v
 STATICSHOCK	.\src\move_impl.cpp	/^void MoveImplementation::STATICSHOCK(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 STATTEXT_H	.\include\stattext.h	2;"	d
 STATUSBAR	.\include\raylib\raygui.h	/^    STATUSBAR$/;"	e	enum:__anon408
@@ -13942,6 +13947,8 @@ Start	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * S
 Start	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * Start)            (ma_IAudioClient3* pThis);$/;"	m	struct:__anon272
 StartCombat	.\src\combat.cpp	/^void StartCombat(Game &game){$/;"	f
 StartCombat	.\src\test.cpp	/^void StartCombat(Game &game){$/;"	f
+StatBar	.\include\gui.h	/^	StatBar(){$/;"	f	struct:StatBar
+StatBar	.\include\gui.h	/^	StatBar(float coeff, Rectangle rect, Color good, Color bad){$/;"	f	struct:StatBar
 StatBar	.\include\gui.h	/^struct StatBar{$/;"	s
 StatTextSetup	.\src\inventory.cpp	/^void StatTextSetup(InventoryData &invD, Actor &actor){$/;"	f
 StatToolTip	.\src\inventory.cpp	/^void StatToolTip(InventoryData &invD, Actor &actor){$/;"	f
@@ -16588,6 +16595,7 @@ __USE_BSD	.\include\raylib\external\dr_flac.h	871;"	d
 __USE_W32_SOCKETS	.\include\raylib\rnet.h	138;"	d
 __WINE_XINPUT_H	.\include\raylib\external\glfw\deps\mingw\xinput.h	21;"	d
 __cpluplus	.\src\gui.cpp	7;"	d	file:
+__cpluscplus	.\src\game.cpp	6;"	d	file:
 __eglMustCastToProperFunctionPointerType	.\include\raylib\external\ANGLE\EGL\egl.h	/^typedef void (*__eglMustCastToProperFunctionPointerType)(void);$/;"	t
 __egl_h_	.\include\raylib\external\ANGLE\EGL\egl.h	2;"	d
 __eglext_h_	.\include\raylib\external\ANGLE\EGL\eglext.h	2;"	d
@@ -17394,6 +17402,7 @@ bottom	.\include\raylib\external\glfw\src\wl_platform.h	/^        _GLFWdecoratio
 bottom	.\include\raylib\raylib.h	/^    int bottom;            \/\/ bottom border offset$/;"	m	struct:NPatchInfo
 bottomDecoration	.\include\raylib\external\glfw\src\wl_platform.h	/^    bottomDecoration,$/;"	e	enum:_GLFWdecorationSideWayland
 bottom_y	.\include\raylib\external\stb_truetype.h	/^   int x,y,bottom_y;$/;"	m	struct:__anon360
+bounds	.\include\gui.h	/^	Rectangle bounds = {0};$/;"	m	struct:StatBar
 bounds	.\include\gui.h	/^	Rectangle bounds;$/;"	m	struct:Button
 bounds	.\include\gui.h	/^	Rectangle bounds;$/;"	m	struct:DropDown
 bounds	.\include\gui.h	/^	Rectangle bounds;$/;"	m	struct:Label
@@ -19424,9 +19433,10 @@ eventTime	.\include\raylib\gestures.h	/^        double eventTime;               
 eventWorker	.\include\raylib\core.c	/^        InputEventWorker eventWorker[10];   \/\/ List of worker threads for every monitored "\/dev\/input\/event<N>"$/;"	m	struct:CoreData::__anon11	file:
 exec	.\include\console.h	/^		exec,$/;"	e	enum:Dev::Command
 execCTP	.\include\combat.h	/^	CasterTargetsPair *execCTP; \/\/the iterator$/;"	m	struct:CombatData
-execIndex	.\include\combat.h	/^	unsigned int execIndex = 0;$/;"	m	struct:CombatData
-executingMove	.\include\combat.h	/^	bool executingMove = false;$/;"	m	struct:CombatData
-executingMoves	.\include\combat.h	/^	bool executingMoves = false;$/;"	m	struct:CombatData
+execIndex	.\include\combat.h	/^	static unsigned int execIndex;$/;"	m	struct:CombatData
+execIndex	.\src\combat.cpp	/^unsigned int CombatData::execIndex = 0;$/;"	m	class:CombatData	file:
+executingMoves	.\include\combat.h	/^	static bool executingMoves;$/;"	m	struct:CombatData
+executingMoves	.\src\combat.cpp	/^bool CombatData::executingMoves = false;$/;"	m	class:CombatData	file:
 executionPhase	.\include\combat.h	/^		executionPhase$/;"	e	enum:CombatData::CombatStates
 exitKey	.\include\raylib\core.c	/^            int exitKey;                    \/\/ Default exit key$/;"	m	struct:CoreData::__anon11::__anon12	file:
 exp	.\include\player.h	/^	int exp;$/;"	m	struct:Player
@@ -24972,6 +24982,8 @@ internalPeriods	.\include\raylib\external\miniaudio.h	/^        ma_uint32 intern
 internalSampleRate	.\include\raylib\external\miniaudio.h	/^        ma_uint32 internalSampleRate;$/;"	m	struct:ma_device::__anon228
 internalSampleRate	.\include\raylib\external\miniaudio.h	/^        ma_uint32 internalSampleRate;$/;"	m	struct:ma_device::__anon229
 internalSampleRate	.\include\raylib\external\miniaudio.h	/^    ma_uint32  internalSampleRate;$/;"	m	struct:ma_decoder
+interpStats	.\include\combat.h	/^	static bool interpStats;$/;"	m	struct:CombatData
+interpStats	.\src\combat.cpp	/^bool CombatData::interpStats = false;$/;"	m	class:CombatData	file:
 interpolation	.\include\raylib\external\cgltf.h	/^	cgltf_interpolation_type interpolation;$/;"	m	struct:cgltf_animation_sampler
 interpupillaryDistance	.\include\raylib\raylib.h	/^    float interpupillaryDistance;   \/\/ HMD IPD (distance between pupils) in meters$/;"	m	struct:VrDeviceInfo
 interpupillaryDistance	.\include\raylib\rlgl.h	/^        float interpupillaryDistance;   \/\/ HMD IPD (distance between pupils) in meters$/;"	m	struct:VrDeviceInfo
@@ -25411,7 +25423,6 @@ leftDecoration	.\include\raylib\external\glfw\src\wl_platform.h	/^    leftDecora
 len	.\include\raylib\external\tinyobj_loader_c.h	/^  unsigned int len;$/;"	m	struct:__anon385
 len	.\include\raylib\rmem.h	/^    size_t len, maxNodes;$/;"	m	struct:AllocList
 len	.\include\raylib\rnet.h	/^    unsigned int len;           \/\/ The length of the packet data$/;"	m	struct:SocketDataPacket
-length	.\include\gui.h	/^	float thickness, length;$/;"	m	struct:StatBar
 length	.\include\raylib\external\jar_mod.h	/^    muchar  length; \/\/ length of tablepos$/;"	m	struct:__anon125
 length	.\include\raylib\external\jar_mod.h	/^    muint   length;$/;"	m	struct:__anon123
 length	.\include\raylib\external\jar_mod.h	/^    muint   length;$/;"	m	struct:__anon126
@@ -28643,7 +28654,6 @@ ports	.\include\raylib\external\miniaudio.h	/^    void** ports;$/;"	m	struct:__a
 pos	.\include\elemino.h	/^	Vector2 pos; \/\/Pos of the whole elemino, NOT just the indiv rects$/;"	m	struct:Elemino
 pos	.\include\elemino.h	/^	Vector2 pos;$/;"	m	struct:Anchor
 pos	.\include\elemino.h	/^	Vector2 pos;$/;"	m	struct:Grid
-pos	.\include\gui.h	/^	Vector2 pos; \/\/Origin is top left$/;"	m	struct:StatBar
 pos	.\include\raylib\external\cgltf.h	/^	unsigned int pos; \/* offset in the JSON string *\/$/;"	m	struct:__anon23
 pos	.\include\raylib\external\dr_mp3.h	/^    int pos, limit;$/;"	m	struct:__anon62
 pos	.\include\raylib\external\glfw\src\internal.h	/^        GLFWwindowposfun        pos;$/;"	m	struct:_GLFWwindow::__anon91
@@ -29654,6 +29664,11 @@ start_offset	.\include\raylib\external\cgltf.h	/^	cgltf_size start_offset;$/;"	m
 start_x	.\include\raylib\external\stb_image.h	/^   int start_x, start_y;$/;"	m	struct:__anon331
 start_y	.\include\raylib\external\stb_image.h	/^   int start_x, start_y;$/;"	m	struct:__anon331
 started	.\include\raylib\external\stb_truetype.h	/^   int started;$/;"	m	struct:__anon358
+statBarInterpTime	.\include\combat.h	/^	static constexpr float statBarInterpTime = .375f;$/;"	m	struct:CombatData
+statBarInterpTimer	.\include\combat.h	/^	static float statBarInterpTimer;$/;"	m	struct:CombatData
+statBarInterpTimer	.\src\combat.cpp	/^float CombatData::statBarInterpTimer = 0.f;$/;"	m	class:CombatData	file:
+statBars	.\include\combat.h	/^	static UMap<Actor *, StatBar[2]> statBars;$/;"	m	struct:CombatData
+statBars	.\src\combat.cpp	/^UMap<Actor *, StatBar[2]> CombatData::statBars;$/;"	m	class:CombatData	file:
 statText	.\include\inventory.h	/^	Label statText[6];$/;"	m	struct:InventoryData
 state	.\include\gui.h	/^	GuiControlState state = GuiControlState::GUI_STATE_NORMAL;$/;"	m	struct:Panel
 state	.\include\gui.h	/^	GuiControlState state;$/;"	m	struct:DropDown
@@ -30615,9 +30630,11 @@ target	.\include\raylib\core.c	/^        double target;                      \/\
 target	.\include\raylib\raylib.h	/^    Vector2 target;         \/\/ Camera target (rotation and zoom origin)$/;"	m	struct:Camera2D
 target	.\include\raylib\raylib.h	/^    Vector3 target;         \/\/ Camera target it looks-at$/;"	m	struct:Camera3D
 target	.\include\raylib\rlgl.h	/^        Vector3 target;         \/\/ Camera target it looks-at$/;"	m	struct:Camera
-targetAliveList	.\include\combat.h	/^	ListView targetAliveList;$/;"	m	struct:CombatData
+targetAliveList	.\include\combat.h	/^	static ListView targetAliveList;$/;"	m	struct:CombatData
+targetAliveList	.\src\combat.cpp	/^ListView CombatData::targetAliveList;$/;"	m	class:CombatData	file:
 targetDistance	.\include\raylib\camera.h	/^    float targetDistance;           \/\/ Camera distance from position to target$/;"	m	struct:__anon4
-targetSelectedList	.\include\combat.h	/^	ListView targetSelectedList;$/;"	m	struct:CombatData
+targetSelectedList	.\include\combat.h	/^	static ListView targetSelectedList;$/;"	m	struct:CombatData
+targetSelectedList	.\src\combat.cpp	/^ListView CombatData::targetSelectedList;$/;"	m	class:CombatData	file:
 target_names	.\include\raylib\external\cgltf.h	/^	char** target_names;$/;"	m	struct:cgltf_mesh
 target_names_count	.\include\raylib\external\cgltf.h	/^	cgltf_size target_names_count;$/;"	m	struct:cgltf_mesh
 target_node	.\include\raylib\external\cgltf.h	/^	cgltf_node* target_node;$/;"	m	struct:cgltf_animation_channel
@@ -30691,7 +30708,6 @@ textures_count	.\include\raylib\external\cgltf.h	/^	cgltf_size textures_count;$/
 theme_destroy	.\include\raylib\external\glfw\src\wl_platform.h	/^        PFN_wl_cursor_theme_destroy theme_destroy;$/;"	m	struct:_GLFWlibraryWayland::__anon111
 theme_get_cursor	.\include\raylib\external\glfw\src\wl_platform.h	/^        PFN_wl_cursor_theme_get_cursor theme_get_cursor;$/;"	m	struct:_GLFWlibraryWayland::__anon111
 theme_load	.\include\raylib\external\glfw\src\wl_platform.h	/^        PFN_wl_cursor_theme_load theme_load;$/;"	m	struct:_GLFWlibraryWayland::__anon111
-thickness	.\include\gui.h	/^	float thickness, length;$/;"	m	struct:StatBar
 thread	.\include\raylib\external\android\native_app_glue\android_native_app_glue.h	/^    pthread_t thread;$/;"	m	struct:android_app
 thread	.\include\raylib\external\miniaudio.h	/^            pthread_t thread;$/;"	m	struct:__anon169::__anon170::__anon172
 thread	.\include\raylib\external\miniaudio.h	/^    ma_thread thread;$/;"	m	struct:ma_device

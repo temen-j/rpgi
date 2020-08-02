@@ -77,6 +77,7 @@ struct Label{
 	Rectangle bounds;
 	std::string text;
 	bool disabled = false;
+	int alignment = GUI_TEXT_ALIGN_LEFT;
 };
 
 struct ImageLabel : Label{
@@ -183,11 +184,13 @@ struct StatBar{
 	float k; //Coeff of proportionality of HP/MP
 	Rectangle bounds = {0};
 	bool showNum;
+	int denom;
 	Color colorGood, colorBad;
 
 	StatBar(){
 		k = 1.f;
 		showNum = false;
+		denom = 1;
 		colorGood = WHITE;
 		colorBad = BLACK;
 	}
@@ -195,6 +198,15 @@ struct StatBar{
 		k = coeff;
 		bounds = rect;
 		showNum = false;
+		denom = 1;
+		colorGood = good;
+		colorBad = bad;
+	}
+	StatBar(float coeff, Rectangle rect, int denominator, Color good, Color bad){
+		k = coeff;
+		bounds = rect;
+		showNum = true;
+		denom = denominator;
 		colorGood = good;
 		colorBad = bad;
 	}
@@ -234,6 +246,8 @@ void DrawConsole(const Console &, GlobalTextData &);
 void DrawInventory(const Player &);
 void DrawMoveInventory(const Player &);
 void DrawStatBar(const StatBar &);
+
+int GetGuiTextWidth(const char *);
 
 //------------------------------------------------------------------------------------
 

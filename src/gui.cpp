@@ -347,12 +347,14 @@ void DrawGuiImageToggle(ImageToggle &ito){
 }
 
 void DrawGuiLabel(Label &label){
-    GuiDrawText(label.text.c_str(), GetTextBounds(LABEL, label.bounds), GuiGetStyle(LABEL, TEXT_ALIGNMENT), Fade(GetColor(GuiGetStyle(LABEL, (label.state == GUI_STATE_DISABLED)? TEXT_COLOR_DISABLED : TEXT_COLOR_NORMAL)), guiAlpha));
+    /* GuiDrawText(label.text.c_str(), GetTextBounds(LABEL, label.bounds), GuiGetStyle(LABEL, TEXT_ALIGNMENT), Fade(GetColor(GuiGetStyle(LABEL, (label.state == GUI_STATE_DISABLED)? TEXT_COLOR_DISABLED : TEXT_COLOR_NORMAL)), guiAlpha)); */
+    GuiDrawText(label.text.c_str(), GetTextBounds(LABEL, label.bounds), label.alignment, Fade(GetColor(GuiGetStyle(LABEL, (label.state == GUI_STATE_DISABLED)? TEXT_COLOR_DISABLED : TEXT_COLOR_NORMAL)), guiAlpha));
 }
 
 void DrawGuiBoxLabel(BoxLabel &label){
 	DrawRectangleRec(label.bgBounds, label.bgColor);
-    GuiDrawText(label.text.c_str(), GetTextBounds(LABEL, label.bounds), GuiGetStyle(LABEL, TEXT_ALIGNMENT), label.textColor);
+    /* GuiDrawText(label.text.c_str(), GetTextBounds(LABEL, label.bounds), GuiGetStyle(LABEL, TEXT_ALIGNMENT), label.textColor); */
+    GuiDrawText(label.text.c_str(), GetTextBounds(LABEL, label.bounds), label.alignment, label.textColor);
 }
 
 
@@ -669,14 +671,21 @@ void DrawCombat(const Game &game){
 		}
 	}
 
-	for(auto &it : CombatData::statBars)
-		DrawStatBar(it);
+	for(auto &it : CombatData::statBars){
+		DrawStatBar(it.second[0]);
+		DrawStatBar(it.second[1]);
+	}
 
 	for(auto &it : CombatData::actorSprites)
 		DrawSprite(it.second);
 
-	for(size_t i = 0; i < NUM_ACTOR_MOVES; ++i)
-		DrawGuiButton(game.cbtData->moveButtons[i]);
+	if(!CombatData::moveAnnouncment.disabled)
+		DrawGuiBoxLabel(CombatData::moveAnnouncment);
+
+	if(Game::gamestate.curr == State::combat_act){
+		for(size_t i = 0; i < NUM_ACTOR_MOVES; ++i)
+			DrawGuiButton(game.cbtData->moveButtons[i]);
+	}
 	
 	if(game.cbtData->canAssign){
 		if(game.cbtData->dispTargetLists){
@@ -691,5 +700,15 @@ void DrawStatBar(const StatBar &sb){
 	Rectangle rect = {sb.bounds.x, sb.bounds.y, sb.bounds.width * sb.k, sb.bounds.height};
 	DrawRectangleRec(sb.bounds, sb.colorBad);
 	DrawRectangleRec(rect, sb.colorGood);
+	if(sb.showNum){
+		std::string frac = std::to_string((int)round(sb.k * (float)sb.denom)) + "/" + std::to_string(sb.denom);
+		float size = sb.bounds.height;
+		DrawTextRecEx(GuiGetFont(), frac.c_str(), sb.bounds, size, size / 10.f, false, (Color){219, 219, 235, 255}, 0, 0, WHITE, WHITE);
+	}
+}
+
+
+int GetGuiTextWidth(const char *str){
+	return GetTextWidth(str);
 }
 

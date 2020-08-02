@@ -1,6 +1,12 @@
 #include "..\include\game.h"
 #include "..\include\moveinventory.h"
 
+#ifndef EASINGS_HEADER
+#define EASINGS_HEADER
+#define __cpluscplus
+#include "..\include\raylib\easings.h"
+#endif
+
 GameState Game::gamestate;
 Mouse Game::mouse;
 TextureManager Game::textures;
@@ -145,6 +151,7 @@ int CombatState(Game &game){
 		StartCombat(game);
 	}
 
+	bool prevMoveAnimPlaying = CombatData::moveAnimPlaying;
 	CombatData::moveAnimPlaying = CombatData::animLockouts > 0;
 
 	if(Game::gamestate.curr == State::combat_act){
@@ -169,22 +176,53 @@ int CombatState(Game &game){
 			MakeCTP(*game.cbtData);
 		}
 		if(CanExecMoves(*game.cbtData)){ //You are now watching a movie :)
-			CombatData::hasMoveChosen.resize(CombatData::playerAlive.size(), false);
+			for(auto &it : CombatData::hasMoveChosen)
+				it.second = false;
 			Game::gamestate.prev = Game::gamestate.curr;
 			Game::gamestate.curr = State::combat_watch;
 		}
 	}
 	if(Game::gamestate.curr == State::combat_watch){
-		if(!CombatData::moveAnimPlaying && CombatData::executingMoves){
+		static UMap<Actor *, float> prevHP; //For interpolating the stat bars
+		static UMap<Actor *, float> prevMP;
+		CombatData::interpStats = CombatData::interpStats || (prevMoveAnimPlaying != CombatData::moveAnimPlaying && !CombatData::moveAnimPlaying); //Ending moveAnimPlaying
+
+		if(!CombatData::moveAnimPlaying && !CombatData::interpStats && CombatData::executingMoves){
+			for(auto &it : CombatData::playerAlive){
+				prevHP[it] = (float)it->remHP / it->maxHP;
+				prevMP[it] = (float)it->remMP / it->maxMP;
+			}
+			CombatData::statBarInterpTimer = 0.f;
+			/* CombatData::moveAnnouncmentTimer = 0.f; */
 			ExecMoves(*game.cbtData);
-			//TODO: Lerp health bars
 			//TODO: Resolve deaths
 		}
+
 		//TODO: Tick Effects here!
 		//TODO: Resolve deaths
+
+		if(CombatData::interpStats){
+			for(auto &it : CombatData::playerAlive){
+				float currHPnorm = (float)it->remHP / it->maxHP;
+				float currMPnorm = (float)it->remMP / it->maxMP;
+
+				float amtHP = EaseCircOut(CombatData::statBarInterpTimer, prevHP[it], currHPnorm - prevHP[it], CombatData::statBarInterpTime);
+				float amtMP = EaseCircOut(CombatData::statBarInterpTimer, prevMP[it], currMPnorm - prevMP[it], CombatData::statBarInterpTime);
+
+				CombatData::statBars[it][0].k = amtHP;
+				CombatData::statBars[it][1].k = amtMP;
+				CombatData::statBars[it][0].denom = it->maxHP;
+				CombatData::statBars[it][1].denom = it->maxMP;
+			}
+
+			CombatData::statBarInterpTimer += GetFrameTime();
+			CombatData::interpStats = !(CombatData::statBarInterpTimer > CombatData::statBarInterpTime);
+			CombatData::moveAnnouncment.disabled = (CombatData::statBarInterpTimer > CombatData::statBarInterpTime);
+		}
+
 		if(!CombatData::executingMoves){ //Stopped exec moves go back to input
 			CombatData::ctps.clear();
-			GetAffordableMoves(*game.cbtData->playerTeam->members[game.cbtData->focus], game.cbtData->affordable);
+			GetAffordableMoves(*CombatData::playerTeam->members[game.cbtData->focus], game.cbtData->affordable);
 
 			Game::gamestate.prev = Game::gamestate.curr;
 			Game::gamestate.curr = State::combat_act;

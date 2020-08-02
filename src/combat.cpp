@@ -12,13 +12,16 @@
 
 #include "..\include\sprite.h"
 
+Team *CombatData::playerTeam = nullptr;
+Team *CombatData::botTeam = nullptr;
+
 UMap<Actor *, Vec<MoveEffect> > CombatData::effects;
 UMap<Actor *, StatusEffects> CombatData::statusEffects;
 MemPool CombatData::diffMemPool = CreateMemPool(DIFF_MEM_SIZE);
 
 CombatPortraits CombatData::portraits;
 Texture CombatData::halo;
-Vec<bool> CombatData::hasMoveChosen;
+UMap<Actor *, bool> CombatData::hasMoveChosen;
 
 UMap<Actor *, Sprite> CombatData::actorSprites;
 bool CombatData::moveAnimPlaying = false;
@@ -35,12 +38,14 @@ unsigned char CombatData::focus = 0;
 unsigned int CombatData::animLockouts = 0;
 
 bool CombatData::executingMoves = false;
+bool CombatData::interpStats = false;
 unsigned int CombatData::execIndex = 0;
+float CombatData::statBarInterpTimer = 0.f;
 
 ListView CombatData::targetAliveList;
 ListView CombatData::targetSelectedList;
-
-Vec<StatBar> CombatData::statBars;
+UMap<Actor *, StatBar[2]> CombatData::statBars;
+BoxLabel CombatData::moveAnnouncment;
 
 
 CasterTargetsPair::CasterTargetsPair(Actor *c, struct Move *m, const Vec<Actor *> &t){
@@ -70,7 +75,7 @@ void StartCombat(Game &game){
 			(Rectangle){PORTRAIT_PADDING, (float)(i * PORTRAIT_SEPARATION + PORTRAIT_PADDING), PORTRAIT_WIDTH, PORTRAIT_WIDTH};
 	}
 
-	cbtData->playerTeam = &game.player.team;
+	CombatData::playerTeam = &game.player.team;
 
 	CombatSpriteSetup(*cbtData);
 
@@ -96,21 +101,27 @@ void StartCombat(Game &game){
 	cbtData->chosenMove = nullptr;
 	cbtData->aiMakePairs = true;
 
-	CombatData::hasMoveChosen.resize(CombatData::playerAlive.size(), false);
+	for(auto &it : CombatData::playerAlive)
+		CombatData::hasMoveChosen[it] = false;
 
 	cbtData->targetSelectedList.bounds = (Rectangle){256, 64, 192, 192};
 	cbtData->targetAliveList.bounds = (Rectangle){256 + 192 + 128, 64, 192, 192};
 
 	//TODO: Also call this when returning to phase 1
-	GetAffordableMoves(*cbtData->playerTeam->members[game.cbtData->focus], cbtData->affordable);
+	GetAffordableMoves(*CombatData::playerTeam->members[CombatData::focus], cbtData->affordable);
 
-	CombatData::statBars.resize(2 * cbtData->playerAlive.size());
-	for(unsigned int i = 0; i < CombatData::statBars.size(); i += 2){
-		Rectangle hpBounds = {PORTRAIT_WIDTH + 2 * PORTRAIT_PADDING, (float)(i/2 * PORTRAIT_SEPARATION + PORTRAIT_PADDING + PORTRAIT_PADDING / 2), STATBAR_WIDTH, STATBAR_HEIGHT};
-		Rectangle mpBounds = {PORTRAIT_WIDTH + 2 * PORTRAIT_PADDING, (float)(i/2 * PORTRAIT_SEPARATION + PORTRAIT_PADDING +  PORTRAIT_PADDING / 2 + STATBAR_HEIGHT * 2), STATBAR_WIDTH, STATBAR_HEIGHT};
-		CombatData::statBars[i] = StatBar(1.f, hpBounds, HPGOODCOLOR, HPBADCOLOR);
-		CombatData::statBars[i+1] = StatBar(1.f, mpBounds, MPGOODCOLOR, MPBADCOLOR);
+	for(unsigned int i = 0; i < CombatData::playerAlive.size(); ++i){
+		Rectangle hpBounds = {PORTRAIT_WIDTH + 2 * PORTRAIT_PADDING, (float)(i * PORTRAIT_SEPARATION + PORTRAIT_PADDING + PORTRAIT_PADDING / 2), STATBAR_WIDTH, STATBAR_HEIGHT};
+		Rectangle mpBounds = {PORTRAIT_WIDTH + 2 * PORTRAIT_PADDING, (float)(i * PORTRAIT_SEPARATION + PORTRAIT_PADDING +  PORTRAIT_PADDING / 2 + STATBAR_HEIGHT * 2), STATBAR_WIDTH, STATBAR_HEIGHT};
+		CombatData::statBars[CombatData::playerAlive[i]][0] = StatBar(1.f, hpBounds, CombatData::playerAlive[i]->maxHP, HPGOODCOLOR, HPBADCOLOR);
+		CombatData::statBars[CombatData::playerAlive[i]][1] = StatBar(1.f, mpBounds, CombatData::playerAlive[i]->maxMP, MPGOODCOLOR, MPBADCOLOR);
 	}
+
+	CombatData::moveAnnouncment.text = "";
+	CombatData::moveAnnouncment.bounds = {0,0,0,0};
+	CombatData::moveAnnouncment.bgColor = (Color){28, 33,  35, 200};
+	CombatData::moveAnnouncment.textColor = (Color){219, 219, 235, 255};
+	CombatData::moveAnnouncment.disabled = true;
 
 	game.justEnteredState = true;
 }
@@ -148,8 +159,7 @@ void AIMakeCTPs(CombatData &cbtD){
 
 
 void SelectMoves(CombatData &cbtD){
-	/* Actor *actor = CombatData::playerAlive[cbtD.focus]; //FIXME: won't work if a character dies! */
-	Actor *actor = cbtD.playerTeam->members[cbtD.focus];
+	auto &actor = CombatData::playerTeam->members[CombatData::focus];
 
 	for(size_t i = 0; i < NUM_ACTOR_MOVES; ++i){
 		Update(cbtD.moveButtons[i]);
@@ -157,14 +167,16 @@ void SelectMoves(CombatData &cbtD){
 			bool found = false;
 			for(size_t j = 0; j < NUM_ACTOR_MOVES; ++j){
 				if(actor->moves[i] && actor->moves[i] == cbtD.affordable[j]){ //If the selection is in the affordable move list
-					found = true;
+					/* found = true; */
+					cbtD.chosenMove = actor->moves[i];
+					cbtD.canAssign = true;
 					break;
 				}
 			}
-			if(found){
-				cbtD.chosenMove = actor->moves[i];
-				cbtD.canAssign = true;
-			}
+			/* if(found){ */
+			/* 	cbtD.chosenMove = actor->moves[i]; */
+			/* 	cbtD.canAssign = true; */
+			/* } */
 			break;
 		}
 	}
@@ -189,7 +201,6 @@ void GetAffordableMoves(Actor &actor, struct Move **affordable){
 
 void AssignTargets(CombatData &cbtD){
 	//Make a macro-loop
-	//TODO: Make this into a function, (AssignTargetsSetup())
 	if(!cbtD.begunAssigning){
 		AssignTargetsSetup(cbtD);
 	}
@@ -248,11 +259,15 @@ void AssignTargetsSetup(CombatData &cbtD){
 
 
 void MakeCTP(CombatData &cbtD){
-	Actor *&actor = cbtD.playerTeam->members[cbtD.focus];
+	auto &actor = CombatData::playerTeam->members[cbtD.focus];
 	CombatData::ctps.emplace(CombatData::ctps.begin(), CasterTargetsPair(actor, cbtD.chosenMove, CombatData::chosenTargets));
 	cbtD.dispTargetLists = false;
 	cbtD.begunAssigning = false;
-	cbtD.hasMoveChosen[cbtD.focus] = true;
+
+	CombatData::hasMoveChosen[actor] = true;
+
+	cbtD.chosenMove = nullptr;
+	CombatData::chosenTargets.clear();
 
 	cbtD.canMakePair = false;
 }
@@ -273,18 +288,20 @@ void RemoveFromSelectedList(CombatData &cbtD, int &prevActive){
 
 
 void HandleInventoryPortraits(CombatData &cbtD){ //TODO: rename HandleCombatPortraits()
-	bool *isToggled = new bool[CombatData::playerAlive.size()]; //Keep track of previous activation
+	bool *isToggled = new bool[CombatData::playerTeam->members.size()]; //Keep track of previous activation
 
-	for(size_t i = 0; i < CombatData::playerAlive.size(); ++i)
+	for(size_t i = 0; i < CombatData::playerTeam->members.size(); ++i)
 		isToggled[i] = CombatData::portraits.toggles[i].active;
 
-	for(size_t i = 0; i < CombatData::playerAlive.size(); ++i){
+	for(size_t i = 0; i < CombatData::playerTeam->members.size(); ++i){
 		bool update = Update(CombatData::portraits.toggles[i]); //a group toggling
 
-		if(isToggled[i] && CombatData::hasMoveChosen[i]){
+		auto actor = CombatData::playerTeam->members[i];
+		if(isToggled[i] && CombatData::hasMoveChosen[actor]){
 
-			for(size_t j = 0; j < CombatData::playerAlive.size() && CombatData::hasMoveChosen[i]; ++j){ //Cycle through characters who have yet to select moves
-				i = (i + 1) % CombatData::playerAlive.size();
+			for(size_t j = 0; j < CombatData::playerTeam->members.size() && CombatData::hasMoveChosen[actor]; ++j){ //Cycle through characters who have yet to select moves
+				i = (i + 1) % CombatData::playerTeam->members.size();
+				actor = CombatData::playerTeam->members[i];
 				CombatData::portraits.toggles[i].active = true;
 				CombatData::focus = i;
 			}
@@ -298,7 +315,6 @@ void HandleInventoryPortraits(CombatData &cbtD){ //TODO: rename HandleCombatPort
 
 		if(update != isToggled[i]){
 			if(update){
-
 				CombatData::focus = i;
 				for(size_t j = 0; j < 4; ++j){
 					if(j != i) //Turn the others in the toggle group off
@@ -327,6 +343,7 @@ void MoveButtonsSetup(CombatData &cbtD){
 void MoveButtonsTextSetup(CombatData &cbtD){
 	Actor *actor = cbtD.playerTeam->members[cbtD.focus];
 	for(size_t i = 0; i < NUM_ACTOR_MOVES; ++i){
+		cbtD.moveButtons[i].text = "";
 		if(actor->moves[i])
 			cbtD.moveButtons[i].text = actor->moves[i]->name;
 		else
@@ -493,10 +510,29 @@ void BeginExecMoves(){
 //TODO: play the corresponding sounds
 void ExecMoves(CombatData &cbtD){
 	ExecMove(*CombatData::ctpsPtrs[cbtD.execIndex]);
+
+	std::string announcment = "";
+	auto &ctp = CombatData::ctpsPtrs[cbtD.execIndex];
+	announcment += ctp->caster->name + " uses " + ctp->move->name + " on ";
+	for(size_t i = 0; i < ctp->targets.size(); ++i){
+		if(i > 1)
+			announcment += ", " + ctp->targets[i]->name;
+		else
+			announcment += ctp->targets[i]->name;
+	}
+	announcment += ".";
+	CombatData::moveAnnouncment.text = announcment;
+	int w = GetGuiTextWidth(CombatData::moveAnnouncment.text.c_str());
+	Rectangle rect = {(float)(SCREENWIDTH / 2 - w / 2 - 8), (float)(SCREENHEIGHT / 4 - GuiGetStyle(DEFAULT, TEXT_SIZE) - 8), (float)(w + 16), (float)(GuiGetStyle(DEFAULT, TEXT_SIZE) * 2)};
+	CombatData::moveAnnouncment.bgBounds = rect;
+	CombatData::moveAnnouncment.bounds = rect;
+	CombatData::moveAnnouncment.disabled = false;
+	CombatData::moveAnnouncment.alignment = GUI_TEXT_ALIGN_CENTER;
+
 	cbtD.execIndex++;
 	
 	cbtD.executingMoves = cbtD.execIndex < CombatData::ctpsPtrs.size();
-	cbtD.aiMakePairs = cbtD.canAssign = !cbtD.executingMoves;
+	cbtD.aiMakePairs = !cbtD.executingMoves;
 }
 
 
@@ -2137,7 +2173,7 @@ void ExecMove(CasterTargetsPair &ctp){
 			CombatData::animLockouts++;
 			break;
 		case REND:
-			/* MoveImplementation::REND(*it, *static_cast<CasterMove *>(&ctp)); */
+			MoveImplementation::REND(*it, *static_cast<CasterMove *>(&ctp));
 			{
 				if(!playedCasterAnim){
 					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
@@ -2457,7 +2493,7 @@ void ExecMove(CasterTargetsPair &ctp){
 			CombatData::animLockouts++;
 			break;
 		case SHADOWSLASH:
-			/* MoveImplementation::SHADOWSLASH(*it, *static_cast<CasterMove *>(&ctp)); */
+			MoveImplementation::SHADOWSLASH(*it, *static_cast<CasterMove *>(&ctp));
 			{
 				if(!playedCasterAnim){
 					CombatData::actorSprites[ctp.caster].playAnimation("Use Physical", 
