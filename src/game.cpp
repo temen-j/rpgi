@@ -150,27 +150,27 @@ int CombatState(Game &game){
 	CombatData::moveAnimPlaying = CombatData::animLockouts > 0;
 
 	if(Game::gamestate.curr == State::combat_act){
-		if(game.cbtData->aiMakePairs)
-			AIMakeCTPs(*game.cbtData);
+		if(CombatData::aiMakePairs)
+			AIMakeCTPs();
 		
-		unsigned char prevFocus = game.cbtData->focus;
-		HandleCombatPortraits(*game.cbtData);
+		unsigned char prevFocus = CombatData::focus;
+		HandleCombatPortraits();
 
 		if(prevFocus != game.cbtData->focus){
-			GetAffordableMoves(*game.cbtData->playerTeam->members[game.cbtData->focus], game.cbtData->affordable);
-			MoveButtonsTextSetup(*game.cbtData);
+			GetAffordableMoves(*CombatData::playerTeam->members[CombatData::focus], CombatData::affordable);
+			MoveButtonsTextSetup();
 		}
 
-		SelectMoves(*game.cbtData);
+		SelectMoves();
 
 		if(game.cbtData->canAssign){
 			game.cbtData->dispTargetLists = true;
-			AssignTargets(*game.cbtData);
+			AssignTargets();
 		}
 		if(game.cbtData->canMakePair){
-			MakeCTP(*game.cbtData);
+			MakeCTP();
 		}
-		if(CanExecMoves(*game.cbtData)){ //You are now watching a movie :)
+		if(CanExecMoves()){ //You are now watching a movie :)
 			for(auto &it : CombatData::hasMoveChosen)
 				it.second = false;
 
@@ -193,14 +193,14 @@ int CombatState(Game &game){
 				prevMP[it] = (float)it->remMP / it->maxMP;
 			}
 			CombatData::statBarInterpTimer = 0.f;
-			ExecMoves(*game.cbtData);
+			ExecMoves();
 		}
 
 		//TODO: Tick Effects here!
 		//TODO: Resolve deaths
 
 		if(CombatData::announceMove && CombatData::executingMoves)
-			AnnounceMove(*game.cbtData); //Announce the move used on which actors
+			AnnounceMove(); //Announce the move used on which actors
 
 		if(CombatData::interpStats){
 			InterpolateStatBars(prevHP, prevMP); //modifies interpStats, and announcMove
@@ -210,7 +210,7 @@ int CombatState(Game &game){
 
 		if(!CombatData::executingMoves){ //Stopped exec moves go back to input
 			CombatData::ctps.clear();
-			GetAffordableMoves(*CombatData::playerTeam->members[game.cbtData->focus], game.cbtData->affordable);
+			GetAffordableMoves(*CombatData::playerTeam->members[CombatData::focus], CombatData::affordable);
 
 			Game::gamestate.prev = Game::gamestate.curr;
 			Game::gamestate.curr = State::combat_act;

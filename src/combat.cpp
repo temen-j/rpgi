@@ -12,6 +12,7 @@
 
 #include "..\include\sprite.h"
 
+
 CasterTargetsPair::CasterTargetsPair(Actor *c, struct Move *m, const Vec<Actor *> &t){
 	caster = c;
 	move = m;
@@ -20,8 +21,6 @@ CasterTargetsPair::CasterTargetsPair(Actor *c, struct Move *m, const Vec<Actor *
 
 
 void StartCombat(Game &game){
-	CombatData *cbtData = game.cbtData;
-
 	CombatData::focus = 0;
 
 	CombatData::portraits.toggles.resize(4);
@@ -41,12 +40,12 @@ void StartCombat(Game &game){
 
 	CombatData::playerTeam = &game.player.team;
 
-	CombatSpriteSetup(*cbtData);
+	CombatSpriteSetup();
 
-	CreateGoons(*cbtData);
-	TeamsSetup(*cbtData);
+	CreateGoons();
+	TeamsSetup();
 
-	GoonSpriteSetup(*cbtData);
+	GoonSpriteSetup();
 
 	CombatData::effects.clear();
 	for(auto &it : CombatData::playerAlive)
@@ -60,9 +59,9 @@ void StartCombat(Game &game){
 	for(auto &it : CombatData::botAlive)
 		CombatData::statusEffects.emplace(it, StatusEffects());
 
-	MoveButtonsSetup(*cbtData);
+	MoveButtonsSetup();
 
-	cbtData->chosenMove = nullptr;
+	CombatData::chosenMove = nullptr;
 	CombatData::aiMakePairs = true;
 
 	for(auto &it : CombatData::playerAlive)
@@ -91,7 +90,7 @@ void StartCombat(Game &game){
 }
 
 
-void AIMakeCTPs(CombatData &cbtD){
+void AIMakeCTPs(){
 	for(unsigned int i = 0; i < CombatData::botAlive.size(); ++i){ //FIXME: turn into for-range
 		Vec<Actor *> targets;
 		struct Move *move = CombatData::botAlive[i]->moves[0];
@@ -122,7 +121,7 @@ void AIMakeCTPs(CombatData &cbtD){
 }
 
 
-void SelectMoves(CombatData &cbtD){
+void SelectMoves(){
 	auto &actor = CombatData::playerTeam->members[CombatData::focus];
 
 	for(size_t i = 0; i < NUM_ACTOR_MOVES; ++i){
@@ -157,10 +156,10 @@ void GetAffordableMoves(Actor &actor, struct Move **affordable){
 }
 
 
-void AssignTargets(CombatData &cbtD){
+void AssignTargets(){
 	//Make a macro-loop
 	if(!CombatData::begunAssigning){
-		AssignTargetsSetup(cbtD);
+		AssignTargetsSetup();
 	}
 	if((int)CombatData::chosenTargets.size() < CombatData::chosenMove->maxTargets){
 		//Detect changes in selection and add/remove the list
@@ -170,9 +169,9 @@ void AssignTargets(CombatData &cbtD){
 		Update(CombatData::targetSelectedList);
 
 		if(prevActiveAlive != -1 && CombatData::targetAliveList.active != prevActiveAlive)
-			AddFromAliveList(cbtD, prevActiveAlive);
+			AddFromAliveList(prevActiveAlive);
 		if(prevActiveSelect != -1 && CombatData::targetSelectedList.active != prevActiveSelect)
-			RemoveFromSelectedList(cbtD, prevActiveSelect);
+			RemoveFromSelectedList(prevActiveSelect);
 	}
 	else{
 		CombatData::canMakePair = true;
@@ -181,7 +180,7 @@ void AssignTargets(CombatData &cbtD){
 }
 
 
-void AssignTargetsSetup(CombatData &cbtD){
+void AssignTargetsSetup(){
 	//TODO: Add checks for maxTargets == all enemies
 	if(CombatData::chosenMove->maxTargets == TARGET_ALL_ACTORS){
 		CombatData::chosenTargets.reserve(CombatData::playerAlive.size() + CombatData::botAlive.size());
@@ -216,7 +215,7 @@ void AssignTargetsSetup(CombatData &cbtD){
 }
 
 
-void MakeCTP(CombatData &cbtD){
+void MakeCTP(){
 	auto &actor = CombatData::playerTeam->members[CombatData::focus];
 	CombatData::ctps.emplace(CombatData::ctps.begin(), CasterTargetsPair(actor, CombatData::chosenMove, CombatData::chosenTargets));
 	CombatData::dispTargetLists = false;
@@ -231,21 +230,21 @@ void MakeCTP(CombatData &cbtD){
 }
 
 
-void AddFromAliveList(CombatData &cbtD, int &prevActive){
+void AddFromAliveList(int &prevActive){
 	CombatData::chosenTargets.push_back(CombatData::potTargets[prevActive]);
 	CombatData::targetSelectedList.text.push_back(CombatData::targetAliveList.text[prevActive]);
 	SetupListView(CombatData::targetSelectedList);
 }
 
 
-void RemoveFromSelectedList(CombatData &cbtD, int &prevActive){
+void RemoveFromSelectedList(int &prevActive){
 	CombatData::chosenTargets.erase(CombatData::chosenTargets.begin() + prevActive);
 	CombatData::targetSelectedList.text.erase(CombatData::targetSelectedList.text.begin() + prevActive);
 	SetupListView(CombatData::targetSelectedList);
 }
 
 
-void HandleCombatPortraits(CombatData &cbtD){
+void HandleCombatPortraits(){
 	bool isToggled[8] = {false}; //Keep track of previous activation
 
 	for(size_t i = 0; i < 8; ++i) //FIXME: magic numbers!
@@ -287,17 +286,17 @@ void HandleCombatPortraits(CombatData &cbtD){
 }
 
 
-void MoveButtonsSetup(CombatData &cbtD){
+void MoveButtonsSetup(){
 	Vector2 pos = {96, 448};
 	for(size_t i = 0; i < NUM_ACTOR_MOVES; ++i){
 		CombatData::moveButtons[i].bounds = (Rectangle){pos.x + (176 * (i % 4)), pos.y + (80 * (i / 4)), 160, 64}; //FIXME: magic numbers!
 	}
 
-	MoveButtonsTextSetup(cbtD);
+	MoveButtonsTextSetup();
 }
 
 
-void MoveButtonsTextSetup(CombatData &cbtD){
+void MoveButtonsTextSetup(){
 	Actor *actor = CombatData::playerTeam->members[CombatData::focus];
 	for(size_t i = 0; i < NUM_ACTOR_MOVES; ++i){
 		CombatData::moveButtons[i].text = "";
@@ -309,7 +308,7 @@ void MoveButtonsTextSetup(CombatData &cbtD){
 }
 
 
-void TeamsSetup(CombatData &cbtD){
+void TeamsSetup(){
 	for(unsigned int i = 0; i < CombatData::playerTeam->members.size(); ++i){
 		Actor *actor = CombatData::playerTeam->members[i];
 		if(!IsDead(*actor))
@@ -323,7 +322,7 @@ void TeamsSetup(CombatData &cbtD){
 }
 
 
-void CombatSpriteSetup(CombatData &cbtD){
+void CombatSpriteSetup(){
 	CombatData::actorSprites[CombatData::playerTeam->members[0]] = LoadSprite(cassandra_combat_anim); 
 	
 	//FIXME: kind of hacky, need to store looping in the anim file and embedded file
@@ -371,7 +370,7 @@ void CombatSpriteSetup(CombatData &cbtD){
 }
 
 
-void GoonSpriteSetup(CombatData &cbtD){
+void GoonSpriteSetup(){
 	CombatData::actorSprites[CombatData::botTeam->members[0]] = LoadSprite(metis_combat_anim);
 	auto &spr0 = CombatData::actorSprites[CombatData::botTeam->members[0]];
 	spr0.pos = {248, 232};
@@ -390,7 +389,7 @@ void GoonSpriteSetup(CombatData &cbtD){
 }
 
 
-void DisableUnusedButtons(CombatData &cbtD){
+void DisableUnusedButtons(){
 	Actor *actor = CombatData::playerTeam->members[CombatData::focus];
 	for(size_t i = 0; i < NUM_ACTOR_MOVES; ++i){
 		if(actor->moves[i])
@@ -401,7 +400,7 @@ void DisableUnusedButtons(CombatData &cbtD){
 }
 
 
-bool CanExecMoves(CombatData &cbtD){
+bool CanExecMoves(){
 	Vec<Actor *> allInCombat;
 	allInCombat.reserve(CombatData::playerAlive.size() + CombatData::botAlive.size());
 
@@ -464,7 +463,7 @@ void BeginExecMoves(){
 
 //NOTE: August 2, 2020
 //This function will execute a move by move
-void ExecMoves(CombatData &cbtD){
+void ExecMoves(){
 	ExecMove(*CombatData::ctpsPtrs[CombatData::execIndex]);
 	CombatData::execIndex++;
 	
@@ -2502,7 +2501,7 @@ void ExecMove(CasterTargetsPair &ctp){
 }
 
 //TODO: Make a tool that creates enemies
-void CreateGoons(CombatData &cbtD){
+void CreateGoons(){
 	CombatData::botTeam = new Team(); //ewww dynamic alloc...
 	Actor *foo = new Actor(); //TODO: Do arena alloc instead
 	Actor *bar = new Actor();
@@ -2554,7 +2553,7 @@ void ApplyEffect(Actor &target, int id){
 }
 
 
-void BeginAnnounceMove(CombatData &cbtD){
+void BeginAnnounceMove(){
 	auto &ctp = CombatData::ctpsPtrs[CombatData::execIndex];
 
 	std::string announcment = "";
@@ -2580,9 +2579,9 @@ void BeginAnnounceMove(CombatData &cbtD){
 }
 
 
-void AnnounceMove(CombatData &cbtD){
+void AnnounceMove(){
 	if(CombatData::moveAnnouncement.disabled)
-		BeginAnnounceMove(cbtD);
+		BeginAnnounceMove();
 
 	if(!CombatData::moveAnnouncement.disabled){
 		CombatData::announcementTimer += GetFrameTime();
