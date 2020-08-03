@@ -76,14 +76,14 @@ struct CombatData{
 	static MemPool diffMemPool;
 	static UMap<Actor *, StatusEffects> statusEffects;
 
-	struct Move *affordable[NUM_ACTOR_MOVES] = {nullptr};
-	struct Move *chosenMove = nullptr;
+	static struct Move *affordable[NUM_ACTOR_MOVES];
+	static struct Move *chosenMove;
 
-	bool aiMakePairs = false;
-	bool dispTargetLists = false;
-	bool begunAssigning = false;
-	bool canAssign = false;
-	bool canMakePair = false;
+	static bool aiMakePairs;
+	static bool dispTargetLists;
+	static bool begunAssigning;
+	static bool canAssign;
+	static bool canMakePair;
 	static bool executingMoves;
 	static bool interpStats;
 	static bool announceMove;
@@ -92,17 +92,20 @@ struct CombatData{
 	static Vec<CasterTargetsPair> ctps; //When exectuting moves, create an array of pointer and heapify that
 	static Vec<CasterTargetsPair *> ctpsPtrs;
 	static unsigned int execIndex;
-	CasterTargetsPair *execCTP; //the iterator
 
 	static ListView targetAliveList;
 	static ListView targetSelectedList;
-	Button moveButtons[NUM_ACTOR_MOVES];
+	static Button moveButtons[NUM_ACTOR_MOVES];
 	static UMap<Actor *, StatBar[2]> statBars;
 	static float statBarInterpTimer;
 	static constexpr float statBarInterpTime = .375f;
+
 	static BoxLabel moveAnnouncement;
 	static float announcementTimer;
 	static constexpr float announcementTime = 1.125f;
+
+	static float tickEffectTimer;
+	static constexpr float tickEffectTime = .375f;
 
 	static unsigned char focus;
 	static unsigned int animLockouts;
@@ -140,7 +143,7 @@ void ExecMove(CasterTargetsPair &);
 void TickEffects(CasterTargetsPair &);
 
 //Remove dead actors from the teams
-void ResolveDeaths(CombatData &);
+void ResolveDeaths();
 
 
 //AI Functions---------------------------------------------------------------------------------------
@@ -167,6 +170,7 @@ bool CanExecMoves(CombatData &);
 void CreateGoons(CombatData &);
 void UpdateFocus(CombatData &); //Update the combat data's character focus
 void ResetSelectAvailList();
+void FindExecutableCTP();
 void CombatSpriteSetup(CombatData &);
 void GoonSpriteSetup(CombatData &);
 

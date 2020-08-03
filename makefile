@@ -8,7 +8,7 @@ MATH_OBJ = tmath.o interp.o
 GRAPHICS_OBJ = sprite.o
 INVENTORY_OBJ = elemino.o inventory.o moveinventory.o
 MOVE_OBJ = move.o allmoves.o moveeffect.o move_impl.o
-COMBAT_OBJ = actor.o combat.o
+COMBAT_OBJ = actor.o combat.o combatdata.o
 GAME_OBJ = game.o element.o player.o
 
 BUILD ?= DEBUG
@@ -79,7 +79,10 @@ moveinventory.o: src\moveinventory.cpp include\moveinventory.h include\move.h
 	$(CXX) $(CXXFLAGS) -c src\moveinventory.cpp -L. $(LIB)
 
 combat.o: src\combat.cpp include\combat.h include\gui.h include\team.h include\move.h
-	$(CXX) $(CXXFLAGS) -c src\combat.cpp -L. $(LIB)
+	$(CXX) $(CXXFLAGS) -c src\combat.cpp -l. $(LIB)
+
+combatdata.o: src\combatdata.cpp include\combat.h
+	$(CXX) $(CXXFLAGS) -c src\combatdata.cpp -l. $(LIB)
 
 moveeffect.o: src\moveeffect.cpp include\moveeffect.h include\moveconst.h include\actor.h
 	$(CXX) $(CXXFLAGS) -c src\moveeffect.cpp -L. $(LIB)

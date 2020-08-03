@@ -185,8 +185,7 @@ int CombatState(Game &game){
 
 		CombatData::interpStats = CombatData::interpStats || (prevMoveAnimPlaying != CombatData::moveAnimPlaying && !CombatData::moveAnimPlaying); //Ending moveAnimPlaying
 
-		if(CombatData::announceMove)
-			AnnounceMove(*game.cbtData); //Announce the move used on which actors
+		FindExecutableCTP();
 
 		if(!CombatData::moveAnimPlaying && !CombatData::interpStats && !CombatData::announceMove && CombatData::executingMoves){
 			for(auto &it : CombatData::playerAlive){
@@ -200,10 +199,13 @@ int CombatState(Game &game){
 		//TODO: Tick Effects here!
 		//TODO: Resolve deaths
 
+		if(CombatData::announceMove && CombatData::executingMoves)
+			AnnounceMove(*game.cbtData); //Announce the move used on which actors
+
 		if(CombatData::interpStats){
-			InterpolateStatBars(prevHP, prevMP); //modifies interpStats
+			InterpolateStatBars(prevHP, prevMP); //modifies interpStats, and announcMove
 			if(!CombatData::interpStats)
-				ResolveDeaths(*game.cbtData);
+				ResolveDeaths();
 		}
 
 		if(!CombatData::executingMoves){ //Stopped exec moves go back to input

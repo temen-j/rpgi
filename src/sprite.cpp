@@ -115,38 +115,45 @@ void DrawSprite(Sprite &spr){
 Sprite LoadSprite(unsigned char *embedded){
 	Sprite spr;
 	void *iter = embedded;
+	struct VOIDPTR{};
 	
 	const unsigned int numAnims = *(unsigned int*)iter;
-	iter += sizeof(int);
+	iter = (VOIDPTR*)iter + sizeof(int);
 	
 	for(unsigned int i = 0; i < numAnims; ++i){
 		std::string animName = "";
 
 		//Find the end of the c-string
-		for(; *((char *)iter) != 0; iter += sizeof(char))
+		for(; *((char *)iter) != 0; iter = (VOIDPTR*)iter + sizeof(char))
 			animName += *((char*)iter);
-		iter += sizeof(char); //Advance forward past the zero
+		iter = (VOIDPTR*)iter + sizeof(char); //Advance forward past the zero
 		
 		const int numFrames = *(int*)iter;
-		iter += sizeof(int);
+		iter = (VOIDPTR*)iter + sizeof(int);
+		
 		Animation anim;
 		anim.durations.reserve(numFrames); //Do only one alloc for optimization
 		anim.rects.reserve(numFrames);
 		
 		int len = 0; //To be length of data decompressed
 		const unsigned int compressedSize = *(unsigned int*)iter; //Length of data compressed
-		iter += sizeof(int);
+		iter = (VOIDPTR*)iter + sizeof(int);
 		unsigned char *data = DecompressData((unsigned char*)iter, compressedSize, &len);
 
 		//Make the frames
 		void *spot = iter; //Save the spot where iter was
 		iter = data;
-		for(void *end = iter + numFrames * (sizeof(int)*5); iter != end; iter += sizeof(int)*5){
+		for(void *end = (VOIDPTR*)(iter) + numFrames * (sizeof(int)*5); iter != end; iter = (VOIDPTR*)iter + sizeof(int)*5){
 			anim.durations.push_back(*(unsigned int*)iter);
-			Rectangle rect = {*(int*)(iter+sizeof(int)), *(int*)(iter+sizeof(int)*2), *(int*)(iter+sizeof(int)*3), *(int*)(iter+sizeof(int)*4)};
+			Rectangle rect = { //Guaruntee int to float, and take next 4 ints
+				(float)(*(int*)((VOIDPTR*)(iter)+sizeof(int))),
+				(float)(*(int*)((VOIDPTR*)(iter)+sizeof(int)*2)),
+				(float)(*(int*)((VOIDPTR*)(iter)+sizeof(int)*3)),
+				(float)(*(int*)((VOIDPTR*)(iter)+sizeof(int)*4))
+			};
 			anim.rects.push_back(rect);
 		}
-		iter = spot + compressedSize * sizeof(unsigned char); //Return back to the spot in the actual data
+		iter = (VOIDPTR*)(spot) + compressedSize * sizeof(unsigned char); //Return back to the spot in the actual data
 
 		free(data);
 
