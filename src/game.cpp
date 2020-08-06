@@ -143,7 +143,8 @@ int MoveInventoryState(Game &game){
 int CombatState(Game &game){
 	if(!game.cbtData){
 		game.cbtData = new CombatData();
-		StartCombat(game);
+		CombatData::StartCombat(&game.player.team, nullptr);
+		game.justEnteredState = true;
 	}
 
 	bool prevMoveAnimPlaying = CombatData::moveAnimPlaying;
@@ -151,26 +152,26 @@ int CombatState(Game &game){
 
 	if(Game::gamestate.curr == State::combat_act){
 		if(CombatData::aiMakePairs)
-			AIMakeCTPs();
+			CombatData::AIMakeCTPs();
 		
 		unsigned char prevFocus = CombatData::focus;
-		HandleCombatPortraits();
+		CombatData::HandleCombatPortraits();
 
-		if(prevFocus != game.cbtData->focus){
-			GetAffordableMoves(*CombatData::playerTeam->members[CombatData::focus], CombatData::affordable);
-			MoveButtonsTextSetup();
+		if(prevFocus != CombatData::focus){
+			CombatData::GetAffordableMoves(*CombatData::playerTeam->members[CombatData::focus], CombatData::affordable);
+			CombatData::MoveButtonsTextSetup();
 		}
 
-		SelectMoves();
+		CombatData::SelectMoves();
 
-		if(game.cbtData->canAssign){
-			game.cbtData->dispTargetLists = true;
-			AssignTargets();
+		if(CombatData::canAssign){
+			CombatData::dispTargetLists = true;
+			CombatData::AssignTargets();
 		}
-		if(game.cbtData->canMakePair){
-			MakeCTP();
+		if(CombatData::canMakePair){
+			CombatData::MakeCTP();
 		}
-		if(CanExecMoves()){ //You are now watching a movie :)
+		if(CombatData::CanExecMoves()){ //You are now watching a movie :)
 			for(auto &it : CombatData::hasMoveChosen)
 				it.second = false;
 
@@ -185,32 +186,36 @@ int CombatState(Game &game){
 
 		CombatData::interpStats = CombatData::interpStats || (prevMoveAnimPlaying != CombatData::moveAnimPlaying && !CombatData::moveAnimPlaying); //Ending moveAnimPlaying
 
-		FindExecutableCTP();
+		CombatData::FindExecutableCTP();
 
-		if(!CombatData::moveAnimPlaying && !CombatData::interpStats && !CombatData::announceMove && CombatData::executingMoves){
-			for(auto &it : CombatData::playerAlive){
-				prevHP[it] = (float)it->remHP / it->maxHP;
-				prevMP[it] = (float)it->remMP / it->maxMP;
-			}
-			CombatData::statBarInterpTimer = 0.f;
-			ExecMoves();
+		if(CombatData::tickEffects && !CombatData::moveAnimPlaying && !CombatData::interpStats){
+			CombatData::SetupStatBar(prevHP, prevMP);
+			CombatData::TickEffects(); //Tick and cleanup move effects
+			CombatData::interpStats = CombatData::endExec = true;
 		}
 
-		//TODO: Tick Effects here!
-		//TODO: Resolve deaths
+		if(!CombatData::moveAnimPlaying && !CombatData::interpStats && !CombatData::announceMove && !CombatData::tickEffects 
+				&& !CombatData::endExec && CombatData::executingMoves){ //TODO: find a lessy crappy way of doing this
+			CombatData::SetupStatBar(prevHP, prevMP);
+			CombatData::ExecMoves();
+		}
 
 		if(CombatData::announceMove && CombatData::executingMoves)
-			AnnounceMove(); //Announce the move used on which actors
+			CombatData::AnnounceMove(); //Announce the move used on which actors
 
 		if(CombatData::interpStats){
-			InterpolateStatBars(prevHP, prevMP); //modifies interpStats, and announcMove
-			if(!CombatData::interpStats)
-				ResolveDeaths();
+			CombatData::InterpolateStatBars(prevHP, prevMP); //modifies interpStats, and announcMove
+
+			if(!CombatData::interpStats){ //Check if no loner interpolating stats
+				CombatData::ResolveDeaths();
+
+				if(CombatData::endExec)
+					CombatData::executingMoves = false;
+			}
 		}
 
 		if(!CombatData::executingMoves){ //Stopped exec moves go back to input
-			CombatData::ctps.clear();
-			GetAffordableMoves(*CombatData::playerTeam->members[CombatData::focus], CombatData::affordable);
+			CombatData::EndExecution();
 
 			Game::gamestate.prev = Game::gamestate.curr;
 			Game::gamestate.curr = State::combat_act;

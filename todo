@@ -1,21 +1,8 @@
 TODO
 	Make Actor
 		Create Enemy and Character derivations (Rudimentary)
-	Finish Actor
-		Re-enable effects to work with actors
-	Make Team/Player
+	Finish Combat
 	Call npcs "Living Entities" of some sort
-	Make Moves
-		Finish move functions
-	Make Effects
-		Read in effect data
-		Finish effect tick functions
-	Make Combat
-		Display Character Portrait Active for move selection
-		Display moves (buttons)
-		Display stats (stat bars?)
-		Perform Combat
-			Display animations?
 	Make AI
 		Write Minimax with Alpha-Beta Recursion
 			Use Monte-Carlo tree search for speedup
@@ -34,4 +21,5 @@ Is working
 	Inventory
 	Move
 	Actor
+	Effects
 	

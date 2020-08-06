@@ -39,6 +39,7 @@ bool CombatData::executingMoves = false;
 bool CombatData::interpStats = false;
 bool CombatData::announceMove = false;
 bool CombatData::aiMakePairs = false;
+bool CombatData::endExec = false;
 //-------------------------------------------------
 
 unsigned int CombatData::execIndex = 0;
@@ -48,11 +49,13 @@ float CombatData::announcementTimer = 0.f;
 ListView CombatData::targetAliveList;
 ListView CombatData::targetSelectedList;
 
-UMap<Actor *, StatBar[2]> CombatData::statBars;
+/* UMap<Actor *, StatBar[2]> CombatData::statBars; */
+UMap<Actor *, std::array<StatBar, 2> > CombatData::statBars;
 
 BoxLabel CombatData::moveAnnouncement;
 
 Button CombatData::moveButtons[NUM_ACTOR_MOVES];
 
 float CombatData::tickEffectTimer = 0.f;
+bool CombatData::tickEffects = false;
 

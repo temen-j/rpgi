@@ -5,9 +5,11 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
-#include <unordered_map>
+#include <array>
+/* #include <unordered_map> */
 
 #include "raylib\raylib.h"
+#include "robin_hood\robin_hood.h"
 
 template<typename T>
 using Vec = std::vector<T>;
@@ -15,12 +17,13 @@ using Vec = std::vector<T>;
 template<typename T, typename U>
 using Pair = std::pair<T, U>;
 
+/* template<typename T, typename U> */
+/* using UMap = std::unordered_map<T, U>; */
 template<typename T, typename U>
-using UMap = std::unordered_map<T, U>;
+using UMap = robin_hood::unordered_flat_map<T, U>;
 
 struct Animation{
 	/* unsigned int id; */
-	/* bool playing = false; //FIXME: remove me! */
 	bool looping = false;
 
 	unsigned int index = 0;

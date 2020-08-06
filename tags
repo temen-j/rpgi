@@ -59,9 +59,11 @@ ADDRESS_NONE	.\include\raylib\rnet.h	199;"	d
 ADDRESS_TYPE_ANY	.\include\raylib\rnet.h	189;"	d
 ADDRESS_TYPE_IPV4	.\include\raylib\rnet.h	190;"	d
 ADDRESS_TYPE_IPV6	.\include\raylib\rnet.h	191;"	d
-AIMakeCTPs	.\src\combat.cpp	/^void AIMakeCTPs(CombatData &cbtD){$/;"	f
-AIMakeCTPs	.\src\test.cpp	/^void AIMakeCTPs(CombatData &cbtD){$/;"	f
+AIMakeCTPs	.\src\combat.cpp	/^void CombatData::AIMakeCTPs(){$/;"	f	class:CombatData
 ALIGN	.\include\raylib\external\jar_xm.h	620;"	d
+ALIGNED_SIZE	.\include\robin_hood\robin_hood.h	/^    static constexpr size_t ALIGNED_SIZE = ((sizeof(T) - 1) \/ ALIGNMENT + 1) * ALIGNMENT;$/;"	m	class:robin_hood::detail::BulkPoolAllocator
+ALIGNMENT	.\include\robin_hood\robin_hood.h	/^    static const size_t ALIGNMENT =$/;"	m	class:robin_hood::detail::BulkPoolAllocator
+ALIGNMENT	.\include\robin_hood\robin_hood.h	/^    static constexpr size_t ALIGNMENT =$/;"	m	class:robin_hood::detail::BulkPoolAllocator
 ALIGN_PTR	.\include\raylib\external\jar_xm.h	621;"	d
 ALLMOVES_H	.\include\allmoves.h	3;"	d
 ALLOYASSAULT	.\src\move_impl.cpp	/^void MoveImplementation::ALLOYASSAULT(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
@@ -128,8 +130,7 @@ ActivateCompleted	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHOD
 Actor	.\include\actor.h	/^	Actor(){$/;"	f	struct:Actor
 Actor	.\include\actor.h	/^struct Actor{$/;"	s
 AddCharacters	.\src\player.cpp	/^void AddCharacters(Player &player){$/;"	f
-AddFromAliveList	.\src\combat.cpp	/^void AddFromAliveList(CombatData &cbtD, int &prevActive){$/;"	f
-AddFromAliveList	.\src\test.cpp	/^void AddFromAliveList(CombatData &cbtD, int &prevActive){$/;"	f
+AddFromAliveList	.\src\combat.cpp	/^void CombatData::AddFromAliveList(int &prevActive){$/;"	f	class:CombatData
 AddNumArgMessage	.\src\console.cpp	/^void AddNumArgMessage(Console &c, unsigned int exact){$/;"	f
 AddNumArgMessage	.\src\console.cpp	/^void AddNumArgMessage(Console &c, unsigned int min, unsigned int max){$/;"	f
 AddRef	.\include\raylib\external\miniaudio.h	/^        ULONG   (STDMETHODCALLTYPE * AddRef)        (ma_IActivateAudioInterfaceAsyncOperation* pThis);$/;"	m	struct:__anon268
@@ -169,11 +170,10 @@ AndroidButton	.\include\raylib\raylib.h	/^} AndroidButton;$/;"	t	typeref:enum:__
 AndroidCommandCallback	.\include\raylib\core.c	/^static void AndroidCommandCallback(struct android_app *app, int32_t cmd)$/;"	f	file:
 AndroidInputCallback	.\include\raylib\core.c	/^static int32_t AndroidInputCallback(struct android_app *app, AInputEvent *event)$/;"	f	file:
 Animation	.\include\sprite.h	/^struct Animation{$/;"	s
-AnnounceMove	.\src\combat.cpp	/^void AnnounceMove(CombatData &cbtD){$/;"	f
+AnnounceMove	.\src\combat.cpp	/^void CombatData::AnnounceMove(){$/;"	f	class:CombatData
 ApplyCost	.\src\move_impl.cpp	/^void ApplyCost(CasterMove &cm){$/;"	f
 ApplyDamage	.\src\move_impl.cpp	/^void ApplyDamage(Actor &target, CasterMove &cm){$/;"	f
 ApplyDisableDiff	.\src\moveeffect.cpp	/^void ApplyDisableDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
-ApplyEffect	.\src\combat.cpp	/^void ApplyEffect(Actor &target, int id){$/;"	f
 ApplyEffectDiff	.\src\moveeffect.cpp	/^void ApplyEffectDiff(Actor &actor, MoveEffect &meff){$/;"	f
 ApplyHPBonusDiff	.\src\moveeffect.cpp	/^void ApplyHPBonusDiff(Actor &actor, EffectDiff &ediff, int &diff){$/;"	f
 ApplyHeal	.\src\move_impl.cpp	/^void ApplyHeal(Actor &target, CasterMove &cm){$/;"	f
@@ -191,9 +191,8 @@ ArpIndex	.\include\raylib\external\jar_mod.h	/^    muchar  ArpIndex;$/;"	m	struc
 Arpperiods	.\include\raylib\external\jar_mod.h	/^    mint    Arpperiods[3];$/;"	m	struct:__anon126
 AssignElementGrid	.\src\inventory.cpp	/^void AssignElementGrid(Grid *g, Actor &a){$/;"	f
 AssignStats	.\src\actor.cpp	/^void AssignStats(Actor *a){$/;"	f
-AssignTargets	.\src\combat.cpp	/^void AssignTargets(CombatData &cbtD){$/;"	f
-AssignTargets	.\src\test.cpp	/^void AssignTargets(CombatData &cbtD){$/;"	f
-AssignTargetsSetup	.\src\combat.cpp	/^void AssignTargetsSetup(CombatData &cbtD){$/;"	f
+AssignTargets	.\src\combat.cpp	/^void CombatData::AssignTargets(){$/;"	f	class:CombatData
+AssignTargetsSetup	.\src\combat.cpp	/^void CombatData::AssignTargetsSetup(){$/;"	f	class:CombatData
 AssignType	.\src\actor.cpp	/^void AssignType(Actor &a){$/;"	f
 AudioBuffer	.\include\raylib\raudio.c	2138;"	d	file:
 AudioBuffer	.\include\raylib\raudio.c	291;"	d	file:
@@ -282,10 +281,10 @@ BYTES_TEXT_PER_LINE	.\include\raylib\raudio.c	776;"	d	file:
 BYTES_TEXT_PER_LINE	.\include\raylib\textures.c	852;"	d	file:
 BatteryLevel	.\include\raylib\external\glfw\deps\mingw\xinput.h	/^    BYTE BatteryLevel;$/;"	m	struct:_XINPUT_BATTERY_INFORMATION
 BatteryType	.\include\raylib\external\glfw\deps\mingw\xinput.h	/^    BYTE BatteryType;$/;"	m	struct:_XINPUT_BATTERY_INFORMATION
-BeginAnnounceMove	.\src\combat.cpp	/^void BeginAnnounceMove(CombatData &cbtD){$/;"	f
+BeginAnnounceMove	.\src\combat.cpp	/^void CombatData::BeginAnnounceMove(){$/;"	f	class:CombatData
 BeginBlendMode	.\include\raylib\rlgl.h	/^void BeginBlendMode(int mode)$/;"	f
 BeginDrawing	.\include\raylib\core.c	/^void BeginDrawing(void)$/;"	f
-BeginExecMoves	.\src\combat.cpp	/^void BeginExecMoves(){$/;"	f
+BeginExecMoves	.\src\combat.cpp	/^void CombatData::BeginExecMoves(){$/;"	f	class:CombatData
 BeginMode2D	.\include\raylib\core.c	/^void BeginMode2D(Camera2D camera)$/;"	f
 BeginMode3D	.\include\raylib\core.c	/^void BeginMode3D(Camera3D camera)$/;"	f
 BeginScissorMode	.\include\raylib\core.c	/^void BeginScissorMode(int x, int y, int width, int height)$/;"	f
@@ -310,6 +309,7 @@ BoundingBox	.\include\raylib\raylib.h	/^typedef struct BoundingBox {$/;"	s
 BoundingBox	.\include\raylib\raylib.h	/^} BoundingBox;$/;"	t	typeref:struct:BoundingBox
 BoxLabel	.\include\gui.h	/^struct BoxLabel : Label{$/;"	s
 Buffer	.\include\raylib\raudio.c	/^    } Buffer;$/;"	m	struct:AudioData	typeref:struct:AudioData::__anon402	file:
+BulkPoolAllocator	.\include\robin_hood\robin_hood.h	/^class BulkPoolAllocator {$/;"	c	namespace:robin_hood::detail
 Button	.\include\gui.h	/^struct Button{$/;"	s
 Button6	.\include\raylib\external\glfw\src\x11_window.c	50;"	d	file:
 Button7	.\include\raylib\external\glfw\src\x11_window.c	51;"	d	file:
@@ -476,13 +476,11 @@ CameraMode	.\include\raylib\raylib.h	/^} CameraMode;$/;"	t	typeref:enum:__anon44
 CameraMove	.\include\raylib\camera.h	/^} CameraMove;$/;"	t	typeref:enum:__anon3
 CameraType	.\include\raylib\camera.h	/^    } CameraType;$/;"	t	typeref:enum:__anon2
 CameraType	.\include\raylib\raylib.h	/^} CameraType;$/;"	t	typeref:enum:__anon444
-CanExecMoves	.\src\combat.cpp	/^bool CanExecMoves(CombatData &cbtD){$/;"	f
-CanExecMoves	.\src\test.cpp	/^bool CanExecMoves(CombatData &cbtD){$/;"	f
+CanExecMoves	.\src\combat.cpp	/^bool CombatData::CanExecMoves(){$/;"	f	class:CombatData
 CasterMove	.\include\combat.h	/^struct CasterMove{$/;"	s
 CasterTargetsPair	.\include\combat.h	/^	CasterTargetsPair(){$/;"	f	struct:CasterTargetsPair
 CasterTargetsPair	.\include\combat.h	/^struct CasterTargetsPair : CasterMove{$/;"	s
 CasterTargetsPair	.\src\combat.cpp	/^CasterTargetsPair::CasterTargetsPair(Actor *c, struct Move *m, const Vec<Actor *> &t){$/;"	f	class:CasterTargetsPair
-CasterTargetsPair	.\src\test.cpp	/^CasterTargetsPair::CasterTargetsPair(Actor *c, struct Move *m, const Vec<Actor *> &t){$/;"	f	class:CasterTargetsPair
 ChangeDirectory	.\include\raylib\core.c	/^bool ChangeDirectory(const char *dir)$/;"	f
 ChangeWindowMessageFilterEx	.\include\raylib\external\glfw\src\win32_platform.h	240;"	d
 ChangeWindowMessageFilterEx_	.\include\raylib\external\glfw\src\win32_platform.h	/^        PFN_ChangeWindowMessageFilterEx ChangeWindowMessageFilterEx_;$/;"	m	struct:_GLFWlibraryWin32::__anon103
@@ -529,6 +527,8 @@ ClearCommand	.\src\console.cpp	/^void ClearCommand(Console &c){$/;"	f
 ClearDirectoryFiles	.\include\raylib\core.c	/^void ClearDirectoryFiles(void)$/;"	f
 ClearDroppedFiles	.\include\raylib\core.c	/^void ClearDroppedFiles(void)$/;"	f
 Clip	.\include\raylib\physac.h	/^static int Clip(Vector2 normal, float clip, Vector2 *faceA, Vector2 *faceB)$/;"	f
+Cloner	.\include\robin_hood\robin_hood.h	/^    struct Cloner<M, false> {$/;"	s	class:robin_hood::detail::Table
+Cloner	.\include\robin_hood\robin_hood.h	/^    struct Cloner<M, true> {$/;"	s	class:robin_hood::detail::Table
 CloseAudioBufferPool	.\include\raylib\raudio.c	/^static void CloseAudioBufferPool(void)$/;"	f	file:
 CloseAudioDevice	.\include\raylib\raudio.c	/^void CloseAudioDevice(void)$/;"	f
 CloseAudioStream	.\include\raylib\raudio.c	/^void CloseAudioStream(AudioStream stream)$/;"	f
@@ -555,7 +555,7 @@ ColorToInt	.\include\raylib\core.c	/^int ColorToInt(Color color)$/;"	f
 ColorToInt	.\include\raylib\raygui.h	/^static int ColorToInt(Color color)$/;"	f
 CombatData	.\include\combat.h	/^struct CombatData{$/;"	s
 CombatPortraits	.\include\gui.h	/^struct CombatPortraits{$/;"	s
-CombatSpriteSetup	.\src\combat.cpp	/^void CombatSpriteSetup(CombatData &cbtD){$/;"	f
+CombatSpriteSetup	.\src\combat.cpp	/^void CombatData::CombatSpriteSetup(){$/;"	f	class:CombatData
 CombatState	.\src\game.cpp	/^int CombatState(Game &game){$/;"	f
 CombatStates	.\include\combat.h	/^	enum CombatStates{$/;"	g	struct:CombatData
 Command	.\include\console.h	/^	enum Command{$/;"	g	namespace:Dev
@@ -576,6 +576,7 @@ CopyCurrentKeyboardLayoutInputSource	.\include\raylib\external\glfw\src\cocoa_pl
 CoreData	.\include\raylib\core.c	/^typedef struct CoreData {$/;"	s	file:
 CoreData	.\include\raylib\core.c	/^} CoreData;$/;"	t	typeref:struct:CoreData	file:
 CorrectPhysicsPositions	.\include\raylib\physac.h	/^static void CorrectPhysicsPositions(PhysicsManifold manifold)$/;"	f
+Counts	.\include\robin_hood\robin_hood.h	/^struct Counts {$/;"	s	namespace:robin_hood
 Create	.\include\raylib\external\glfw\src\win32_platform.h	/^        PFN_DirectInput8Create          Create;$/;"	m	struct:_GLFWlibraryWin32::__anon101
 CreateBiStack	.\include\raylib\rmem.h	/^BiStack CreateBiStack(const size_t len)$/;"	f
 CreateBiStackFromBuffer	.\include\raylib\rmem.h	/^BiStack CreateBiStackFromBuffer(void *const buf, const size_t len)$/;"	f
@@ -586,8 +587,7 @@ CreateContextAttribs	.\include\raylib\external\glfw\src\osmesa_context.h	/^    P
 CreateContextAttribsARB	.\include\raylib\external\glfw\src\glx_context.h	/^    PFNGLXCREATECONTEXTATTRIBSARBPROC   CreateContextAttribsARB;$/;"	m	struct:_GLFWlibraryGLX
 CreateContextAttribsARB	.\include\raylib\external\glfw\src\wgl_context.h	/^    PFNWGLCREATECONTEXTATTRIBSARBPROC   CreateContextAttribsARB;$/;"	m	struct:_GLFWlibraryWGL
 CreateContextExt	.\include\raylib\external\glfw\src\osmesa_context.h	/^    PFN_OSMesaCreateContextExt      CreateContextExt;$/;"	m	struct:_GLFWlibraryOSMesa
-CreateGoons	.\src\combat.cpp	/^void CreateGoons(CombatData &cbtD){$/;"	f
-CreateGoons	.\src\test.cpp	/^void CreateGoons(CombatData &cbtD){$/;"	f
+CreateGoons	.\src\combat.cpp	/^void CombatData::CreateGoons(){$/;"	f	class:CombatData
 CreateMemPool	.\include\raylib\rmem.h	/^MemPool CreateMemPool(const size_t size)$/;"	f
 CreateMemPoolFromBuffer	.\include\raylib\rmem.h	/^MemPool CreateMemPoolFromBuffer(void *buf, const size_t size)$/;"	f
 CreateNewContext	.\include\raylib\external\glfw\src\glx_context.h	/^    PFNGLXCREATENEWCONTEXTPROC          CreateNewContext;$/;"	m	struct:_GLFWlibraryGLX
@@ -1624,6 +1624,9 @@ DWM_BB_BLURREGION	.\include\raylib\external\glfw\src\win32_platform.h	130;"	d
 DWM_BB_ENABLE	.\include\raylib\external\glfw\src\win32_platform.h	129;"	d
 DWM_BLURBEHIND	.\include\raylib\external\glfw\src\win32_platform.h	/^} DWM_BLURBEHIND;$/;"	t	typeref:struct:__anon97
 DWORD_PTR	.\include\raylib\external\miniaudio.h	/^typedef size_t DWORD_PTR;$/;"	t
+DataNode	.\include\robin_hood\robin_hood.h	/^        explicit DataNode(M& map, Args&&... args)$/;"	f	class:robin_hood::detail::Table::DataNode
+DataNode	.\include\robin_hood\robin_hood.h	/^    class DataNode {};$/;"	c	class:robin_hood::detail::Table
+DataNode	.\include\robin_hood\robin_hood.h	/^    class DataNode<M, false> {$/;"	c	class:robin_hood::detail::Table
 DecodeBase64	.\include\raylib\models.c	/^static unsigned char *DecodeBase64(char *input, int *size)$/;"	f	file:
 DecompressData	.\include\raylib\core.c	/^unsigned char *DecompressData(unsigned char *compData, int compDataLength, int *dataLength)$/;"	f
 DeleteContext	.\include\raylib\external\glfw\src\wgl_context.h	/^    PFN_wglDeleteContext                DeleteContext;$/;"	m	struct:_GLFWlibraryWGL
@@ -1638,6 +1641,9 @@ DestroyPhysicsBody	.\include\raylib\physac.h	/^PHYSACDEF void DestroyPhysicsBody
 DestroyPhysicsManifold	.\include\raylib\physac.h	/^static void DestroyPhysicsManifold(PhysicsManifold manifold)$/;"	f
 DestroySurface	.\include\raylib\external\glfw\src\egl_context.h	/^    PFN_eglDestroySurface       DestroySurface;$/;"	m	struct:_GLFWlibraryEGL
 DestroyWindow	.\include\raylib\external\glfw\src\glx_context.h	/^    PFNGLXDESTROYWINDOWPROC             DestroyWindow;$/;"	m	struct:_GLFWlibraryGLX
+Destroyer	.\include\robin_hood\robin_hood.h	/^    struct Destroyer {};$/;"	s	class:robin_hood::detail::Table
+Destroyer	.\include\robin_hood\robin_hood.h	/^    struct Destroyer<M, false> {$/;"	s	class:robin_hood::detail::Table
+Destroyer	.\include\robin_hood\robin_hood.h	/^    struct Destroyer<M, true> {$/;"	s	class:robin_hood::detail::Table
 Dev	.\include\console.h	/^namespace Dev{$/;"	n
 DirectInput8Create	.\include\raylib\external\glfw\src\win32_platform.h	230;"	d
 DirectInputCreate	.\include\raylib\external\glfw\deps\mingw\dinput.h	2458;"	d
@@ -1648,8 +1654,7 @@ DirectSoundEnumerateA	.\include\raylib\external\miniaudio.h	/^            ma_pro
 DirectoryExists	.\include\raylib\core.c	/^bool DirectoryExists(const char *dirPath)$/;"	f
 DisableCursor	.\include\raylib\camera.h	/^static void DisableCursor() {}      \/\/ Lock cursor$/;"	f
 DisableCursor	.\include\raylib\core.c	/^void DisableCursor(void)$/;"	f
-DisableUnusedButtons	.\src\combat.cpp	/^void DisableUnusedButtons(CombatData &cbtD){$/;"	f
-DisableUnusedButtons	.\src\test.cpp	/^void DisableUnusedButtons(CombatData &cbtD){$/;"	f
+DisableUnusedButtons	.\src\combat.cpp	/^void CombatData::DisableUnusedButtons(){$/;"	f	class:CombatData
 DistSqr	.\include\raylib\physac.h	/^static inline float DistSqr(Vector2 v1, Vector2 v2)$/;"	f
 DllMain	.\include\raylib\external\glfw\src\win32_init.c	/^BOOL WINAPI DllMain(HINSTANCE instance, DWORD reason, LPVOID reserved)$/;"	f
 Drag	.\include\raylib\gestures.h	/^    } Drag;$/;"	m	struct:__anon390	typeref:struct:__anon390::__anon393
@@ -1762,7 +1767,7 @@ DynamicBuffer	.\include\raylib\rlgl.h	/^} DynamicBuffer;$/;"	t	typeref:struct:Dy
 EASEDEF	.\include\raylib\easings.h	88;"	d
 EASEDEF	.\include\raylib\easings.h	90;"	d
 EASINGS_H	.\include\raylib\easings.h	83;"	d
-EASINGS_HEADER	.\include\combat.h	17;"	d
+EASINGS_HEADER	.\include\combat.h	18;"	d
 EASINGS_STATIC_INLINE	.\include\raylib\easings.h	85;"	d
 ECTORAY	.\src\move_impl.cpp	/^void MoveImplementation::ECTORAY(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 EDS_ROTATEDMODE	.\include\raylib\external\glfw\src\win32_platform.h	96;"	d
@@ -2467,10 +2472,8 @@ ErrorCallback	.\include\raylib\core.c	/^static void ErrorCallback(int error, con
 EventThread	.\include\raylib\core.c	/^static void *EventThread(void *arg)$/;"	f	file:
 EventThreadSpawn	.\include\raylib\core.c	/^static void EventThreadSpawn(char *device)$/;"	f	file:
 ExecCommand	.\src\console.cpp	/^void ExecCommand(Console &c, Game &game){$/;"	f
-ExecMove	.\src\combat.cpp	/^void ExecMove(CasterTargetsPair &ctp){$/;"	f
-ExecMove	.\src\test.cpp	/^void ExecMove(CasterTargetsPair &ctp){$/;"	f
-ExecMoves	.\src\combat.cpp	/^void ExecMoves(CombatData &cbtD){$/;"	f
-ExecMoves	.\src\test.cpp	/^void ExecMoves(CombatData &cbtD){$/;"	f
+ExecMove	.\src\execmove.cpp	/^void CombatData::ExecMove(CasterTargetsPair &ctp){$/;"	f	class:CombatData
+ExecMoves	.\src\combat.cpp	/^void CombatData::ExecMoves(){$/;"	f	class:CombatData
 ExportImage	.\include\raylib\textures.c	/^void ExportImage(Image image, const char *fileName)$/;"	f
 ExportImageAsCode	.\include\raylib\textures.c	/^void ExportImageAsCode(Image image, const char *fileName)$/;"	f
 ExportMesh	.\include\raylib\models.c	/^void ExportMesh(Mesh mesh, const char *fileName)$/;"	f
@@ -2532,6 +2535,7 @@ FileExists	.\include\raylib\core.c	/^bool FileExists(const char *fileName)$/;"	f
 FindAvailableBodyIndex	.\include\raylib\physac.h	/^static int FindAvailableBodyIndex()$/;"	f
 FindAvailableManifoldIndex	.\include\raylib\physac.h	/^static int FindAvailableManifoldIndex()$/;"	f
 FindAxisLeastPenetration	.\include\raylib\physac.h	/^static float FindAxisLeastPenetration(int *faceIndex, PhysicsShape shapeA, PhysicsShape shapeB)$/;"	f
+FindExecutableCTP	.\src\combat.cpp	/^void CombatData::FindExecutableCTP(){$/;"	f	class:CombatData
 FindIncidentFace	.\include\raylib\physac.h	/^static void FindIncidentFace(Vector2 *v0, Vector2 *v1, PhysicsShape ref, PhysicsShape inc, int index)$/;"	f
 FindVisualFormat	.\include\raylib\external\glfw\src\x11_platform.h	/^        PFN_XRenderFindVisualFormat FindVisualFormat;$/;"	m	struct:_GLFWlibraryX11::__anon122
 Flags	.\include\raylib\external\glfw\deps\mingw\xinput.h	/^    WORD Flags;$/;"	m	struct:_XINPUT_CAPABILITIES
@@ -7927,8 +7931,7 @@ GetAddressFamily	.\include\raylib\rnet.h	/^int GetAddressFamily(AddressInformati
 GetAddressHostAndPort	.\include\raylib\rnet.h	/^char *GetAddressHostAndPort(AddressInformation address, char *outhost, int *outport)$/;"	f
 GetAddressProtocol	.\include\raylib\rnet.h	/^int GetAddressProtocol(AddressInformation address)$/;"	f
 GetAddressSocketType	.\include\raylib\rnet.h	/^int GetAddressSocketType(AddressInformation address)$/;"	f
-GetAffordableMoves	.\src\combat.cpp	/^void GetAffordableMoves(Actor &actor, struct Move **affordable){$/;"	f
-GetAffordableMoves	.\src\test.cpp	/^void GetAffordableMoves(Actor &actor, struct Move **affordable){$/;"	f
+GetAffordableMoves	.\src\combat.cpp	/^void CombatData::GetAffordableMoves(Actor &actor, struct Move **affordable){$/;"	f	class:CombatData
 GetAndroidApp	.\include\raylib\core.c	/^struct android_app *GetAndroidApp(void)$/;"	f
 GetAt	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * GetAt)   (ma_IPropertyStore* pThis, DWORD propIndex, PROPERTYKEY* pPropKey);$/;"	m	struct:__anon269
 GetAvailable	.\src\moveinventory.cpp	/^void GetAvailable(Player &player){$/;"	f
@@ -8174,7 +8177,7 @@ GlbMagicBinChunk	.\include\raylib\external\cgltf.h	/^static const uint32_t GlbMa
 GlbMagicJsonChunk	.\include\raylib\external\cgltf.h	/^static const uint32_t GlbMagicJsonChunk = 0x4E4F534A;$/;"	v
 GlbVersion	.\include\raylib\external\cgltf.h	/^static const uint32_t GlbVersion = 2;$/;"	v
 GlobalTextData	.\include\gui.h	/^struct GlobalTextData{$/;"	s
-GoonSpriteSetup	.\src\combat.cpp	/^void GoonSpriteSetup(CombatData &cbtD){$/;"	f
+GoonSpriteSetup	.\src\combat.cpp	/^void CombatData::GoonSpriteSetup(){$/;"	f	class:CombatData
 Grid	.\include\elemino.h	/^	Grid(){$/;"	f	struct:Grid
 Grid	.\include\elemino.h	/^struct Grid{$/;"	s
 GuiButton	.\include\raylib\raygui.h	/^bool GuiButton(Rectangle bounds, const char *text)$/;"	f
@@ -8321,12 +8324,11 @@ HWND	.\include\raylib\external\ANGLE\EGL\eglplatform.h	/^typedef HANDLE HWND;   
 HWND	.\include\raylib\external\glfw\include\GLFW\glfw3native.h	/^ typedef HANDLE HWND;$/;"	t
 HandleAccept	.\src\console.cpp	/^void HandleAccept(Console &console){$/;"	f
 HandleClose	.\src\console.cpp	/^void HandleClose(Console &console, GameState &gs){$/;"	f
-HandleCombatPortraits	.\src\combat.cpp	/^void HandleCombatPortraits(CombatData &cbtD){ \/\/TODO: rename HandleCombatPortraits()$/;"	f
+HandleCombatPortraits	.\src\combat.cpp	/^void CombatData::HandleCombatPortraits(){$/;"	f	class:CombatData
 HandleDelete	.\src\console.cpp	/^void HandleDelete(Console &console){$/;"	f
 HandleFlyingElemino	.\src\inventory.cpp	/^void HandleFlyingElemino(Game &game){$/;"	f
 HandleInventoryPortraits	.\src\inventory.cpp	/^void HandleInventoryPortraits(InventoryData &invD){$/;"	f
 HandleInventoryPortraits	.\src\moveinventory.cpp	/^void HandleInventoryPortraits(MoveInventoryData &minvD){$/;"	f
-HandleInventoryPortraits	.\src\test.cpp	/^void HandleInventoryPortraits(CombatData &cbtD){$/;"	f
 HandleMoveLeft	.\src\console.cpp	/^void HandleMoveLeft(Console &console){$/;"	f
 HandleMoveRight	.\src\console.cpp	/^void HandleMoveRight(Console &console){$/;"	f
 HandleRetrieveCommand	.\src\console.cpp	/^void HandleRetrieveCommand(Console &console){$/;"	f
@@ -8839,6 +8841,10 @@ InitTimer	.\include\raylib\core.c	/^static void InitTimer(void)$/;"	f	file:
 InitTimer	.\include\raylib\physac.h	/^static void InitTimer(void)$/;"	f
 InitVrSimulator	.\include\raylib\rlgl.h	/^void InitVrSimulator(void)$/;"	f
 InitWindow	.\include\raylib\core.c	/^void InitWindow(int width, int height, const char *title)$/;"	f
+InitialInfoHashShift	.\include\robin_hood\robin_hood.h	/^    static constexpr uint8_t InitialInfoHashShift = sizeof(size_t) * 8 - InitialInfoNumBits;$/;"	m	class:robin_hood::detail::Table
+InitialInfoInc	.\include\robin_hood\robin_hood.h	/^    static constexpr uint8_t InitialInfoInc = 1U << InitialInfoNumBits;$/;"	m	class:robin_hood::detail::Table
+InitialInfoNumBits	.\include\robin_hood\robin_hood.h	/^    static constexpr uint32_t InitialInfoNumBits = 5;$/;"	m	class:robin_hood::detail::Table
+InitialNumElements	.\include\robin_hood\robin_hood.h	/^    static constexpr size_t InitialNumElements = sizeof(uint64_t);$/;"	m	class:robin_hood::detail::Table
 Initialize	.\include\raylib\external\glfw\src\egl_context.h	/^    PFN_eglInitialize           Initialize;$/;"	m	struct:_GLFWlibraryEGL
 Initialize	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * Initialize)          (ma_IDirectSound* pThis, const GUID* pGuidDevice);$/;"	m	struct:__anon284
 Initialize	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * Initialize)         (ma_IDirectSoundCapture* pThis, const GUID* pGuidDevice);$/;"	m	struct:__anon286
@@ -8856,7 +8862,7 @@ IntegratePhysicsForces	.\include\raylib\physac.h	/^static void IntegratePhysicsF
 IntegratePhysicsImpulses	.\include\raylib\physac.h	/^static void IntegratePhysicsImpulses(PhysicsManifold manifold)$/;"	f
 IntegratePhysicsVelocity	.\include\raylib\physac.h	/^static void IntegratePhysicsVelocity(PhysicsBody body)$/;"	f
 Interface	.\include\gui.h	/^struct Interface{$/;"	s
-InterpolateStatBars	.\src\combat.cpp	/^void InterpolateStatBars(UMap<Actor *, float> &prevHP, UMap<Actor *, float> &prevMP){$/;"	f
+InterpolateStatBars	.\src\combat.cpp	/^void CombatData::InterpolateStatBars(UMap<Actor *, float> &prevHP, UMap<Actor *, float> &prevMP){$/;"	f	class:CombatData
 InventoryData	.\include\inventory.h	/^struct InventoryData{$/;"	s
 InventoryPortraits	.\include\gui.h	/^struct InventoryPortraits{$/;"	s
 InventoryState	.\src\game.cpp	/^int InventoryState(Game &game){$/;"	f
@@ -8914,6 +8920,7 @@ IsWindows8Point1OrGreater	.\include\raylib\external\glfw\src\win32_platform.h	17
 IsWindowsVistaOrGreater	.\include\raylib\external\glfw\src\win32_platform.h	166;"	d
 IsWindowsXPOrGreater	.\include\raylib\external\glfw\src\win32_platform.h	163;"	d
 Item	.\include\raylib\external\miniaudio.h	/^        HRESULT (STDMETHODCALLTYPE * Item)    (ma_IMMDeviceCollection* pThis, UINT nDevice, ma_IMMDevice** ppDevice);$/;"	m	struct:__anon266
+Iter	.\include\robin_hood\robin_hood.h	/^    class Iter {$/;"	c	class:robin_hood::detail::Table
 J	.\include\elemino.h	/^	J,$/;"	e	enum:MinoShape
 JARMOD_FREE	.\include\raylib\external\jar_mod.h	89;"	d
 JARMOD_FREE	.\include\raylib\raudio.c	194;"	d	file:
@@ -9349,7 +9356,6 @@ Lerp	.\include\raylib\raymath.h	/^RMDEF float Lerp(float start, float end, float
 Lerp	.\src\interp.cpp	/^Vector2 Lerp(const float t, const Vector2 a, const Vector2 b){$/;"	f
 Lerp	.\src\interp.cpp	/^float Lerp(const float t, const float a, const float b){$/;"	f
 LessThanCTP	.\src\combat.cpp	/^bool LessThanCTP(CasterTargetsPair *first, CasterTargetsPair *second){$/;"	f
-LessThanCTP	.\src\test.cpp	/^bool LessThanCTP(CasterTargetsPair *first, CasterTargetsPair *second){$/;"	f
 LibraryLoadImage	.\include\raylib\external\glfw\src\x11_platform.h	/^        PFN_XcursorLibraryLoadImage LibraryLoadImage;$/;"	m	struct:_GLFWlibraryX11::__anon117
 LifeDrain	.\src\moveeffect.cpp	/^void LifeDrain(MoveEffect &meff, Actor *actor, int healing){$/;"	f
 LineInfo	.\include\raylib\external\tinyobj_loader_c.h	/^} LineInfo;$/;"	t	typeref:struct:__anon385
@@ -10475,8 +10481,7 @@ MVK_macos_surface	.\include\raylib\external\glfw\src\internal.h	/^        GLFWbo
 MWM_DECOR_ALL	.\include\raylib\external\glfw\src\x11_window.c	55;"	d	file:
 MWM_HINTS_DECORATIONS	.\include\raylib\external\glfw\src\x11_window.c	54;"	d	file:
 M_PI	.\include\raylib\external\stb_vorbis.h	1015;"	d
-MakeCTP	.\src\combat.cpp	/^void MakeCTP(CombatData &cbtD){$/;"	f
-MakeCTP	.\src\test.cpp	/^void MakeCTP(CombatData &cbtD){$/;"	f
+MakeCTP	.\src\combat.cpp	/^void CombatData::MakeCTP(){$/;"	f	class:CombatData
 MakeCurrent	.\include\raylib\external\glfw\src\egl_context.h	/^    PFN_eglMakeCurrent          MakeCurrent;$/;"	m	struct:_GLFWlibraryEGL
 MakeCurrent	.\include\raylib\external\glfw\src\glx_context.h	/^    PFNGLXMAKECURRENTPROC               MakeCurrent;$/;"	m	struct:_GLFWlibraryGLX
 MakeCurrent	.\include\raylib\external\glfw\src\osmesa_context.h	/^    PFN_OSMesaMakeCurrent           MakeCurrent;$/;"	m	struct:_GLFWlibraryOSMesa
@@ -10573,10 +10578,8 @@ Move	.\include\move.h	/^struct Move{$/;"	s
 Move	.\src\elemino.cpp	/^void Move(Elemino &e, const Vector2 &offset){$/;"	f
 Move	.\src\move.cpp	/^Move::Move(){$/;"	f	class:Move
 Move	.\src\move.cpp	/^Move::Move(int id, const char *name, Element elem, int levelObtained, int priority, int maxTargets, int damage, int healing, int cost,$/;"	f	class:Move
-MoveButtonsSetup	.\src\combat.cpp	/^void MoveButtonsSetup(CombatData &cbtD){$/;"	f
-MoveButtonsSetup	.\src\test.cpp	/^void MoveButtonsSetup(CombatData &cbtD){$/;"	f
-MoveButtonsTextSetup	.\src\combat.cpp	/^void MoveButtonsTextSetup(CombatData &cbtD){$/;"	f
-MoveButtonsTextSetup	.\src\test.cpp	/^void MoveButtonsTextSetup(CombatData &cbtD){$/;"	f
+MoveButtonsSetup	.\src\combat.cpp	/^void CombatData::MoveButtonsSetup(){$/;"	f	class:CombatData
+MoveButtonsTextSetup	.\src\combat.cpp	/^void CombatData::MoveButtonsTextSetup(){$/;"	f	class:CombatData
 MoveEffect	.\include\moveeffect.h	/^	MoveEffect(int id){$/;"	f
 MoveEffect	.\include\moveeffect.h	/^struct MoveEffect{$/;"	s
 MoveImplementation	.\include\move_impl.h	/^namespace MoveImplementation{$/;"	n
@@ -10757,6 +10760,8 @@ NameGuid	.\include\raylib\external\miniaudio.h	/^    GUID NameGuid;$/;"	m	struct
 NativeDisplayType	.\include\raylib\external\ANGLE\EGL\eglplatform.h	/^typedef EGLNativeDisplayType NativeDisplayType;$/;"	t
 NativePixmapType	.\include\raylib\external\ANGLE\EGL\eglplatform.h	/^typedef EGLNativePixmapType  NativePixmapType;$/;"	t
 NativeWindowType	.\include\raylib\external\ANGLE\EGL\eglplatform.h	/^typedef EGLNativeWindowType  NativeWindowType;$/;"	t
+NodeAllocator	.\include\robin_hood\robin_hood.h	/^struct NodeAllocator<T, MinSize, MaxSize, false> : public BulkPoolAllocator<T, MinSize, MaxSize> {};$/;"	s	namespace:robin_hood::detail
+NodeAllocator	.\include\robin_hood\robin_hood.h	/^struct NodeAllocator<T, MinSize, MaxSize, true> {$/;"	s	namespace:robin_hood::detail
 O	.\include\elemino.h	/^	O,$/;"	e	enum:MinoShape
 OBSIDIANONSLAUGHT	.\src\move_impl.cpp	/^void MoveImplementation::OBSIDIANONSLAUGHT(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 OCR_HAND	.\include\raylib\external\glfw\src\win32_platform.h	114;"	d
@@ -13264,6 +13269,37 @@ RNET_CALLOC	.\include\raylib\rnet.h	98;"	d
 RNET_FREE	.\include\raylib\rnet.h	101;"	d
 RNET_H	.\include\raylib\rnet.h	41;"	d
 RNET_MALLOC	.\include\raylib\rnet.h	95;"	d
+ROBIN_HOOD	.\include\robin_hood\robin_hood.h	96;"	d
+ROBIN_HOOD_COUNT	.\include\robin_hood\robin_hood.h	75;"	d
+ROBIN_HOOD_COUNT_TRAILING_ZEROES	.\include\robin_hood\robin_hood.h	146;"	d
+ROBIN_HOOD_HASH_INT	.\include\robin_hood\robin_hood.h	797;"	d
+ROBIN_HOOD_H_INCLUDED	.\include\robin_hood\robin_hood.h	35;"	d
+ROBIN_HOOD_IS_TRIVIALLY_COPYABLE	.\include\robin_hood\robin_hood.h	208;"	d
+ROBIN_HOOD_LIKELY	.\include\robin_hood\robin_hood.h	187;"	d
+ROBIN_HOOD_LOG	.\include\robin_hood\robin_hood.h	58;"	d
+ROBIN_HOOD_LOG	.\include\robin_hood\robin_hood.h	60;"	d
+ROBIN_HOOD_PRIVATE_DEFINITION_BIG_ENDIAN	.\include\robin_hood\robin_hood.h	113;"	d
+ROBIN_HOOD_PRIVATE_DEFINITION_BITNESS	.\include\robin_hood\robin_hood.h	103;"	d
+ROBIN_HOOD_PRIVATE_DEFINITION_CTZ	.\include\robin_hood\robin_hood.h	142;"	d
+ROBIN_HOOD_PRIVATE_DEFINITION_CXX	.\include\robin_hood\robin_hood.h	214;"	d
+ROBIN_HOOD_PRIVATE_DEFINITION_CXX11	.\include\robin_hood\robin_hood.h	216;"	d
+ROBIN_HOOD_PRIVATE_DEFINITION_CXX14	.\include\robin_hood\robin_hood.h	217;"	d
+ROBIN_HOOD_PRIVATE_DEFINITION_CXX17	.\include\robin_hood\robin_hood.h	218;"	d
+ROBIN_HOOD_PRIVATE_DEFINITION_CXX98	.\include\robin_hood\robin_hood.h	215;"	d
+ROBIN_HOOD_PRIVATE_DEFINITION_FALLTHROUGH	.\include\robin_hood\robin_hood.h	178;"	d
+ROBIN_HOOD_PRIVATE_DEFINITION_HAS_EXCEPTIONS	.\include\robin_hood\robin_hood.h	129;"	d
+ROBIN_HOOD_PRIVATE_DEFINITION_HAS_NATIVE_WCHART	.\include\robin_hood\robin_hood.h	197;"	d
+ROBIN_HOOD_PRIVATE_DEFINITION_LITTLE_ENDIAN	.\include\robin_hood\robin_hood.h	112;"	d
+ROBIN_HOOD_PRIVATE_DEFINITION_NODISCARD	.\include\robin_hood\robin_hood.h	221;"	d
+ROBIN_HOOD_PRIVATE_DEFINITION_NOINLINE	.\include\robin_hood\robin_hood.h	122;"	d
+ROBIN_HOOD_STD	.\include\robin_hood\robin_hood.h	229;"	d
+ROBIN_HOOD_TRACE	.\include\robin_hood\robin_hood.h	66;"	d
+ROBIN_HOOD_TRACE	.\include\robin_hood\robin_hood.h	69;"	d
+ROBIN_HOOD_UNLIKELY	.\include\robin_hood\robin_hood.h	188;"	d
+ROBIN_HOOD_UNUSED	.\include\robin_hood\robin_hood.h	99;"	d
+ROBIN_HOOD_VERSION_MAJOR	.\include\robin_hood\robin_hood.h	38;"	d
+ROBIN_HOOD_VERSION_MINOR	.\include\robin_hood\robin_hood.h	39;"	d
+ROBIN_HOOD_VERSION_PATCH	.\include\robin_hood\robin_hood.h	40;"	d
 ROCKCOLOR	.\include\gui.h	37;"	d
 ROCKSLIDE	.\src\move_impl.cpp	/^void MoveImplementation::ROCKSLIDE(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 ROLLINGBOULDER	.\src\move_impl.cpp	/^void MoveImplementation::ROLLINGBOULDER(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
@@ -13305,8 +13341,7 @@ Release	.\include\raylib\external\miniaudio.h	/^    ULONG   (STDMETHODCALLTYPE *
 ReleaseBuffer	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * ReleaseBuffer)    (ma_IAudioCaptureClient* pThis, ma_uint32 numFramesRead);$/;"	m	struct:__anon274
 ReleaseBuffer	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * ReleaseBuffer)(ma_IAudioRenderClient* pThis, ma_uint32 numFramesWritten, DWORD dwFlags);$/;"	m	struct:__anon273
 RemoveFromCurrentMoves	.\src\moveinventory.cpp	/^void RemoveFromCurrentMoves(Player &player, int &prevActive){$/;"	f
-RemoveFromSelectedList	.\src\combat.cpp	/^void RemoveFromSelectedList(CombatData &cbtD, int &prevActive){$/;"	f
-RemoveFromSelectedList	.\src\test.cpp	/^void RemoveFromSelectedList(CombatData &cbtD, int &prevActive){$/;"	f
+RemoveFromSelectedList	.\src\combat.cpp	/^void CombatData::RemoveFromSelectedList(int &prevActive){$/;"	f	class:CombatData
 RemoveSocket	.\include\raylib\rnet.h	/^int RemoveSocket(SocketSet *set, Socket *sock)$/;"	f
 RenderTexture	.\include\raylib\raylib.h	/^typedef RenderTexture2D RenderTexture;$/;"	t
 RenderTexture	.\include\raylib\rlgl.h	/^    typedef RenderTexture2D RenderTexture;$/;"	t
@@ -13318,10 +13353,9 @@ Reset	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * R
 Reset	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * Reset)            (ma_IAudioClient2* pThis);$/;"	m	struct:__anon271
 Reset	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * Reset)            (ma_IAudioClient3* pThis);$/;"	m	struct:__anon272
 ResetPhysics	.\include\raylib\physac.h	/^PHYSACDEF void ResetPhysics(void)$/;"	f
-ResetSelectAvailList	.\src\combat.cpp	/^void ResetSelectAvailList(){$/;"	f
-ResetSelectAvailList	.\src\test.cpp	/^void ResetSelectAvailList(CombatData &cbtD){$/;"	f
+ResetSelectAvailList	.\src\combat.cpp	/^void CombatData::ResetSelectAvailList(){$/;"	f	class:CombatData
 ResizePacket	.\include\raylib\rnet.h	/^int ResizePacket(SocketDataPacket *packet, int newsize)$/;"	f
-ResolveDeaths	.\src\combat.cpp	/^void ResolveDeaths(CombatData &cbtD){$/;"	f
+ResolveDeaths	.\src\combat.cpp	/^void CombatData::ResolveDeaths(){$/;"	f	class:CombatData
 ResolveHost	.\include\raylib\rnet.h	/^int ResolveHost(const char *address, const char *service, int addressType, int flags, AddressInformation *outAddr)$/;"	f
 ResolveIP	.\include\raylib\rnet.h	/^void ResolveIP(const char *ip, const char *port, int flags, char *host, char *serv)$/;"	f
 Restore	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * Restore)           (ma_IDirectSoundBuffer* pThis);$/;"	m	struct:__anon285
@@ -13795,8 +13829,7 @@ ScrollBar	.\include\gui.h	/^struct ScrollBar{$/;"	s
 ScrollCallback	.\include\raylib\core.c	/^static void ScrollCallback(GLFWwindow *window, double xoffset, double yoffset)$/;"	f	file:
 SelectEvents	.\include\raylib\external\glfw\src\x11_platform.h	/^        PFN_XISelectEvents SelectEvents;$/;"	m	struct:_GLFWlibraryX11::__anon121
 SelectInput	.\include\raylib\external\glfw\src\x11_platform.h	/^        PFN_XRRSelectInput SelectInput;$/;"	m	struct:_GLFWlibraryX11::__anon113
-SelectMoves	.\src\combat.cpp	/^void SelectMoves(CombatData &cbtD){$/;"	f
-SelectMoves	.\src\test.cpp	/^void SelectMoves(CombatData &cbtD){$/;"	f
+SelectMoves	.\src\combat.cpp	/^void CombatData::SelectMoves(){$/;"	f	class:CombatData
 SendMessageToUWP	.\include\raylib\utils.c	/^void SendMessageToUWP(UWPMessage *msg)$/;"	f
 SetAudioBufferPitch	.\include\raylib\raudio.c	/^void SetAudioBufferPitch(AudioBuffer *buffer, float pitch)$/;"	f
 SetAudioBufferVolume	.\include\raylib\raudio.c	/^void SetAudioBufferVolume(AudioBuffer *buffer, float volume)$/;"	f
@@ -13878,6 +13911,7 @@ SetupFramebuffer	.\include\raylib\core.c	/^static void SetupFramebuffer(int widt
 SetupListView	.\src\gui.cpp	/^void SetupListView(ListView &lw){$/;"	f
 SetupMoveInfo	.\src\moveinventory.cpp	/^void SetupMoveInfo(MoveInventoryData &minvD){$/;"	f
 SetupScrollBar	.\src\gui.cpp	/^void SetupScrollBar(ScrollBar &sb){$/;"	f
+SetupStatBar	.\src\combat.cpp	/^void CombatData::SetupStatBar(UMap<Actor *, float> &prevHP, UMap<Actor *, float> &prevMP){$/;"	f	class:CombatData
 SetupViewport	.\include\raylib\core.c	/^static void SetupViewport(int width, int height)$/;"	f	file:
 Shader	.\include\raylib\raylib.h	/^typedef struct Shader {$/;"	s
 Shader	.\include\raylib\raylib.h	/^} Shader;$/;"	t	typeref:struct:Shader
@@ -13950,8 +13984,7 @@ Start	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * S
 Start	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * Start)            (ma_IAudioClient* pThis);$/;"	m	struct:__anon270
 Start	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * Start)            (ma_IAudioClient2* pThis);$/;"	m	struct:__anon271
 Start	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * Start)            (ma_IAudioClient3* pThis);$/;"	m	struct:__anon272
-StartCombat	.\src\combat.cpp	/^void StartCombat(Game &game){$/;"	f
-StartCombat	.\src\test.cpp	/^void StartCombat(Game &game){$/;"	f
+StartCombat	.\src\combat.cpp	/^void CombatData::StartCombat(Team *playerTeam, Team *botTeam){$/;"	f	class:CombatData
 StatBar	.\include\gui.h	/^	StatBar(){$/;"	f	struct:StatBar
 StatBar	.\include\gui.h	/^	StatBar(float coeff, Rectangle rect, Color good, Color bad){$/;"	f	struct:StatBar
 StatBar	.\include\gui.h	/^	StatBar(float coeff, Rectangle rect, int denominator, Color good, Color bad){$/;"	f	struct:StatBar
@@ -13996,6 +14029,10 @@ SwapIntervalSGI	.\include\raylib\external\glfw\src\glx_context.h	/^    PFNGLXSWA
 Swipe	.\include\raylib\gestures.h	/^    } Swipe;$/;"	m	struct:__anon390	typeref:struct:__anon390::__anon394
 System	.\include\raylib\raudio.c	/^    } System;$/;"	m	struct:AudioData	typeref:struct:AudioData::__anon401	file:
 T	.\include\elemino.h	/^	T,$/;"	e	enum:MinoShape
+T2	.\include\robin_hood\robin_hood.h	/^                U1...>&>()))...)) && noexcept(T2(std::$/;"	f	struct:robin_hood::pair
+T2	.\include\robin_hood\robin_hood.h	/^        T1(std::move(std::declval<T1&&>()))) && noexcept(T2(std::move(std::declval<T2&&>()))))$/;"	f	struct:robin_hood::pair
+T2	.\include\robin_hood\robin_hood.h	/^        noexcept(T1(std::declval<T1 const&>())) && noexcept(T2(std::declval<T2 const&>())))$/;"	f	struct:robin_hood::pair
+T2	.\include\robin_hood\robin_hood.h	/^        std::declval<U1&&>()))) && noexcept(T2(std::forward<U2>(std::declval<U2&&>()))))$/;"	f	struct:robin_hood::pair
 TAP_TIMEOUT	.\include\raylib\gestures.h	169;"	d
 TARGETS	.\include\raylib\external\glfw\src\x11_platform.h	/^    Atom            TARGETS;$/;"	m	struct:_GLFWlibraryX11
 TARGET_ALL_ACTORS	.\include\move.h	/^const int TARGET_ALL_ACTORS = 127; \/\/To be used with maxTargets$/;"	v
@@ -14083,13 +14120,16 @@ TREECLEAVER	.\src\move_impl.cpp	/^void MoveImplementation::TREECLEAVER(Actor &ta
 TREMOR	.\src\move_impl.cpp	/^void MoveImplementation::TREMOR(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 TRUE	.\include\raylib\external\stb_vorbis.h	634;"	d
 TSUNAMI	.\src\move_impl.cpp	/^void MoveImplementation::TSUNAMI(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
+Table	.\include\robin_hood\robin_hood.h	/^    Table(Iter first, Iter last, size_t ROBIN_HOOD_UNUSED(bucket_count) \/*unused*\/ = 0,$/;"	f	class:robin_hood::detail::Table
+Table	.\include\robin_hood\robin_hood.h	/^    Table(const Table& o)$/;"	f	class:robin_hood::detail::Table
+Table	.\include\robin_hood\robin_hood.h	/^    Table(std::initializer_list<value_type> initlist,$/;"	f	class:robin_hood::detail::Table
+Table	.\include\robin_hood\robin_hood.h	/^class Table$/;"	c	namespace:robin_hood::detail
 TakeScreenshot	.\include\raylib\core.c	/^void TakeScreenshot(const char *fileName)$/;"	f
 Team	.\include\player.h	/^	Team(){$/;"	f	struct:Team
 Team	.\include\player.h	/^struct Team{$/;"	s
 Team	.\include\team.h	/^	Team(){$/;"	f	struct:Team
 Team	.\include\team.h	/^struct Team{$/;"	s
-TeamsSetup	.\src\combat.cpp	/^void TeamsSetup(CombatData &cbtD){$/;"	f
-TeamsSetup	.\src\test.cpp	/^void TeamsSetup(CombatData &cbtD){$/;"	f
+TeamsSetup	.\src\combat.cpp	/^void CombatData::TeamsSetup(){$/;"	f	class:CombatData
 Terminate	.\include\raylib\external\glfw\src\egl_context.h	/^    PFN_eglTerminate            Terminate;$/;"	m	struct:_GLFWlibraryEGL
 TextAppend	.\include\raylib\text.c	/^void TextAppend(char *text, const char *append, int *position)$/;"	f
 TextCopy	.\include\raylib\text.c	/^int TextCopy(char *dst, const char *src)$/;"	f
@@ -14126,6 +14166,7 @@ TextureManager	.\include\sprite.h	/^struct TextureManager{$/;"	s
 TextureWrapMode	.\include\raylib\raylib.h	/^} TextureWrapMode;$/;"	t	typeref:enum:__anon439
 Tick	.\src\moveeffect.cpp	/^void MoveEffect::Tick(Actor *actor){$/;"	f	class:MoveEffect
 TickDamage	.\src\moveeffect.cpp	/^void MoveEffect::TickDamage(int healing){$/;"	f	class:MoveEffect
+TickEffects	.\src\combat.cpp	/^void CombatData::TickEffects(){$/;"	f	class:CombatData
 TickHealCaster	.\src\moveeffect.cpp	/^void MoveEffect::TickHealCaster(int healing){$/;"	f	class:MoveEffect
 TickHealTarget	.\src\moveeffect.cpp	/^void MoveEffect::TickHealTarget(int healing){$/;"	f	class:MoveEffect
 Time	.\include\raylib\core.c	/^    } Time;$/;"	m	struct:CoreData	typeref:struct:CoreData::__anon16	file:
@@ -14147,6 +14188,7 @@ Transform	.\include\raylib\raylib.h	/^typedef struct Transform {$/;"	s
 Transform	.\include\raylib\raylib.h	/^} Transform;$/;"	t	typeref:struct:Transform
 TriangleBarycenter	.\include\raylib\physac.h	/^static Vector2 TriangleBarycenter(Vector2 v1, Vector2 v2, Vector2 v3)$/;"	f
 Type	.\include\raylib\external\glfw\deps\mingw\xinput.h	/^    BYTE Type;$/;"	m	struct:_XINPUT_CAPABILITIES
+U2	.\include\robin_hood\robin_hood.h	/^    constexpr pair() noexcept(noexcept(U1()) && noexcept(U2()))$/;"	f	struct:robin_hood::pair
 UDPChannel	.\include\raylib\rnet.h	/^typedef struct UDPChannel {$/;"	s
 UDPChannel	.\include\raylib\rnet.h	/^} UDPChannel;$/;"	t	typeref:struct:UDPChannel
 UINT16_C	.\include\raylib\external\glfw\deps\vs2008\stdint.h	236;"	d
@@ -16162,6 +16204,7 @@ WINT_MAX	.\include\raylib\external\glfw\deps\vs2008\stdint.h	219;"	d
 WINT_MIN	.\include\raylib\external\glfw\deps\vs2008\stdint.h	218;"	d
 WINVER	.\include\raylib\external\glfw\src\win32_platform.h	53;"	d
 WINVER	.\include\raylib\external\glfw\src\win32_platform.h	54;"	d
+WKeyEqual	.\include\robin_hood\robin_hood.h	/^        , WKeyEqual(equal) {$/;"	f	class:robin_hood::detail::Table
 WM_COPYGLOBALDATA	.\include\raylib\external\glfw\src\win32_platform.h	81;"	d
 WM_DELETE_WINDOW	.\include\raylib\external\glfw\src\x11_platform.h	/^    Atom            WM_DELETE_WINDOW;$/;"	m	struct:_GLFWlibraryX11
 WM_DPICHANGED	.\include\raylib\external\glfw\src\win32_platform.h	90;"	d
@@ -16190,6 +16233,8 @@ WindowIconifyCallback	.\include\raylib\core.c	/^static void WindowIconifyCallbac
 WindowSetup	.\src\window.cpp	/^void WindowSetup(){$/;"	f
 WindowShouldClose	.\include\raylib\core.c	/^bool WindowShouldClose(void)$/;"	f
 WindowSizeCallback	.\include\raylib\core.c	/^static void WindowSizeCallback(GLFWwindow *window, int width, int height)$/;"	f	file:
+WrapHash	.\include\robin_hood\robin_hood.h	/^struct WrapHash : public T {$/;"	s	namespace:robin_hood::detail
+WrapKeyEqual	.\include\robin_hood\robin_hood.h	/^struct WrapKeyEqual : public T {$/;"	s	namespace:robin_hood::detail
 XF86VidModeGetGammaRamp	.\include\raylib\external\glfw\src\x11_platform.h	116;"	d
 XF86VidModeGetGammaRampSize	.\include\raylib\external\glfw\src\x11_platform.h	118;"	d
 XF86VidModeQueryExtension	.\include\raylib\external\glfw\src\x11_platform.h	115;"	d
@@ -16601,7 +16646,7 @@ __USE_BSD	.\include\raylib\external\dr_flac.h	871;"	d
 __USE_W32_SOCKETS	.\include\raylib\rnet.h	138;"	d
 __WINE_XINPUT_H	.\include\raylib\external\glfw\deps\mingw\xinput.h	21;"	d
 __cpluplus	.\src\gui.cpp	7;"	d	file:
-__cpluscplus	.\include\combat.h	18;"	d
+__cpluscplus	.\include\combat.h	19;"	d
 __eglMustCastToProperFunctionPointerType	.\include\raylib\external\ANGLE\EGL\egl.h	/^typedef void (*__eglMustCastToProperFunctionPointerType)(void);$/;"	t
 __egl_h_	.\include\raylib\external\ANGLE\EGL\egl.h	2;"	d
 __eglext_h_	.\include\raylib\external\ANGLE\EGL\eglext.h	2;"	d
@@ -16619,6 +16664,7 @@ __gl3platform_h_	.\include\raylib\external\ANGLE\GLES3\gl3platform.h	2;"	d
 __gl_h_	.\include\raylib\external\glad.h	26;"	d
 __gl_h_	.\include\raylib\external\glfw\deps\glad\gl.h	33;"	d
 __glad_h_	.\include\raylib\external\glad.h	21;"	d
+__has_cpp_attribute	.\include\robin_hood\robin_hood.h	175;"	d
 __khrplatform_h_	.\include\raylib\external\ANGLE\KHR\khrplatform.h	2;"	d
 __khrplatform_h_	.\include\raylib\external\glfw\deps\glad\khrplatform.h	2;"	d
 __magic	.\include\raylib\external\miniaudio.h	/^    unsigned int __magic;$/;"	m	struct:ma_sio_par
@@ -17085,7 +17131,7 @@ active_port	.\include\raylib\external\miniaudio.h	/^    void* active_port;$/;"	m
 activity	.\include\raylib\external\android\native_app_glue\android_native_app_glue.h	/^    ANativeActivity* activity;$/;"	m	struct:android_app
 activityState	.\include\raylib\external\android\native_app_glue\android_native_app_glue.h	/^    int activityState;$/;"	m	struct:android_app
 actorSprites	.\include\combat.h	/^	static UMap<Actor *, Sprite> actorSprites;$/;"	m	struct:CombatData
-actorSprites	.\src\combat.cpp	/^UMap<Actor *, Sprite> CombatData::actorSprites;$/;"	m	class:CombatData	file:
+actorSprites	.\src\combatdata.cpp	/^UMap<Actor *, Sprite> CombatData::actorSprites;$/;"	m	class:CombatData	file:
 actors	.\include\player.h	/^	static Actor actors[NUM_PLAYER_CHARACTERS];$/;"	m	struct:Character
 actors	.\src\player.cpp	/^Actor Character::actors[NUM_PLAYER_CHARACTERS];$/;"	m	class:Character	file:
 actualPeriodSizeInFramesCapture	.\include\raylib\external\miniaudio.h	/^            ma_uint32 actualPeriodSizeInFramesCapture;$/;"	m	struct:ma_device::__anon230::__anon231
@@ -17112,8 +17158,10 @@ advance	.\include\raylib\external\stb_truetype.h	/^   int advance;$/;"	m	struct:
 advanceX	.\include\raylib\raylib.h	/^    int advanceX;           \/\/ Character advance position X$/;"	m	struct:CharInfo
 affected	.\include\moveeffect.h	/^	Actor *affected = nullptr;$/;"	v
 affector	.\include\moveeffect.h	/^	Actor *affector = nullptr;$/;"	v
-affordable	.\include\combat.h	/^	struct Move *affordable[NUM_ACTOR_MOVES] = {nullptr};$/;"	m	struct:CombatData	typeref:struct:CombatData::Move
-aiMakePairs	.\include\combat.h	/^	bool aiMakePairs = false;$/;"	m	struct:CombatData
+affordable	.\include\combat.h	/^	static struct Move *affordable[NUM_ACTOR_MOVES];$/;"	m	struct:CombatData	typeref:struct:CombatData::Move
+affordable	.\src\combatdata.cpp	/^struct Move *CombatData::affordable[NUM_ACTOR_MOVES] = {nullptr};$/;"	m	class:CombatData	typeref:struct:CombatData::	file:
+aiMakePairs	.\include\combat.h	/^	static bool aiMakePairs;$/;"	m	struct:CombatData
+aiMakePairs	.\src\combatdata.cpp	/^bool CombatData::aiMakePairs = false;$/;"	m	class:CombatData	file:
 algo	.\include\raylib\external\dr_mp3.h	/^    } algo;$/;"	m	struct:drmp3_src	typeref:union:drmp3_src::__anon55
 algorithm	.\include\raylib\external\dr_mp3.h	/^    drmp3_src_algorithm algorithm;$/;"	m	struct:__anon54
 algorithm	.\include\raylib\external\miniaudio.h	/^        ma_resample_algorithm algorithm;$/;"	m	struct:__anon159::__anon160
@@ -17131,6 +17179,7 @@ alloc	.\include\raylib\external\stb_vorbis.h	/^   stb_vorbis_alloc alloc;$/;"	m	
 alloc_buffer	.\include\raylib\external\stb_vorbis.h	/^   char *alloc_buffer;$/;"	m	struct:__anon362
 alloc_buffer_length_in_bytes	.\include\raylib\external\stb_vorbis.h	/^   int   alloc_buffer_length_in_bytes;$/;"	m	struct:__anon362
 alloca	.\include\raylib\external\stb_vorbis.h	596;"	d
+allocate	.\include\robin_hood\robin_hood.h	/^    T* allocate() {$/;"	f	class:robin_hood::detail::BulkPoolAllocator
 allocate_perm	.\include\raylib\external\par_shapes.h	/^static int allocate_perm(struct osn_context* ctx, int nperm, int ngrad)$/;"	f
 allocated	.\include\raylib\external\glfw\src\posix_thread.h	/^    GLFWbool        allocated;$/;"	m	struct:_GLFWmutexPOSIX
 allocated	.\include\raylib\external\glfw\src\posix_thread.h	/^    GLFWbool        allocated;$/;"	m	struct:_GLFWtlsPOSIX
@@ -17197,7 +17246,7 @@ angle	.\include\raylib\gestures.h	/^        float angle;                    \/\/
 angle	.\include\raylib\gestures.h	/^        float angle;                    \/\/ PINCH angle (relative to x-axis)$/;"	m	struct:__anon390::__anon395
 angularVelocity	.\include\raylib\physac.h	/^    float angularVelocity;                      \/\/ Current angular velocity applied to orient$/;"	m	struct:PhysicsBodyData
 animLockouts	.\include\combat.h	/^	static unsigned int animLockouts;$/;"	m	struct:CombatData
-animLockouts	.\src\combat.cpp	/^unsigned int CombatData::animLockouts = 0;$/;"	m	class:CombatData	file:
+animLockouts	.\src\combatdata.cpp	/^unsigned int CombatData::animLockouts = 0;$/;"	m	class:CombatData	file:
 animNormals	.\include\raylib\raylib.h	/^    float *animNormals;     \/\/ Animated normals (after bones transformations)$/;"	m	struct:Mesh
 animNormals	.\include\raylib\rlgl.h	/^        float *animNormals;     \/\/ Animated normals (after bones transformations)$/;"	m	struct:Mesh
 animToBePlayed	.\include\sprite.h	/^	Animation *animToBePlayed = nullptr;$/;"	m	struct:Sprite
@@ -17208,10 +17257,10 @@ animations_count	.\include\raylib\external\cgltf.h	/^	cgltf_size animations_coun
 anims	.\include\sprite.h	/^	UMap<std::string, Animation> anims;$/;"	m	struct:Sprite
 anisotropyEnable	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkBool32                 anisotropyEnable;$/;"	m	struct:VkSamplerCreateInfo
 announceMove	.\include\combat.h	/^	static bool announceMove;$/;"	m	struct:CombatData
-announceMove	.\src\combat.cpp	/^bool CombatData::announceMove = false;$/;"	m	class:CombatData	file:
+announceMove	.\src\combatdata.cpp	/^bool CombatData::announceMove = false;$/;"	m	class:CombatData	file:
 announcementTime	.\include\combat.h	/^	static constexpr float announcementTime = 1.125f;$/;"	m	struct:CombatData
 announcementTimer	.\include\combat.h	/^	static float announcementTimer;$/;"	m	struct:CombatData
-announcementTimer	.\src\combat.cpp	/^float CombatData::announcementTimer = 0.f;$/;"	m	class:CombatData	file:
+announcementTimer	.\src\combatdata.cpp	/^float CombatData::announcementTimer = 0.f;$/;"	m	class:CombatData	file:
 api	.\include\raylib\external\glfw\src\win32_platform.h	/^        IDirectInput8W*                 api;$/;"	m	struct:_GLFWlibraryWin32::__anon101
 apiVersion	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t          apiVersion;$/;"	m	struct:VkApplicationInfo
 apiVersion	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t         apiVersion;$/;"	m	struct:VkPhysicalDeviceProperties
@@ -17242,8 +17291,11 @@ aspectMask	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkImageAspect
 aspectMask	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkImageAspectFlags       aspectMask;$/;"	m	struct:VkSparseImageFormatProperties
 aspectReferenceCount	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t                          aspectReferenceCount;$/;"	m	struct:VkRenderPassInputAttachmentAspectCreateInfo
 aspect_ratio	.\include\raylib\external\cgltf.h	/^	cgltf_float aspect_ratio;$/;"	m	struct:cgltf_camera_perspective
+assertNotNull	.\include\robin_hood\robin_hood.h	/^T* assertNotNull(T* t, Args&&... args) {$/;"	f	namespace:robin_hood::detail
 asset	.\include\raylib\external\cgltf.h	/^	cgltf_asset asset;$/;"	m	struct:cgltf_data
 assetManager	.\include\raylib\utils.c	/^static AAssetManager *assetManager = NULL;              \/\/ Android assets manager pointer$/;"	v	file:
+at	.\include\robin_hood\robin_hood.h	/^    typename std::enable_if<!std::is_void<Q>::value, Q const&>::type at(key_type const& key) const {$/;"	f	class:robin_hood::detail::Table
+at	.\include\robin_hood\robin_hood.h	/^    typename std::enable_if<!std::is_void<Q>::value, Q&>::type at(key_type const& key) {$/;"	f	class:robin_hood::detail::Table
 atEnd	.\include\raylib\external\dr_mp3.h	/^    drmp3_bool32 atEnd : 1;$/;"	m	struct:__anon60
 attached	.\include\elemino.h	/^	Vec<Elemino *> attached;$/;"	m	struct:Grid
 attachment	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t                 attachment;$/;"	m	struct:VkAttachmentReference
@@ -17324,7 +17376,10 @@ base_color_texture	.\include\raylib\external\cgltf.h	/^	cgltf_texture_view base_
 base_volume	.\include\raylib\external\miniaudio.h	/^    ma_uint32 base_volume;$/;"	m	struct:__anon302
 base_volume	.\include\raylib\external\miniaudio.h	/^    ma_uint32 base_volume;$/;"	m	struct:__anon303
 begin	.\include\raylib\external\stb_vorbis.h	/^   stbv_uint32 begin, end;$/;"	m	struct:__anon368
-begunAssigning	.\include\combat.h	/^	bool begunAssigning = false;$/;"	m	struct:CombatData
+begin	.\include\robin_hood\robin_hood.h	/^    const_iterator begin() const { \/\/ NOLINT(modernize-use-nodiscard)$/;"	f	class:robin_hood::detail::Table
+begin	.\include\robin_hood\robin_hood.h	/^    iterator begin() {$/;"	f	class:robin_hood::detail::Table
+begunAssigning	.\include\combat.h	/^	static bool begunAssigning;$/;"	m	struct:CombatData
+begunAssigning	.\src\combatdata.cpp	/^bool CombatData::begunAssigning = false;$/;"	m	class:CombatData	file:
 bgBounds	.\include\gui.h	/^	Rectangle bgBounds;$/;"	m	struct:BoxLabel
 bgColor	.\include\gui.h	/^	Color bgColor;$/;"	m	struct:BoxLabel
 bgindex	.\include\raylib\external\stb_image.h	/^   int flags, bgindex, ratio, transparent, eflags;$/;"	m	struct:__anon331
@@ -17408,9 +17463,9 @@ bool	.\include\raylib\rnet.h	/^    typedef enum { false, true } bool;$/;"	t	type
 borderColor	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkBorderColor            borderColor;$/;"	m	struct:VkSamplerCreateInfo
 bosPageHeader	.\include\raylib\external\dr_flac.h	/^    drflac_ogg_page_header bosPageHeader;   \/* Used for seeking. *\/$/;"	m	struct:__anon49
 botAlive	.\include\combat.h	/^	static Vec<Actor *> botAlive;$/;"	m	struct:CombatData
-botAlive	.\src\combat.cpp	/^Vec<Actor *> CombatData::botAlive;$/;"	m	class:CombatData	file:
+botAlive	.\src\combatdata.cpp	/^Vec<Actor *> CombatData::botAlive;$/;"	m	class:CombatData	file:
 botTeam	.\include\combat.h	/^	static Team *botTeam;$/;"	m	struct:CombatData
-botTeam	.\src\combat.cpp	/^Team *CombatData::botTeam = nullptr;$/;"	m	class:CombatData	file:
+botTeam	.\src\combatdata.cpp	/^Team *CombatData::botTeam = nullptr;$/;"	m	class:CombatData	file:
 bottom	.\include\raylib\external\glfw\src\wl_platform.h	/^        _GLFWdecorationWayland             top, left, right, bottom;$/;"	m	struct:_GLFWwindowWayland::__anon109
 bottom	.\include\raylib\raylib.h	/^    int bottom;            \/\/ bottom border offset$/;"	m	struct:NPatchInfo
 bottomDecoration	.\include\raylib\external\glfw\src\wl_platform.h	/^    bottomDecoration,$/;"	e	enum:_GLFWdecorationSideWayland
@@ -17513,6 +17568,7 @@ cachedSampleCount	.\include\raylib\external\dr_wav.h	/^        drwav_uint32 cach
 cachedSampleCount	.\include\raylib\external\dr_wav.h	/^        drwav_uint32 cachedSampleCount;$/;"	m	struct:__anon78::__anon81
 cachedSamples	.\include\raylib\external\dr_wav.h	/^        drwav_int32  cachedSamples[16]; \/* Samples are stored in this cache during decoding. *\/$/;"	m	struct:__anon78::__anon81
 cachedSamples	.\include\raylib\external\dr_wav.h	/^        drwav_int32  cachedSamples[4];  \/* Samples are stored in this cache during decoding. *\/$/;"	m	struct:__anon78::__anon80
+calcNumBytesTotal	.\include\robin_hood\robin_hood.h	/^    ROBIN_HOOD(NODISCARD) size_t calcNumBytesTotal(size_t numElements) const {$/;"	f	class:robin_hood::detail::Table
 calculateRefreshRate	.\include\raylib\external\glfw\src\x11_monitor.c	/^static int calculateRefreshRate(const XRRModeInfo* mi)$/;"	f	file:
 callback	.\include\raylib\external\glfw\src\wl_platform.h	/^    struct wl_callback*         callback;$/;"	m	struct:_GLFWwindowWayland	typeref:struct:_GLFWwindowWayland::wl_callback
 callback	.\include\raylib\external\miniaudio.h	/^    ma_enum_devices_callback_proc callback;$/;"	m	struct:__anon289
@@ -17523,8 +17579,10 @@ callisto_combat_anim	.\include\embed\callisto_combat_sprite.h	/^static unsigned 
 camera	.\include\raylib\external\cgltf.h	/^	cgltf_camera* camera;$/;"	m	struct:cgltf_node
 cameras	.\include\raylib\external\cgltf.h	/^	cgltf_camera* cameras;$/;"	m	struct:cgltf_data
 cameras_count	.\include\raylib\external\cgltf.h	/^	cgltf_size cameras_count;$/;"	m	struct:cgltf_data
-canAssign	.\include\combat.h	/^	bool canAssign = false;$/;"	m	struct:CombatData
-canMakePair	.\include\combat.h	/^	bool canMakePair = false;$/;"	m	struct:CombatData
+canAssign	.\include\combat.h	/^	static bool canAssign;$/;"	m	struct:CombatData
+canAssign	.\src\combatdata.cpp	/^bool CombatData::canAssign = false;$/;"	m	class:CombatData	file:
+canMakePair	.\include\combat.h	/^	static bool canMakePair;$/;"	m	struct:CombatData
+canMakePair	.\src\combatdata.cpp	/^bool CombatData::canMakePair = false;$/;"	m	class:CombatData	file:
 capacity	.\include\raylib\external\miniaudio.h	/^    ma_uint32 capacity;$/;"	m	struct:__anon304
 capacity	.\include\raylib\external\tinyobj_loader_c.h	/^  unsigned int capacity;$/;"	m	struct:__anon382
 capsLockMask	.\include\raylib\external\glfw\src\wl_platform.h	/^        xkb_mod_mask_t          capsLockMask;$/;"	m	struct:_GLFWlibraryWayland::__anon110
@@ -17544,8 +17602,10 @@ cbSize	.\include\raylib\external\glfw\src\win32_platform.h	/^    DWORD cbSize;$/
 cbSize	.\include\raylib\external\miniaudio.h	/^    UINT32 cbSize;$/;"	m	struct:__anon262
 cbTypeSpecificParams	.\include\raylib\external\glfw\deps\mingw\dinput.h	/^	DWORD			cbTypeSpecificParams;$/;"	m	struct:DIEFFECT
 cbTypeSpecificParams	.\include\raylib\external\glfw\deps\mingw\dinput.h	/^	DWORD			cbTypeSpecificParams;$/;"	m	struct:DIEFFECT_DX5
+cbegin	.\include\robin_hood\robin_hood.h	/^    const_iterator cbegin() const { \/\/ NOLINT(modernize-use-nodiscard)$/;"	f	class:robin_hood::detail::Table
 cbtData	.\include\game.h	/^	CombatData *cbtData = nullptr;$/;"	m	struct:Game
 cdata	.\include\raylib\external\stb_truetype.h	/^stbtt_bakedchar cdata[96]; \/\/ ASCII 32..126 is 95 glyphs$/;"	v
+cend	.\include\robin_hood\robin_hood.h	/^    const_iterator cend() const { \/\/ NOLINT(modernize-use-nodiscard)$/;"	f	class:robin_hood::detail::Table
 centerCursor	.\include\raylib\external\glfw\src\internal.h	/^    GLFWbool      centerCursor;$/;"	m	struct:_GLFWwndconfig
 cff	.\include\raylib\external\stb_truetype.h	/^   stbtt__buf cff;                    \/\/ cff font data$/;"	m	struct:stbtt_fontinfo
 cgltf_accessor	.\include\raylib\external\cgltf.h	/^typedef struct cgltf_accessor$/;"	s
@@ -17886,9 +17946,10 @@ chooseEGLConfig	.\include\raylib\external\glfw\src\egl_context.c	/^static GLFWbo
 chooseGLXFBConfig	.\include\raylib\external\glfw\src\glx_context.c	/^static GLFWbool chooseGLXFBConfig(const _GLFWfbconfig* desired,$/;"	f	file:
 chooseImage	.\include\raylib\external\glfw\src\win32_window.c	/^static const GLFWimage* chooseImage(int count, const GLFWimage* images,$/;"	f	file:
 choosePixelFormat	.\include\raylib\external\glfw\src\wgl_context.c	/^static int choosePixelFormat(_GLFWwindow* window,$/;"	f	file:
-chosenMove	.\include\combat.h	/^	struct Move *chosenMove = nullptr;$/;"	m	struct:CombatData	typeref:struct:CombatData::Move
+chosenMove	.\include\combat.h	/^	static struct Move *chosenMove;$/;"	m	struct:CombatData	typeref:struct:CombatData::Move
+chosenMove	.\src\combatdata.cpp	/^struct Move *CombatData::chosenMove = nullptr;$/;"	m	class:CombatData	typeref:struct:CombatData::	file:
 chosenTargets	.\include\combat.h	/^	static Vec<Actor *> chosenTargets;$/;"	m	struct:CombatData
-chosenTargets	.\src\combat.cpp	/^Vec<Actor *> CombatData::chosenTargets;$/;"	m	class:CombatData	file:
+chosenTargets	.\src\combatdata.cpp	/^Vec<Actor *> CombatData::chosenTargets;$/;"	m	class:CombatData	file:
 chromaAbCorrection	.\include\raylib\raylib.h	/^    float chromaAbCorrection[4];    \/\/ HMD chromatic aberration correction parameters$/;"	m	struct:VrDeviceInfo
 chromaAbCorrection	.\include\raylib\rlgl.h	/^        float chromaAbCorrection[4];    \/\/ HMD chromatic aberration correction parameters$/;"	m	struct:VrDeviceInfo
 chromaFilter	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkFilter                           chromaFilter;$/;"	m	struct:VkSamplerYcbcrConversionCreateInfo
@@ -17902,6 +17963,7 @@ classbook	.\include\raylib\external\stb_vorbis.h	/^   stbv_uint8 classbook;$/;"	
 classdata	.\include\raylib\external\stb_vorbis.h	/^   stbv_uint8 **classdata;$/;"	m	struct:__anon368
 classifications	.\include\raylib\external\stb_vorbis.h	/^   stbv_uint8 classifications;$/;"	m	struct:__anon368
 clear	.\include\console.h	/^		clear,$/;"	e	enum:Dev::Command
+clear	.\include\robin_hood\robin_hood.h	/^    void clear() {$/;"	f	class:robin_hood::detail::Table
 clearOnWriteAcquire	.\include\raylib\external\miniaudio.h	/^    ma_bool32 clearOnWriteAcquire : 1;     \/* When set, clears the acquired write buffer before returning from ma_rb_acquire_write(). *\/$/;"	m	struct:__anon164
 clearValue	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkClearValue             clearValue;$/;"	m	struct:VkClearAttachment
 clearValueCount	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t                 clearValueCount;$/;"	m	struct:VkRenderPassBeginInfo
@@ -17916,6 +17978,7 @@ clipboardString	.\include\raylib\external\glfw\src\win32_platform.h	/^    char* 
 clipboardString	.\include\raylib\external\glfw\src\wl_platform.h	/^    char*                       clipboardString;$/;"	m	struct:_GLFWlibraryWayland
 clipboardString	.\include\raylib\external\glfw\src\x11_platform.h	/^    char*           clipboardString;$/;"	m	struct:_GLFWlibraryX11
 clipped	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkBool32                           clipped;$/;"	m	struct:VkSwapchainCreateInfoKHR
+cloneData	.\include\robin_hood\robin_hood.h	/^    void cloneData(const Table& o) {$/;"	f	class:robin_hood::detail::Table
 close	.\include\raylib\external\glfw\src\internal.h	/^        GLFWwindowclosefun      close;$/;"	m	struct:_GLFWwindow::__anon91
 closeJoystick	.\include\raylib\external\glfw\src\linux_joystick.c	/^static void closeJoystick(_GLFWjoystick* js)$/;"	f	file:
 closeJoystick	.\include\raylib\external\glfw\src\win32_joystick.c	/^static void closeJoystick(_GLFWjoystick* js)$/;"	f	file:
@@ -18027,6 +18090,8 @@ container	.\include\raylib\external\dr_flac.h	/^    drflac_container container;$
 container	.\include\raylib\external\dr_flac.h	/^    drflac_container container;$/;"	m	struct:__anon47
 container	.\include\raylib\external\dr_wav.h	/^    drwav_container container;  \/* RIFF, W64. *\/$/;"	m	struct:__anon74
 container	.\include\raylib\external\dr_wav.h	/^    drwav_container container;$/;"	m	struct:__anon78
+contains	.\include\robin_hood\robin_hood.h	/^    bool contains(const key_type& key) const { \/\/ NOLINT(modernize-use-nodiscard)$/;"	f	class:robin_hood::detail::Table
+contains	.\include\robin_hood\robin_hood.h	/^    typename std::enable_if<Self_::is_transparent, bool>::type contains(const OtherKey& key) const {$/;"	f	class:robin_hood::detail::Table
 contentRect	.\include\raylib\external\android\native_app_glue\android_native_app_glue.h	/^    ARect contentRect;$/;"	m	struct:android_app
 contentScaleX	.\include\raylib\external\glfw\src\x11_platform.h	/^    float           contentScaleX, contentScaleY;$/;"	m	struct:_GLFWlibraryX11
 contentScaleY	.\include\raylib\external\glfw\src\x11_platform.h	/^    float           contentScaleX, contentScaleY;$/;"	m	struct:_GLFWlibraryX11
@@ -18064,6 +18129,8 @@ count	.\include\raylib\external\cgltf.h	/^	cgltf_size count;$/;"	m	struct:cgltf_
 count	.\include\raylib\external\cgltf.h	/^	cgltf_size count;$/;"	m	struct:cgltf_accessor_sparse
 count	.\include\raylib\external\glfw\src\x11_platform.h	/^        int         count;$/;"	m	struct:_GLFWlibraryX11::__anon115
 count	.\include\raylib\external\miniaudio.h	/^    ma_uint32 count;$/;"	m	struct:__anon304
+count	.\include\robin_hood\robin_hood.h	/^    size_t count(const key_type& key) const { \/\/ NOLINT(modernize-use-nodiscard)$/;"	f	class:robin_hood::detail::Table
+count	.\include\robin_hood\robin_hood.h	/^    typename std::enable_if<Self_::is_transparent, size_t>::type count(const OtherKey& key) const {$/;"	f	class:robin_hood::detail::Table
 count1_table	.\include\raylib\external\dr_mp3.h	/^    drmp3_uint8 preflag, scalefac_scale, count1_table, scfsi;$/;"	m	struct:__anon65
 countRemaining	.\include\raylib\external\dr_flac.h	/^    drflac_uint32 countRemaining;$/;"	m	struct:__anon42
 countRemaining	.\include\raylib\external\dr_flac.h	/^    drflac_uint32 countRemaining;$/;"	m	struct:__anon43
@@ -18071,6 +18138,7 @@ counter	.\include\raylib\external\miniaudio.h	/^    ma_int64 counter;$/;"	m	unio
 counter	.\include\raylib\external\miniaudio.h	/^    ma_uint32 counter;$/;"	m	struct:__anon166
 counter	.\include\raylib\external\miniaudio.h	/^    ma_uint32 counter;$/;"	m	struct:ma_completion_handler_uwp
 counterD	.\include\raylib\external\miniaudio.h	/^    double counterD;$/;"	m	union:__anon189
+counts	.\include\robin_hood\robin_hood.h	/^static Counts& counts() {$/;"	f	namespace:robin_hood
 coupling_steps	.\include\raylib\external\stb_vorbis.h	/^   stbv_uint16 coupling_steps;$/;"	m	struct:__anon370
 cp	.\include\raylib\external\glfw\deps\mingw\dinput.h	/^    CPOINT	cp[MAXCPOINTSNUM];$/;"	m	struct:DIPROPCPOINTS
 crc16	.\include\raylib\external\dr_flac.h	/^    drflac_uint16 crc16;$/;"	m	struct:__anon37
@@ -18100,9 +18168,9 @@ createXdgSurface	.\include\raylib\external\glfw\src\wl_window.c	/^static GLFWboo
 create_hash_table	.\include\raylib\external\tinyobj_loader_c.h	/^static void create_hash_table(unsigned int start_capacity, hash_table_t* hash_table)$/;"	f
 crtc	.\include\raylib\external\glfw\src\x11_platform.h	/^    RRCrtc          crtc;$/;"	m	struct:_GLFWmonitorX11
 ctps	.\include\combat.h	/^	static Vec<CasterTargetsPair> ctps; \/\/When exectuting moves, create an array of pointer and heapify that$/;"	m	struct:CombatData
-ctps	.\src\combat.cpp	/^Vec<CasterTargetsPair> CombatData::ctps;$/;"	m	class:CombatData	file:
+ctps	.\src\combatdata.cpp	/^Vec<CasterTargetsPair> CombatData::ctps;$/;"	m	class:CombatData	file:
 ctpsPtrs	.\include\combat.h	/^	static Vec<CasterTargetsPair *> ctpsPtrs;$/;"	m	struct:CombatData
-ctpsPtrs	.\src\combat.cpp	/^Vec<CasterTargetsPair *> CombatData::ctpsPtrs;$/;"	m	class:CombatData	file:
+ctpsPtrs	.\src\combatdata.cpp	/^Vec<CasterTargetsPair *> CombatData::ctpsPtrs;$/;"	m	class:CombatData	file:
 ctxData	.\include\raylib\raudio.h	/^    void *ctxData;                  \/\/ Audio context data, depends on type$/;"	m	struct:Music
 ctxData	.\include\raylib\raylib.h	/^    void *ctxData;                  \/\/ Audio context data, depends on type$/;"	m	struct:Music
 ctxType	.\include\raylib\raudio.h	/^    int ctxType;                    \/\/ Type of music context (audio filetype)$/;"	m	struct:Music
@@ -18302,6 +18370,10 @@ debug	.\include\raylib\external\glfw\src\internal.h	/^    GLFWbool      debug;$/
 debugMarker	.\include\raylib\rlgl.h	/^        bool debugMarker;                   \/\/ Debug marker support$/;"	m	struct:rlglData::__anon457
 decalperiod	.\include\raylib\external\jar_mod.h	/^    mint    decalperiod;$/;"	m	struct:__anon126
 decaying	.\include\moveeffect.h	/^		decaying,$/;"	m	struct:MoveEffect	typeref:enum:MoveEffect::
+declval	.\include\robin_hood\robin_hood.h	/^                                                                     std::declval<B const&>())) {$/;"	f	class:robin_hood::std
+declval	.\include\robin_hood\robin_hood.h	/^            noexcept(std::declval<value_type>().swap(std::declval<value_type>()))) {$/;"	f	class:robin_hood::detail::Table::final
+declval	.\include\robin_hood\robin_hood.h	/^        noexcept(noexcept(std::declval<std::hash<T>>().operator()(std::declval<T const&>()))) {$/;"	f	struct:robin_hood::hash
+declval	.\include\robin_hood\robin_hood.h	/^    noexcept(std::declval<pair<A, B>&>().swap(std::declval<pair<A, B>&>()))) {$/;"	f	namespace:robin_hood
 decodeUTF8	.\include\raylib\external\glfw\src\x11_window.c	/^static unsigned int decodeUTF8(const char** s)$/;"	f	file:
 decode_buffer	.\include\raylib\external\stb_image_resize.h	/^    float* decode_buffer;$/;"	m	struct:__anon338
 decode_buffer_pixels	.\include\raylib\external\stb_image_resize.h	/^    int decode_buffer_pixels;$/;"	m	struct:__anon338
@@ -18381,6 +18453,7 @@ descriptorType	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkDescrip
 descriptorType	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkDescriptorType         descriptorType;$/;"	m	struct:VkWriteDescriptorSet
 descriptorUpdateEntryCount	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t                   descriptorUpdateEntryCount;$/;"	m	struct:VkDescriptorUpdateTemplateCreateInfo
 destroy	.\include\raylib\external\glfw\src\internal.h	/^    _GLFWdestroycontextfun      destroy;$/;"	m	struct:_GLFWcontext
+destroy	.\include\robin_hood\robin_hood.h	/^    void destroy() {$/;"	f	class:robin_hood::detail::Table
 destroyContextEGL	.\include\raylib\external\glfw\src\egl_context.c	/^static void destroyContextEGL(_GLFWwindow* window)$/;"	f	file:
 destroyContextGLX	.\include\raylib\external\glfw\src\glx_context.c	/^static void destroyContextGLX(_GLFWwindow* window)$/;"	f	file:
 destroyContextOSMesa	.\include\raylib\external\glfw\src\osmesa_context.c	/^static void destroyContextOSMesa(_GLFWwindow* window)$/;"	f	file:
@@ -18390,6 +18463,7 @@ destroyDecorations	.\include\raylib\external\glfw\src\wl_window.c	/^static void 
 destroyRequested	.\include\raylib\external\android\native_app_glue\android_native_app_glue.h	/^    int destroyRequested;$/;"	m	struct:android_app
 destroy_hash_table	.\include\raylib\external\tinyobj_loader_c.h	/^static void destroy_hash_table(hash_table_t* hash_table)$/;"	f
 destroyed	.\include\raylib\external\android\native_app_glue\android_native_app_glue.h	/^    int destroyed;$/;"	m	struct:android_app
+detail	.\include\robin_hood\robin_hood.h	/^namespace detail {$/;"	n	namespace:robin_hood
 detectEWMH	.\include\raylib\external\glfw\src\x11_init.c	/^static void detectEWMH(void)$/;"	f	file:
 detectable	.\include\raylib\external\glfw\src\x11_platform.h	/^        GLFWbool     detectable;$/;"	m	struct:_GLFWlibraryX11::__anon114
 device	.\include\raylib\core.c	/^        EGLDisplay device;                  \/\/ Native display device (physical screen connection)$/;"	m	struct:CoreData::__anon9	file:
@@ -18430,7 +18504,7 @@ deviceUUID	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint8_t      
 dics	.\include\raylib\external\glfw\deps\mingw\dinput.h	/^	DICOLORSET		dics;$/;"	m	struct:_DICONFIGUREDEVICESPARAMSA
 dics	.\include\raylib\external\glfw\deps\mingw\dinput.h	/^	DICOLORSET		dics;$/;"	m	struct:_DICONFIGUREDEVICESPARAMSW
 diffMemPool	.\include\combat.h	/^	static MemPool diffMemPool;$/;"	m	struct:CombatData
-diffMemPool	.\src\combat.cpp	/^MemPool CombatData::diffMemPool = CreateMemPool(DIFF_MEM_SIZE);$/;"	m	class:CombatData	file:
+diffMemPool	.\src\combatdata.cpp	/^MemPool CombatData::diffMemPool = CreateMemPool(DIFF_MEM_SIZE);$/;"	m	class:CombatData	file:
 diffs	.\include\moveeffect.h	/^	struct EffectDiff *diffs = nullptr;$/;"	v	typeref:struct:EffectDiff
 diffuse	.\include\raylib\external\tinyobj_loader_c.h	/^  float diffuse[3];$/;"	m	struct:__anon378
 diffuse_factor	.\include\raylib\external\cgltf.h	/^	cgltf_float diffuse_factor[4];$/;"	m	struct:cgltf_pbr_specular_glossiness
@@ -18466,7 +18540,8 @@ disabledCursorWindow	.\include\raylib\external\glfw\src\win32_platform.h	/^    _
 disabledCursorWindow	.\include\raylib\external\glfw\src\x11_platform.h	/^    _GLFWwindow*    disabledCursorWindow;$/;"	m	struct:_GLFWlibraryX11
 discard_samples_deferred	.\include\raylib\external\stb_vorbis.h	/^   int discard_samples_deferred;$/;"	m	struct:stb_vorbis
 discreteQueuePriorities	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t                 discreteQueuePriorities;$/;"	m	struct:VkPhysicalDeviceLimits
-dispTargetLists	.\include\combat.h	/^	bool dispTargetLists = false;$/;"	m	struct:CombatData
+dispTargetLists	.\include\combat.h	/^	static bool dispTargetLists;$/;"	m	struct:CombatData
+dispTargetLists	.\src\combatdata.cpp	/^bool CombatData::dispTargetLists = false;$/;"	m	class:CombatData	file:
 displacement_texname	.\include\raylib\external\tinyobj_loader_c.h	/^  char *displacement_texname;       \/* disp *\/$/;"	m	struct:__anon378
 display	.\include\raylib\core.c	/^        Size display;                       \/\/ Display width and height (monitor, device-screen, LCD, ...)$/;"	m	struct:CoreData::__anon9	file:
 display	.\include\raylib\external\glfw\src\egl_context.h	/^    EGLDisplay      display;$/;"	m	struct:_GLFWlibraryEGL
@@ -18483,6 +18558,9 @@ distortionShader	.\include\raylib\rlgl.h	/^        Shader distortionShader;     
 distortionShader	.\include\raylib\rlgl.h	/^    Shader distortionShader;        \/\/ VR stereo rendering distortion shader$/;"	m	struct:VrStereoConfig
 ditherMode	.\include\raylib\external\miniaudio.h	/^    ma_dither_mode ditherMode;$/;"	m	struct:__anon159
 ditherMode	.\include\raylib\external\miniaudio.h	/^    ma_dither_mode ditherMode;$/;"	m	struct:__anon246
+doCreateByKey	.\include\robin_hood\robin_hood.h	/^    typename std::enable_if<!std::is_void<Q>::value, Q&>::type doCreateByKey(Arg&& key) {$/;"	f	class:robin_hood::detail::Table
+doInsert	.\include\robin_hood\robin_hood.h	/^    std::pair<iterator, bool> doInsert(Arg&& keyval) {$/;"	f	class:robin_hood::detail::Table
+doThrow	.\include\robin_hood\robin_hood.h	/^void doThrow(Args&&... args) {$/;"	f	namespace:robin_hood::detail
 doTransform	.\include\raylib\rlgl.h	/^        bool doTransform;                   \/\/ Use transform matrix against vertex (if required)$/;"	m	struct:rlglData::__anon456
 domainOrigin	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkTessellationDomainOrigin      domainOrigin;$/;"	m	struct:VkPipelineTessellationDomainOriginStateCreateInfo
 dot	.\src\tmath.cpp	/^float dot(const Vector2 &a, const Vector2 &b){$/;"	f
@@ -19361,7 +19439,7 @@ effect_code	.\include\raylib\external\jar_mod.h	/^    muint   effect_code;$/;"	m
 effect_param	.\include\raylib\external\jar_xm.h	/^     uint8_t effect_param;$/;"	m	struct:jar_xm_pattern_slot_s
 effect_type	.\include\raylib\external\jar_xm.h	/^     uint8_t effect_type;$/;"	m	struct:jar_xm_pattern_slot_s
 effects	.\include\combat.h	/^	static UMap<Actor *, Vec<MoveEffect> > effects;$/;"	m	struct:CombatData
-effects	.\src\combat.cpp	/^UMap<Actor *, Vec<MoveEffect> > CombatData::effects;$/;"	m	class:CombatData	file:
+effects	.\src\combatdata.cpp	/^UMap<Actor *, Vec<MoveEffect> > CombatData::effects;$/;"	m	class:CombatData	file:
 efficient	.\include\moveeffect.h	/^		efficient,$/;"	m	struct:MoveEffect	typeref:enum:MoveEffect::
 eflags	.\include\raylib\external\stb_image.h	/^   int flags, bgindex, ratio, transparent, eflags;$/;"	m	struct:__anon331
 egl	.\include\raylib\external\glfw\src\wl_platform.h	/^    } egl;$/;"	m	struct:_GLFWlibraryWayland	typeref:struct:_GLFWlibraryWayland::__anon112
@@ -19391,6 +19469,7 @@ eleminoesAvail	.\include\inventory.h	/^	Vec<Elemino *> eleminoesAvail; \/\/The e
 emission	.\include\raylib\external\tinyobj_loader_c.h	/^  float emission[3];$/;"	m	struct:__anon378
 emissive_factor	.\include\raylib\external\cgltf.h	/^	cgltf_float emissive_factor[3];$/;"	m	struct:cgltf_material
 emissive_texture	.\include\raylib\external\cgltf.h	/^	cgltf_texture_view emissive_texture;$/;"	m	struct:cgltf_material
+emplace	.\include\robin_hood\robin_hood.h	/^    std::pair<iterator, bool> emplace(Args&&... args) {$/;"	f	class:robin_hood::detail::Table
 enableCursor	.\include\raylib\external\glfw\src\win32_window.c	/^static void enableCursor(_GLFWwindow* window)$/;"	f	file:
 enableCursor	.\include\raylib\external\glfw\src\x11_window.c	/^static void enableCursor(_GLFWwindow* window)$/;"	f	file:
 enableRawMouseMotion	.\include\raylib\external\glfw\src\win32_window.c	/^static void enableRawMouseMotion(_GLFWwindow* window)$/;"	f	file:
@@ -19412,6 +19491,8 @@ encodedWriteOffset	.\include\raylib\external\miniaudio.h	/^    volatile ma_uint3
 end	.\include\raylib\external\cgltf.h	/^	int end;$/;"	m	struct:__anon22
 end	.\include\raylib\external\dr_wav.h	/^    drwav_uint32 end;$/;"	m	struct:__anon76
 end	.\include\raylib\external\stb_vorbis.h	/^   stbv_uint32 begin, end;$/;"	m	struct:__anon368
+end	.\include\robin_hood\robin_hood.h	/^    const_iterator end() const { \/\/ NOLINT(modernize-use-nodiscard)$/;"	f	class:robin_hood::detail::Table
+end	.\include\robin_hood\robin_hood.h	/^    iterator end() {$/;"	f	class:robin_hood::detail::Table
 endIndex	.\include\gui.h	/^	int startIndex, endIndex;$/;"	m	struct:ListView
 end_of_previous_sample	.\include\raylib\external\jar_xm.h	/^     float end_of_previous_sample[jar_xm_SAMPLE_RAMPING_POINTS];$/;"	m	struct:jar_xm_channel_context_s
 end_offset	.\include\raylib\external\cgltf.h	/^	cgltf_size end_offset;$/;"	m	struct:cgltf_extras
@@ -19423,6 +19504,10 @@ eob_run	.\include\raylib\external\stb_image.h	/^   int            eob_run;$/;"	m
 eof	.\include\raylib\external\stb_image.h	/^   int      (*eof)   (void *user);                       \/\/ returns nonzero if we are at end of file\/data$/;"	m	struct:__anon314
 eof	.\include\raylib\external\stb_vorbis.h	/^   int eof;$/;"	m	struct:stb_vorbis
 equal	.\include\raylib\external\stb_truetype.h	/^static int equal(float *a, float *b)$/;"	f
+equal	.\include\robin_hood\robin_hood.h	/^        const KeyEqual& equal = KeyEqual{}) noexcept(noexcept(Hash(h)) && noexcept(KeyEqual(equal)))$/;"	m	class:robin_hood::detail::Table
+erase	.\include\robin_hood\robin_hood.h	/^    iterator erase(const_iterator pos) {$/;"	f	class:robin_hood::detail::Table
+erase	.\include\robin_hood\robin_hood.h	/^    iterator erase(iterator pos) {$/;"	f	class:robin_hood::detail::Table
+erase	.\include\robin_hood\robin_hood.h	/^    size_t erase(const key_type& key) {$/;"	f	class:robin_hood::detail::Table
 error	.\include\raylib\external\stb_vorbis.h	/^   enum STBVorbisError error;$/;"	m	struct:stb_vorbis	typeref:enum:stb_vorbis::STBVorbisError
 errorBase	.\include\raylib\external\glfw\src\glx_context.h	/^    int             errorBase;$/;"	m	struct:_GLFWlibraryGLX
 errorBase	.\include\raylib\external\glfw\src\x11_platform.h	/^        int          errorBase;$/;"	m	struct:_GLFWlibraryX11::__anon114
@@ -19446,11 +19531,10 @@ eventSource	.\include\raylib\external\glfw\src\cocoa_platform.h	/^    CGEventSou
 eventTime	.\include\raylib\gestures.h	/^        double eventTime;               \/\/ Time stamp when an event happened$/;"	m	struct:__anon390::__anon391
 eventWorker	.\include\raylib\core.c	/^        InputEventWorker eventWorker[10];   \/\/ List of worker threads for every monitored "\/dev\/input\/event<N>"$/;"	m	struct:CoreData::__anon11	file:
 exec	.\include\console.h	/^		exec,$/;"	e	enum:Dev::Command
-execCTP	.\include\combat.h	/^	CasterTargetsPair *execCTP; \/\/the iterator$/;"	m	struct:CombatData
 execIndex	.\include\combat.h	/^	static unsigned int execIndex;$/;"	m	struct:CombatData
-execIndex	.\src\combat.cpp	/^unsigned int CombatData::execIndex = 0;$/;"	m	class:CombatData	file:
+execIndex	.\src\combatdata.cpp	/^unsigned int CombatData::execIndex = 0;$/;"	m	class:CombatData	file:
 executingMoves	.\include\combat.h	/^	static bool executingMoves;$/;"	m	struct:CombatData
-executingMoves	.\src\combat.cpp	/^bool CombatData::executingMoves = false;$/;"	m	class:CombatData	file:
+executingMoves	.\src\combatdata.cpp	/^bool CombatData::executingMoves = false;$/;"	m	class:CombatData	file:
 executionPhase	.\include\combat.h	/^		executionPhase$/;"	e	enum:CombatData::CombatStates
 exitKey	.\include\raylib\core.c	/^            int exitKey;                    \/\/ Default exit key$/;"	m	struct:CoreData::__anon11::__anon12	file:
 exp	.\include\player.h	/^	int exp;$/;"	m	struct:Player
@@ -19554,6 +19638,7 @@ fast	.\include\raylib\external\stb_image.h	/^   stbi__uint16 fast[1 << STBI__ZFA
 fast	.\include\raylib\external\stb_image.h	/^   stbi_uc  fast[1 << FAST_BITS];$/;"	m	struct:__anon319
 fastFloor	.\include\raylib\external\par_shapes.h	/^static inline int fastFloor(double x)$/;"	f
 fast_ac	.\include\raylib\external\stb_image.h	/^   stbi__int16 fast_ac[4][1 << FAST_BITS];$/;"	m	struct:__anon320
+fast_forward_tag	.\include\robin_hood\robin_hood.h	/^    struct fast_forward_tag {};$/;"	s	class:robin_hood::detail::Table
 fast_huffman	.\include\raylib\external\stb_vorbis.h	/^    stbv_int16  fast_huffman[STBV_FAST_HUFFMAN_TABLE_SIZE];$/;"	m	struct:__anon364
 fast_huffman	.\include\raylib\external\stb_vorbis.h	/^    stbv_int32  fast_huffman[STBV_FAST_HUFFMAN_TABLE_SIZE];$/;"	m	struct:__anon364
 fbHeight	.\include\raylib\external\glfw\src\cocoa_platform.h	/^    int             fbWidth, fbHeight;$/;"	m	struct:_GLFWwindowNS
@@ -19578,10 +19663,18 @@ file_type	.\include\raylib\external\cgltf.h	/^	cgltf_file_type file_type;$/;"	m	
 fillModeNonSolid	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkBool32                 fillModeNonSolid;$/;"	m	struct:VkPhysicalDeviceFeatures
 filled	.\include\raylib\external\tinyobj_loader_c.h	/^  int filled;$/;"	m	struct:hash_table_entry_t
 filter	.\include\raylib\external\jar_mod.h	/^    mint    filter;$/;"	m	struct:__anon127
+final	.\include\robin_hood\robin_hood.h	/^    class DataNode<M, true> final {$/;"	c	class:robin_hood::detail::Table
 finalLayout	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkImageLayout            finalLayout;$/;"	m	struct:VkAttachmentDescription
 finalY	.\include\raylib\external\stb_vorbis.h	/^   stbv_int16 *finalY[STB_VORBIS_MAX_CHANNELS];$/;"	m	struct:stb_vorbis
+find	.\include\robin_hood\robin_hood.h	/^    const_iterator find(const OtherKey& key, is_transparent_tag \/*unused*\/) const {$/;"	f	class:robin_hood::detail::Table
+find	.\include\robin_hood\robin_hood.h	/^    const_iterator find(const key_type& key) const { \/\/ NOLINT(modernize-use-nodiscard)$/;"	f	class:robin_hood::detail::Table
+find	.\include\robin_hood\robin_hood.h	/^    find(const OtherKey& key) const {              \/\/ NOLINT(modernize-use-nodiscard)$/;"	f	class:robin_hood::detail::Table
+find	.\include\robin_hood\robin_hood.h	/^    iterator find(const OtherKey& key, is_transparent_tag \/*unused*\/) {$/;"	f	class:robin_hood::detail::Table
+find	.\include\robin_hood\robin_hood.h	/^    iterator find(const key_type& key) {$/;"	f	class:robin_hood::detail::Table
+find	.\include\robin_hood\robin_hood.h	/^    typename std::enable_if<Self_::is_transparent, iterator>::type find(const OtherKey& key) {$/;"	f	class:robin_hood::detail::Table
 findAttribValue	.\include\raylib\external\glfw\src\wgl_context.c	293;"	d	file:
 findAttribValue	.\include\raylib\external\glfw\src\wgl_context.c	61;"	d	file:
+findIdx	.\include\robin_hood\robin_hood.h	/^    size_t findIdx(Other const& key) const {$/;"	f	class:robin_hood::detail::Table
 findMapping	.\include\raylib\external\glfw\src\input.c	/^static _GLFWmapping* findMapping(const char* guid)$/;"	f	file:
 findPixelFormatAttribValue	.\include\raylib\external\glfw\src\wgl_context.c	/^static int findPixelFormatAttribValue(const int* attribs,$/;"	f	file:
 findValidMapping	.\include\raylib\external\glfw\src\input.c	/^static _GLFWmapping* findValidMapping(const _GLFWjoystick* js)$/;"	f	file:
@@ -19598,6 +19691,7 @@ finishedLaunching	.\include\raylib\external\glfw\src\cocoa_platform.h	/^    GLFW
 first	.\include\raylib\external\miniaudio.h	/^    unsigned int first;$/;"	m	struct:__anon294
 first	.\include\raylib\external\stb_image.h	/^   stbi_uc first;$/;"	m	struct:__anon330
 first	.\include\raylib\raudio.c	/^        AudioBuffer *first;         \/\/ Pointer to first AudioBuffer in the list$/;"	m	struct:AudioData::__anon402	file:
+first	.\include\robin_hood\robin_hood.h	/^    T1 first;  \/\/ NOLINT(misc-non-private-member-variables-in-classes)$/;"	m	struct:robin_hood::pair
 firstBytePos	.\include\raylib\external\dr_flac.h	/^    drflac_uint64 firstBytePos;             \/* The position of the first byte in the physical bitstream. Points to the start of the "OggS" identifier of the FLAC bos page. *\/$/;"	m	struct:__anon49
 firstFrameHeader	.\include\raylib\external\dr_flac.h	/^    drflac_frame_header firstFrameHeader;   \/* <-- The header of the first frame that was read during relaxed initalization. Only set if there is no STREAMINFO block. *\/$/;"	m	struct:__anon47
 firstFramePos	.\include\raylib\external\dr_flac.h	/^    drflac_uint64 firstFramePos;$/;"	m	struct:__anon41
@@ -19702,7 +19796,7 @@ focus	.\include\inventory.h	/^	unsigned char focus;$/;"	m	struct:InventoryData
 focus	.\include\moveinventory.h	/^	unsigned char focus = 0;$/;"	m	struct:MoveInventoryData
 focus	.\include\raylib\external\glfw\src\internal.h	/^        GLFWwindowfocusfun      focus;$/;"	m	struct:_GLFWwindow::__anon91
 focus	.\include\raylib\external\glfw\src\wl_platform.h	/^        int                                focus;$/;"	m	struct:_GLFWwindowWayland::__anon109
-focus	.\src\combat.cpp	/^unsigned char CombatData::focus = 0;$/;"	m	class:CombatData	file:
+focus	.\src\combatdata.cpp	/^unsigned char CombatData::focus = 0;$/;"	m	class:CombatData	file:
 focusOnShow	.\include\raylib\external\glfw\src\internal.h	/^    GLFWbool            focusOnShow;$/;"	m	struct:_GLFWwindow
 focusOnShow	.\include\raylib\external\glfw\src\internal.h	/^    GLFWbool      focusOnShow;$/;"	m	struct:_GLFWwndconfig
 focused	.\include\raylib\external\glfw\src\internal.h	/^    GLFWbool      focused;$/;"	m	struct:_GLFWwndconfig
@@ -24568,6 +24662,7 @@ h	.\include\raylib\external\stb_image.h	/^   int w,h;$/;"	m	struct:__anon331
 h	.\include\raylib\external\stb_rect_pack.h	/^   stbrp_coord    w, h;$/;"	m	struct:stbrp_rect
 h	.\include\raylib\external\stb_truetype.h	/^   int id,w,h,was_packed;$/;"	m	struct:stbrp_rect
 h	.\include\raylib\external\stb_truetype.h	/^   int w,h,stride;$/;"	m	struct:__anon351
+h	.\include\robin_hood\robin_hood.h	/^        size_t ROBIN_HOOD_UNUSED(bucket_count) \/*unused*\/ = 0, const Hash& h = Hash{},$/;"	m	class:robin_hood::detail::Table
 h2	.\include\raylib\external\stb_image.h	/^      int x,y,w2,h2;$/;"	m	struct:__anon320::__anon321
 hAAudio	.\include\raylib\external\miniaudio.h	/^            ma_handle hAAudio; \/* libaaudio.so *\/$/;"	m	struct:ma_context::__anon207::__anon218
 hAdvapi32DLL	.\include\raylib\external\miniaudio.h	/^            \/*HMODULE*\/ ma_handle hAdvapi32DLL;$/;"	m	struct:ma_context::__anon222::__anon223
@@ -24603,7 +24698,7 @@ ha	.\include\raylib\external\stb_image.h	/^      int hd,ha;$/;"	m	struct:__anon3
 halo	.\include\combat.h	/^	static Texture halo;$/;"	m	struct:CombatData
 halo	.\include\inventory.h	/^	Texture halo;$/;"	m	struct:InventoryData
 halo	.\include\moveinventory.h	/^	Texture halo;$/;"	m	struct:MoveInventoryData
-halo	.\src\combat.cpp	/^Texture CombatData::halo;$/;"	m	class:CombatData	file:
+halo	.\src\combatdata.cpp	/^Texture CombatData::halo;$/;"	m	class:CombatData	file:
 handle	.\include\raylib\core.c	/^        EGL_DISPMANX_WINDOW_T handle;       \/\/ Native window handle (graphic device)$/;"	m	struct:CoreData::__anon9	file:
 handle	.\include\raylib\core.c	/^        GLFWwindow *handle;                 \/\/ Native window handle (graphic device)$/;"	m	struct:CoreData::__anon9	file:
 handle	.\include\raylib\external\dirent.h	/^    handle_type handle;         \/\/ -1 for failed rewind$/;"	m	struct:DIR
@@ -24649,12 +24744,14 @@ handleTypes	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkExternalMe
 handleTypes	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkExternalMemoryHandleTypeFlags   handleTypes;$/;"	m	struct:VkExternalMemoryImageCreateInfo
 handleTypes	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkExternalSemaphoreHandleTypeFlags   handleTypes;$/;"	m	struct:VkExportSemaphoreCreateInfo
 handle_type	.\include\raylib\external\dirent.h	/^typedef ptrdiff_t handle_type;  \/\/ C99's intptr_t not sufficiently portable$/;"	t
+has	.\include\robin_hood\robin_hood.h	/^    typename std::enable_if<!std::is_void<Q>::value, bool>::type has(const value_type& e) const {$/;"	f	class:robin_hood::detail::Table
+has	.\include\robin_hood\robin_hood.h	/^    typename std::enable_if<std::is_void<Q>::value, bool>::type has(const value_type& e) const {$/;"	f	class:robin_hood::detail::Table
 hasChannelConverter	.\include\raylib\external\miniaudio.h	/^    ma_bool32 hasChannelConverter     : 1;$/;"	m	struct:__anon163
 hasDefaultCaptureDeviceChanged	.\include\raylib\external\miniaudio.h	/^            ma_bool32 hasDefaultCaptureDeviceChanged;          \/* <-- Make sure this is always a whole 32-bits because we use atomic assignments. *\/$/;"	m	struct:ma_device::__anon230::__anon231
 hasDefaultPlaybackDeviceChanged	.\include\raylib\external\miniaudio.h	/^            ma_bool32 hasDefaultPlaybackDeviceChanged;         \/* <-- Make sure this is always a whole 32-bits because we use atomic assignments. *\/$/;"	m	struct:ma_device::__anon230::__anon231
 hasMetadataBlocks	.\include\raylib\external\dr_flac.h	/^    drflac_bool32 hasMetadataBlocks;$/;"	m	struct:__anon47
 hasMoveChosen	.\include\combat.h	/^	static UMap<Actor *, bool> hasMoveChosen;$/;"	m	struct:CombatData
-hasMoveChosen	.\src\combat.cpp	/^UMap<Actor *, bool> CombatData::hasMoveChosen;$/;"	m	class:CombatData	file:
+hasMoveChosen	.\src\combatdata.cpp	/^UMap<Actor *, bool> CombatData::hasMoveChosen;$/;"	m	class:CombatData	file:
 hasPC	.\include\raylib\external\glfw\src\win32_platform.h	/^    GLFWbool            hasPC;$/;"	m	struct:_GLFWtimerWin32
 hasPostFormatConversion	.\include\raylib\external\miniaudio.h	/^    ma_bool32 hasPostFormatConversion : 1;$/;"	m	struct:__anon163
 hasPreFormatConversion	.\include\raylib\external\miniaudio.h	/^    ma_bool32 hasPreFormatConversion  : 1;$/;"	m	struct:__anon163
@@ -24663,6 +24760,8 @@ hasStreamInfoBlock	.\include\raylib\external\dr_flac.h	/^    drflac_bool32 hasSt
 hasUsableInputMethodStyle	.\include\raylib\external\glfw\src\x11_init.c	/^static GLFWbool hasUsableInputMethodStyle(void)$/;"	f	file:
 has_arg	.\include\raylib\external\glfw\deps\getopt.h	/^  int has_arg;$/;"	m	struct:option
 has_ext	.\include\raylib\external\glad.h	/^static int has_ext(const char *ext) {$/;"	f
+has_is_transparent	.\include\robin_hood\robin_hood.h	/^struct has_is_transparent : public std::false_type {};$/;"	s	namespace:robin_hood::detail
+has_is_transparent	.\include\robin_hood\robin_hood.h	/^struct has_is_transparent<T, typename void_type<typename T::is_transparent>::type>$/;"	s	namespace:robin_hood::detail
 has_matrix	.\include\raylib\external\cgltf.h	/^	cgltf_bool has_matrix;$/;"	m	struct:cgltf_node
 has_max	.\include\raylib\external\cgltf.h	/^	cgltf_bool has_max;$/;"	m	struct:cgltf_accessor
 has_min	.\include\raylib\external\cgltf.h	/^	cgltf_bool has_min;$/;"	m	struct:cgltf_accessor
@@ -24673,6 +24772,12 @@ has_scale	.\include\raylib\external\cgltf.h	/^	cgltf_bool has_scale;$/;"	m	struc
 has_transform	.\include\raylib\external\cgltf.h	/^	cgltf_bool has_transform;$/;"	m	struct:cgltf_texture_view
 has_translation	.\include\raylib\external\cgltf.h	/^	cgltf_bool has_translation;$/;"	m	struct:cgltf_node
 hash	.\include\raylib\external\tinyobj_loader_c.h	/^  unsigned long hash;$/;"	m	struct:hash_table_entry_t
+hash	.\include\robin_hood\robin_hood.h	/^struct hash : public std::hash<T> {$/;"	s	namespace:robin_hood
+hash	.\include\robin_hood\robin_hood.h	/^struct hash<T*> {$/;"	s	namespace:robin_hood
+hash	.\include\robin_hood\robin_hood.h	/^struct hash<std::basic_string<CharT>> {$/;"	s	namespace:robin_hood
+hash	.\include\robin_hood\robin_hood.h	/^struct hash<std::basic_string_view<CharT>> {$/;"	s	namespace:robin_hood
+hash	.\include\robin_hood\robin_hood.h	/^struct hash<std::shared_ptr<T>> {$/;"	s	namespace:robin_hood
+hash	.\include\robin_hood\robin_hood.h	/^struct hash<std::unique_ptr<T>> {$/;"	s	namespace:robin_hood
 hash_djb2	.\include\raylib\external\tinyobj_loader_c.h	/^static unsigned long hash_djb2(const unsigned char* str)$/;"	f
 hash_table_entry_t	.\include\raylib\external\tinyobj_loader_c.h	/^typedef struct hash_table_entry_t$/;"	s
 hash_table_entry_t	.\include\raylib\external\tinyobj_loader_c.h	/^} hash_table_entry_t;$/;"	t	typeref:struct:hash_table_entry_t
@@ -24810,6 +24915,7 @@ id	.\include\raylib\rlgl.h	/^        unsigned int id;        \/\/ Shader program
 id	.\include\raylib\rnet.h	/^    int id;                     \/\/ Socked option id$/;"	m	struct:SocketOpt
 idata	.\include\raylib\external\stb_image.h	/^   stbi_uc *idata, *expanded, *out;$/;"	m	struct:__anon326
 idct_block_kernel	.\include\raylib\external\stb_image.h	/^   void (*idct_block_kernel)(stbi_uc *out, int out_stride, short data[64]);$/;"	m	struct:__anon320
+identity_hash	.\include\robin_hood\robin_hood.h	/^struct identity_hash {$/;"	s	namespace:robin_hood::detail
 idleInhibitManager	.\include\raylib\external\glfw\src\wl_platform.h	/^    struct zwp_idle_inhibit_manager_v1*     idleInhibitManager;$/;"	m	struct:_GLFWlibraryWayland	typeref:struct:_GLFWlibraryWayland::zwp_idle_inhibit_manager_v1
 idleInhibitor	.\include\raylib\external\glfw\src\wl_platform.h	/^    struct zwp_idle_inhibitor_v1*          idleInhibitor;$/;"	m	struct:_GLFWwindowWayland	typeref:struct:_GLFWwindowWayland::zwp_idle_inhibitor_v1
 ii	.\include\elemino.h	/^	ii,$/;"	e	enum:MinoShape
@@ -24878,6 +24984,7 @@ inInventory	.\include\elemino.h	/^	bool inInventory = true;$/;"	m	struct:Elemino
 inTimeFrac	.\include\raylib\external\miniaudio.h	/^    ma_uint32 inTimeFrac;$/;"	m	struct:__anon146
 inTimeInt	.\include\raylib\external\miniaudio.h	/^    ma_uint32 inTimeInt;$/;"	m	struct:__anon146
 incaps	.\include\combat.h	/^	bool incaps[2] = {false};$/;"	m	struct:StatusEffects
+increase_size	.\include\robin_hood\robin_hood.h	/^    void increase_size() {$/;"	f	class:robin_hood::detail::Table
 incrementCursorImage	.\include\raylib\external\glfw\src\wl_window.c	/^static void incrementCursorImage(_GLFWwindow* window)$/;"	f	file:
 independentBlend	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkBool32                 independentBlend;$/;"	m	struct:VkPhysicalDeviceFeatures
 index	.\include\raylib\external\cgltf.h	/^	cgltf_int index;$/;"	m	struct:cgltf_attribute
@@ -24914,6 +25021,7 @@ inheritedQueries	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkBool3
 init	.\include\raylib\external\glfw\src\internal.h	/^        _GLFWinitconfig init;$/;"	m	struct:_GLFWlibrary::__anon92
 initExtensions	.\include\raylib\external\glfw\src\x11_init.c	/^static GLFWbool initExtensions(void)$/;"	f	file:
 initMaterial	.\include\raylib\external\tinyobj_loader_c.h	/^static void initMaterial(tinyobj_material_t *material) {$/;"	f
+init_data	.\include\robin_hood\robin_hood.h	/^    void init_data(size_t max_elements) {$/;"	f	class:robin_hood::detail::Table
 init_mode	.\include\raylib\external\stb_rect_pack.h	/^   int init_mode;$/;"	m	struct:stbrp_context
 initialDataSize	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    size_t                   initialDataSize;$/;"	m	struct:VkPipelineCacheCreateInfo
 initialLayout	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkImageLayout            initialLayout;$/;"	m	struct:VkAttachmentDescription
@@ -24932,6 +25040,15 @@ input_data	.\include\raylib\external\stb_image_resize.h	/^    const void* input_
 input_h	.\include\raylib\external\stb_image_resize.h	/^    int input_h;$/;"	m	struct:__anon338
 input_stride_bytes	.\include\raylib\external\stb_image_resize.h	/^    int input_stride_bytes;$/;"	m	struct:__anon338
 input_w	.\include\raylib\external\stb_image_resize.h	/^    int input_w;$/;"	m	struct:__anon338
+insert	.\include\robin_hood\robin_hood.h	/^    std::pair<iterator, bool> insert(const value_type& keyval) {$/;"	f	class:robin_hood::detail::Table
+insert	.\include\robin_hood\robin_hood.h	/^    std::pair<iterator, bool> insert(value_type&& keyval) {$/;"	f	class:robin_hood::detail::Table
+insert	.\include\robin_hood\robin_hood.h	/^    void insert(Iter first, Iter last) {$/;"	f	class:robin_hood::detail::Table
+insert_move	.\include\robin_hood\robin_hood.h	/^    size_t insert_move(Node&& keyval) {$/;"	f	class:robin_hood::detail::Table
+insert_or_assign	.\include\robin_hood\robin_hood.h	/^    std::pair<iterator, bool> insert_or_assign(const key_type& key, Mapped&& obj) {$/;"	f	class:robin_hood::detail::Table
+insert_or_assign	.\include\robin_hood\robin_hood.h	/^    std::pair<iterator, bool> insert_or_assign(const_iterator hint, const key_type& key,$/;"	f	class:robin_hood::detail::Table
+insert_or_assign	.\include\robin_hood\robin_hood.h	/^    std::pair<iterator, bool> insert_or_assign(const_iterator hint, key_type&& key, Mapped&& obj) {$/;"	f	class:robin_hood::detail::Table
+insert_or_assign	.\include\robin_hood\robin_hood.h	/^    std::pair<iterator, bool> insert_or_assign(key_type&& key, Mapped&& obj) {$/;"	f	class:robin_hood::detail::Table
+insert_or_assign_impl	.\include\robin_hood\robin_hood.h	/^    std::pair<iterator, bool> insert_or_assign_impl(OtherKey&& key, Mapped&& obj) {$/;"	f	class:robin_hood::detail::Table
 instance	.\include\raylib\external\glfw\src\wgl_context.h	/^    HINSTANCE                           instance;$/;"	m	struct:_GLFWlibraryWGL
 instance	.\include\raylib\external\glfw\src\win32_platform.h	/^        HINSTANCE                       instance;$/;"	m	struct:_GLFWlibraryWin32::__anon100
 instance	.\include\raylib\external\glfw\src\win32_platform.h	/^        HINSTANCE                       instance;$/;"	m	struct:_GLFWlibraryWin32::__anon101
@@ -24997,7 +25114,7 @@ internalSampleRate	.\include\raylib\external\miniaudio.h	/^        ma_uint32 int
 internalSampleRate	.\include\raylib\external\miniaudio.h	/^        ma_uint32 internalSampleRate;$/;"	m	struct:ma_device::__anon229
 internalSampleRate	.\include\raylib\external\miniaudio.h	/^    ma_uint32  internalSampleRate;$/;"	m	struct:ma_decoder
 interpStats	.\include\combat.h	/^	static bool interpStats;$/;"	m	struct:CombatData
-interpStats	.\src\combat.cpp	/^bool CombatData::interpStats = false;$/;"	m	class:CombatData	file:
+interpStats	.\src\combatdata.cpp	/^bool CombatData::interpStats = false;$/;"	m	class:CombatData	file:
 interpolation	.\include\raylib\external\cgltf.h	/^	cgltf_interpolation_type interpolation;$/;"	m	struct:cgltf_animation_sampler
 interpupillaryDistance	.\include\raylib\raylib.h	/^    float interpupillaryDistance;   \/\/ HMD IPD (distance between pupils) in meters$/;"	m	struct:VrDeviceInfo
 interpupillaryDistance	.\include\raylib\rlgl.h	/^        float interpupillaryDistance;   \/\/ HMD IPD (distance between pupils) in meters$/;"	m	struct:VrDeviceInfo
@@ -25067,8 +25184,13 @@ isUsingMMapCapture	.\include\raylib\external\miniaudio.h	/^            ma_bool32
 isUsingMMapPlayback	.\include\raylib\external\miniaudio.h	/^            ma_bool32 isUsingMMapPlayback : 1;$/;"	m	struct:ma_device::__anon230::__anon234
 isValidElementForJoystick	.\include\raylib\external\glfw\src\input.c	/^static GLFWbool isValidElementForJoystick(const _GLFWmapelement* e,$/;"	f	file:
 isVertical	.\include\gui.h	/^	bool isVertical;$/;"	m	struct:ScrollBar
+is_flat	.\include\robin_hood\robin_hood.h	/^    static constexpr bool is_flat = IsFlat;$/;"	m	class:robin_hood::detail::Table
 is_line_ending	.\include\raylib\external\tinyobj_loader_c.h	/^static int is_line_ending(const char *p, unsigned int i, unsigned int end_i) {$/;"	f
+is_map	.\include\robin_hood\robin_hood.h	/^    static constexpr bool is_map = !std::is_void<T>::value;$/;"	m	class:robin_hood::detail::Table
+is_set	.\include\robin_hood\robin_hood.h	/^    static constexpr bool is_set = !is_map;$/;"	m	class:robin_hood::detail::Table
 is_sparse	.\include\raylib\external\cgltf.h	/^	cgltf_bool is_sparse;$/;"	m	struct:cgltf_accessor
+is_transparent	.\include\robin_hood\robin_hood.h	/^    static constexpr bool is_transparent =$/;"	m	class:robin_hood::detail::Table
+is_transparent_tag	.\include\robin_hood\robin_hood.h	/^struct is_transparent_tag {};$/;"	s	namespace:robin_hood
 ist_pos	.\include\raylib\external\dr_mp3.h	/^    drmp3_uint8 ist_pos[2][39];$/;"	m	struct:__anon66
 itemBounds	.\include\gui.h	/^	Rectangle itemBounds;$/;"	m	struct:DropDown
 itemBounds	.\include\gui.h	/^	Rectangle itemBounds;$/;"	m	struct:ListView
@@ -25245,6 +25367,7 @@ key	.\include\raylib\external\glfw\src\posix_thread.h	/^    pthread_key_t   key;
 keyMap	.\include\raylib\external\glfw\src\linux_joystick.h	/^    int                     keyMap[KEY_CNT - BTN_MISC];$/;"	m	struct:_GLFWjoystickLinux
 keyPressedQueue	.\include\raylib\core.c	/^            int keyPressedQueue[MAX_CHARS_QUEUE]; \/\/ Input characters queue$/;"	m	struct:CoreData::__anon11::__anon12	file:
 keyPressedQueueCount	.\include\raylib\core.c	/^            int keyPressedQueueCount;             \/\/ Input characters queue count$/;"	m	struct:CoreData::__anon11::__anon12	file:
+keyToIdx	.\include\robin_hood\robin_hood.h	/^    void keyToIdx(HashKey&& key, size_t* idx, InfoType* info) const {$/;"	f	class:robin_hood::detail::Table
 keyUpMonitor	.\include\raylib\external\glfw\src\cocoa_platform.h	/^    id                  keyUpMonitor;$/;"	m	struct:_GLFWlibraryNS
 keyboard	.\include\raylib\external\glfw\src\wl_platform.h	/^    struct wl_keyboard*         keyboard;$/;"	m	struct:_GLFWlibraryWayland	typeref:struct:_GLFWlibraryWayland::wl_keyboard
 keyboardFocus	.\include\raylib\external\glfw\src\wl_platform.h	/^    _GLFWwindow*                keyboardFocus;$/;"	m	struct:_GLFWlibraryWayland
@@ -25648,7 +25771,21 @@ m8	.\include\raylib\raymath.h	/^        float m0, m4, m8, m12;$/;"	m	struct:Matr
 m9	.\include\raylib\raylib.h	/^    float m1, m5, m9, m13;$/;"	m	struct:Matrix
 m9	.\include\raylib\raymath.h	/^        float m1, m5, m9, m13;$/;"	m	struct:Matrix
 mAtk	.\include\actor.h	/^	int mAtk[NUMELEMENTS], mDef[NUMELEMENTS], pAtk[NUMELEMENTS], pDef[NUMELEMENTS], hpBonus, mpBonus;$/;"	m	struct:Actor
+mData	.\include\robin_hood\robin_hood.h	/^        value_type mData;$/;"	m	class:robin_hood::detail::Table::final
+mData	.\include\robin_hood\robin_hood.h	/^        value_type* mData;$/;"	m	class:robin_hood::detail::Table::DataNode
 mDef	.\include\actor.h	/^	int mAtk[NUMELEMENTS], mDef[NUMELEMENTS], pAtk[NUMELEMENTS], pDef[NUMELEMENTS], hpBonus, mpBonus;$/;"	m	struct:Actor
+mInfo	.\include\robin_hood\robin_hood.h	/^            , mInfo(infoPtr) {$/;"	f	class:robin_hood::detail::Table::Iter
+mInfo	.\include\robin_hood\robin_hood.h	/^            , mInfo(infoPtr) {}$/;"	f	class:robin_hood::detail::Table::Iter
+mInfo	.\include\robin_hood\robin_hood.h	/^            , mInfo(other.mInfo) {}$/;"	f	class:robin_hood::detail::Table::Iter
+mInfo	.\include\robin_hood\robin_hood.h	/^    uint8_t* mInfo = reinterpret_cast<uint8_t*>(&mMask);                    \/\/ 8 byte 16$/;"	m	class:robin_hood::detail::Table
+mInfoHashShift	.\include\robin_hood\robin_hood.h	/^    InfoType mInfoHashShift = InitialInfoHashShift;                         \/\/ 4 byte 48$/;"	m	class:robin_hood::detail::Table
+mInfoInc	.\include\robin_hood\robin_hood.h	/^    InfoType mInfoInc = InitialInfoInc;                                     \/\/ 4 byte 44$/;"	m	class:robin_hood::detail::Table
+mKeyVals	.\include\robin_hood\robin_hood.h	/^    Node* mKeyVals = reinterpret_cast_no_cast_align_warning<Node*>(&mMask); \/\/ 8 byte  8$/;"	m	class:robin_hood::detail::Table
+mListForFree	.\include\robin_hood\robin_hood.h	/^        , mListForFree(nullptr) {}$/;"	f	class:robin_hood::detail::BulkPoolAllocator
+mListForFree	.\include\robin_hood\robin_hood.h	/^        , mListForFree(o.mListForFree) {$/;"	f	class:robin_hood::detail::BulkPoolAllocator
+mMask	.\include\robin_hood\robin_hood.h	/^    size_t mMask = 0;                                                       \/\/ 8 byte 32$/;"	m	class:robin_hood::detail::Table
+mMaxNumElementsAllowed	.\include\robin_hood\robin_hood.h	/^    size_t mMaxNumElementsAllowed = 0;                                      \/\/ 8 byte 40$/;"	m	class:robin_hood::detail::Table
+mNumElements	.\include\robin_hood\robin_hood.h	/^    size_t mNumElements = 0;                                                \/\/ 8 byte 24$/;"	m	class:robin_hood::detail::Table
 mOffset	.\include\elemino.h	/^	Vector2 mOffset; \/\/Offset from mouse to position$/;"	m	struct:Elemino
 m_next	.\include\raylib\external\rgif.h	/^    unsigned short m_next[256];$/;"	m	struct:GifLzwNode
 ma	.\include\raylib\external\stb_image.h	/^   unsigned int mr,mg,mb,ma, all_a;$/;"	m	struct:__anon328
@@ -27636,11 +27773,14 @@ mouseButton	.\include\raylib\external\glfw\src\internal.h	/^        GLFWmousebut
 mouseButtons	.\include\raylib\external\glfw\src\internal.h	/^    char                mouseButtons[GLFW_MOUSE_BUTTON_LAST + 1];$/;"	m	struct:_GLFWwindow
 mouseTrailSize	.\include\raylib\external\glfw\src\win32_platform.h	/^    UINT                mouseTrailSize;$/;"	m	struct:_GLFWlibraryWin32
 move	.\include\combat.h	/^	struct Move *move;$/;"	m	struct:CasterMove	typeref:struct:CasterMove::Move
+move	.\include\robin_hood\robin_hood.h	/^            : mData(std::move(n.mData)) {}$/;"	f	class:robin_hood::detail::Table::DataNode
+move	.\include\robin_hood\robin_hood.h	/^        , DataPool(std::move(static_cast<DataPool&>(o))) {$/;"	f	class:robin_hood::detail::Table
 moveAnimPlaying	.\include\combat.h	/^	static bool moveAnimPlaying;$/;"	m	struct:CombatData
-moveAnimPlaying	.\src\combat.cpp	/^bool CombatData::moveAnimPlaying = false;$/;"	m	class:CombatData	file:
+moveAnimPlaying	.\src\combatdata.cpp	/^bool CombatData::moveAnimPlaying = false;$/;"	m	class:CombatData	file:
 moveAnnouncement	.\include\combat.h	/^	static BoxLabel moveAnnouncement;$/;"	m	struct:CombatData
-moveAnnouncement	.\src\combat.cpp	/^BoxLabel CombatData::moveAnnouncement;$/;"	m	class:CombatData	file:
-moveButtons	.\include\combat.h	/^	Button moveButtons[NUM_ACTOR_MOVES];$/;"	m	struct:CombatData
+moveAnnouncement	.\src\combatdata.cpp	/^BoxLabel CombatData::moveAnnouncement;$/;"	m	class:CombatData	file:
+moveButtons	.\include\combat.h	/^	static Button moveButtons[NUM_ACTOR_MOVES];$/;"	m	struct:CombatData
+moveButtons	.\src\combatdata.cpp	/^Button CombatData::moveButtons[NUM_ACTOR_MOVES];$/;"	m	class:CombatData	file:
 moveControl	.\include\raylib\camera.h	/^    int moveControl[6];$/;"	m	struct:__anon4
 moveDownPositionA	.\include\raylib\gestures.h	/^        Vector2 moveDownPositionA;      \/\/ First touch down position on move$/;"	m	struct:__anon390::__anon391
 moveDownPositionB	.\include\raylib\gestures.h	/^        Vector2 moveDownPositionB;      \/\/ Second touch down position on move$/;"	m	struct:__anon390::__anon391
@@ -27782,6 +27922,15 @@ nodes_count	.\include\raylib\external\cgltf.h	/^	cgltf_size nodes_count;$/;"	m	s
 nodes_count	.\include\raylib\external\cgltf.h	/^	cgltf_size nodes_count;$/;"	m	struct:cgltf_scene
 noerror	.\include\raylib\external\glfw\src\internal.h	/^    GLFWbool            forward, debug, noerror;$/;"	m	struct:_GLFWcontext
 noerror	.\include\raylib\external\glfw\src\internal.h	/^    GLFWbool      noerror;$/;"	m	struct:_GLFWctxconfig
+noexcept	.\include\robin_hood\robin_hood.h	/^            noexcept(value_type(std::forward<Args>(args)...)))$/;"	f	class:robin_hood::detail::Table::final
+noexcept	.\include\robin_hood\robin_hood.h	/^            size_t const insertion_idx) noexcept(std::is_nothrow_move_assignable<Node>::value) {$/;"	f	class:robin_hood::detail::Table
+noexcept	.\include\robin_hood\robin_hood.h	/^        DataNode(M& ROBIN_HOOD_UNUSED(map) \/*unused*\/, DataNode<M, true>&& n) noexcept($/;"	f	class:robin_hood::detail::Table::final
+noexcept	.\include\robin_hood\robin_hood.h	/^        std::tuple<U2...> b) noexcept(noexcept(pair(std::declval<std::tuple<U1...>&>(),$/;"	f	struct:robin_hood::pair
+noexcept	.\include\robin_hood\robin_hood.h	/^    BulkPoolAllocator() noexcept = default;$/;"	m	class:robin_hood::detail::BulkPoolAllocator
+noexcept	.\include\robin_hood\robin_hood.h	/^    explicit WrapHash(T const& o) noexcept(noexcept(T(std::declval<T const&>())))$/;"	f	struct:robin_hood::detail::WrapHash
+noexcept	.\include\robin_hood\robin_hood.h	/^    explicit WrapKeyEqual(T const& o) noexcept(noexcept(T(std::declval<T const&>())))$/;"	f	struct:robin_hood::detail::WrapKeyEqual
+noexcept	.\include\robin_hood\robin_hood.h	/^    void shiftDown(size_t idx) noexcept(std::is_nothrow_move_assignable<Node>::value) {$/;"	f	class:robin_hood::detail::Table
+noexcept	.\include\robin_hood\robin_hood.h	/^    void swap(pair<T1, T2>& o) noexcept((detail::swappable::nothrow<T1>::value) &&$/;"	f	struct:robin_hood::pair
 nomore	.\include\raylib\external\stb_image.h	/^   int            nomore;      \/\/ flag if we saw a marker so must stop$/;"	m	struct:__anon320
 nonCoherentAtomSize	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkDeviceSize             nonCoherentAtomSize;$/;"	m	struct:VkPhysicalDeviceLimits
 nonblocking	.\include\raylib\rnet.h	/^    bool nonblocking;           \/\/ non-blocking operation?$/;"	m	struct:SocketConfig
@@ -27799,6 +27948,7 @@ note	.\include\raylib\external\jar_mod.h	/^} note;$/;"	t	typeref:struct:__anon12
 note	.\include\raylib\external\jar_xm.h	/^     float note;$/;"	m	struct:jar_xm_channel_context_s
 note	.\include\raylib\external\jar_xm.h	/^     uint8_t note; \/* 1-96, 97 = Key Off note *\/$/;"	m	struct:jar_xm_pattern_slot_s
 note_delay_param	.\include\raylib\external\jar_xm.h	/^     uint8_t note_delay_param;$/;"	m	struct:jar_xm_channel_context_s
+nothrow	.\include\robin_hood\robin_hood.h	/^struct nothrow {$/;"	s	namespace:robin_hood::detail::swappable
 notificationClient	.\include\raylib\external\miniaudio.h	/^            ma_IMMNotificationClient notificationClient;$/;"	m	struct:ma_device::__anon230::__anon231
 npoints	.\include\raylib\external\par_shapes.h	/^    int npoints;             \/\/ Number of points$/;"	m	struct:par_shapes_mesh_s
 ns	.\include\raylib\external\glfw\src\internal.h	/^    } ns;$/;"	m	struct:_GLFWinitconfig	typeref:struct:_GLFWinitconfig::__anon86
@@ -27953,17 +28103,34 @@ operation	.\include\raylib\external\miniaudio.h	/^            ma_uint32 operatio
 operationCompletionEvent	.\include\raylib\external\miniaudio.h	/^            ma_event operationCompletionEvent;$/;"	m	struct:ma_device::__anon230::__anon244
 operationEvent	.\include\raylib\external\miniaudio.h	/^            ma_event operationEvent;$/;"	m	struct:ma_device::__anon230::__anon244
 operationResult	.\include\raylib\external\miniaudio.h	/^            ma_result operationResult;$/;"	m	struct:ma_device::__anon230::__anon244
+operator !=	.\include\robin_hood\robin_hood.h	/^    bool operator!=(const Table& other) const {$/;"	f	class:robin_hood::detail::Table
+operator !=	.\include\robin_hood\robin_hood.h	/^inline constexpr bool operator!=(pair<A, B> const& x, pair<A, B> const& y) {$/;"	f	namespace:robin_hood
+operator ()	.\include\robin_hood\robin_hood.h	/^        void operator()(M const& s, M& t) const {$/;"	f	struct:robin_hood::detail::Table::Cloner
+operator ()	.\include\robin_hood\robin_hood.h	/^        void operator()(M const& source, M& target) const {$/;"	f	struct:robin_hood::detail::Table::Cloner
+operator *	.\include\robin_hood\robin_hood.h	/^        const value_type& operator*() const {$/;"	f	class:robin_hood::detail::Table::DataNode
+operator *	.\include\robin_hood\robin_hood.h	/^        reference operator*() const {$/;"	f	class:robin_hood::detail::Table::Iter
+operator *	.\include\robin_hood\robin_hood.h	/^        value_type& operator*() {$/;"	f	class:robin_hood::detail::Table::DataNode
 operator *	.\src\tmath.cpp	/^Vector2 operator*(const Vector2 &a, const float &f){$/;"	f
 operator *=	.\src\tmath.cpp	/^void operator*=(Vector2 &a, const float &f){$/;"	f
 operator +	.\src\tmath.cpp	/^Vector2 operator+(const Vector2 &a, const Vector2 &b){$/;"	f
 operator +=	.\src\tmath.cpp	/^void operator+=(Vector2 &a, const Vector2 &b){$/;"	f
 operator -	.\src\tmath.cpp	/^Vector2 operator-(const Vector2 &a, const Vector2 &b){$/;"	f
 operator -=	.\src\tmath.cpp	/^void operator-=(Vector2 &a, const Vector2 &b){$/;"	f
+operator ->	.\include\robin_hood\robin_hood.h	/^        pointer operator->() const {$/;"	f	class:robin_hood::detail::Table::Iter
 operator /	.\src\tmath.cpp	/^Vector2 operator\/(const Vector2 &a, const Vector2 &b){$/;"	f
 operator /	.\src\tmath.cpp	/^Vector2 operator\/(const Vector2 &a, const float &f){$/;"	f
 operator /=	.\src\tmath.cpp	/^void operator\/=(Vector2 &a, const Vector2 &b){$/;"	f
 operator /=	.\src\tmath.cpp	/^void operator\/=(Vector2 &a, const float &f){$/;"	f
+operator <<	.\include\robin_hood\robin_hood.h	/^inline std::ostream& operator<<(std::ostream& os, Counts const& c) {$/;"	f	namespace:robin_hood
+operator <=	.\include\robin_hood\robin_hood.h	/^inline constexpr bool operator<=(pair<A, B> const& x, pair<A, B> const& y) {$/;"	f	namespace:robin_hood
+operator =	.\include\robin_hood\robin_hood.h	/^    Table& operator=(Table const& o) {$/;"	f	class:robin_hood::detail::Table
 operator =	.\src\gui.cpp	/^void Anchor::operator=(const Vector2 &v){$/;"	f	class:Anchor
+operator ==	.\include\robin_hood\robin_hood.h	/^    bool operator==(const Table& other) const {$/;"	f	class:robin_hood::detail::Table
+operator ==	.\include\robin_hood\robin_hood.h	/^inline constexpr bool operator==(pair<A, B> const& x, pair<A, B> const& y) {$/;"	f	namespace:robin_hood
+operator >	.\include\robin_hood\robin_hood.h	/^inline constexpr bool operator>(pair<A, B> const& x, pair<A, B> const& y) {$/;"	f	namespace:robin_hood
+operator >=	.\include\robin_hood\robin_hood.h	/^inline constexpr bool operator>=(pair<A, B> const& x, pair<A, B> const& y) {$/;"	f	namespace:robin_hood
+operator []	.\include\robin_hood\robin_hood.h	/^    typename std::enable_if<!std::is_void<Q>::value, Q&>::type operator[](const key_type& key) {$/;"	f	class:robin_hood::detail::Table
+operator []	.\include\robin_hood\robin_hood.h	/^    typename std::enable_if<!std::is_void<Q>::value, Q&>::type operator[](key_type&& key) {$/;"	f	class:robin_hood::detail::Table
 operator []	.\include\sprite.h	/^	Texture & operator[](const char *path){$/;"	f	struct:TextureManager
 optarg	.\include\raylib\external\glfw\deps\getopt.c	/^char* optarg;$/;"	v
 optcursor	.\include\raylib\external\glfw\deps\getopt.c	/^static char* optcursor = NULL;$/;"	v	file:
@@ -28417,6 +28584,7 @@ page_crc_tests	.\include\raylib\external\stb_vorbis.h	/^   int page_crc_tests; \
 page_end	.\include\raylib\external\stb_vorbis.h	/^   stbv_uint32 page_start, page_end;$/;"	m	struct:__anon373
 page_flag	.\include\raylib\external\stb_vorbis.h	/^   stbv_uint8 page_flag;$/;"	m	struct:stb_vorbis
 page_start	.\include\raylib\external\stb_vorbis.h	/^   stbv_uint32 page_start, page_end;$/;"	m	struct:__anon373
+pair	.\include\robin_hood\robin_hood.h	/^struct pair {$/;"	s	namespace:robin_hood
 pal	.\include\raylib\external\stb_image.h	/^   stbi_uc  pal[256][4];$/;"	m	struct:__anon331
 panControl	.\include\raylib\camera.h	/^    int panControl;                 \/\/ raylib: MOUSE_MIDDLE_BUTTON$/;"	m	struct:__anon4
 panel	.\include\gui.h	/^	Panel panel;$/;"	m	struct:DropDown
@@ -28556,6 +28724,7 @@ pendingContentRect	.\include\raylib\external\android\native_app_glue\android_nat
 pendingInputQueue	.\include\raylib\external\android\native_app_glue\android_native_app_glue.h	/^    AInputQueue* pendingInputQueue;$/;"	m	struct:android_app
 pendingWindow	.\include\raylib\external\android\native_app_glue\android_native_app_glue.h	/^    ANativeWindow* pendingWindow;$/;"	m	struct:android_app
 penetration	.\include\raylib\physac.h	/^    float penetration;                          \/\/ Depth of penetration from collision$/;"	m	struct:PhysicsManifoldData
+performAllocation	.\include\robin_hood\robin_hood.h	/^    ROBIN_HOOD(NOINLINE) T* performAllocation() {$/;"	f	class:robin_hood::detail::BulkPoolAllocator
 performanceProfile	.\include\raylib\external\miniaudio.h	/^    ma_performance_profile performanceProfile;$/;"	m	struct:__anon193
 period	.\include\elemino.h	/^	period,$/;"	e	enum:MinoShape
 period	.\include\raylib\external\jar_mod.h	/^    muchar  period;$/;"	m	struct:__anon124
@@ -28623,10 +28792,10 @@ playback	.\include\raylib\external\miniaudio.h	/^    } playback;$/;"	m	struct:ma
 playbackDeviceInfoCount	.\include\raylib\external\miniaudio.h	/^    ma_uint32 playbackDeviceInfoCount;$/;"	m	struct:ma_context
 player	.\include\game.h	/^	Player player;$/;"	m	struct:Game
 playerAlive	.\include\combat.h	/^	static Vec<Actor *> playerAlive;$/;"	m	struct:CombatData
-playerAlive	.\src\combat.cpp	/^Vec<Actor *> CombatData::playerAlive;$/;"	m	class:CombatData	file:
+playerAlive	.\src\combatdata.cpp	/^Vec<Actor *> CombatData::playerAlive;$/;"	m	class:CombatData	file:
 playerEyesPosition	.\include\raylib\camera.h	/^    float playerEyesPosition;       \/\/ Default player eyes position from ground (in meters)$/;"	m	struct:__anon4
 playerTeam	.\include\combat.h	/^	static Team *playerTeam;$/;"	m	struct:CombatData
-playerTeam	.\src\combat.cpp	/^Team *CombatData::playerTeam = nullptr;$/;"	m	class:CombatData	file:
+playerTeam	.\src\combatdata.cpp	/^Team *CombatData::playerTeam = nullptr;$/;"	m	class:CombatData	file:
 playing	.\include\raylib\raudio.c	/^    bool playing;                   \/\/ Audio buffer state: AUDIO_PLAYING$/;"	m	struct:rAudioBuffer	file:
 playing	.\include\sprite.h	/^	bool playing = false;$/;"	m	struct:Sprite
 playrate	.\include\raylib\external\jar_mod.h	/^    mulong  playrate;$/;"	m	struct:__anon127
@@ -28665,7 +28834,7 @@ portaspeed	.\include\raylib\external\jar_mod.h	/^    mint    portaspeed;$/;"	m	s
 portraits	.\include\combat.h	/^	static CombatPortraits portraits;$/;"	m	struct:CombatData
 portraits	.\include\inventory.h	/^	InventoryPortraits portraits;$/;"	m	struct:InventoryData
 portraits	.\include\moveinventory.h	/^	InventoryPortraits portraits;$/;"	m	struct:MoveInventoryData
-portraits	.\src\combat.cpp	/^CombatPortraits CombatData::portraits;$/;"	m	class:CombatData	file:
+portraits	.\src\combatdata.cpp	/^CombatPortraits CombatData::portraits;$/;"	m	class:CombatData	file:
 ports	.\include\raylib\external\miniaudio.h	/^    void** ports;$/;"	m	struct:__anon302
 ports	.\include\raylib\external\miniaudio.h	/^    void** ports;$/;"	m	struct:__anon303
 pos	.\include\elemino.h	/^	Vector2 pos; \/\/Pos of the whole elemino, NOT just the indiv rects$/;"	m	struct:Elemino
@@ -28696,7 +28865,7 @@ posix	.\include\raylib\external\miniaudio.h	/^        } posix;$/;"	m	union:__ano
 posix	.\include\raylib\external\miniaudio.h	/^        } posix;$/;"	m	union:__anon181::__anon182	typeref:struct:__anon181::__anon182::__anon184
 posix	.\include\raylib\external\miniaudio.h	/^        } posix;$/;"	m	union:ma_context::__anon222	typeref:struct:ma_context::__anon222::__anon224
 potTargets	.\include\combat.h	/^	static Vec<Actor *> potTargets; \/\/potential targets$/;"	m	struct:CombatData
-potTargets	.\src\combat.cpp	/^Vec<Actor *> CombatData::potTargets;$/;"	m	class:CombatData	file:
+potTargets	.\src\combatdata.cpp	/^Vec<Actor *> CombatData::potTargets;$/;"	m	class:CombatData	file:
 povCount	.\include\raylib\external\glfw\src\win32_joystick.c	/^    int                     povCount;$/;"	m	struct:_GLFWobjenumWin32	file:
 ppData	.\include\raylib\external\dr_wav.h	/^    void** ppData;$/;"	m	struct:__anon73
 ppEnabledExtensionNames	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    const  char * const*       ppEnabledExtensionNames;$/;"	m	struct:VkDeviceCreateInfo
@@ -28883,6 +29052,8 @@ registry	.\include\raylib\external\glfw\src\wl_platform.h	/^    struct wl_regist
 registryHandleGlobal	.\include\raylib\external\glfw\src\wl_init.c	/^static void registryHandleGlobal(void* data,$/;"	f	file:
 registryHandleGlobalRemove	.\include\raylib\external\glfw\src\wl_init.c	/^static void registryHandleGlobalRemove(void *data,$/;"	f	file:
 registryListener	.\include\raylib\external\glfw\src\wl_init.c	/^static const struct wl_registry_listener registryListener = {$/;"	v	typeref:struct:wl_registry_listener	file:
+rehash	.\include\robin_hood\robin_hood.h	/^    void rehash(size_t c) {$/;"	f	class:robin_hood::detail::Table
+rehashPowerOfTwo	.\include\robin_hood\robin_hood.h	/^    void rehashPowerOfTwo(size_t numBuckets) {$/;"	f	class:robin_hood::detail::Table
 relativePointer	.\include\raylib\external\glfw\src\wl_platform.h	/^        struct zwp_relative_pointer_v1*    relativePointer;$/;"	m	struct:_GLFWwindowWayland::__anon108	typeref:struct:_GLFWwindowWayland::__anon108::zwp_relative_pointer_v1
 relativePointerHandleRelativeMotion	.\include\raylib\external\glfw\src\wl_window.c	/^static void relativePointerHandleRelativeMotion(void* data,$/;"	f	file:
 relativePointerListener	.\include\raylib\external\glfw\src\wl_window.c	/^static const struct zwp_relative_pointer_v1_listener relativePointerListener = {$/;"	v	typeref:struct:zwp_relative_pointer_v1_listener	file:
@@ -28922,6 +29093,7 @@ rescaleTarget	.\include\window.h	/^	static RenderTexture rescaleTarget;$/;"	m	st
 rescaleTarget	.\src\window.cpp	/^RenderTexture2D Window::rescaleTarget;$/;"	m	class:Window	file:
 reserv	.\include\raylib\external\dr_mp3.h	/^    int reserv, free_format_bytes;$/;"	m	struct:__anon51
 reserv_buf	.\include\raylib\external\dr_mp3.h	/^    unsigned char header[4], reserv_buf[511];$/;"	m	struct:__anon51
+reserve	.\include\robin_hood\robin_hood.h	/^    void reserve(size_t c) {$/;"	f	class:robin_hood::detail::Table
 reserved	.\include\raylib\external\dr_flac.h	/^    drflac_uint8 reserved[3];$/;"	m	struct:__anon44
 reset	.\include\sprite.h	/^	void reset(){$/;"	f	struct:Animation
 resetRequired	.\include\raylib\gestures.h	/^        bool resetRequired;             \/\/ HOLD reset to get first touch point again$/;"	m	struct:__anon390::__anon392
@@ -29075,6 +29247,7 @@ rlglData	.\include\raylib\rlgl.h	/^typedef struct rlglData {$/;"	s
 rlglData	.\include\raylib\rlgl.h	/^} rlglData;$/;"	t	typeref:struct:rlglData
 rlglDraw	.\include\raylib\rlgl.h	/^void rlglDraw(void)$/;"	f
 rlglInit	.\include\raylib\rlgl.h	/^void rlglInit(int width, int height)$/;"	f
+robin_hood	.\include\robin_hood\robin_hood.h	/^namespace robin_hood {$/;"	n
 robustBufferAccess	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkBool32                 robustBufferAccess;$/;"	m	struct:VkPhysicalDeviceFeatures
 robustness	.\include\raylib\external\glfw\src\internal.h	/^    int                 robustness;$/;"	m	struct:_GLFWcontext
 robustness	.\include\raylib\external\glfw\src\internal.h	/^    int           robustness;$/;"	m	struct:_GLFWctxconfig
@@ -29083,6 +29256,7 @@ rotation	.\include\raylib\external\cgltf.h	/^	cgltf_float rotation;$/;"	m	struct
 rotation	.\include\raylib\external\cgltf.h	/^	cgltf_float rotation[4];$/;"	m	struct:cgltf_node
 rotation	.\include\raylib\raylib.h	/^    Quaternion rotation;    \/\/ Rotation$/;"	m	struct:Transform
 rotation	.\include\raylib\raylib.h	/^    float rotation;         \/\/ Camera rotation in degrees$/;"	m	struct:Camera2D
+rotr	.\include\robin_hood\robin_hood.h	/^T rotr(T x, unsigned k) {$/;"	f	namespace:robin_hood::detail
 roughness_factor	.\include\raylib\external\cgltf.h	/^	cgltf_float roughness_factor;$/;"	m	struct:cgltf_pbr_metallic_roughness
 round	.\include\raylib\external\miniaudio.h	/^    unsigned int round;$/;"	m	struct:ma_sio_par
 rowPitch	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkDeviceSize             rowPitch;$/;"	m	struct:VkSubresourceLayout
@@ -29369,6 +29543,7 @@ seatHandleCapabilities	.\include\raylib\external\glfw\src\wl_init.c	/^static voi
 seatHandleName	.\include\raylib\external\glfw\src\wl_init.c	/^static void seatHandleName(void* data,$/;"	f	file:
 seatListener	.\include\raylib\external\glfw\src\wl_init.c	/^static const struct wl_seat_listener seatListener = {$/;"	v	typeref:struct:wl_seat_listener	file:
 seatVersion	.\include\raylib\external\glfw\src\wl_platform.h	/^    int                         seatVersion;$/;"	m	struct:_GLFWlibraryWayland
+second	.\include\robin_hood\robin_hood.h	/^    T2 second; \/\/ NOLINT(misc-non-private-member-variables-in-classes)$/;"	m	struct:robin_hood::pair
 section	.\include\raylib\external\glfw\src\win32_platform.h	/^    CRITICAL_SECTION    section;$/;"	m	struct:_GLFWmutexWin32
 seekPointCount	.\include\raylib\external\dr_mp3.h	/^    drmp3_uint32 seekPointCount;        \/* The number of items in pSeekPoints. When set to 0 assumes to no seek table. Defaults to zero. *\/$/;"	m	struct:__anon60
 seekPosInBytes	.\include\raylib\external\dr_mp3.h	/^    drmp3_uint64 seekPosInBytes;        \/* Points to the first byte of an MP3 frame. *\/$/;"	m	struct:__anon58
@@ -29683,9 +29858,9 @@ start_y	.\include\raylib\external\stb_image.h	/^   int start_x, start_y;$/;"	m	s
 started	.\include\raylib\external\stb_truetype.h	/^   int started;$/;"	m	struct:__anon358
 statBarInterpTime	.\include\combat.h	/^	static constexpr float statBarInterpTime = .375f;$/;"	m	struct:CombatData
 statBarInterpTimer	.\include\combat.h	/^	static float statBarInterpTimer;$/;"	m	struct:CombatData
-statBarInterpTimer	.\src\combat.cpp	/^float CombatData::statBarInterpTimer = 0.f;$/;"	m	class:CombatData	file:
+statBarInterpTimer	.\src\combatdata.cpp	/^float CombatData::statBarInterpTimer = 0.f;$/;"	m	class:CombatData	file:
 statBars	.\include\combat.h	/^	static UMap<Actor *, StatBar[2]> statBars;$/;"	m	struct:CombatData
-statBars	.\src\combat.cpp	/^UMap<Actor *, StatBar[2]> CombatData::statBars;$/;"	m	class:CombatData	file:
+statBars	.\src\combatdata.cpp	/^UMap<Actor *, StatBar[2]> CombatData::statBars;$/;"	m	class:CombatData	file:
 statText	.\include\inventory.h	/^	Label statText[6];$/;"	m	struct:InventoryData
 state	.\include\gui.h	/^	GuiControlState state = GuiControlState::GUI_STATE_NORMAL;$/;"	m	struct:Panel
 state	.\include\gui.h	/^	GuiControlState state;$/;"	m	struct:DropDown
@@ -29711,7 +29886,7 @@ status	.\include\raylib\rnet.h	/^    int status;                 \/\/ Packet sta
 status	.\include\raylib\rnet.h	/^    int status;                 \/\/ Socket result state$/;"	m	struct:SocketResult
 status	.\include\raylib\rnet.h	/^    int status;                 \/\/ The last status code to have occured using this socket$/;"	m	struct:Socket
 statusEffects	.\include\combat.h	/^	static UMap<Actor *, StatusEffects> statusEffects;$/;"	m	struct:CombatData
-statusEffects	.\src\combat.cpp	/^UMap<Actor *, StatusEffects> CombatData::statusEffects;$/;"	m	class:CombatData	file:
+statusEffects	.\src\combatdata.cpp	/^UMap<Actor *, StatusEffects> CombatData::statusEffects;$/;"	m	class:CombatData	file:
 stb__perlin_ease	.\include\raylib\external\stb_perlin.h	231;"	d
 stb__perlin_ease	.\include\raylib\external\stb_perlin.h	351;"	d
 stb__perlin_fastfloor	.\include\raylib\external\stb_perlin.h	/^static int stb__perlin_fastfloor(float a)$/;"	f
@@ -30607,6 +30782,7 @@ sustain_enabled	.\include\raylib\external\jar_xm.h	/^    bool sustain_enabled;$/
 sustain_point	.\include\raylib\external\jar_xm.h	/^    uint8_t sustain_point;$/;"	m	struct:jar_xm_envelope_s
 sustained	.\include\raylib\external\jar_xm.h	/^     bool sustained;$/;"	m	struct:jar_xm_channel_context_s
 svg	.\include\raylib\external\stb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo
+swap	.\include\robin_hood\robin_hood.h	/^    void swap(Table& o) {$/;"	f	class:robin_hood::detail::Table
 swapBuffers	.\include\raylib\external\glfw\src\internal.h	/^    _GLFWswapbuffersfun         swapBuffers;$/;"	m	struct:_GLFWcontext
 swapBuffersEGL	.\include\raylib\external\glfw\src\egl_context.c	/^static void swapBuffersEGL(_GLFWwindow* window)$/;"	f	file:
 swapBuffersGLX	.\include\raylib\external\glfw\src\glx_context.c	/^static void swapBuffersGLX(_GLFWwindow* window)$/;"	f	file:
@@ -30622,6 +30798,7 @@ swapchain	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkSwapchainKHR
 swapchain	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkSwapchainKHR   swapchain;$/;"	m	struct:VkBindImageMemorySwapchainInfoKHR
 swapchainCount	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t                           swapchainCount;$/;"	m	struct:VkPresentInfoKHR
 swapchainCount	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t           swapchainCount;$/;"	m	struct:VkDeviceGroupPresentInfoKHR
+swappable	.\include\robin_hood\robin_hood.h	/^namespace swappable {$/;"	n	namespace:robin_hood::detail
 sy	.\include\raylib\external\stb_truetype.h	/^   float sy;$/;"	m	struct:stbtt__active_edge
 syn	.\include\raylib\external\dr_mp3.h	/^    float grbuf[2][576], scf[40], syn[18 + 15][2*32];$/;"	m	struct:__anon66
 szCSDVersion	.\include\raylib\external\miniaudio.h	/^    WCHAR szCSDVersion[128];$/;"	m	struct:__anon256
@@ -30648,10 +30825,10 @@ target	.\include\raylib\raylib.h	/^    Vector2 target;         \/\/ Camera targe
 target	.\include\raylib\raylib.h	/^    Vector3 target;         \/\/ Camera target it looks-at$/;"	m	struct:Camera3D
 target	.\include\raylib\rlgl.h	/^        Vector3 target;         \/\/ Camera target it looks-at$/;"	m	struct:Camera
 targetAliveList	.\include\combat.h	/^	static ListView targetAliveList;$/;"	m	struct:CombatData
-targetAliveList	.\src\combat.cpp	/^ListView CombatData::targetAliveList;$/;"	m	class:CombatData	file:
+targetAliveList	.\src\combatdata.cpp	/^ListView CombatData::targetAliveList;$/;"	m	class:CombatData	file:
 targetDistance	.\include\raylib\camera.h	/^    float targetDistance;           \/\/ Camera distance from position to target$/;"	m	struct:__anon4
 targetSelectedList	.\include\combat.h	/^	static ListView targetSelectedList;$/;"	m	struct:CombatData
-targetSelectedList	.\src\combat.cpp	/^ListView CombatData::targetSelectedList;$/;"	m	class:CombatData	file:
+targetSelectedList	.\src\combatdata.cpp	/^ListView CombatData::targetSelectedList;$/;"	m	class:CombatData	file:
 target_names	.\include\raylib\external\cgltf.h	/^	char** target_names;$/;"	m	struct:cgltf_mesh
 target_names_count	.\include\raylib\external\cgltf.h	/^	cgltf_size target_names_count;$/;"	m	struct:cgltf_mesh
 target_node	.\include\raylib\external\cgltf.h	/^	cgltf_node* target_node;$/;"	m	struct:cgltf_animation_channel
@@ -30732,6 +30909,12 @@ threadId	.\include\raylib\core.c	/^            pthread_t threadId;             \
 threadId	.\include\raylib\core.c	/^    pthread_t threadId;             \/\/ Event reading thread id$/;"	m	struct:__anon5	file:
 threadPriority	.\include\raylib\external\miniaudio.h	/^    ma_thread_priority threadPriority;$/;"	m	struct:__anon202
 threadPriority	.\include\raylib\external\miniaudio.h	/^    ma_thread_priority threadPriority;$/;"	m	struct:ma_context
+throwOverflowError	.\include\robin_hood\robin_hood.h	/^    ROBIN_HOOD(NOINLINE) void throwOverflowError() const {$/;"	f	class:robin_hood::detail::Table
+tickEffectTime	.\include\combat.h	/^	static constexpr float tickEffectTime = .375f;$/;"	m	struct:CombatData
+tickEffectTimer	.\include\combat.h	/^	static float tickEffectTimer;$/;"	m	struct:CombatData
+tickEffectTimer	.\src\combatdata.cpp	/^float CombatData::tickEffectTimer = 0.f;$/;"	m	class:CombatData	file:
+tickEffects	.\include\combat.h	/^	static bool tickEffects;$/;"	m	struct:CombatData
+tickEffects	.\src\combatdata.cpp	/^bool CombatData::tickEffects = false;$/;"	m	class:CombatData	file:
 ticks	.\include\raylib\external\jar_mod.h	/^    mulong  ticks;$/;"	m	struct:__anon126
 tiling	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkImageTiling                      tiling;$/;"	m	struct:VkPhysicalDeviceImageFormatInfo2
 tiling	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkImageTiling                      tiling;$/;"	m	struct:VkPhysicalDeviceSparseImageFormatInfo2
@@ -30853,6 +31036,12 @@ tryAutoSpawn	.\include\raylib\external\miniaudio.h	/^        ma_bool32 tryAutoSp
 tryParseDouble	.\include\raylib\external\tinyobj_loader_c.h	/^static int tryParseDouble(const char *s, const char *s_end, double *result) {$/;"	f
 tryStartServer	.\include\raylib\external\miniaudio.h	/^            ma_bool32 tryStartServer;$/;"	m	struct:ma_context::__anon207::__anon213
 tryStartServer	.\include\raylib\external\miniaudio.h	/^        ma_bool32 tryStartServer;$/;"	m	struct:__anon202::__anon206
+try_emplace	.\include\robin_hood\robin_hood.h	/^    std::pair<iterator, bool> try_emplace(const key_type& key, Args&&... args) {$/;"	f	class:robin_hood::detail::Table
+try_emplace	.\include\robin_hood\robin_hood.h	/^    std::pair<iterator, bool> try_emplace(const_iterator hint, const key_type& key,$/;"	f	class:robin_hood::detail::Table
+try_emplace	.\include\robin_hood\robin_hood.h	/^    std::pair<iterator, bool> try_emplace(const_iterator hint, key_type&& key, Args&&... args) {$/;"	f	class:robin_hood::detail::Table
+try_emplace	.\include\robin_hood\robin_hood.h	/^    std::pair<iterator, bool> try_emplace(key_type&& key, Args&&... args) {$/;"	f	class:robin_hood::detail::Table
+try_emplace_impl	.\include\robin_hood\robin_hood.h	/^    std::pair<iterator, bool> try_emplace_impl(OtherKey&& key, Args&&... args) {$/;"	f	class:robin_hood::detail::Table
+try_increase_info	.\include\robin_hood\robin_hood.h	/^    bool try_increase_info() {$/;"	f	class:robin_hood::detail::Table
 tszActionMap	.\include\raylib\external\glfw\deps\mingw\dinput.h	/^	CHAR		tszActionMap[MAX_PATH];$/;"	m	struct:_DIACTIONFORMATA
 tszActionMap	.\include\raylib\external\glfw\deps\mingw\dinput.h	/^	WCHAR		tszActionMap[MAX_PATH];$/;"	m	struct:_DIACTIONFORMATW
 tszImagePath	.\include\raylib\external\glfw\deps\mingw\dinput.h	/^	CHAR	tszImagePath[MAX_PATH];$/;"	m	struct:_DIDEVICEIMAGEINFOA
@@ -31043,6 +31232,7 @@ value	.\include\raylib\raylib.h	/^    float value;            \/\/ Material map 
 value	.\include\raylib\raylib.h	/^    int value;              \/\/ Character value (Unicode)$/;"	m	struct:CharInfo
 value	.\include\raylib\rlgl.h	/^        float value;            \/\/ Material map value$/;"	m	struct:MaterialMap
 value	.\include\raylib\rnet.h	/^    void *value;                \/\/ Socked option value data$/;"	m	struct:SocketOpt
+value	.\include\robin_hood\robin_hood.h	/^    static const bool value = noexcept(swap(std::declval<T&>(), std::declval<T&>()));$/;"	m	struct:robin_hood::detail::swappable::nothrow
 valueLen	.\include\raylib\rnet.h	/^    int valueLen;               \/\/ Socked option value len$/;"	m	struct:SocketOpt
 value_bits	.\include\raylib\external\stb_vorbis.h	/^   stbv_uint8  value_bits;$/;"	m	struct:__anon364
 values	.\include\raylib\external\miniaudio.h	/^    ma_uint32 values[MA_PA_CHANNELS_MAX];$/;"	m	struct:__anon300
@@ -31312,6 +31502,7 @@ vkUpdateDescriptorSetWithTemplate	.\include\raylib\external\glfw\deps\glad\vulka
 vkUpdateDescriptorSets	.\include\raylib\external\glfw\deps\glad\vulkan.h	3464;"	d
 vkWaitForFences	.\include\raylib\external\glfw\deps\glad\vulkan.h	3466;"	d
 vn_idx	.\include\raylib\external\tinyobj_loader_c.h	/^typedef struct { int v_idx, vt_idx, vn_idx; } tinyobj_vertex_index_t;$/;"	m	struct:__anon380
+void_type	.\include\robin_hood\robin_hood.h	/^struct void_type {$/;"	s	namespace:robin_hood::detail
 volume	.\include\raylib\external\jar_mod.h	/^    muchar  volume;$/;"	m	struct:__anon123
 volume	.\include\raylib\external\jar_mod.h	/^    muchar  volume;$/;"	m	struct:__anon126
 volume	.\include\raylib\external\jar_xm.h	/^     float volume; \/* Ideally between 0 (muted) and 1 (loudest) *\/$/;"	m	struct:jar_xm_channel_context_s
@@ -31678,6 +31869,7 @@ zout_start	.\include\raylib\external\stb_image.h	/^   char *zout_start;$/;"	m	st
 ~Menu	.\src\menu.cpp	/^Menu::~Menu(){$/;"	f	class:Menu
 ~MoveEffect	.\src\moveeffect.cpp	/^MoveEffect::~MoveEffect(){$/;"	f	class:MoveEffect
 ~Player	.\src\player.cpp	/^Player::~Player(){$/;"	f	class:Player
+~Table	.\include\robin_hood\robin_hood.h	/^    ~Table() {$/;"	f	class:robin_hood::detail::Table
 ~Team	.\include\player.h	/^	~Team(){$/;"	f	struct:Team
 ~Team	.\include\team.h	/^	~Team(){$/;"	f	struct:Team
 ~team	.\src\team.cpp	/^team::~team(){$/;"	f	class:team

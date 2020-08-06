@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS = -Wall -Iinclude -m64
-LIB = -lraylib -lopengl32 -lgdi32 -lwinmm -static -lpthread
+LIB = -lraylib -lrobin_hood -lopengl32 -lgdi32 -lwinmm -static -lpthread
 
 DEV_OBJ = console.o tmem.o
 GUI_OBJ = gui.o window.o
@@ -8,7 +8,7 @@ MATH_OBJ = tmath.o interp.o
 GRAPHICS_OBJ = sprite.o
 INVENTORY_OBJ = elemino.o inventory.o moveinventory.o
 MOVE_OBJ = move.o allmoves.o moveeffect.o move_impl.o
-COMBAT_OBJ = actor.o combat.o combatdata.o
+COMBAT_OBJ = actor.o combat.o combatdata.o execmove.o
 GAME_OBJ = game.o element.o player.o
 
 BUILD ?= DEBUG
@@ -83,6 +83,9 @@ combat.o: src\combat.cpp include\combat.h include\gui.h include\team.h include\m
 
 combatdata.o: src\combatdata.cpp include\combat.h
 	$(CXX) $(CXXFLAGS) -c src\combatdata.cpp -l. $(LIB)
+
+execmove.o: src\execmove.cpp include\combat.h
+	$(CXX) $(CXXFLAGS) -c src\execmove.cpp -l. $(LIB)
 
 moveeffect.o: src\moveeffect.cpp include\moveeffect.h include\moveconst.h include\actor.h
 	$(CXX) $(CXXFLAGS) -c src\moveeffect.cpp -L. $(LIB)
