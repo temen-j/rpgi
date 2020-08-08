@@ -1,8 +1,8 @@
 CXX = g++
-CXXFLAGS = -Wall -Iinclude -m64
-LIB = -lraylib -lrobin_hood -lopengl32 -lgdi32 -lwinmm -static -lpthread
+CXXFLAGS = -Wall -Iinclude -m64 -mbmi
+LIB = -lraylib -lrmem -lopengl32 -lgdi32 -lwinmm -static -lpthread
 
-DEV_OBJ = console.o tmem.o
+DEV_OBJ = console.o
 GUI_OBJ = gui.o window.o
 MATH_OBJ = tmath.o interp.o
 GRAPHICS_OBJ = sprite.o
@@ -18,8 +18,11 @@ EMPTY =
 ifeq ($(BUILD),DEBUG)
 	CXXFLAGS += -pg -g
 endif
-ifeq ($(BUILD),RELEASE)
+ifeq ($(BUILD),FAST)
 	CXXFLAGS += -O3 -pg -g
+endif
+ifeq ($(BUILD),RELEASE)
+	CXXFLAGS += -O3 -s
 endif
 ifeq ($(SYSTEM),WINDOWS)
 	CXXFLAGS += -mwindows
@@ -93,14 +96,15 @@ moveeffect.o: src\moveeffect.cpp include\moveeffect.h include\moveconst.h includ
 move_impl.o: src\move_impl.cpp include\move_impl.h include\actor.h include\combat.h include\move.h
 	$(CXX) $(CXXFLAGS) -c src\move_impl.cpp -L. $(LIB)
 
-tmem.o: src\tmem.c
-	gcc -O3 -c src\tmem.c
-
 sprite.o: src\sprite.cpp include\sprite.h
 	$(CXX) $(CXXFLAGS) -c src\sprite.cpp -L. $(LIB)
 
 window.o: src\window.cpp include\window.h
 	$(CXX) $(CXXFLAGS) -c src\window.cpp -L. $(LIB)
+
+librmem.a: src\rmem.c
+	gcc -O3 -c src\rmem.c
+	ar rcs rmem.o librmem.a
 
 run:
 	$(MAKE) -C bin run

@@ -1,88 +1,6 @@
 #include "..\include\actor.h"
 #include "..\include\move.h"
 
-/* Actor::Actor(const Actor* a){ */
-/* 	for(int i = 0; i < NUMGRIDS; ++i) */
-/* 		for(int j = 0; j < NUMCELLS; ++j) */
-/* 			this->grids[i][j] = a->grids[i][j]; */
-
-/* 	this->remHP = a->remHP; */
-/* 	this->remMP = a->remMP; */
-/* 	this->maxHP = a->maxHP; */
-/* 	this->maxMP = a->maxMP; */
-/* 	this->pIncap = a->pIncap; */
-/* 	this->mIncap = a->mIncap; */
-/* 	this->isDisabled = a->isDisabled; */
-	
-
-/* 	for(int i = 0; i < NUMELEMENTS; ++i){ */
-/* 		this->mAtk[i] = a->mAtk[i]; */
-/* 		this->mDef[i] = a->mDef[i]; */
-/* 		this->pAtk[i] = a->pAtk[i]; */
-/* 		this->pDef[i] = a->pDef[i]; */
-/* 	} */
-
-/* 	this->hpBonus = a->hpBonus; */
-/* 	this->mpBonus = a->mpBonus; */
-
-/* 	this->type[0] = a->type[0]; */
-/* 	this->type[1] = a->type[1]; */
-
-/* } */
-
-/*
-Actor::Actor(const Actor_serialized &as){
-	for (int i = 0; i < NUMGRIDS; ++i)
-		for(int j = 0; j < NUMCELLS; ++j)
-			grids[i][j] = as.grids[i][j];
-
-	remHP = as.remHP;
-	remMP = as.remMP;
-	type[0] = type[1] = Element::none;
-	assignStats(this);
-
-	for(int i = 0; i < NUMMOVES; ++i)
-		moves[i] = nullptr;
-
-	chosen = nullptr;
-}
-
-
-Actor_serialized::Actor_serialized(Actor *a){
-	if(!a)
-		return;
-
-	for(int i = 0; i < NUMGRIDS; ++i)
-		for(int j = 0; j < NUMCELLS; ++j)
-			this->grids[i][j] = a->grids[i][j];
-
-	this->remHP = a->remHP;
-	this->remMP = a->remMP;
-
-	for(int i = 0; i < NUMMOVES; ++i){
-		if(!a->moves[i])
-			this->moveIds[i] = 0;
-		else
-			this->moveIds[i] = a->moves[i]->id;
-	}
-}
-
-
-void saveActor(Actor *a){
-	Actor_serialized saved(a);
-	std::ofstream file(a->name + ".Actor", std::ios::binary);
-	const void *data = &saved;
-	file.write((char*)data, sizeof(saved));
-	file.close();
-}
-
-
-void loadActor(Actor *&a, const Actor_serialized &as){
-	a = new Actor(as);
-}
-*/
-
-
 void AssignStats(Actor *a){
 	//Init all stats to 0
 	for(int i = 0; i < NUMELEMENTS; ++i)
@@ -164,6 +82,7 @@ void AssignStats(Actor *a){
 			int prevMaxMP = a->maxMP;
 			a->maxHP = (int)ceil(INITHP * (1.0f + HPMPBONUS_MULT * a->hpBonus));
 			a->maxMP = (int)ceil(INITMP * (1.0f + HPMPBONUS_MULT * a->mpBonus));
+			/* a->maxMP = INITMP; */
 
 			a->remHP = (int) ceil(((float) a->remHP / prevMaxHP) * a->maxHP);
 			a->remMP = (int) ceil(((float) a->remMP / prevMaxMP) * a->maxMP);

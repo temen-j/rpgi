@@ -6,7 +6,7 @@
 //                                      _/_____/
 //
 // Fast & memory efficient hashtable based on robin hood hashing for C++11/14/17/20
-// version 3.8.0
+// version 3.8.1
 // https://github.com/martinus/robin-hood-hashing
 //
 // Licensed under the MIT License <http://opensource.org/licenses/MIT>.
@@ -37,16 +37,20 @@
 // see https://semver.org/
 #define ROBIN_HOOD_VERSION_MAJOR 3 // for incompatible API changes
 #define ROBIN_HOOD_VERSION_MINOR 8 // for adding functionality in a backwards-compatible manner
-#define ROBIN_HOOD_VERSION_PATCH 0 // for backwards-compatible bug fixes
+#define ROBIN_HOOD_VERSION_PATCH 1 // for backwards-compatible bug fixes
 
 #include <algorithm>
 #include <cstdlib>
 #include <cstring>
 #include <functional>
+#include <memory> // only to support hash of smart pointers
 #include <stdexcept>
 #include <string>
 #include <type_traits>
 #include <utility>
+#if __cplusplus >= 201703L
+#    include <string_view>
+#endif
 
 // #define ROBIN_HOOD_LOG_ENABLED
 #ifdef ROBIN_HOOD_LOG_ENABLED
@@ -127,6 +131,45 @@ static Counts& counts() {
 #    define ROBIN_HOOD_PRIVATE_DEFINITION_HAS_EXCEPTIONS() 1
 #endif
 
+// count leading/trailing bits
+#if ((defined __i386 || defined __x86_64__) && defined __BMI__) || defined _M_IX86 || defined _M_X64
+#    ifdef _MSC_VER
+#        include <intrin.h>
+#    else
+#        include <x86intrin.h>
+#    endif
+#    if ROBIN_HOOD(BITNESS) == 32
+#        define ROBIN_HOOD_PRIVATE_DEFINITION_CTZ() _tzcnt_u32
+#    else
+#        define ROBIN_HOOD_PRIVATE_DEFINITION_CTZ() _tzcnt_u64
+#    endif
+#    define ROBIN_HOOD_COUNT_TRAILING_ZEROES(x) ROBIN_HOOD(CTZ)(x)
+#elif defined _MSC_VER
+#    if ROBIN_HOOD(BITNESS) == 32
+#        define ROBIN_HOOD_PRIVATE_DEFINITION_BITSCANFORWARD() _BitScanForward
+#    else
+#        define ROBIN_HOOD_PRIVATE_DEFINITION_BITSCANFORWARD() _BitScanForward64
+#    endif
+#    include <intrin.h>
+#    pragma intrinsic(ROBIN_HOOD(BITSCANFORWARD))
+#    define ROBIN_HOOD_COUNT_TRAILING_ZEROES(x)                                       \
+        [](size_t mask) noexcept -> int {                                             \
+            unsigned long index;                                                      \
+            return ROBIN_HOOD(BITSCANFORWARD)(&index, mask) ? static_cast<int>(index) \
+                                                            : ROBIN_HOOD(BITNESS);    \
+        }(x)
+#else
+#    if ROBIN_HOOD(BITNESS) == 32
+#        define ROBIN_HOOD_PRIVATE_DEFINITION_CTZ() __builtin_ctzl
+#        define ROBIN_HOOD_PRIVATE_DEFINITION_CLZ() __builtin_clzl
+#    else
+#        define ROBIN_HOOD_PRIVATE_DEFINITION_CTZ() __builtin_ctzll
+#        define ROBIN_HOOD_PRIVATE_DEFINITION_CLZ() __builtin_clzll
+#    endif
+#    define ROBIN_HOOD_COUNT_LEADING_ZEROES(x) ((x) ? ROBIN_HOOD(CLZ)(x) : ROBIN_HOOD(BITNESS))
+#    define ROBIN_HOOD_COUNT_TRAILING_ZEROES(x) ((x) ? ROBIN_HOOD(CTZ)(x) : ROBIN_HOOD(BITNESS))
+#endif
+
 // fallthrough
 #ifndef __has_cpp_attribute // For backwards compatibility
 #    define __has_cpp_attribute(x) 0
@@ -146,6 +189,17 @@ static Counts& counts() {
 #else
 #    define ROBIN_HOOD_LIKELY(condition) __builtin_expect(condition, 1)
 #    define ROBIN_HOOD_UNLIKELY(condition) __builtin_expect(condition, 0)
+#endif
+
+// detect if native wchar_t type is availiable in MSVC
+#ifdef _MSC_VER
+#    ifdef _NATIVE_WCHAR_T_DEFINED
+#        define ROBIN_HOOD_PRIVATE_DEFINITION_HAS_NATIVE_WCHART() 1
+#    else
+#        define ROBIN_HOOD_PRIVATE_DEFINITION_HAS_NATIVE_WCHART() 0
+#    endif
+#else
+#    define ROBIN_HOOD_PRIVATE_DEFINITION_HAS_NATIVE_WCHART() 1
 #endif
 
 // workaround missing "is_trivially_copyable" in g++ < 5.0
@@ -623,7 +677,7 @@ inline constexpr bool operator>=(pair<A, B> const& x, pair<A, B> const& y) {
     return !(x < y);
 }
 
-static size_t hash_bytes(void const* ptr, size_t const len) noexcept {
+inline size_t hash_bytes(void const* ptr, size_t const len) noexcept {
     static constexpr uint64_t m = UINT64_C(0xc6a4a7935bd1e995);
     static constexpr uint64_t seed = UINT64_C(0xe17a1465);
     static constexpr unsigned int r = 47;
@@ -703,12 +757,21 @@ struct hash : public std::hash<T> {
     }
 };
 
-template <>
-struct hash<std::string> {
-    size_t operator()(std::string const& str) const noexcept {
-        return hash_bytes(str.data(), str.size());
+template <typename CharT>
+struct hash<std::basic_string<CharT>> {
+    size_t operator()(std::basic_string<CharT> const& str) const noexcept {
+        return hash_bytes(str.data(), sizeof(CharT) * str.size());
     }
 };
+
+#if ROBIN_HOOD(CXX) >= ROBIN_HOOD(CXX17)
+template <typename CharT>
+struct hash<std::basic_string_view<CharT>> {
+    size_t operator()(std::basic_string_view<CharT> const& sv) const noexcept {
+        return hash_bytes(sv.data(), sizeof(CharT) * sv.size());
+    }
+};
+#endif
 
 template <class T>
 struct hash<T*> {
@@ -717,10 +780,24 @@ struct hash<T*> {
     }
 };
 
+template <class T>
+struct hash<std::unique_ptr<T>> {
+    size_t operator()(std::unique_ptr<T> const& ptr) const noexcept {
+        return hash_int(reinterpret_cast<size_t>(ptr.get()));
+    }
+};
+
+template <class T>
+struct hash<std::shared_ptr<T>> {
+    size_t operator()(std::shared_ptr<T> const& ptr) const noexcept {
+        return hash_int(reinterpret_cast<size_t>(ptr.get()));
+    }
+};
+
 #define ROBIN_HOOD_HASH_INT(T)                           \
     template <>                                          \
     struct hash<T> {                                     \
-        size_t operator()(T obj) const noexcept {        \
+        size_t operator()(T const& obj) const noexcept { \
             return hash_int(static_cast<uint64_t>(obj)); \
         }                                                \
     }
@@ -736,7 +813,9 @@ ROBIN_HOOD_HASH_INT(signed char);
 ROBIN_HOOD_HASH_INT(unsigned char);
 ROBIN_HOOD_HASH_INT(char16_t);
 ROBIN_HOOD_HASH_INT(char32_t);
+#if ROBIN_HOOD(HAS_NATIVE_WCHART)
 ROBIN_HOOD_HASH_INT(wchar_t);
+#endif
 ROBIN_HOOD_HASH_INT(short);
 ROBIN_HOOD_HASH_INT(unsigned short);
 ROBIN_HOOD_HASH_INT(int);
@@ -1177,7 +1256,7 @@ private:
         Iter operator++(int) noexcept {
             Iter tmp = *this;
             ++(*this);
-            return std::move(tmp);
+            return tmp;
         }
 
         reference operator*() const {
@@ -1199,31 +1278,22 @@ private:
         }
 
     private:
-        // fast forward to the next non-zero info byte. Most of the time the first entry is already
-        // != 0, so it's faster to use ROBIN_HOOD_UNLIKELY in all cases.
-        inline void fastForward() noexcept {
-            if (0U != *mInfo) {
-                // bail out quickly if possible
-                return;
+        // fast forward to the next non-free info byte
+        // I've tried a few variants that don't depend on intrinsics, but unfortunately they are
+        // quite a bit slower than this one. So I've reverted that change again. See map_benchmark.
+        void fastForward() noexcept {
+            size_t n = 0;
+            while (0U == (n = detail::unaligned_load<size_t>(mInfo))) {
+                mInfo += sizeof(size_t);
+                mKeyVals += sizeof(size_t);
             }
-            size_t idx = 1;
-            while (ROBIN_HOOD_UNLIKELY(0U == detail::unaligned_load<uint64_t>(mInfo + idx))) {
-                idx += 8;
-            }
-
-            // we know for certain that within the next 8 bytes we'll find a non-zero one.
-            if (ROBIN_HOOD_UNLIKELY(0U == detail::unaligned_load<uint32_t>(mInfo + idx))) {
-                idx += 4;
-            }
-            if (ROBIN_HOOD_UNLIKELY(0U == detail::unaligned_load<uint16_t>(mInfo + idx))) {
-                idx += 2;
-            }
-            if (ROBIN_HOOD_UNLIKELY(0U == mInfo[idx])) {
-                idx += 1;
-            }
-
-            mInfo += idx;
-            mKeyVals += idx;
+#if ROBIN_HOOD(LITTLE_ENDIAN)
+            auto inc = ROBIN_HOOD_COUNT_TRAILING_ZEROES(n) / 8;
+#else
+            auto inc = ROBIN_HOOD_COUNT_LEADING_ZEROES(n) / 8;
+#endif
+            mInfo += inc;
+            mKeyVals += inc;
         }
 
         friend class Table<IsFlat, MaxLoadFactor100, key_type, mapped_type, hasher, key_equal>;
