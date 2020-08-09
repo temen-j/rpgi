@@ -38,7 +38,6 @@ static const int MPBONUS_SPECTRE = 7;
 
 static const float COMBATBONUS_MULT = 0.0234375f; //.375 / 16
 static const float HPMPBONUS_MULT = 0.015625f; //2^-6
-static const float MP_RECOVERY_MULT = = 0.015625f; //2^-6
 static const float MP_BASE_RECOVERY = 0.25f;
 static const int MAXAMOUNT = 16; //0, 1, ..., 16
 static const int MAXCUMAMOUNT = 112; //7  * 16, # of Elements  * # of cells

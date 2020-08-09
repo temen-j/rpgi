@@ -460,6 +460,7 @@ CURSED_DEBUFF_BONUS	.\include\moveeffect.h	/^const float CURSED_DEBUFF_BONUS = .
 CUSTOM_MESH_GEN_CUBE	.\include\raylib\models.c	1427;"	d	file:
 CUSTOM_MESH_GEN_PLANE	.\include\raylib\models.c	1292;"	d	file:
 CalcLevelCap	.\src\team.cpp	/^void CalcLevelCap(const int &level){$/;"	f
+CalcStatBarsMP	.\src\combat.cpp	/^void CombatData::CalcStatBarsMP(){$/;"	f	class:CombatData
 Camera	.\include\raylib\camera.h	/^    typedef Camera3D Camera;    \/\/ Camera type fallback, defaults to Camera3D$/;"	t
 Camera	.\include\raylib\raylib.h	/^typedef Camera3D Camera;    \/\/ Camera type fallback, defaults to Camera3D$/;"	t
 Camera	.\include\raylib\rlgl.h	/^    typedef struct Camera {$/;"	s
@@ -1767,7 +1768,6 @@ DynamicBuffer	.\include\raylib\rlgl.h	/^} DynamicBuffer;$/;"	t	typeref:struct:Dy
 EASEDEF	.\include\raylib\easings.h	88;"	d
 EASEDEF	.\include\raylib\easings.h	90;"	d
 EASINGS_H	.\include\raylib\easings.h	83;"	d
-EASINGS_HEADER	.\include\combat.h	18;"	d
 EASINGS_STATIC_INLINE	.\include\raylib\easings.h	85;"	d
 ECTORAY	.\src\move_impl.cpp	/^void MoveImplementation::ECTORAY(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
 EDS_ROTATEDMODE	.\include\raylib\external\glfw\src\win32_platform.h	96;"	d
@@ -2459,6 +2459,7 @@ EnableNonClientDpiScaling_	.\include\raylib\external\glfw\src\win32_platform.h	/
 EncodeCodepoint	.\include\raylib\gui_textbox_extended.h	/^static int EncodeCodepoint(unsigned int c, char out[5])$/;"	f
 EndBlendMode	.\include\raylib\rlgl.h	/^void EndBlendMode(void)$/;"	f
 EndDrawing	.\include\raylib\core.c	/^void EndDrawing(void)$/;"	f
+EndExecution	.\src\combat.cpp	/^void CombatData::EndExecution(){$/;"	f	class:CombatData
 EndMode2D	.\include\raylib\core.c	/^void EndMode2D(void)$/;"	f
 EndMode3D	.\include\raylib\core.c	/^void EndMode3D(void)$/;"	f
 EndScissorMode	.\include\raylib\core.c	/^void EndScissorMode(void)$/;"	f
@@ -8332,7 +8333,7 @@ HandleInventoryPortraits	.\src\moveinventory.cpp	/^void HandleInventoryPortraits
 HandleMoveLeft	.\src\console.cpp	/^void HandleMoveLeft(Console &console){$/;"	f
 HandleMoveRight	.\src\console.cpp	/^void HandleMoveRight(Console &console){$/;"	f
 HandleRetrieveCommand	.\src\console.cpp	/^void HandleRetrieveCommand(Console &console){$/;"	f
-HasEffect	.\src\moveeffect.cpp	/^bool HasEffect(Actor &target, MoveEffect &meff, MoveEffect *match){$/;"	f
+HasEffect	.\src\moveeffect.cpp	/^bool HasEffect(Actor &target, MoveEffect &meff, MoveEffect *&match){$/;"	f
 HasMessageFromUWP	.\include\raylib\utils.c	/^bool HasMessageFromUWP(void)$/;"	f
 HealActor	.\src\actor.cpp	/^void HealActor(Actor &a, const unsigned int amount){$/;"	f
 HealCommand	.\src\console.cpp	/^void HealCommand(Console &c, Game &game){$/;"	f
@@ -10469,6 +10470,7 @@ MPBONUS_ROCK	.\include\actor.h	/^static const int MPBONUS_ROCK = 2;$/;"	v
 MPBONUS_SPECTRE	.\include\actor.h	/^static const int MPBONUS_SPECTRE = 7;$/;"	v
 MPBONUS_WATER	.\include\actor.h	/^static const int MPBONUS_WATER = 4;$/;"	v
 MPGOODCOLOR	.\include\gui.h	40;"	d
+MP_BASE_RECOVERY	.\include\actor.h	/^static const float MP_BASE_RECOVERY = 0.25f;$/;"	v
 MSGFLT_ALLOW	.\include\raylib\external\glfw\src\win32_platform.h	124;"	d
 MULTIPLE	.\include\raylib\external\glfw\src\x11_platform.h	/^    Atom            MULTIPLE;$/;"	m	struct:_GLFWlibraryX11
 MUSIC_AUDIO_FLAC	.\include\raylib\raudio.c	/^    MUSIC_AUDIO_FLAC,$/;"	e	enum:__anon398	file:
@@ -13264,7 +13266,8 @@ RMEMAPI	.\include\raylib\rmem.h	51;"	d
 RMEMAPI	.\include\raylib\rmem.h	53;"	d
 RMEMAPI	.\include\raylib\rmem.h	55;"	d
 RMEM_H	.\include\raylib\rmem.h	42;"	d
-RMEM_IMPLEMENTATION	.\src\tmem.c	6;"	d	file:
+RMEM_IMPLEMENTATION	.\src\rmem.c	2;"	d	file:
+RMEM_IMPLEMENTATION	.\src\tmem.c	2;"	d	file:
 RNET_CALLOC	.\include\raylib\rnet.h	98;"	d
 RNET_FREE	.\include\raylib\rnet.h	101;"	d
 RNET_H	.\include\raylib\rnet.h	41;"	d
@@ -13310,6 +13313,7 @@ RayHitInfo	.\include\raylib\raylib.h	/^typedef struct RayHitInfo {$/;"	s
 RayHitInfo	.\include\raylib\raylib.h	/^} RayHitInfo;$/;"	t	typeref:struct:RayHitInfo
 ReadAudioBufferFramesInInternalFormat	.\include\raylib\raudio.c	/^static ma_uint32 ReadAudioBufferFramesInInternalFormat(AudioBuffer *audioBuffer, void *framesOut, ma_uint32 frameCount)$/;"	f	file:
 ReadAudioBufferFramesInMixingFormat	.\include\raylib\raudio.c	/^static ma_uint32 ReadAudioBufferFramesInMixingFormat(AudioBuffer *audioBuffer, float *framesOut, ma_uint32 frameCount)$/;"	f	file:
+RecoverMP	.\src\combat.cpp	/^void CombatData::RecoverMP(){$/;"	f	class:CombatData
 Rectangle	.\include\raylib\raygui.h	/^    typedef struct Rectangle {$/;"	s
 Rectangle	.\include\raylib\raygui.h	/^    } Rectangle;$/;"	t	typeref:struct:Rectangle
 Rectangle	.\include\raylib\raylib.h	/^typedef struct Rectangle {$/;"	s
@@ -14092,7 +14096,6 @@ TINYOBJ_REALLOC	.\include\raylib\models.c	66;"	d	file:
 TINYOBJ_SUCCESS	.\include\raylib\external\tinyobj_loader_c.h	85;"	d
 TISCopyCurrentKeyboardLayoutInputSource	.\include\raylib\external\glfw\src\cocoa_platform.h	107;"	d
 TISGetInputSourceProperty	.\include\raylib\external\glfw\src\cocoa_platform.h	109;"	d
-TMEM_H	.\src\tmem.c	3;"	d	file:
 TOGGLE	.\include\raylib\raygui.h	/^    TOGGLE,         \/\/ TOGGLEGROUP$/;"	e	enum:__anon408
 TOGGLEGROUP_MAX_ELEMENTS	.\include\raylib\raygui.h	1124;"	d
 TORMENT	.\src\move_impl.cpp	/^void MoveImplementation::TORMENT(Actor &target, CasterMove &cm){$/;"	f	class:MoveImplementation
@@ -16646,7 +16649,6 @@ __USE_BSD	.\include\raylib\external\dr_flac.h	871;"	d
 __USE_W32_SOCKETS	.\include\raylib\rnet.h	138;"	d
 __WINE_XINPUT_H	.\include\raylib\external\glfw\deps\mingw\xinput.h	21;"	d
 __cpluplus	.\src\gui.cpp	7;"	d	file:
-__cpluscplus	.\include\combat.h	19;"	d
 __eglMustCastToProperFunctionPointerType	.\include\raylib\external\ANGLE\EGL\egl.h	/^typedef void (*__eglMustCastToProperFunctionPointerType)(void);$/;"	t
 __egl_h_	.\include\raylib\external\ANGLE\EGL\egl.h	2;"	d
 __eglext_h_	.\include\raylib\external\ANGLE\EGL\eglext.h	2;"	d
@@ -19493,6 +19495,8 @@ end	.\include\raylib\external\dr_wav.h	/^    drwav_uint32 end;$/;"	m	struct:__an
 end	.\include\raylib\external\stb_vorbis.h	/^   stbv_uint32 begin, end;$/;"	m	struct:__anon368
 end	.\include\robin_hood\robin_hood.h	/^    const_iterator end() const { \/\/ NOLINT(modernize-use-nodiscard)$/;"	f	class:robin_hood::detail::Table
 end	.\include\robin_hood\robin_hood.h	/^    iterator end() {$/;"	f	class:robin_hood::detail::Table
+endExec	.\include\combat.h	/^	static bool endExec;$/;"	m	struct:CombatData
+endExec	.\src\combatdata.cpp	/^bool CombatData::endExec = false;$/;"	m	class:CombatData	file:
 endIndex	.\include\gui.h	/^	int startIndex, endIndex;$/;"	m	struct:ListView
 end_of_previous_sample	.\include\raylib\external\jar_xm.h	/^     float end_of_previous_sample[jar_xm_SAMPLE_RAMPING_POINTS];$/;"	m	struct:jar_xm_channel_context_s
 end_offset	.\include\raylib\external\cgltf.h	/^	cgltf_size end_offset;$/;"	m	struct:cgltf_extras
@@ -29859,8 +29863,8 @@ started	.\include\raylib\external\stb_truetype.h	/^   int started;$/;"	m	struct:
 statBarInterpTime	.\include\combat.h	/^	static constexpr float statBarInterpTime = .375f;$/;"	m	struct:CombatData
 statBarInterpTimer	.\include\combat.h	/^	static float statBarInterpTimer;$/;"	m	struct:CombatData
 statBarInterpTimer	.\src\combatdata.cpp	/^float CombatData::statBarInterpTimer = 0.f;$/;"	m	class:CombatData	file:
-statBars	.\include\combat.h	/^	static UMap<Actor *, StatBar[2]> statBars;$/;"	m	struct:CombatData
-statBars	.\src\combatdata.cpp	/^UMap<Actor *, StatBar[2]> CombatData::statBars;$/;"	m	class:CombatData	file:
+statBars	.\include\combat.h	/^	static UMap<Actor *, std::array<StatBar, 2> > statBars;$/;"	m	struct:CombatData
+statBars	.\src\combatdata.cpp	/^UMap<Actor *, std::array<StatBar, 2> > CombatData::statBars;$/;"	m	class:CombatData	file:
 statText	.\include\inventory.h	/^	Label statText[6];$/;"	m	struct:InventoryData
 state	.\include\gui.h	/^	GuiControlState state = GuiControlState::GUI_STATE_NORMAL;$/;"	m	struct:Panel
 state	.\include\gui.h	/^	GuiControlState state;$/;"	m	struct:DropDown

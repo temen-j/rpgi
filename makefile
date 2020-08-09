@@ -57,7 +57,7 @@ element.o: src\element.cpp include\element.h
 elemino.o: src\elemino.cpp include\elemino.h include\gui.h
 	$(CXX) $(CXXFLAGS) -c src\elemino.cpp -L. $(LIB)
 
-actor.o: src\actor.cpp include\actor.h include\element.h
+actor.o: src\actor.cpp include\actor.h include\element.h include\moveeffect.h
 	$(CXX) $(CXXFLAGS) -c src\actor.cpp -L. $(LIB)
 
 player.o: src\player.cpp include\player.h include\team.h include\elemino.h include\inventory.h include\actor.h
@@ -82,13 +82,13 @@ moveinventory.o: src\moveinventory.cpp include\moveinventory.h include\move.h
 	$(CXX) $(CXXFLAGS) -c src\moveinventory.cpp -L. $(LIB)
 
 combat.o: src\combat.cpp include\combat.h include\gui.h include\team.h include\move.h
-	$(CXX) $(CXXFLAGS) -c src\combat.cpp -l. $(LIB)
+	$(CXX) $(CXXFLAGS) -c src\combat.cpp -L. $(LIB)
 
 combatdata.o: src\combatdata.cpp include\combat.h
-	$(CXX) $(CXXFLAGS) -c src\combatdata.cpp -l. $(LIB)
+	$(CXX) $(CXXFLAGS) -c src\combatdata.cpp -L. $(LIB)
 
 execmove.o: src\execmove.cpp include\combat.h
-	$(CXX) $(CXXFLAGS) -c src\execmove.cpp -l. $(LIB)
+	$(CXX) $(CXXFLAGS) -c src\execmove.cpp -L. $(LIB)
 
 moveeffect.o: src\moveeffect.cpp include\moveeffect.h include\moveconst.h include\actor.h
 	$(CXX) $(CXXFLAGS) -c src\moveeffect.cpp -L. $(LIB)

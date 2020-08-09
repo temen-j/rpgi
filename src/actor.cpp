@@ -82,7 +82,6 @@ void AssignStats(Actor *a){
 			int prevMaxMP = a->maxMP;
 			a->maxHP = (int)ceil(INITHP * (1.0f + HPMPBONUS_MULT * a->hpBonus));
 			a->maxMP = (int)ceil(INITMP * (1.0f + HPMPBONUS_MULT * a->mpBonus));
-			/* a->maxMP = INITMP; */
 
 			a->remHP = (int) ceil(((float) a->remHP / prevMaxHP) * a->maxHP);
 			a->remMP = (int) ceil(((float) a->remMP / prevMaxMP) * a->maxMP);

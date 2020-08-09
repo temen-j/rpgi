@@ -217,8 +217,28 @@ int CombatState(Game &game){
 		if(!CombatData::executingMoves){ //Stopped exec moves go back to input
 			CombatData::EndExecution();
 
-			Game::gamestate.prev = Game::gamestate.curr;
-			Game::gamestate.curr = State::combat_act;
+			if(CombatData::botAlive.size() == 0){ //End combat
+				//TODO: UnloadEnemies()
+				CombatData::actorSprites.clear();
+
+				for(auto &it : CombatData::botTeam->members)
+					delete it;
+
+				delete CombatData::botTeam;
+
+				for(auto &it : CombatData::portraits.toggles)
+					UnloadTexture(it.texture);
+
+				CombatData::effects.clear();
+				CombatData::statusEffects.clear();
+
+				Game::gamestate.prev = Game::gamestate.curr;
+				Game::gamestate.curr = State::limbo;
+			}
+			else{
+				Game::gamestate.prev = Game::gamestate.curr;
+				Game::gamestate.curr = State::combat_act;
+			}
 		}
 	}
 

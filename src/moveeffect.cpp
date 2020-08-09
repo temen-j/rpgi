@@ -177,7 +177,7 @@ void LifeDrain(MoveEffect &meff, Actor *actor, int healing){
 }
 
 
-bool HasEffect(Actor &target, MoveEffect &meff, MoveEffect *match){
+bool HasEffect(Actor &target, MoveEffect &meff, MoveEffect *&match){
 	for(auto &it : CombatData::effects[&target]){
 		if(it.id == meff.id || it.family == meff.family){
 			match = &it;

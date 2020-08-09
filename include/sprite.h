@@ -106,5 +106,8 @@ Sprite LoadSprite(const char *);
 Sprite LoadSprite(unsigned char *);
 
 
+bool UnloadSprite(Sprite &);
+
+
 
 #endif

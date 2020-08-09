@@ -4,7 +4,6 @@
 #include <algorithm>
 #include <vector>
 #include <array>
-/* #include <unordered_map> */
 
 #include "raylib\rmem.h"
 #include "robin_hood\robin_hood.h"
@@ -14,11 +13,7 @@
 #include "inventory.h"
 #include "sprite.h"
 
-#ifndef EASINGS_HEADER
-#define EASINGS_HEADER
-#define __cpluscplus
 #include "..\include\raylib\easings.h"
-#endif
 
 constexpr size_t DIFF_MEM_SIZE = 1024 * sizeof(EffectDiff);
 
@@ -28,8 +23,6 @@ using Vec = std::vector<T>;
 template<typename T, typename U>
 using Pair = std::pair<T, U>;
 
-/* template<typename T, typename U> */
-/* using UMap = std::unordered_map<T, U>; */
 template<typename T, typename U>
 using UMap = robin_hood::unordered_flat_map<T, U>;
 
@@ -184,9 +177,11 @@ static void GoonSpriteSetup();
 static void BeginAnnounceMove();
 static void SetupStatBar(UMap<Actor *, float> &, UMap<Actor *, float> &);
 static void EndExecution();
+static void RecoverMP();
 
 static void AnnounceMove();
 static void InterpolateStatBars(UMap<Actor *, float> &, UMap<Actor *, float> &); //Pass the previous ...p stats to interp from
+static void CalcStatBarsMP();
 
 static bool LessThan(CasterTargetsPair *, CasterTargetsPair *);
 };

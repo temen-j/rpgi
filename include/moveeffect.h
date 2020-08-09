@@ -129,7 +129,7 @@ struct EffectDiff{
 };
 
 //Returns whether the effect is already applied to an actor, 3rd param is the matching effect
-bool HasEffect(Actor &target, MoveEffect &, MoveEffect *);
+bool HasEffect(Actor &target, MoveEffect &, MoveEffect *&);
 
 //Returns whether the effect's duration is potentially updated
 bool UpdateEffectDuration(Actor &, MoveEffect &);

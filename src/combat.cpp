@@ -573,10 +573,12 @@ void CombatData::InterpolateStatBars(UMap<Actor *, float> &prevHP, UMap<Actor *,
 		float amtHP = EaseCircOut(statBarInterpTimer, prevHP[it], currHPnorm - prevHP[it], statBarInterpTime);
 		float amtMP = EaseCircOut(statBarInterpTimer, prevMP[it], currMPnorm - prevMP[it], statBarInterpTime);
 
-		statBars[it][0].k = amtHP;
-		statBars[it][1].k = amtMP;
-		statBars[it][0].denom = it->maxHP;
-		statBars[it][1].denom = it->maxMP;
+		auto &sb = statBars[it]; //Hash once
+
+		sb[0].k = amtHP;
+		sb[0].denom = it->maxHP;
+		sb[1].k = amtMP;
+		sb[1].denom = it->maxMP;
 	}
 
 	for(auto &it : botAlive){
@@ -586,8 +588,10 @@ void CombatData::InterpolateStatBars(UMap<Actor *, float> &prevHP, UMap<Actor *,
 		float amtHP = EaseCircOut(statBarInterpTimer, prevHP[it], currHPnorm - prevHP[it], statBarInterpTime);
 		float amtMP = EaseCircOut(statBarInterpTimer, prevMP[it], currMPnorm - prevMP[it], statBarInterpTime);
 
-		statBars[it][0].k = amtHP;
-		statBars[it][1].k = amtMP;
+		auto &sb = statBars[it]; //Hash once
+
+		sb[0].k = amtHP;
+		sb[1].k = amtMP;
 	}
 
 	statBarInterpTimer += GetFrameTime();
@@ -678,6 +682,40 @@ void CombatData::EndExecution(){
 
 	moveAnnouncement.disabled = true;
 	aiMakePairs = true;
+
+	RecoverMP();
+}
+
+
+void CombatData::RecoverMP(){
+	for(auto &it : playerAlive){
+		int recovered  = (int)ceil(MP_BASE_RECOVERY * it->maxMP);
+		int mp = it->remMP + recovered;
+		it->remMP = mp > it->maxMP ? it->maxMP : mp;
+	}
+	
+	for(auto &it : botAlive){
+		int recovered  = (int)ceil(MP_BASE_RECOVERY * it->maxMP);
+		int mp = it->remMP + recovered;
+		it->remMP = mp > it->maxMP ? it->maxMP : mp;
+	}
+
+	CalcStatBarsMP();
+}
+
+
+void CombatData::CalcStatBarsMP(){
+	for(auto &it : playerAlive){
+		//Change the proportion in the statbar to the actual proportion of MP left
+		float currMPnorm = (float)it->remMP / it->maxMP;
+		statBars[it][1].k = currMPnorm;
+	}
+
+	for(auto &it : botAlive){
+		//Change the proportion in the statbar to the actual proportion of MP left
+		float currMPnorm = (float)it->remMP / it->maxMP;
+		statBars[it][1].k = currMPnorm;
+	}
 }
 
 
