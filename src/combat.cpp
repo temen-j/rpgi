@@ -59,6 +59,16 @@ void CombatData::StartCombat(Team *playerTeam, Team *botTeam){
 		statusEffects.emplace(it, StatusEffects());
 
 	MoveButtonsSetup();
+	
+	passButton.bounds = {
+		(176 * 4 + 96),
+		448,
+		96,
+		144
+	};
+	passButton.text = "Pass";
+
+	actorsPassed.reserve(playerAlive.size() + botAlive.size());
 
 	chosenMove = nullptr;
 	aiMakePairs = true;
@@ -130,6 +140,21 @@ void CombatData::AIMakeCTPs(){
 void CombatData::SelectMoves(){
 	auto &actor = playerTeam->members[focus];
 
+	auto prevState = passButton.state;
+	Update(passButton);
+	if(passButton.state == GuiControlState::GUI_STATE_PRESSED && passButton.state != prevState){
+		bool found = false;
+		for(auto &it : actorsPassed)
+			found = it == actor;
+
+		if(!found){
+			actorsPassed.push_back(actor);
+			hasMoveChosen[actor] = true;
+		}
+
+		return;
+	}
+
 	for(size_t i = 0; i < NUM_ACTOR_MOVES; ++i){
 		Update(moveButtons[i]);
 		if(moveButtons[i].state == GuiControlState::GUI_STATE_PRESSED && affordable){
@@ -167,7 +192,7 @@ void CombatData::AssignTargets(){
 	if(!begunAssigning){
 		AssignTargetsSetup();
 	}
-	if((int)chosenTargets.size() < chosenMove->maxTargets){
+	if((int)chosenTargets.size() < chosenMove->maxTargets && canAssign){
 		//Detect changes in selection and add/remove the list
 		int prevActiveAlive = targetAliveList.active;
 		int prevActiveSelect = targetSelectedList.active;
@@ -180,14 +205,16 @@ void CombatData::AssignTargets(){
 			RemoveFromSelectedList(prevActiveSelect);
 	}
 	else{
-		canMakePair = true;
 		canAssign = false;
+		MakeCTP();
 	}
 }
 
 
 void CombatData::AssignTargetsSetup(){
 	//TODO: Add checks for maxTargets == all enemies
+	ResetSelectAvailList();
+
 	if(chosenMove->maxTargets == TARGET_ALL_ACTORS){
 		chosenTargets.reserve(playerAlive.size() + botAlive.size());
 		for(auto &it : playerAlive)
@@ -196,8 +223,8 @@ void CombatData::AssignTargetsSetup(){
 			chosenTargets.push_back(it);
 		
 		targetAliveList.text.push_back("ALL");
+		canAssign = false;
 	}
-	ResetSelectAvailList();
 
 	//Get potential targets
 	if(chosenMove->isFriendly){ //Potential optimization: potTargets.reserve(is... * ...Alive.size())
@@ -231,8 +258,6 @@ void CombatData::MakeCTP(){
 
 	chosenMove = nullptr;
 	chosenTargets.clear();
-
-	canMakePair = false;
 }
 
 
@@ -251,42 +276,43 @@ void CombatData::RemoveFromSelectedList(int &prevActive){
 
 
 void CombatData::HandleCombatPortraits(){
-	bool isToggled[8] = {false}; //Keep track of previous activation
+	//Keep track of previous activation
+	bool prevActive[4] = {false}; //FIXME: magic numbers
+	prevActive[focus] = true;
 
-	for(size_t i = 0; i < 8; ++i) //FIXME: magic numbers!
-		isToggled[i] = portraits.toggles[i].active;
+	const auto &size = playerTeam->members.size();
 
-	for(size_t i = 0; i < playerTeam->members.size(); ++i){
-		bool update = Update(portraits.toggles[i]); //a group toggling
+	for(auto &it : portraits.toggles)
+		Update(it);
 
-		auto actor = playerTeam->members[i];
-		if((isToggled[i] && hasMoveChosen[actor]) || actor->remHP == 0){ //If an actor is already selected and has chosen a move
+	for(size_t i = 0; i < size; ++i){
+		bool &active = portraits.toggles[i].active;
 
-			for(size_t j = 0; (j < playerTeam->members.size() && hasMoveChosen[actor]) || actor->remHP == 0; ++j){ //Cycle through characters who have yet to select moves
-				i = (i + 1) % playerTeam->members.size();
-				actor = playerTeam->members[i];
-				portraits.toggles[i].active = true;
-				focus = i;
-			}
-
-			for(size_t j = 0; j < playerAlive.size(); ++j){
-				if(j != i) //Turn the others in the toggle group off
-					portraits.toggles[j].active = false;
-			}
-			break;
-		}
-
-		if(update != isToggled[i]){
-			if(update){
-				focus = i;
-				for(size_t j = 0; j < 4; ++j){
-					if(j != i) //Turn the others in the toggle group off
-						portraits.toggles[j].active = false;
-				}
-				break;
+		//Change the focus if a new portrait was toggled
+		if(active && !prevActive[i]){
+			if(!IsDead(*playerTeam->members[i])){
+				portraits.toggles[focus].active = false;
+				focus = (unsigned char)i;
+				portraits.toggles[focus].active = true;
 			}
 			else
-				portraits.toggles[i].active = true;
+				active = false;
+
+			break; //early exit, only one change
+		}
+	}
+
+	//Cycle through unchosen and alive characters
+	size_t prevFocus = focus;
+	for(size_t i = prevFocus; i < prevFocus + size; ++i){
+		auto iModSize = i % size;
+		auto &actor = playerTeam->members[iModSize];
+
+		if(!IsDead(*actor) && !hasMoveChosen[actor]){
+			portraits.toggles[focus].active = false;
+			focus = (unsigned char)(iModSize);
+			portraits.toggles[focus].active = true;
+			break;
 		}
 	}
 }
@@ -303,25 +329,23 @@ void CombatData::MoveButtonsSetup(){
 
 
 void CombatData::MoveButtonsTextSetup(){
-	Actor *actor = playerTeam->members[focus];
+	auto &actor = playerTeam->members[focus];
 	for(size_t i = 0; i < NUM_ACTOR_MOVES; ++i){
 		moveButtons[i].text = "";
 		if(actor->moves[i])
 			moveButtons[i].text = actor->moves[i]->name;
-		else
-			break; //early exit b/c moves should always be valid until 1+ nullptr at the end
 	}
 }
 
 
 void CombatData::TeamsSetup(){
 	for(unsigned int i = 0; i < playerTeam->members.size(); ++i){
-		Actor *actor = playerTeam->members[i];
+		auto &actor = playerTeam->members[i];
 		if(!IsDead(*actor))
 			playerAlive.push_back(actor);
 	}
 	for(unsigned int i = 0; i < botTeam->members.size(); ++i){
-		Actor *actor = botTeam->members[i];
+		auto &actor = botTeam->members[i];
 		if(!IsDead(*actor))
 			botAlive.push_back(actor);
 	}
@@ -420,6 +444,12 @@ bool CombatData::CanExecMoves(){
 		bool found = false;
 		for(auto &jt : ctps){
 			if(it == jt.caster){
+				found = true;
+				break;
+			}
+		}
+		for(auto &jt : actorsPassed){
+			if(it == jt){
 				found = true;
 				break;
 			}
@@ -675,7 +705,9 @@ void CombatData::SetupStatBar(UMap<Actor *, float> &prevHP, UMap<Actor *, float>
 
 void CombatData::EndExecution(){
 	ctps.clear();
+
 	GetAffordableMoves(*playerTeam->members[focus], affordable);
+	MoveButtonsTextSetup();
 	
 	moveAnimPlaying = interpStats = announceMove = tickEffects =
 		endExec = executingMoves = false;
@@ -684,23 +716,32 @@ void CombatData::EndExecution(){
 	aiMakePairs = true;
 
 	RecoverMP();
+	CalcStatBarsMP();
+
+	actorsPassed.clear();
 }
 
 
 void CombatData::RecoverMP(){
 	for(auto &it : playerAlive){
+		bool found = std::any_of(actorsPassed.begin(), actorsPassed.end(), [it](auto jt){ return it == jt; });
+
 		int recovered  = (int)ceil(MP_BASE_RECOVERY * it->maxMP);
+		recovered = recovered << found; //Double recovery if the actor passed
 		int mp = it->remMP + recovered;
+
 		it->remMP = mp > it->maxMP ? it->maxMP : mp;
 	}
 	
 	for(auto &it : botAlive){
+		bool found = std::any_of(actorsPassed.begin(), actorsPassed.end(), [it](auto jt){ return it == jt; });
+
 		int recovered  = (int)ceil(MP_BASE_RECOVERY * it->maxMP);
+		recovered = recovered << found; //Double recovery if the actor passed
 		int mp = it->remMP + recovered;
+
 		it->remMP = mp > it->maxMP ? it->maxMP : mp;
 	}
-
-	CalcStatBarsMP();
 }
 
 

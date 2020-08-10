@@ -11,6 +11,7 @@ CombatPortraits CombatData::portraits;
 Texture CombatData::halo;
 
 UMap<Actor *, bool> CombatData::hasMoveChosen;
+Vec<Actor *> CombatData::actorsPassed;
 
 UMap<Actor *, Sprite> CombatData::actorSprites;
 
@@ -55,6 +56,7 @@ UMap<Actor *, std::array<StatBar, 2> > CombatData::statBars;
 BoxLabel CombatData::moveAnnouncement;
 
 Button CombatData::moveButtons[NUM_ACTOR_MOVES];
+Button CombatData::passButton;
 
 float CombatData::tickEffectTimer = 0.f;
 bool CombatData::tickEffects = false;

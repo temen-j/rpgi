@@ -85,6 +85,7 @@ struct CombatData{
 	static bool announceMove;
 
 	static UMap<Actor *, bool> hasMoveChosen;
+	static Vec<Actor *> actorsPassed;
 	static Vec<CasterTargetsPair> ctps; //When exectuting moves, create an array of pointer and heapify that
 	static Vec<CasterTargetsPair *> ctpsPtrs;
 	static unsigned int execIndex;
@@ -92,6 +93,7 @@ struct CombatData{
 	static ListView targetAliveList;
 	static ListView targetSelectedList;
 	static Button moveButtons[NUM_ACTOR_MOVES];
+	static Button passButton;
 	/* static UMap<Actor *, StatBar[2]> statBars; */
 	static UMap<Actor *, std::array<StatBar, 2> > statBars;
 	static float statBarInterpTimer;

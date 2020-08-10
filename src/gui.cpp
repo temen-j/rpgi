@@ -684,7 +684,9 @@ void DrawCombat(const Game &game){
 
 	if(Game::gamestate.curr == State::combat_act){
 		for(size_t i = 0; i < NUM_ACTOR_MOVES; ++i)
-			DrawGuiButton(game.cbtData->moveButtons[i]);
+			DrawGuiButton(CombatData::moveButtons[i]);
+
+		DrawGuiButton(CombatData::passButton);
 	}
 	
 	if(game.cbtData->canAssign){

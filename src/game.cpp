@@ -168,9 +168,9 @@ int CombatState(Game &game){
 			CombatData::dispTargetLists = true;
 			CombatData::AssignTargets();
 		}
-		if(CombatData::canMakePair){
-			CombatData::MakeCTP();
-		}
+		/* if(CombatData::canMakePair){ */
+		/* 	CombatData::MakeCTP(); */
+		/* } */
 		if(CombatData::CanExecMoves()){ //You are now watching a movie :)
 			for(auto &it : CombatData::hasMoveChosen)
 				it.second = false;
