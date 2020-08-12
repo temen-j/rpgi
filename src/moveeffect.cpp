@@ -25,8 +25,10 @@ void MoveEffect::Tick(Actor *actor){
 	case FLAMESWORD:
 		TickDamage(GetEffectDamage(id));
 		break;
-	case FLAREKICK:
-		TickDamage(GetEffectDamage(id));
+	case FLAREKICK:{
+		if(family != MoveEffect::Family::taunted)
+			TickDamage(GetEffectDamage(id));
+		}
 		break;
 	case FIREWALL:
 		TickDamage(GetEffectDamage(id));

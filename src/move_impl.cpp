@@ -131,13 +131,13 @@ void MoveImplementation::FLAREKICK(Actor &target, CasterMove &cm){
 	}
 
 	MoveEffect temp2(cm.move->id);
-	temp2.duration = GetEffectPrimaryDuration(temp2.id);
+	temp2.duration = GetEffectSecondaryDuration(temp2.id);
 	temp2.family = MoveEffect::Family::taunted;
 
 	if(!UpdateEffectDuration(target, temp2)){
 		CombatData::effects[&target].emplace_back(cm.move->id);
 		auto &meff = CombatData::effects[&target].back();
-		meff.duration = GetEffectPrimaryDuration(meff.id);
+		meff.duration = GetEffectSecondaryDuration(meff.id);
 		meff.family = MoveEffect::Family::taunted;
 	}
 

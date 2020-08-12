@@ -560,16 +560,23 @@ void CombatData::ResetSelectAvailList(){
 void CombatData::BeginAnnounceMove(){
 	auto &ctp = ctpsPtrs[execIndex];
 
-	std::string announcment = "";
-	announcment += ctp->caster->name + " uses " + ctp->move->name + " on ";
-	for(size_t i = 0; i < ctp->targets.size(); ++i){
-		if(i > 1)
-			announcment += ", " + ctp->targets[i]->name;
-		else
-			announcment += ctp->targets[i]->name;
+	std::string announcement = "";
+	announcement += ctp->caster->name + " uses " + ctp->move->name + " on ";
+
+	if(ctp->move->maxTargets == TARGET_SELF){
+		announcement += ctp->caster->name;
 	}
-	announcment += ".";
-	moveAnnouncement.text = announcment;
+	else{
+		for(size_t i = 0; i < ctp->targets.size(); ++i){
+			if(i > 1)
+				announcement += ", " + ctp->targets[i]->name;
+			else
+				announcement += ctp->targets[i]->name;
+		}
+	}
+
+	announcement += ".";
+	moveAnnouncement.text = announcement;
 
 	int w = GetGuiTextWidth(moveAnnouncement.text.c_str());
 	Rectangle rect = {(float)(SCREENWIDTH / 2 - w / 2 - 8), (float)(SCREENHEIGHT / 4 - GuiGetStyle(DEFAULT, TEXT_SIZE) - 8), (float)(w + 16), (float)(GuiGetStyle(DEFAULT, TEXT_SIZE) * 2)};
@@ -635,6 +642,7 @@ void CombatData::ResolveDeaths(){
 	for(size_t i = 0; i < playerAlive.size(); ++i){
 		auto &actor = playerAlive[i];
 		if(actor && actor->remHP == 0){
+			effects[actor].clear();
 			playerAlive.erase(playerAlive.begin() + i);
 			i--;
 		}
@@ -643,6 +651,7 @@ void CombatData::ResolveDeaths(){
 	for(size_t i = 0; i < botAlive.size(); ++i){
 		auto &actor = botAlive[i];
 		if(actor && actor->remHP == 0){
+			effects[actor].clear();
 			botAlive.erase(botAlive.begin() + i);
 			i--;
 		}
