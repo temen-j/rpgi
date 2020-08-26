@@ -12,6 +12,7 @@
 #include "sprite.h"
 #include "inventory.h"
 #include "sprite.h"
+#include "combat_ai.h"
 
 #include "..\include\raylib\easings.h"
 
@@ -112,9 +113,10 @@ struct CombatData{
 	static unsigned char focus;
 	static unsigned int animLockouts;
 
+	static UMap<Actor *, std::array<CombatAIBehavior::Behavior, 2> > *behaviors;
+
 
 //Setup the combat of the game
-/* static void StartCombat(Game &game); */
 static void StartCombat(Team *, Team *);
 
 //A whole team selects moves

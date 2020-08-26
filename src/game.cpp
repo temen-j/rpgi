@@ -5,6 +5,7 @@
 GameState Game::gamestate;
 Mouse Game::mouse;
 TextureManager Game::textures;
+CombatAIBehavior::BehaviorMap *Game::behaviors = nullptr;
 
 unsigned int Game::delay = 0;
 

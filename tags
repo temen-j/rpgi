@@ -291,6 +291,8 @@ BeginScissorMode	.\include\raylib\core.c	/^void BeginScissorMode(int x, int y, i
 BeginShaderMode	.\include\raylib\rlgl.h	/^void BeginShaderMode(Shader shader)$/;"	f
 BeginTextureMode	.\include\raylib\core.c	/^void BeginTextureMode(RenderTexture2D target)$/;"	f
 BeginVrDrawing	.\include\raylib\rlgl.h	/^void BeginVrDrawing(void)$/;"	f
+Behavior	.\include\combat_ai.h	/^	enum class Behavior : int{$/;"	c	namespace:CombatAIBehavior
+BehaviorMap	.\include\combat_ai.h	/^	typedef UMap<Actor *, std::array<Behavior, 2> > BehaviorMap;$/;"	t	namespace:CombatAIBehavior
 BiStack	.\include\raylib\rmem.h	/^typedef struct BiStack {$/;"	s
 BiStack	.\include\raylib\rmem.h	/^} BiStack;$/;"	t	typeref:struct:BiStack
 BiStackAllocBack	.\include\raylib\rmem.h	/^void *BiStackAllocBack(BiStack *const destack, const size_t len)$/;"	f
@@ -406,6 +408,7 @@ COLOR_SELECTED_BG	.\include\raylib\raygui.h	/^    COLOR_SELECTED_BG$/;"	e	enum:_
 COLOR_SELECTED_FG	.\include\raylib\raygui.h	/^    COLOR_SELECTED_FG,$/;"	e	enum:__anon417
 COLOR_SELECTOR_SIZE	.\include\raylib\raygui.h	/^    COLOR_SELECTOR_SIZE = 16,$/;"	e	enum:__anon422
 COMBATBONUS_MULT	.\include\actor.h	/^static const float COMBATBONUS_MULT = 0.0234375f; \/\/.375 \/ 16$/;"	v
+COMBAT_AI_H	.\include\combat_ai.h	2;"	d
 COMBAT_H	.\include\combat.h	3;"	d
 COMBOBOX	.\include\raylib\raygui.h	/^    COMBOBOX,$/;"	e	enum:__anon408
 COMBO_BUTTON_PADDING	.\include\raylib\raygui.h	/^    COMBO_BUTTON_PADDING$/;"	e	enum:__anon415
@@ -554,6 +557,7 @@ ColorNormalize	.\include\raylib\core.c	/^Vector4 ColorNormalize(Color color)$/;"
 ColorToHSV	.\include\raylib\core.c	/^Vector3 ColorToHSV(Color color)$/;"	f
 ColorToInt	.\include\raylib\core.c	/^int ColorToInt(Color color)$/;"	f
 ColorToInt	.\include\raylib\raygui.h	/^static int ColorToInt(Color color)$/;"	f
+CombatAIBehavior	.\include\combat_ai.h	/^namespace CombatAIBehavior{$/;"	n
 CombatData	.\include\combat.h	/^struct CombatData{$/;"	s
 CombatPortraits	.\include\gui.h	/^struct CombatPortraits{$/;"	s
 CombatSpriteSetup	.\src\combat.cpp	/^void CombatData::CombatSpriteSetup(){$/;"	f	class:CombatData
@@ -13982,13 +13986,14 @@ Sound	.\include\raylib\raylib.h	/^typedef struct Sound {$/;"	s
 Sound	.\include\raylib\raylib.h	/^} Sound;$/;"	t	typeref:struct:Sound
 Sprite	.\include\sprite.h	/^struct Sprite{$/;"	s
 SpriteFont	.\include\raylib\raylib.h	286;"	d
+SpriteManager	.\include\sprite.h	/^struct SpriteManager{$/;"	s
 Stack	.\include\raylib\rmem.h	/^typedef struct Stack {$/;"	s
 Stack	.\include\raylib\rmem.h	/^} Stack;$/;"	t	typeref:struct:Stack
 Start	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * Start)             (ma_IDirectSoundCaptureBuffer* pThis, DWORD dwFlags);$/;"	m	struct:__anon287
 Start	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * Start)            (ma_IAudioClient* pThis);$/;"	m	struct:__anon270
 Start	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * Start)            (ma_IAudioClient2* pThis);$/;"	m	struct:__anon271
 Start	.\include\raylib\external\miniaudio.h	/^    HRESULT (STDMETHODCALLTYPE * Start)            (ma_IAudioClient3* pThis);$/;"	m	struct:__anon272
-StartCombat	.\src\combat.cpp	/^void CombatData::StartCombat(Team *playerTeam, Team *botTeam){$/;"	f	class:CombatData
+StartCombat	.\src\combat.cpp	/^void CombatData::StartCombat(Team *playerTeam, Team *botTeam, BehaviorMap *bh){$/;"	f	class:CombatData
 StatBar	.\include\gui.h	/^	StatBar(){$/;"	f	struct:StatBar
 StatBar	.\include\gui.h	/^	StatBar(float coeff, Rectangle rect, Color good, Color bad){$/;"	f	struct:StatBar
 StatBar	.\include\gui.h	/^	StatBar(float coeff, Rectangle rect, int denominator, Color good, Color bad){$/;"	f	struct:StatBar
@@ -17136,6 +17141,8 @@ actorSprites	.\include\combat.h	/^	static UMap<Actor *, Sprite> actorSprites;$/;
 actorSprites	.\src\combatdata.cpp	/^UMap<Actor *, Sprite> CombatData::actorSprites;$/;"	m	class:CombatData	file:
 actors	.\include\player.h	/^	static Actor actors[NUM_PLAYER_CHARACTERS];$/;"	m	struct:Character
 actors	.\src\player.cpp	/^Actor Character::actors[NUM_PLAYER_CHARACTERS];$/;"	m	class:Character	file:
+actorsPassed	.\include\combat.h	/^	static Vec<Actor *> actorsPassed;$/;"	m	struct:CombatData
+actorsPassed	.\src\combatdata.cpp	/^Vec<Actor *> CombatData::actorsPassed;$/;"	m	class:CombatData	file:
 actualPeriodSizeInFramesCapture	.\include\raylib\external\miniaudio.h	/^            ma_uint32 actualPeriodSizeInFramesCapture;$/;"	m	struct:ma_device::__anon230::__anon231
 actualPeriodSizeInFramesPlayback	.\include\raylib\external\miniaudio.h	/^            ma_uint32 actualPeriodSizeInFramesPlayback;        \/* Value from GetBufferSize(). internalPeriodSizeInFrames is not set to the _actual_ buffer size when low-latency shared mode is being used due to the way the IAudioClient3 API works. *\/$/;"	m	struct:ma_device::__anon230::__anon231
 actual_panning	.\include\raylib\external\jar_xm.h	/^     float actual_panning;$/;"	m	struct:jar_xm_channel_context_s
@@ -17162,6 +17169,7 @@ affected	.\include\moveeffect.h	/^	Actor *affected = nullptr;$/;"	v
 affector	.\include\moveeffect.h	/^	Actor *affector = nullptr;$/;"	v
 affordable	.\include\combat.h	/^	static struct Move *affordable[NUM_ACTOR_MOVES];$/;"	m	struct:CombatData	typeref:struct:CombatData::Move
 affordable	.\src\combatdata.cpp	/^struct Move *CombatData::affordable[NUM_ACTOR_MOVES] = {nullptr};$/;"	m	class:CombatData	typeref:struct:CombatData::	file:
+aggresive	.\include\combat_ai.h	/^		aggresive,$/;"	m	class:CombatAIBehavior::Behavior
 aiMakePairs	.\include\combat.h	/^	static bool aiMakePairs;$/;"	m	struct:CombatData
 aiMakePairs	.\src\combatdata.cpp	/^bool CombatData::aiMakePairs = false;$/;"	m	class:CombatData	file:
 algo	.\include\raylib\external\dr_mp3.h	/^    } algo;$/;"	m	struct:drmp3_src	typeref:union:drmp3_src::__anon55
@@ -17217,6 +17225,7 @@ altMask	.\include\raylib\external\glfw\src\wl_platform.h	/^        xkb_mod_mask_
 alwaysRun	.\include\raylib\core.c	/^        bool alwaysRun;                     \/\/ Flag to keep window update\/draw running on minimized$/;"	m	struct:CoreData::__anon9	file:
 ambient	.\include\raylib\external\tinyobj_loader_c.h	/^  float ambient[3];$/;"	m	struct:__anon378
 ambient_texname	.\include\raylib\external\tinyobj_loader_c.h	/^  char *ambient_texname;            \/* map_Ka *\/$/;"	m	struct:__anon378
+ambiguous	.\include\combat_ai.h	/^		ambiguous,$/;"	m	class:CombatAIBehavior::Behavior
 amiga_frequencies	.\include\raylib\external\jar_xm.h	/^static const uint16_t amiga_frequencies[] = {$/;"	v
 amplification	.\include\raylib\external\jar_xm.h	/^     float amplification;$/;"	m	struct:jar_xm_context_s
 amplitude	.\include\raylib\external\miniaudio.h	/^    double amplitude;$/;"	m	struct:__anon252
@@ -17382,6 +17391,9 @@ begin	.\include\robin_hood\robin_hood.h	/^    const_iterator begin() const { \/\
 begin	.\include\robin_hood\robin_hood.h	/^    iterator begin() {$/;"	f	class:robin_hood::detail::Table
 begunAssigning	.\include\combat.h	/^	static bool begunAssigning;$/;"	m	struct:CombatData
 begunAssigning	.\src\combatdata.cpp	/^bool CombatData::begunAssigning = false;$/;"	m	class:CombatData	file:
+behaviors	.\include\combat.h	/^	static BehaviorMap *behaviors;$/;"	m	struct:CombatData
+behaviors	.\include\combat_ai.h	/^	static BehaviorMap behaviors;$/;"	m	namespace:CombatAIBehavior
+behaviors	.\include\player.h	/^	BehaviorMap *behaviors;$/;"	m	struct:Team
 bgBounds	.\include\gui.h	/^	Rectangle bgBounds;$/;"	m	struct:BoxLabel
 bgColor	.\include\gui.h	/^	Color bgColor;$/;"	m	struct:BoxLabel
 bgindex	.\include\raylib\external\stb_image.h	/^   int flags, bgindex, ratio, transparent, eflags;$/;"	m	struct:__anon331
@@ -18028,6 +18040,10 @@ colors	.\include\raylib\rlgl.h	/^    unsigned char *colors;      \/\/ vertex col
 colorspace	.\include\raylib\external\stb_image_resize.h	/^    stbir_colorspace colorspace;$/;"	m	struct:__anon338
 combat_act	.\include\gamestate.h	/^	combat_act,$/;"	m	class:State
 combat_act_transition	.\include\gamestate.h	/^	combat_act_transition,$/;"	m	class:State
+combat_actor_sprite_pool	.\include\sprite.h	/^	static MemPool combat_actor_sprite_pool;$/;"	m	struct:SpriteManager
+combat_actor_sprites	.\include\sprite.h	/^	static Vec<Sprite> combat_actor_sprites;$/;"	m	struct:SpriteManager
+combat_fx_sprite_pool	.\include\sprite.h	/^	static MemPool combat_fx_sprite_pool;$/;"	m	struct:SpriteManager
+combat_fx_sprites	.\include\sprite.h	/^	static Vec<Sprite> combat_fx_sprites;$/;"	m	struct:SpriteManager
 combinedImageSamplerDescriptorCount	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t                           combinedImageSamplerDescriptorCount;$/;"	m	struct:VkSamplerYcbcrConversionImageFormatProperties
 comma	.\include\elemino.h	/^	comma,$/;"	e	enum:MinoShape
 command	.\include\console.h	/^	Dev::Command command;$/;"	m	struct:Console
@@ -18133,6 +18149,7 @@ count	.\include\raylib\external\glfw\src\x11_platform.h	/^        int         co
 count	.\include\raylib\external\miniaudio.h	/^    ma_uint32 count;$/;"	m	struct:__anon304
 count	.\include\robin_hood\robin_hood.h	/^    size_t count(const key_type& key) const { \/\/ NOLINT(modernize-use-nodiscard)$/;"	f	class:robin_hood::detail::Table
 count	.\include\robin_hood\robin_hood.h	/^    typename std::enable_if<Self_::is_transparent, size_t>::type count(const OtherKey& key) const {$/;"	f	class:robin_hood::detail::Table
+count	.\include\sprite.h	/^	static int count;$/;"	m	struct:SpriteManager
 count1_table	.\include\raylib\external\dr_mp3.h	/^    drmp3_uint8 preflag, scalefac_scale, count1_table, scfsi;$/;"	m	struct:__anon65
 countRemaining	.\include\raylib\external\dr_flac.h	/^    drflac_uint32 countRemaining;$/;"	m	struct:__anon42
 countRemaining	.\include\raylib\external\dr_flac.h	/^    drflac_uint32 countRemaining;$/;"	m	struct:__anon43
@@ -19540,6 +19557,7 @@ execIndex	.\src\combatdata.cpp	/^unsigned int CombatData::execIndex = 0;$/;"	m	c
 executingMoves	.\include\combat.h	/^	static bool executingMoves;$/;"	m	struct:CombatData
 executingMoves	.\src\combatdata.cpp	/^bool CombatData::executingMoves = false;$/;"	m	class:CombatData	file:
 executionPhase	.\include\combat.h	/^		executionPhase$/;"	e	enum:CombatData::CombatStates
+exhaustive	.\include\combat_ai.h	/^		exhaustive,$/;"	m	class:CombatAIBehavior::Behavior
 exitKey	.\include\raylib\core.c	/^            int exitKey;                    \/\/ Default exit key$/;"	m	struct:CoreData::__anon11::__anon12	file:
 exp	.\include\player.h	/^	int exp;$/;"	m	struct:Player
 expanded	.\include\raylib\external\stb_image.h	/^   stbi_uc *idata, *expanded, *out;$/;"	m	struct:__anon326
@@ -24842,6 +24860,7 @@ heightMM	.\include\raylib\external\glfw\src\internal.h	/^    int             wid
 helper	.\include\raylib\external\glfw\src\cocoa_platform.h	/^    id                  helper;$/;"	m	struct:_GLFWlibraryNS
 helperWindowHandle	.\include\raylib\external\glfw\src\win32_platform.h	/^    HWND                helperWindowHandle;$/;"	m	struct:_GLFWlibraryWin32
 helperWindowHandle	.\include\raylib\external\glfw\src\x11_platform.h	/^    Window          helperWindowHandle;$/;"	m	struct:_GLFWlibraryX11
+helpful	.\include\combat_ai.h	/^		helpful,$/;"	m	class:CombatAIBehavior::Behavior
 heuristic	.\include\raylib\external\stb_rect_pack.h	/^   int heuristic;$/;"	m	struct:stbrp_context
 hhea	.\include\raylib\external\stb_truetype.h	/^   int loca,head,glyf,hhea,hmtx,kern,gpos,svg; \/\/ table locations as offset from start of .ttf$/;"	m	struct:stbtt_fontinfo
 hidManager	.\include\raylib\external\glfw\src\cocoa_platform.h	/^    IOHIDManagerRef     hidManager;$/;"	m	struct:_GLFWlibraryNS
@@ -25131,6 +25150,8 @@ invData	.\include\player.h	/^	InventoryData *invData;$/;"	m	struct:Player
 inventory	.\include\gamestate.h	/^	inventory,$/;"	m	class:State
 inventory	.\include\player.h	/^	Vec<Elemino *> inventory;$/;"	m	struct:Player
 inventoryOpen	.\include\game.h	/^	bool inventoryOpen;$/;"	m	struct:Game
+inventory_sprite_pool	.\include\sprite.h	/^	static MemPool inventory_sprite_pool;$/;"	m	struct:SpriteManager
+inventory_sprites	.\include\sprite.h	/^	static Vec<Sprite> inventory_sprites;$/;"	m	struct:SpriteManager
 inverseInertia	.\include\raylib\physac.h	/^    float inverseInertia;                       \/\/ Inverse value of inertia$/;"	m	struct:PhysicsBodyData
 inverseMass	.\include\raylib\physac.h	/^    float inverseMass;                          \/\/ Inverse value of mass$/;"	m	struct:PhysicsBodyData
 inverse_bind_matrices	.\include\raylib\external\cgltf.h	/^	cgltf_accessor* inverse_bind_matrices;$/;"	m	struct:cgltf_skin
@@ -28187,6 +28208,8 @@ outputs	.\include\raylib\external\stb_vorbis.h	/^   float *outputs        [STB_V
 overrideRedirect	.\include\raylib\external\glfw\src\x11_platform.h	/^    GLFWbool        overrideRedirect;$/;"	m	struct:_GLFWwindowX11
 overworld_idle	.\include\gamestate.h	/^	overworld_idle,$/;"	m	class:State
 overworld_move	.\include\gamestate.h	/^	overworld_move,$/;"	m	class:State
+overworld_sprite_pool	.\include\sprite.h	/^	static MemPool overworld_sprite_pool;$/;"	m	struct:SpriteManager
+overworld_sprites	.\include\sprite.h	/^	static Vec<Sprite> overworld_sprites;$/;"	m	struct:SpriteManager
 owner	.\include\move.h	/^	Ownership owner;$/;"	m	struct:Move
 owner_module	.\include\raylib\external\miniaudio.h	/^    ma_uint32 owner_module;$/;"	m	struct:__anon302
 owner_module	.\include\raylib\external\miniaudio.h	/^    ma_uint32 owner_module;$/;"	m	struct:__anon303
@@ -28694,6 +28717,8 @@ part_23_length	.\include\raylib\external\dr_mp3.h	/^    drmp3_uint16 part_23_len
 part_size	.\include\raylib\external\stb_vorbis.h	/^   stbv_uint32 part_size;$/;"	m	struct:__anon368
 partition_class_list	.\include\raylib\external\stb_vorbis.h	/^   stbv_uint8 partition_class_list[32]; \/\/ varies$/;"	m	struct:__anon366
 partitions	.\include\raylib\external\stb_vorbis.h	/^   stbv_uint8 partitions;$/;"	m	struct:__anon366
+passButton	.\include\combat.h	/^	static Button passButton;$/;"	m	struct:CombatData
+passButton	.\src\combatdata.cpp	/^Button CombatData::passButton;$/;"	m	class:CombatData	file:
 passOp	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkStencilOp              passOp;$/;"	m	struct:VkStencilOpState
 patchControlPoints	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t                 patchControlPoints;$/;"	m	struct:VkPipelineTessellationStateCreateInfo
 path	.\include\raylib\external\glfw\src\linux_joystick.h	/^    char                    path[PATH_MAX];$/;"	m	struct:_GLFWjoystickLinux
@@ -29817,6 +29842,7 @@ spinnerSize	.\include\gui.h	/^	int spinnerSize;$/;"	m	struct:ScrollBar
 splitInstanceBindRegionCount	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    uint32_t           splitInstanceBindRegionCount;$/;"	m	struct:VkBindImageMemoryDeviceGroupInfo
 spot_inner_cone_angle	.\include\raylib\external\cgltf.h	/^	cgltf_float spot_inner_cone_angle;$/;"	m	struct:cgltf_light
 spot_outer_cone_angle	.\include\raylib\external\cgltf.h	/^	cgltf_float spot_outer_cone_angle;$/;"	m	struct:cgltf_light
+sprite_loc	.\include\player.h	/^	Vec<int> sprite_loc;$/;"	m	struct:Team
 src	.\include\raylib\external\dr_mp3.h	/^    drmp3_src src;$/;"	m	struct:__anon60
 srcAccessMask	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkAccessFlags            srcAccessMask;$/;"	m	struct:VkBufferMemoryBarrier
 srcAccessMask	.\include\raylib\external\glfw\deps\glad\vulkan.h	/^    VkAccessFlags            srcAccessMask;$/;"	m	struct:VkImageMemoryBarrier

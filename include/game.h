@@ -10,6 +10,8 @@
 #include "moveinventory.h"
 #include "combat.h"
 #include "sprite.h"
+#include "combat_ai.h"
+#include "random_cycle.h"
 
 #include "raylib\raylib.h"
 
@@ -29,6 +31,7 @@ struct Game{
 	bool consoleOpen;
 	bool inventoryOpen;
 	bool minventoryOpen;
+	static CombatAIBehavior::BehaviorMap *behaviors;
 
 	static unsigned int delay;
 

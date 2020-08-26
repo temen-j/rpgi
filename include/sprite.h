@@ -87,6 +87,20 @@ struct TextureManager{
 	}
 };
 
+struct SpriteManager{
+	//Have some memory pools to decrease allocation
+	/* static MemPool combat_actor_sprite_pool; */
+	/* static MemPool combat_fx_sprite_pool; */
+	/* static MemPool overworld_sprite_pool; */
+	/* static MemPool inventory_sprite_pool; */
+
+	static Vec<Sprite> combat_actor_sprites;
+	static Vec<Sprite> combat_fx_sprites;
+	static Vec<Sprite> overworld_sprites;
+	static Vec<Sprite> inventory_sprites;
+	static int count;
+};
+
 //Call every frame to ensure the 'closest' updates to sprite framerate
 void UpdateAnimationFrame(float dt);
 

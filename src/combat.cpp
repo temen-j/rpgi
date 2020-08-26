@@ -10,6 +10,7 @@
 #include "..\include\embed\callisto_combat_sprite.h"
 
 #include "..\include\sprite.h"
+#include "..\include\random_cycle.h"
 
 
 CasterTargetsPair::CasterTargetsPair(Actor *c, struct Move *m, const Vec<Actor *> &t){
@@ -38,13 +39,19 @@ void CombatData::StartCombat(Team *playerTeam, Team *botTeam){
 	}
 
 	CombatData::playerTeam = playerTeam;
+	CombatData::behaviors = Game::behaviors;
 
 	CombatSpriteSetup();
 
-	CreateGoons();
-	TeamsSetup();
+	//Do some default enemies if theyre not passed in
+	if(!botTeam){
+		CreateGoons();
+		TeamsSetup();
+		GoonSpriteSetup();
+	}
+	else{
+	}
 
-	GoonSpriteSetup();
 
 	effects.clear();
 	for(auto &it : playerAlive)
@@ -107,6 +114,8 @@ void CombatData::StartCombat(Team *playerTeam, Team *botTeam){
 
 
 void CombatData::AIMakeCTPs(){
+	tmn::rand rng;
+	int num = rng();
 	for(unsigned int i = 0; i < botAlive.size(); ++i){ //FIXME: turn into for-range
 		Vec<Actor *> targets;
 		struct Move *move = botAlive[i]->moves[0];

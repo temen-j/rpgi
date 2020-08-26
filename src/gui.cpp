@@ -703,9 +703,10 @@ void DrawStatBar(const StatBar &sb){
 	DrawRectangleRec(sb.bounds, sb.colorBad);
 	DrawRectangleRec(rect, sb.colorGood);
 	if(sb.showNum){
-		std::string frac = std::to_string((int)round(sb.k * (float)sb.denom)) + "/" + std::to_string(sb.denom);
-		float size = sb.bounds.height;
-		DrawTextRecEx(GuiGetFont(), frac.c_str(), sb.bounds, size, size / 10.f, false, (Color){219, 219, 235, 255}, 0, 0, WHITE, WHITE);
+		static char frac_cstr[8] = {'\0'};
+		sprintf(frac_cstr, "%d/%d", (int)round(sb.k * (float)sb.denom), sb.denom);
+		auto &size = sb.bounds.height;
+		DrawTextRecEx(GuiGetFont(), frac_cstr, sb.bounds, size, size / 10.f, false, (Color){219, 219, 235, 255}, 0, 0, WHITE, WHITE);
 	}
 }
 

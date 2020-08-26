@@ -2,7 +2,7 @@ CXX = g++
 CXXFLAGS = -Wall -Iinclude -m64 -mbmi
 LIB = -lraylib -lrmem -lopengl32 -lgdi32 -lwinmm -static -lpthread
 
-DEV_OBJ = console.o
+DEV_OBJ = console.o random_cycle.o
 GUI_OBJ = gui.o window.o
 MATH_OBJ = tmath.o interp.o
 GRAPHICS_OBJ = sprite.o
@@ -102,6 +102,9 @@ sprite.o: src\sprite.cpp include\sprite.h
 window.o: src\window.cpp include\window.h
 	$(CXX) $(CXXFLAGS) -c src\window.cpp -L. $(LIB)
 
+random_cycle.o: src\random_cycle.cpp include\random_cycle.h
+	$(CXX) $(CXXFLAGS) -c src\random_cycle.cpp -L. $(LIB)
+
 librmem.a: src\rmem.c
 	gcc -O3 -c src\rmem.c
 	ar rcs rmem.o librmem.a
@@ -113,7 +116,7 @@ debug:
 	$(MAKE) -C bin debug
 
 prof:
-	$(MAKE) -C bin prof
+	$(MAKE) -s -C bin prof
 
 clean:
 	del *.o

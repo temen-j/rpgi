@@ -61,3 +61,5 @@ Button CombatData::passButton;
 float CombatData::tickEffectTimer = 0.f;
 bool CombatData::tickEffects = false;
 
+UMap<Actor *, std::array<CombatAIBehavior::Behavior, 2> > *CombatData::behaviors = nullptr;
+

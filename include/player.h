@@ -8,6 +8,7 @@
 #include "inventory.h"
 #include "actor.h"
 #include "moveinventory.h"
+#include "combat_ai.h"
 
 #include "raylib\raylib.h"
 
